@@ -9,7 +9,7 @@ The idea of this project is to visualize real-time data from the measurements at
 
 Curretly we are using **JIRA** as a tool in order to use SCRUM methodology and all of the Agile's philosophical principles and values. In **Confluence** you can see most of our documentation and planning.
 
-![JIRA][https://petarmihaylov.atlassian.net/secure/RapidBoard.jspa?projectKey=AIR&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYWI1M2M1YWVmMmIyNGJkYmIwYWRiNjFlMGE4NmRlOTYiLCJwIjoiaiJ9]
+[JIRA](https://petarmihaylov.atlassian.net/secure/RapidBoard.jspa?projectKey=AIR&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYWI1M2M1YWVmMmIyNGJkYmIwYWRiNjFlMGE4NmRlOTYiLCJwIjoiaiJ9)
 
-![Confluence][https://petarmihaylov.atlassian.net/l/c/QEGg4x6G]
+[Confluence](https://petarmihaylov.atlassian.net/l/c/QEGg4x6G)
 

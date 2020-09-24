@@ -33,7 +33,7 @@ namespace WebAPI
         {
             services.AddControllers();
 
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnectionString")));  
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));  
   
             // For Identity  
             services.AddIdentity<ApplicationUser, IdentityRole>()  

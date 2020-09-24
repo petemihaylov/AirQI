@@ -1,15 +1,14 @@
+image: microsoft/dotnet:latest
+
 stages:
     - build
     
-docker-build:
-  image: docker:latest
-  stage: build
-  services:
-    - docker:dind
-  before_script:
+before_script:
     - "cd WebAPI"
-    - docker login -u pepsm -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
-  script:
-    - docker build --pull -t index.docker.io/pepsm/webapi .
-    - docker push index.docker.io/pepsm/webapi
+
+build:
+    stage: build
+    script:
+        - "dotnet build"
+        - "dotnet run"
  

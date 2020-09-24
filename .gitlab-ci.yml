@@ -10,6 +10,6 @@ docker-build:
     - "cd WebAPI"
     - docker login -u pepsm -p "$CI_REGISTRY_PASSWORD" $CI_REGISTRY
   script:
-    - docker build --pull -t pepsm/webapi .
-    - docker push pepsm/webapi
+    - docker build --pull -t index.docker.io/pepsm/webapi .
+    - docker push index.docker.io/pepsm/webapi
  

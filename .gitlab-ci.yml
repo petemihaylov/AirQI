@@ -10,5 +10,4 @@ build:
     stage: build
     script:
         - "dotnet build"
-        - "dotnet run"
  

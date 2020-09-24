@@ -53,6 +53,10 @@
               "target": "Package",
               "version": "[3.1.8, )"
            ***REMOVED***,
+            "Microsoft.Data.SqlClient": ***REMOVED***
+              "target": "Package",
+              "version": "[2.0.1, )"
+           ***REMOVED***,
             "Microsoft.EntityFrameworkCore.SqlServer": ***REMOVED***
               "target": "Package",
               "version": "[3.1.8, )"

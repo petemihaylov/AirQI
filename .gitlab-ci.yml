@@ -1,0 +1,13 @@
+
+image: microsoft/dotnet:latest
+
+stages:
+    - build
+
+before_script:
+    - "cd WebAPI"
+
+build:
+    stage: build
+    script:
+        - "dotnet build"

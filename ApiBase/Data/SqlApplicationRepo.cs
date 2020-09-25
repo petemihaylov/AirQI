@@ -1,7 +1,8 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using ApiBase.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ApiBase.Data
 {
@@ -9,31 +10,67 @@ namespace ApiBase.Data
     {
         
         private readonly ApplicationContext _context;
-
         public SqlApplicationRepo(ApplicationContext context)
         {
             this._context = context;
         }
 
-        public void CreateRole(Role role)
+
+
+        public async Task CreateRole(Role role)
         {
             if(role == null)
             {
                 throw new ArgumentNullException(nameof(role));
             }
-            this._context.Roles.Add(role);
+          await  this._context.Roles.AddAsync(role);
         }
 
-        public void CreateUser(User user)
+        public async Task CreateUser(User user)
         {
             if(user == null)
             {
                 throw new ArgumentNullException(nameof(user));
             }
 
-            this._context.Users.Add(user);
-        
+            await this._context.Users.AddAsync(user);
+
         }
+
+
+        public bool Exists(User user)
+        {
+            return _context.Exists(user);
+        }
+
+        public bool Exists(Role role)
+        {
+            return _context.Exists(role);
+        }
+
+
+
+        public void DeleteRole(Role role)
+        {
+            if(role == null)
+            {
+                throw new ArgumentNullException(nameof(role));
+            }
+
+            this._context.Roles.Remove(role);
+        }
+
+        public void DeleteUser(User user)
+        {
+            if(user == null)
+            {
+                throw new ArgumentNullException(nameof(user));
+            }
+
+            this._context.Users.Remove(user);
+        }
+
+
 
         public IEnumerable<Role> GetAllRoles()
         {
@@ -45,14 +82,25 @@ namespace ApiBase.Data
            return this._context.Users.ToList();
         }
 
+
+
+        public Role GetRoleById(int id)
+        {
+            return _context.Roles.FirstOrDefault(r => r.RoleId == id);
+        }
+
         public User GetUserById(int id)
         {
             return _context.Users.FirstOrDefault(u => u.UserId == id);
         }
 
-        public bool SaveChanges()
+
+
+        public async Task<bool> SaveChanges()
         {
-           return (_context.SaveChanges() >= 0);
+           return  (await _context.SaveChangesAsync() >= 0);
         }
+
+        public void UpdateUser(User user) { }
     }
 }

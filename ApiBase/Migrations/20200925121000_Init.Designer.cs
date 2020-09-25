@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiBase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200924154627_Init")]
+    [Migration("20200925121000_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,13 +31,7 @@ namespace ApiBase.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("RoleId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Roles");
                 });
@@ -61,16 +55,22 @@ namespace ApiBase.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("RoleId")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ApiBase.Models.Role", b =>
+            modelBuilder.Entity("ApiBase.Models.User", b =>
                 {
-                    b.HasOne("ApiBase.Models.User", "User")
-                        .WithOne("UserRole")
-                        .HasForeignKey("ApiBase.Models.Role", "UserId")
+                    b.HasOne("ApiBase.Models.Role", "UserRole")
+                        .WithOne("User")
+                        .HasForeignKey("ApiBase.Models.User", "RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

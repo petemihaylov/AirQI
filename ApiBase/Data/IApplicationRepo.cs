@@ -1,21 +1,28 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ApiBase.Models;
 
 namespace ApiBase.Data
 {
     public interface IApplicationRepo
     {
-        bool SaveChanges();
+        Task<bool> SaveChanges();
 
         // User
         IEnumerable<User> GetAllUsers();
         User GetUserById(int id);
-        void CreateUser(User user);
+        Task CreateUser(User user);
+        void UpdateUser(User user); 
+        void DeleteUser(User user);
+        bool Exists(User user);
+
 
         // Role
-
+        Role GetRoleById(int id);
         IEnumerable<Role> GetAllRoles();
-        void CreateRole(Role role);
+        Task CreateRole(Role role);
+        void DeleteRole(Role role);
+        bool Exists(Role role);
     
     }
 }

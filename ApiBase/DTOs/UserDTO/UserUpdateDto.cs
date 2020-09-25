@@ -1,13 +1,9 @@
-﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiBase.Models
+namespace ApiBase.DTOs
 {
-    public class User
+    public class UserUpdateDto
     {
-        [Key]
-        public int UserId { get; set; }
-        
         [MaxLength(250)]
         public string FirstName { get; set; }
         
@@ -16,11 +12,8 @@ namespace ApiBase.Models
 
         [Required]
         public string Password { get; set; }
-
+        
         public int RoleId { get; set; }
-        public Role UserRole { get; set; }
-    
-    
     }
     
 }

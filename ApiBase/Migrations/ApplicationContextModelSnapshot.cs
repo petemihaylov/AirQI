@@ -29,13 +29,7 @@ namespace ApiBase.Migrations
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
 
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
                     b.HasKey("RoleId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
 
                     b.ToTable("Roles");
                 });
@@ -59,16 +53,22 @@ namespace ApiBase.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
                     b.HasKey("UserId");
+
+                    b.HasIndex("RoleId")
+                        .IsUnique();
 
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("ApiBase.Models.Role", b =>
+            modelBuilder.Entity("ApiBase.Models.User", b =>
                 {
-                    b.HasOne("ApiBase.Models.User", "User")
-                        .WithOne("UserRole")
-                        .HasForeignKey("ApiBase.Models.Role", "UserId")
+                    b.HasOne("ApiBase.Models.Role", "UserRole")
+                        .WithOne("User")
+                        .HasForeignKey("ApiBase.Models.User", "RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

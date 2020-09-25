@@ -1,6 +1,6 @@
 using ApiBase.Models;
 
-namespace ApiBase.Dto
+namespace ApiBase.DTOs
 {
     public class UserReadDto
     {
@@ -8,7 +8,7 @@ namespace ApiBase.Dto
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Password { get; set; }
-        public Role UserRole { get; set; }
+        public int RoleId { get; set; }
     }
     
 }

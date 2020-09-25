@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using ApiBase.Models;
 
-namespace ApiBase.Dto
+namespace ApiBase.DTOs
 {
     public class UserCreateDto
     {
@@ -13,7 +13,8 @@ namespace ApiBase.Dto
 
         [Required]
         public string Password { get; set; }
-        public Role UserRole { get; set; }
+        
+        public int RoleId { get; set; }
     }
     
 }

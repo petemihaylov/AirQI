@@ -3,7 +3,8 @@ using AutoMapper;
 using ApiBase.Data;
 using System.Collections.Generic;
 using ApiBase.Models;
-using ApiBase.Dto;
+using ApiBase.DTOs;
+using System.Threading.Tasks;
 
 namespace ApiBase.Controllers
 ***REMOVED***
@@ -20,6 +21,7 @@ namespace ApiBase.Controllers
             this._repository = repository;
             this._mapper = mapper;
        ***REMOVED***
+
 
         // GET api/users
         [HttpGet]
@@ -45,17 +47,58 @@ namespace ApiBase.Controllers
 
         // POST api/users
         [HttpPost]
-        public ActionResult <User> CreateUser(UserCreateDto userCreateDto)
+        public async Task<ActionResult <User>> CreateUser(UserCreateDto userCreateDto)
         ***REMOVED***
-             var userModel = _mapper.Map<User>(userCreateDto);
-            this._repository.CreateUser(userModel);
-            this._repository.SaveChanges();
-
+            var userModel = _mapper.Map<User>(userCreateDto);
+            await this._repository.CreateUser(userModel);
+            
+            if(_repository.Exists(userModel) == true)
+            ***REMOVED***
+                return Conflict();
+           ***REMOVED***
+            
+            await this._repository.SaveChanges();
 
             var userReadDto = _mapper.Map<UserReadDto>(userModel);
             return CreatedAtRoute(nameof(GetUserById), new ***REMOVED***Id = userReadDto.UserId***REMOVED***, userReadDto);
        ***REMOVED***
     
-    
+        
+        // PUT api/users/***REMOVED***id***REMOVED***
+        [HttpPut("***REMOVED***id***REMOVED***")]
+        public async Task<ActionResult> UpdateUser(int id, UserUpdateDto userUpdateDto)
+        ***REMOVED***
+            var userRepo = _repository.GetUserById(id);
+            if(userRepo == null)
+            ***REMOVED***
+                return NotFound();
+           ***REMOVED***
+
+            _mapper.Map(userUpdateDto, userRepo);
+
+            _repository.UpdateUser(userRepo);
+            
+            await _repository.SaveChanges();
+
+            return NoContent();
+
+       ***REMOVED***
+ 
+
+        // DELETE api/users/***REMOVED***id***REMOVED***
+        [HttpDelete("***REMOVED***id***REMOVED***")]
+        public async Task<ActionResult> DeleteUser(int id)
+        ***REMOVED***
+            var userRepo = _repository.GetUserById(id);
+            if(userRepo == null)
+            ***REMOVED***
+                return NotFound();
+           ***REMOVED***
+
+            _repository.DeleteUser(userRepo);
+            await _repository.SaveChanges();
+
+            return NoContent();
+       ***REMOVED***
    ***REMOVED***
 ***REMOVED***

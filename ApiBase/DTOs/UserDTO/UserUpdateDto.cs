@@ -1,9 +1,8 @@
 using System.ComponentModel.DataAnnotations;
-using ApiBase.Models;
 
-namespace ApiBase.Dto
+namespace ApiBase.DTOs
 ***REMOVED***
-    public class UserCreateDto
+    public class UserUpdateDto
     ***REMOVED***
         [MaxLength(250)]
         public string FirstName ***REMOVED*** get; set;***REMOVED***
@@ -13,7 +12,8 @@ namespace ApiBase.Dto
 
         [Required]
         public string Password ***REMOVED*** get; set;***REMOVED***
-        public Role UserRole ***REMOVED*** get; set;***REMOVED***
+        
+        public int RoleId ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
     
 ***REMOVED***

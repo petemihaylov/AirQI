@@ -13,11 +13,10 @@ namespace ApiBase.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     {
-        private readonly IApplicationRepo _repository;
-
+        private readonly IEFRepository _repository;
         public readonly IMapper _mapper;
 
-        public RolesController(IApplicationRepo repository, IMapper mapper)
+        public RolesController(IEFRepository repository, IMapper mapper)
         {
             this._repository = repository;
             this._mapper = mapper;
@@ -27,18 +26,18 @@ namespace ApiBase.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<RoleReadDto>> GetAllRoles()
         {
-            var roleItems = _repository.GetAllRoles();
-            return Ok(_mapper.Map<IEnumerable<RoleReadDto>>(roleItems));
+            var roleItems = _repository.GetAllAsync<Role>();
+            return Ok(_mapper.Map<IEnumerable<RoleReadDto>>(roleItems.Result));
         }
 
         // GET api/roles/{id}
         [HttpGet("{id}", Name="GetRoleById")]
         public ActionResult <RoleReadDto> GetRoleById(int id)
         {
-            var roleItem = _repository.GetRoleById(id);
+            var roleItem = _repository.GetByIdAsync<Role>(id);
             if(roleItem != null)
             {
-                return Ok(_mapper.Map<RoleReadDto>(roleItem)); 
+                return Ok(_mapper.Map<RoleReadDto>(roleItem.Result)); 
             }
             return NotFound();
         }
@@ -47,37 +46,33 @@ namespace ApiBase.Controllers
 
         // POST api/role
         [HttpPost]
-        public async Task<ActionResult<Role>> CreateRole(RoleCreateDto roleCreateDto)
+        public ActionResult<Role> CreateRole(RoleCreateDto roleCreateDto)
         {
 
-            var roleModel = _mapper.Map<Role>(roleCreateDto);
-            await this._repository.CreateRole(roleModel);
-
-            if(_repository.Exists(roleModel) == false)
+            var roleItem = _mapper.Map<Role>(roleCreateDto);
+            if(_repository.Exists<Role>(roleItem))
             {
                     return Conflict();
             }
+            this._repository.AddAsync<Role>(roleItem);
+
             
-            await this._repository.SaveChanges();
-        
-            var roleReadDto = _mapper.Map<RoleReadDto>(roleModel);
-            return CreatedAtRoute(nameof(GetRoleById), new {Id = roleReadDto.RoleId}, roleReadDto);
+            var roleReadDto = _mapper.Map<RoleReadDto>(roleItem);
+            return CreatedAtRoute(nameof(GetRoleById), new {Id = roleReadDto.Id}, roleReadDto);
         }
 
 
         // DELETE api/roles/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteRole(int id)
+        public ActionResult DeleteRole(int id)
         {
-            var roleRepo = _repository.GetRoleById(id);
-            if(roleRepo == null)
+            var roleItem = _repository.GetByIdAsync<Role>(id);
+            if(roleItem == null)
             {
                 return NotFound();
             }
 
-            _repository.DeleteRole(roleRepo);
-            await _repository.SaveChanges();
-
+            _repository.DeleteAsync<Role>(roleItem.Result);
             return NoContent();
         }
 

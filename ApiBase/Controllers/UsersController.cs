@@ -13,10 +13,10 @@ namespace ApiBase.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IApplicationRepo _repository;
+        private readonly IEFRepository _repository;
         public readonly IMapper _mapper;
 
-        public UsersController(IApplicationRepo repository, IMapper mapper)
+        public UsersController(IEFRepository repository, IMapper mapper)
         {
             this._repository = repository;
             this._mapper = mapper;
@@ -27,8 +27,8 @@ namespace ApiBase.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<UserReadDto>> GetAllUsers()
         {
-            var userItems = _repository.GetAllUsers();
-            return Ok(_mapper.Map<IEnumerable<UserReadDto>>(userItems));
+            var userItems = _repository.GetAllAsync<User>();
+            return Ok(_mapper.Map<IEnumerable<UserReadDto>>(userItems.Result));
         }
 
 
@@ -36,10 +36,10 @@ namespace ApiBase.Controllers
         [HttpGet("{id}", Name="GetUserById")]
         public ActionResult <UserReadDto> GetUserById(int id)
         {
-            var userItem = _repository.GetUserById(id);
+            var userItem = _repository.GetByIdAsync<User>(id);
             if(userItem != null)
             {
-                return Ok(_mapper.Map<UserReadDto>(userItem)); 
+                return Ok(_mapper.Map<UserReadDto>(userItem.Result)); 
             }
             return NotFound();
         }
@@ -47,56 +47,51 @@ namespace ApiBase.Controllers
 
         // POST api/users
         [HttpPost]
-        public async Task<ActionResult <User>> CreateUser(UserCreateDto userCreateDto)
+        public ActionResult <User> CreateUser(UserCreateDto userCreateDto)
         {
-            var userModel = _mapper.Map<User>(userCreateDto);
-            await this._repository.CreateUser(userModel);
+            var userItem = _mapper.Map<User>(userCreateDto);
             
-            if(_repository.Exists(userModel) == true)
+            if(_repository.Exists<User>(userItem))
             {
                 return Conflict();
             }
             
-            await this._repository.SaveChanges();
+            this._repository.AddAsync<User>(userItem);
+            var userReadDto = _mapper.Map<UserReadDto>(userItem);
 
-            var userReadDto = _mapper.Map<UserReadDto>(userModel);
-            return CreatedAtRoute(nameof(GetUserById), new {Id = userReadDto.UserId}, userReadDto);
+            return CreatedAtRoute(nameof(GetUserById), new {Id = userReadDto.Id}, userReadDto);
         }
     
         
         // PUT api/users/{id}
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateUser(int id, UserUpdateDto userUpdateDto)
+        public ActionResult UpdateUser(int id, UserUpdateDto userUpdateDto)
         {
-            var userRepo = _repository.GetUserById(id);
-            if(userRepo == null)
+            var userItem = _repository.GetByIdAsync<User>(id);
+            if(userItem.Result == null)
             {
                 return NotFound();
             }
 
-            _mapper.Map(userUpdateDto, userRepo);
+            _mapper.Map(userUpdateDto, userItem.Result);
 
-            _repository.UpdateUser(userRepo);
+            _repository.UpdateAsync<User>(userItem.Result);
             
-            await _repository.SaveChanges();
-
             return NoContent();
-
         }
  
 
         // DELETE api/users/{id}
         [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteUser(int id)
+        public ActionResult DeleteUser(int id)
         {
-            var userRepo = _repository.GetUserById(id);
-            if(userRepo == null)
+            var userItem = _repository.GetByIdAsync<User>(id);
+            if(userItem == null)
             {
                 return NotFound();
             }
 
-            _repository.DeleteUser(userRepo);
-            await _repository.SaveChanges();
+            _repository.DeleteAsync<User>(userItem.Result);
 
             return NoContent();
         }

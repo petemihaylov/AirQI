@@ -6,7 +6,7 @@ namespace ApiBase.DTOs
 {
     public class RoleReadDto
     {        
-        public int RoleId { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         
     }

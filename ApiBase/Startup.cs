@@ -25,7 +25,7 @@ namespace ApiBase
         {
             
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer
-            (Configuration.GetConnectionString("ApiConnection")));
+            (Configuration.GetConnectionString("AzureConnection")));
 
 
             services.AddScoped<IEFRepository, SqlRepository>();

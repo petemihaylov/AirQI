@@ -2,12 +2,18 @@ image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 stages:
     - build
+    - test
     
-before_script:
-    - "cd ApiBase"
-
 build:
     stage: build
     
     script:
+        - "cd ApiBase"
         - "dotnet build"
+
+test:
+    stage: test
+
+    script:
+    - "cd ../ApiBase.IntegrationTests"
+    - "dotnet test"

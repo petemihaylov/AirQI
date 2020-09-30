@@ -15,5 +15,5 @@ test:
     stage: test
 
     script:
-    - "cd ../ApiBase.IntegrationTests"
+    - "cd ApiBase.IntegrationTests"
     - "dotnet test"

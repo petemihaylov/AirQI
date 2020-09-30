@@ -3,11 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ApiBase.Models
 ***REMOVED***
-    public class User
+    public class User : BaseEntity
     ***REMOVED***
-        [Key]
-        public int UserId ***REMOVED*** get; set;***REMOVED***
-        
         [MaxLength(250)]
         public string FirstName ***REMOVED*** get; set;***REMOVED***
         

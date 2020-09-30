@@ -12,12 +12,6 @@ namespace ApiBase.Data
         public DbSet<User> Users ***REMOVED*** get; set;***REMOVED***
         public DbSet<Role> Roles ***REMOVED*** get; set;***REMOVED*** 
 
-        
-        public bool Exists<T>(T entity) where T: class
-        ***REMOVED***
-            return this.Set<T>().Local.Any(e => e == entity);
-       ***REMOVED***
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         ***REMOVED***
             modelBuilder.Entity<User>()

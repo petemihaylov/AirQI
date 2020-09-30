@@ -13,10 +13,10 @@ namespace ApiBase.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     ***REMOVED***
-        private readonly IApplicationRepo _repository;
+        private readonly IEFRepository _repository;
         public readonly IMapper _mapper;
 
-        public UsersController(IApplicationRepo repository, IMapper mapper)
+        public UsersController(IEFRepository repository, IMapper mapper)
         ***REMOVED***
             this._repository = repository;
             this._mapper = mapper;
@@ -27,8 +27,8 @@ namespace ApiBase.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<UserReadDto>> GetAllUsers()
         ***REMOVED***
-            var userItems = _repository.GetAllUsers();
-            return Ok(_mapper.Map<IEnumerable<UserReadDto>>(userItems));
+            var userItems = _repository.GetAllAsync<User>();
+            return Ok(_mapper.Map<IEnumerable<UserReadDto>>(userItems.Result));
        ***REMOVED***
 
 
@@ -36,10 +36,10 @@ namespace ApiBase.Controllers
         [HttpGet("***REMOVED***id***REMOVED***", Name="GetUserById")]
         public ActionResult <UserReadDto> GetUserById(int id)
         ***REMOVED***
-            var userItem = _repository.GetUserById(id);
+            var userItem = _repository.GetByIdAsync<User>(id);
             if(userItem != null)
             ***REMOVED***
-                return Ok(_mapper.Map<UserReadDto>(userItem)); 
+                return Ok(_mapper.Map<UserReadDto>(userItem.Result)); 
            ***REMOVED***
             return NotFound();
        ***REMOVED***
@@ -47,56 +47,51 @@ namespace ApiBase.Controllers
 
         // POST api/users
         [HttpPost]
-        public async Task<ActionResult <User>> CreateUser(UserCreateDto userCreateDto)
+        public ActionResult <User> CreateUser(UserCreateDto userCreateDto)
         ***REMOVED***
-            var userModel = _mapper.Map<User>(userCreateDto);
-            await this._repository.CreateUser(userModel);
+            var userItem = _mapper.Map<User>(userCreateDto);
             
-            if(_repository.Exists(userModel) == true)
+            if(_repository.Exists<User>(userItem))
             ***REMOVED***
                 return Conflict();
            ***REMOVED***
             
-            await this._repository.SaveChanges();
+            this._repository.AddAsync<User>(userItem);
+            var userReadDto = _mapper.Map<UserReadDto>(userItem);
 
-            var userReadDto = _mapper.Map<UserReadDto>(userModel);
-            return CreatedAtRoute(nameof(GetUserById), new ***REMOVED***Id = userReadDto.UserId***REMOVED***, userReadDto);
+            return CreatedAtRoute(nameof(GetUserById), new ***REMOVED***Id = userReadDto.Id***REMOVED***, userReadDto);
        ***REMOVED***
     
         
         // PUT api/users/***REMOVED***id***REMOVED***
         [HttpPut("***REMOVED***id***REMOVED***")]
-        public async Task<ActionResult> UpdateUser(int id, UserUpdateDto userUpdateDto)
+        public ActionResult UpdateUser(int id, UserUpdateDto userUpdateDto)
         ***REMOVED***
-            var userRepo = _repository.GetUserById(id);
-            if(userRepo == null)
+            var userItem = _repository.GetByIdAsync<User>(id);
+            if(userItem.Result == null)
             ***REMOVED***
                 return NotFound();
            ***REMOVED***
 
-            _mapper.Map(userUpdateDto, userRepo);
+            _mapper.Map(userUpdateDto, userItem.Result);
 
-            _repository.UpdateUser(userRepo);
+            _repository.UpdateAsync<User>(userItem.Result);
             
-            await _repository.SaveChanges();
-
             return NoContent();
-
        ***REMOVED***
  
 
         // DELETE api/users/***REMOVED***id***REMOVED***
         [HttpDelete("***REMOVED***id***REMOVED***")]
-        public async Task<ActionResult> DeleteUser(int id)
+        public ActionResult DeleteUser(int id)
         ***REMOVED***
-            var userRepo = _repository.GetUserById(id);
-            if(userRepo == null)
+            var userItem = _repository.GetByIdAsync<User>(id);
+            if(userItem == null)
             ***REMOVED***
                 return NotFound();
            ***REMOVED***
 
-            _repository.DeleteUser(userRepo);
-            await _repository.SaveChanges();
+            _repository.DeleteAsync<User>(userItem.Result);
 
             return NoContent();
        ***REMOVED***

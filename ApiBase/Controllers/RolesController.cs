@@ -13,11 +13,10 @@ namespace ApiBase.Controllers
     [ApiController]
     public class RolesController : ControllerBase
     ***REMOVED***
-        private readonly IApplicationRepo _repository;
-
+        private readonly IEFRepository _repository;
         public readonly IMapper _mapper;
 
-        public RolesController(IApplicationRepo repository, IMapper mapper)
+        public RolesController(IEFRepository repository, IMapper mapper)
         ***REMOVED***
             this._repository = repository;
             this._mapper = mapper;
@@ -27,18 +26,18 @@ namespace ApiBase.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<RoleReadDto>> GetAllRoles()
         ***REMOVED***
-            var roleItems = _repository.GetAllRoles();
-            return Ok(_mapper.Map<IEnumerable<RoleReadDto>>(roleItems));
+            var roleItems = _repository.GetAllAsync<Role>();
+            return Ok(_mapper.Map<IEnumerable<RoleReadDto>>(roleItems.Result));
        ***REMOVED***
 
         // GET api/roles/***REMOVED***id***REMOVED***
         [HttpGet("***REMOVED***id***REMOVED***", Name="GetRoleById")]
         public ActionResult <RoleReadDto> GetRoleById(int id)
         ***REMOVED***
-            var roleItem = _repository.GetRoleById(id);
+            var roleItem = _repository.GetByIdAsync<Role>(id);
             if(roleItem != null)
             ***REMOVED***
-                return Ok(_mapper.Map<RoleReadDto>(roleItem)); 
+                return Ok(_mapper.Map<RoleReadDto>(roleItem.Result)); 
            ***REMOVED***
             return NotFound();
        ***REMOVED***
@@ -47,37 +46,33 @@ namespace ApiBase.Controllers
 
         // POST api/role
         [HttpPost]
-        public async Task<ActionResult<Role>> CreateRole(RoleCreateDto roleCreateDto)
+        public ActionResult<Role> CreateRole(RoleCreateDto roleCreateDto)
         ***REMOVED***
 
-            var roleModel = _mapper.Map<Role>(roleCreateDto);
-            await this._repository.CreateRole(roleModel);
-
-            if(_repository.Exists(roleModel) == false)
+            var roleItem = _mapper.Map<Role>(roleCreateDto);
+            if(_repository.Exists<Role>(roleItem))
             ***REMOVED***
                     return Conflict();
            ***REMOVED***
+            this._repository.AddAsync<Role>(roleItem);
+
             
-            await this._repository.SaveChanges();
-        
-            var roleReadDto = _mapper.Map<RoleReadDto>(roleModel);
-            return CreatedAtRoute(nameof(GetRoleById), new ***REMOVED***Id = roleReadDto.RoleId***REMOVED***, roleReadDto);
+            var roleReadDto = _mapper.Map<RoleReadDto>(roleItem);
+            return CreatedAtRoute(nameof(GetRoleById), new ***REMOVED***Id = roleReadDto.Id***REMOVED***, roleReadDto);
        ***REMOVED***
 
 
         // DELETE api/roles/***REMOVED***id***REMOVED***
         [HttpDelete("***REMOVED***id***REMOVED***")]
-        public async Task<ActionResult> DeleteRole(int id)
+        public ActionResult DeleteRole(int id)
         ***REMOVED***
-            var roleRepo = _repository.GetRoleById(id);
-            if(roleRepo == null)
+            var roleItem = _repository.GetByIdAsync<Role>(id);
+            if(roleItem == null)
             ***REMOVED***
                 return NotFound();
            ***REMOVED***
 
-            _repository.DeleteRole(roleRepo);
-            await _repository.SaveChanges();
-
+            _repository.DeleteAsync<Role>(roleItem.Result);
             return NoContent();
        ***REMOVED***
 

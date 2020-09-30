@@ -4,7 +4,7 @@ namespace ApiBase.DTOs
 ***REMOVED***
     public class UserReadDto
     ***REMOVED***
-        public int UserId ***REMOVED*** get; set;***REMOVED***
+        public int Id ***REMOVED*** get; set;***REMOVED***
         public string FirstName ***REMOVED*** get; set;***REMOVED***
         public string LastName ***REMOVED*** get; set;***REMOVED***
         public string Password ***REMOVED*** get; set;***REMOVED***

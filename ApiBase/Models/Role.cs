@@ -4,14 +4,11 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ApiBase.Models
 ***REMOVED***
-    public class Role 
+    public class Role : BaseEntity
     ***REMOVED***
-        [Key]
-        public int RoleId ***REMOVED*** get; set;***REMOVED***
         
         [MaxLength(250)]
         public string Name ***REMOVED*** get; set;***REMOVED***
-
 
         public User User ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***

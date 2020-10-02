@@ -9,8 +9,18 @@ using Aqi.Dtos;
 
 namespace Aqi.Controllers
 ***REMOVED***
+    // api/stations
+    [Route("api/[controller]")]
+    [ApiController]
     public class StationsController : ControllerBase
     ***REMOVED***
+        private readonly IStationRepo _repository;
+        private readonly IMapper _mapper;
 
+        public StationsController(IStationRepo repository, IMapper mapper)
+        ***REMOVED***
+            _repository = repository;
+            _mapper = mapper;
+       ***REMOVED***
    ***REMOVED***
 ***REMOVED***

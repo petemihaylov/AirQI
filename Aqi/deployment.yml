@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: aqi-deployment
+spec:
+  selector:
+    matchLabels:
+      app: aqi-pod
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: aqi-pod
+    spec:
+      containers:
+      - name: aqi-container
+        image: "aqi-api:latest"
+        imagePullPolicy: IfNotPresent
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - containerPort: 80
+        livenessProbe:
+           httpGet:
+            path: /api/stations
+            port: 80
+        readinessProbe:
+          httpGet:
+            path: /api/stations
+            port: 80

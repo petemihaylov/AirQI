@@ -8,7 +8,7 @@ namespace Aqi.Data
         
         public AqiDbContext(DbContextOptions<AqiDbContext> options) : base(options)
         ***REMOVED***
-            
+
        ***REMOVED***
 
         public DbSet<Station> Stations ***REMOVED*** get; set;***REMOVED***

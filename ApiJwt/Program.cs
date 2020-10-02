@@ -7,7 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace ApiBase
+namespace ApiJwt
 ***REMOVED***
     public class Program
     ***REMOVED***
@@ -21,7 +21,6 @@ namespace ApiBase
                 .ConfigureWebHostDefaults(webBuilder =>
                 ***REMOVED***
                     webBuilder.UseStartup<Startup>();
-                    // webBuilder.UseUrls("http://localhost:8080/");
                ***REMOVED***);
    ***REMOVED***
 ***REMOVED***

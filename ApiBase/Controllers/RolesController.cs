@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using ApiBase.Models;
 using ApiBase.DTOs;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBase.Controllers
 {
-    
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class RolesController : ControllerBase

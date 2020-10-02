@@ -8,7 +8,7 @@ namespace Aqi.Data
         
         public AqiDbContext(DbContextOptions<AqiDbContext> options) : base(options)
         {
-            
+
         }
 
         public DbSet<Station> Stations { get; set; }

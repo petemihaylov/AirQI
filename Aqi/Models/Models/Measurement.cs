@@ -1,22 +1,24 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models
+namespace Aqi.Models.Models
 ***REMOVED***
+    [BsonIgnoreExtraElements]
     public class Measurement
     ***REMOVED***
-        [Key]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public int IdMeasurement  ***REMOVED*** get; set;***REMOVED***
 
-        [Required]
+        [BsonElement]
         [MaxLength(50)]
         public string Metric ***REMOVED*** get; set;***REMOVED***
 
-        [Required]
+        [BsonElement]
         public double Value ***REMOVED*** get; set;***REMOVED***
 
-        [ForeignKey("Station")]
-        public int StationFK ***REMOVED*** get; set;***REMOVED*** 
 
    ***REMOVED***
 ***REMOVED***

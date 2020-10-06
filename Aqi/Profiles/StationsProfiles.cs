@@ -1,6 +1,6 @@
 using AutoMapper;
 using Aqi.Dtos;
-using Aqi.Models;
+using Aqi.Models.Models;
 
 namespace Aqi.Profiles
 ***REMOVED***
@@ -9,8 +9,9 @@ namespace Aqi.Profiles
         public StationsProfile()
         ***REMOVED***
             CreateMap<Station, StationReadDto>();
+            CreateMap<StationReadDto, Station>();
             CreateMap<StationCreateDto, Station>();
-            CreateMap<Station, StationCreateDto>();
+            CreateMap<Station,StationCreateDto>();
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

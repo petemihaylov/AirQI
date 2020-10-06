@@ -1,20 +1,24 @@
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models
+namespace Aqi.Models.Models
 ***REMOVED***
+    [BsonIgnoreExtraElements]
     public class Location
     ***REMOVED***
     
-        [Key]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public int IdLocation  ***REMOVED*** get; set;***REMOVED***
 
-        [Required]
+        [BsonElement]
         public double Accuracy ***REMOVED*** get; set;***REMOVED***
         
-        [Required]
+        [BsonElement]
         public double Latitude ***REMOVED*** get; set;***REMOVED***
 
-        [Required]
+        [BsonElement]
         public double Longitude ***REMOVED*** get; set;***REMOVED***
 
    ***REMOVED***

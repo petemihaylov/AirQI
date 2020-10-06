@@ -1,26 +1,27 @@
-using Aqi.Models;
 using System;
-using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Aqi.Repository;
+using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Dtos
+namespace Aqi.Models.Models
 ***REMOVED***
-    public class StationReadDto
+    [BsonCollection("station")]
+    public class Station : Document
     ***REMOVED***
-        public ObjectId Id ***REMOVED*** get; set;***REMOVED***
 
+        // [BsonElement]
         // public City City ***REMOVED*** get; set;***REMOVED***
 
+        // [BsonElement]
         // public Country Country ***REMOVED*** get; set;***REMOVED***
 
+        // [BsonElement]
         // public Location Location ***REMOVED*** get; set;***REMOVED***
-        
+
+        // [BsonElement]
         // public ICollection<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
 
-        public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
-
-        public DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

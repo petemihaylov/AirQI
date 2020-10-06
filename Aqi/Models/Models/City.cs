@@ -1,21 +1,25 @@
 using System.ComponentModel.DataAnnotations;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models
+namespace Aqi.Models.Models
 {
+    [BsonIgnoreExtraElements]
     public class City
     {
     
-        [Key]
+        [BsonId]
+        [BsonRepresentation(BsonType.ObjectId)]
         public int IdCity  { get; set; }
 
-        [Required]
+        [BsonElement]
         [MaxLength(50)]
         public string Name { get; set; }
         
-        [Required]
+        [BsonElement]
         public Country Country { get; set; }
 
-        [Required]
+        [BsonElement]
         public Location Location { get; set; }
 
     }

@@ -30,6 +30,26 @@ namespace Aqi.Repository
                 typeof(BsonCollectionAttribute), true).FirstOrDefault())?.CollectionName;
         }
 
+        public virtual IEnumerable<TDocument> GetAll()
+        {
+            return _collection.Find(doc => true).ToList();
+        }
+
+        public virtual TDocument GetObjectById(string id)
+        {
+            var objectId = new ObjectId(id);
+            return _collection.Find<TDocument>(doc => doc.Id == objectId).FirstOrDefault();
+        }
+
+        public Task<TDocument> GetObjectByIdAsync(string id)
+        {
+            return Task.Run(() =>
+            {
+                var objectId = new ObjectId(id);
+                 return _collection.Find<TDocument>(doc => doc.Id == objectId).FirstOrDefault();
+            });
+        }
+
         public IQueryable<TDocument> AsQueryable()
         {
             return _collection.AsQueryable();
@@ -86,13 +106,13 @@ namespace Aqi.Repository
             return Task.Run(() => _collection.InsertOneAsync(document));
         }
 
-        public void InsertMany(ICollection<TDocument> documents)
+        public virtual void InsertMany(IEnumerable<TDocument> documents)
         {
             _collection.InsertMany(documents);
         }
 
 
-        public virtual async Task InsertManyAsync(ICollection<TDocument> documents)
+        public virtual async Task InsertManyAsync(IEnumerable<TDocument> documents)
         {
             await _collection.InsertManyAsync(documents);
         }

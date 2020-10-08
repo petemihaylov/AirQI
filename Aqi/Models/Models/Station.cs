@@ -11,17 +11,18 @@ namespace Aqi.Models.Models
     public class Station : Document
     {
 
-        // [BsonElement]
-        // public City City { get; set; }
+        [BsonElement]
+        [MaxLength(50)]
+        public string City { get; set; }
 
-        // [BsonElement]
-        // public Country Country { get; set; }
+        [BsonElement]
+        public Country Country { get; set; }
 
-        // [BsonElement]
-        // public Location Location { get; set; }
+        [BsonElement]
+        public Location Location { get; set; }
 
-        // [BsonElement]
-        // public ICollection<Measurement> Measurements { get; set; }
+        [BsonElement]
+        public IEnumerable<Measurement> Measurements { get; set; }
 
     }
 }

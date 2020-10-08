@@ -9,7 +9,6 @@ namespace Aqi.Profiles
         public StationsProfile()
         {
             CreateMap<Station, StationReadDto>();
-            CreateMap<StationReadDto, Station>();
             CreateMap<StationCreateDto, Station>();
             CreateMap<Station,StationCreateDto>();
         }

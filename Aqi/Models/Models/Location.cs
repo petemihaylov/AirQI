@@ -8,10 +8,6 @@ namespace Aqi.Models.Models
     public class Location
     {
     
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public int IdLocation  { get; set; }
-
         [BsonElement]
         public double Accuracy { get; set; }
         

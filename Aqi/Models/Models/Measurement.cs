@@ -8,16 +8,29 @@ namespace Aqi.Models.Models
     [BsonIgnoreExtraElements]
     public class Measurement
     {
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public int IdMeasurement  { get; set; }
+        [BsonElement]
+        public double Pm025 { get; set; }
 
         [BsonElement]
-        [MaxLength(50)]
-        public string Metric { get; set; }
+        public double Pm100 { get; set; }
 
         [BsonElement]
-        public double Value { get; set; }
+        public double Aqi { get; set; }
+
+        [BsonElement]
+        public double P { get; set; }
+
+        [BsonElement]
+        public double H { get; set; }
+
+        [BsonElement]
+        public double T { get; set; }
+
+        [BsonElement]
+        public double O3 { get; set; }
+
+        [BsonElement]
+        public double No2 { get; set; }
 
 
     }

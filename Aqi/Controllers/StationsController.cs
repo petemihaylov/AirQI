@@ -32,10 +32,7 @@ namespace Aqi.Controllers
         [HttpGet]
         public ActionResult <IEnumerable<StationReadDto>> GetAllStations()
         {
-            var stationModelItems =  _repository.FilterBy(
-                    filter => filter.Id != null,
-                    projection => projection.Id
-                );
+            var stationModelItems =  _repository.GetAll();
             
             if(stationModelItems != null){
                 return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stationModelItems));

@@ -11,13 +11,19 @@ namespace Aqi.Repository
     {
         IQueryable<TDocument> AsQueryable();
 
+        IEnumerable<TDocument> GetAll();
+
+        TDocument GetObjectById(string id);
+
+        Task<TDocument> GetObjectByIdAsync(string id);
+
         void InsertOne(TDocument document);
 
         Task InsertOneAsync(TDocument document);
 
-        void InsertMany(ICollection<TDocument> documents);
+        void InsertMany(IEnumerable<TDocument> documents);
 
-        Task InsertManyAsync(ICollection<TDocument> documents);
+        Task InsertManyAsync(IEnumerable<TDocument> documents);
 
         void ReplaceOne(TDocument document);
 

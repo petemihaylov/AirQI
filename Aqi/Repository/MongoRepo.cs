@@ -2,7 +2,7 @@ using Aqi.Repository;
 using System.Linq;
 using Aqi.Settings;
 using MongoDB.Driver;
-using Aqi.Models.Models;
+using Aqi.Models.Data;
 using System.Collections.Generic;
 using Aqi.Models;
 using System.Threading.Tasks;

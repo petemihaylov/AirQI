@@ -1,5 +1,5 @@
 using Aqi.Models;
-using Aqi.Models.Models;
+using Aqi.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

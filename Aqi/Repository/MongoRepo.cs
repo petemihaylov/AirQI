@@ -30,6 +30,26 @@ namespace Aqi.Repository
                 typeof(BsonCollectionAttribute), true).FirstOrDefault())?.CollectionName;
        ***REMOVED***
 
+        public virtual IEnumerable<TDocument> GetAll()
+        ***REMOVED***
+            return _collection.Find(doc => true).ToList();
+       ***REMOVED***
+
+        public virtual TDocument GetObjectById(string id)
+        ***REMOVED***
+            var objectId = new ObjectId(id);
+            return _collection.Find<TDocument>(doc => doc.Id == objectId).FirstOrDefault();
+       ***REMOVED***
+
+        public Task<TDocument> GetObjectByIdAsync(string id)
+        ***REMOVED***
+            return Task.Run(() =>
+            ***REMOVED***
+                var objectId = new ObjectId(id);
+                 return _collection.Find<TDocument>(doc => doc.Id == objectId).FirstOrDefault();
+           ***REMOVED***);
+       ***REMOVED***
+
         public IQueryable<TDocument> AsQueryable()
         ***REMOVED***
             return _collection.AsQueryable();
@@ -86,13 +106,13 @@ namespace Aqi.Repository
             return Task.Run(() => _collection.InsertOneAsync(document));
        ***REMOVED***
 
-        public void InsertMany(ICollection<TDocument> documents)
+        public virtual void InsertMany(IEnumerable<TDocument> documents)
         ***REMOVED***
             _collection.InsertMany(documents);
        ***REMOVED***
 
 
-        public virtual async Task InsertManyAsync(ICollection<TDocument> documents)
+        public virtual async Task InsertManyAsync(IEnumerable<TDocument> documents)
         ***REMOVED***
             await _collection.InsertManyAsync(documents);
        ***REMOVED***

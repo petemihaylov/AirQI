@@ -7,7 +7,7 @@ namespace Aqi.Models
     public interface IDocument
     ***REMOVED***
         [BsonId]
-        [BsonRepresentation(BsonType.String)]
+        [BsonRepresentation(BsonType.ObjectId)]
         ObjectId Id ***REMOVED*** get; set;***REMOVED***
 
         DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***

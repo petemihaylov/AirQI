@@ -4,20 +4,21 @@ using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson.Serialization.Attributes;
+using Aqi.Models.Models;
 
 namespace Aqi.Dtos
 ***REMOVED***
-    public class StationReadDto
+    public class StationReadDto 
     ***REMOVED***
-        public ObjectId Id ***REMOVED*** get; set;***REMOVED***
+        public string Id ***REMOVED*** get; set;***REMOVED***
 
-        // public City City ***REMOVED*** get; set;***REMOVED***
-
-        // public Country Country ***REMOVED*** get; set;***REMOVED***
-
-        // public Location Location ***REMOVED*** get; set;***REMOVED***
-        
-        // public ICollection<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
+        public string City ***REMOVED*** get; set;***REMOVED***
+  
+        public Country Country ***REMOVED*** get; set;***REMOVED***
+      
+        public Location Location ***REMOVED*** get; set;***REMOVED***
+      
+        public ICollection<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
 
         public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
 

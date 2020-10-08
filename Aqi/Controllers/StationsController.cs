@@ -1,7 +1,7 @@
 using Aqi.Dtos;
 using AutoMapper;
 using System.Collections.Generic;
-using Aqi.Models.Models;
+using Aqi.Models.Data;
 using Aqi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;

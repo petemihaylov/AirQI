@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Dashboard from "../Dashboard";
 import RegisterForm from "../RegisterForm";
+import Login from "../login.component";
 
 class App extends Component {
   render() {
@@ -12,6 +13,7 @@ class App extends Component {
             <Dashboard />
           </Route>
           <Route path="/register" component={RegisterForm} />
+          <Route path="/signin" component={Login} />
         </Switch>
       </Router>
     );

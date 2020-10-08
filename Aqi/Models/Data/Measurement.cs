@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models.Models
+namespace Aqi.Models.Data
 {
     [BsonIgnoreExtraElements]
     public class Measurement

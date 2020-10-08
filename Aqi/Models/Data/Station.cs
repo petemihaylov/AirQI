@@ -5,7 +5,7 @@ using Aqi.Repository;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models.Models
+namespace Aqi.Models.Data
 {
     [BsonCollection("station")]
     public class Station : Document

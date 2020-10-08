@@ -1,6 +1,6 @@
 using AutoMapper;
 using Aqi.Dtos;
-using Aqi.Models.Models;
+using Aqi.Models.Data;
 
 namespace Aqi.Profiles
 {

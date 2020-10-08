@@ -4,7 +4,7 @@ using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson.Serialization.Attributes;
-using Aqi.Models.Models;
+using Aqi.Models.Data;
 
 namespace Aqi.Dtos
 {

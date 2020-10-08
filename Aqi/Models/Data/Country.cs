@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models.Models
+namespace Aqi.Models.Data
 {
     [BsonIgnoreExtraElements]
     public class Country

@@ -7,10 +7,6 @@ namespace Aqi.Models.Models
     [BsonIgnoreExtraElements]
     public class Country
     ***REMOVED***
-    
-        [BsonId]
-        [BsonRepresentation(BsonType.ObjectId)]
-        public int IdCountry ***REMOVED*** get; set;***REMOVED***
 
         [BsonElement]
         [MaxLength(50)]

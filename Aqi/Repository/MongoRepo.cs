@@ -30,9 +30,18 @@ namespace Aqi.Repository
                 typeof(BsonCollectionAttribute), true).FirstOrDefault())?.CollectionName;
        ***REMOVED***
 
+
         public virtual IEnumerable<TDocument> GetAll()
         ***REMOVED***
             return _collection.Find(doc => true).ToList();
+       ***REMOVED***
+
+        public virtual Task<IEnumerable<TDocument>> GetAllAsync()
+        ***REMOVED***
+            return Task.Run( () =>
+            ***REMOVED***
+               return (IEnumerable<TDocument>) _collection.Find(doc => true).ToList();
+           ***REMOVED***);
        ***REMOVED***
 
         public virtual TDocument GetObjectById(string id)
@@ -41,7 +50,7 @@ namespace Aqi.Repository
             return _collection.Find<TDocument>(doc => doc.Id == objectId).FirstOrDefault();
        ***REMOVED***
 
-        public Task<TDocument> GetObjectByIdAsync(string id)
+        public virtual Task<TDocument> GetObjectByIdAsync(string id)
         ***REMOVED***
             return Task.Run(() =>
             ***REMOVED***
@@ -50,11 +59,58 @@ namespace Aqi.Repository
            ***REMOVED***);
        ***REMOVED***
 
-        public IQueryable<TDocument> AsQueryable()
+        public virtual void CreateObject(TDocument document)
         ***REMOVED***
-            return _collection.AsQueryable();
+            _collection.InsertOne(document);
        ***REMOVED***
 
+        public virtual Task CreateObjectAsync(TDocument document)
+        ***REMOVED***
+            return Task.Run(() => _collection.InsertOneAsync(document));
+       ***REMOVED***
+
+        public virtual void UpdateObject(string id, TDocument document)
+        ***REMOVED***
+            var objectId = new ObjectId(id);
+            _collection.ReplaceOne(doc => doc.Id == objectId, document);
+       ***REMOVED***
+
+        public virtual Task UpdateObjectAsync(string id, TDocument document)***REMOVED***
+            return Task.Run(() =>
+            ***REMOVED***
+                var objectId = new ObjectId(id);
+                _collection.ReplaceOne(doc => doc.Id == objectId, document);
+           ***REMOVED***);
+       ***REMOVED***
+
+        public void RemoveObject(TDocument document)
+        ***REMOVED***
+            _collection.DeleteOne(doc => doc.Id == document.Id);
+       ***REMOVED***
+
+        public virtual Task RemoveObjectAsync(TDocument document)
+        ***REMOVED***
+            return Task.Run(() =>
+            ***REMOVED***
+                _collection.DeleteOne(doc => doc.Id == document.Id);
+           ***REMOVED***);
+       ***REMOVED***
+
+        public virtual void RemoveObjectById(string id)
+        ***REMOVED***
+            var objectId = new ObjectId(id);
+            _collection.DeleteOne(doc => doc.Id == objectId);
+       ***REMOVED***
+
+        public virtual Task RemoveObjectByIdAsync(string id)
+        ***REMOVED***
+            return Task.Run(() =>
+            ***REMOVED***
+                var objectId = new ObjectId(id);
+                _collection.DeleteOne(doc => doc.Id == objectId);
+           ***REMOVED***);
+       ***REMOVED***
+        
         public virtual IEnumerable<TDocument> FilterBy(
             Expression<Func<TDocument, bool>> filterExpression)
         ***REMOVED***
@@ -93,77 +149,6 @@ namespace Aqi.Repository
                 var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
                 return _collection.Find(filter).SingleOrDefaultAsync();
            ***REMOVED***);
-       ***REMOVED***
-
-
-        public virtual void InsertOne(TDocument document)
-        ***REMOVED***
-            _collection.InsertOne(document);
-       ***REMOVED***
-
-        public virtual Task InsertOneAsync(TDocument document)
-        ***REMOVED***
-            return Task.Run(() => _collection.InsertOneAsync(document));
-       ***REMOVED***
-
-        public virtual void InsertMany(IEnumerable<TDocument> documents)
-        ***REMOVED***
-            _collection.InsertMany(documents);
-       ***REMOVED***
-
-
-        public virtual async Task InsertManyAsync(IEnumerable<TDocument> documents)
-        ***REMOVED***
-            await _collection.InsertManyAsync(documents);
-       ***REMOVED***
-
-        public void ReplaceOne(TDocument document)
-        ***REMOVED***
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
-            _collection.FindOneAndReplace(filter, document);
-       ***REMOVED***
-
-        public virtual async Task ReplaceOneAsync(TDocument document)
-        ***REMOVED***
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
-            await _collection.FindOneAndReplaceAsync(filter, document);
-       ***REMOVED***
-
-        public void DeleteOne(Expression<Func<TDocument, bool>> filterExpression)
-        ***REMOVED***
-            _collection.FindOneAndDelete(filterExpression);
-       ***REMOVED***
-
-        public Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression)
-        ***REMOVED***
-            return Task.Run(() => _collection.FindOneAndDeleteAsync(filterExpression));
-       ***REMOVED***
-
-        public void DeleteById(string id)
-        ***REMOVED***
-            var objectId = new ObjectId(id);
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
-            _collection.FindOneAndDelete(filter);
-       ***REMOVED***
-
-        public Task DeleteByIdAsync(string id)
-        ***REMOVED***
-            return Task.Run(() =>
-            ***REMOVED***
-                var objectId = new ObjectId(id);
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
-                _collection.FindOneAndDeleteAsync(filter);
-           ***REMOVED***);
-       ***REMOVED***
-
-        public void DeleteMany(Expression<Func<TDocument, bool>> filterExpression)
-        ***REMOVED***
-            _collection.DeleteMany(filterExpression);
-       ***REMOVED***
-
-        public Task DeleteManyAsync(Expression<Func<TDocument, bool>> filterExpression)
-        ***REMOVED***
-            return Task.Run(() => _collection.DeleteManyAsync(filterExpression));
        ***REMOVED***
 
    ***REMOVED***

@@ -21,12 +21,5 @@ namespace Aqi.Dtos
         [Required]
         public ICollection<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
 
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
-
-        [Required]
-        [DataType(DataType.Date)]
-        public DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

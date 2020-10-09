@@ -7,7 +7,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Aqi.Models.Data
 ***REMOVED***
-    [BsonCollection("station")]
+    [BsonCollection("stations")]
     public class Station : Document
     ***REMOVED***
 

@@ -6,5 +6,6 @@ namespace ApiBase.Models
     {
         [Key]
         public int Id { get; set; }
+
     }
 }

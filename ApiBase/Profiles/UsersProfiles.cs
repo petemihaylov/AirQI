@@ -11,7 +11,6 @@ namespace Commander.Profiles
             // source to destionation
             CreateMap<User, UserReadDto>();
             CreateMap<UserCreateDto, User>();
-            CreateMap<UserUpdateDto, User>();
         }
     }
 }

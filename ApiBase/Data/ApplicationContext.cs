@@ -10,14 +10,18 @@ namespace ApiBase.Data
 
         
         public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; } 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>()
-            .HasOne(u => u.UserRole)
-            .WithOne(r => r.User)
-            .HasForeignKey<User>(u => u.RoleId);
+                .Property(u => u.UserRole)
+                .HasConversion<string>();
+            
+            modelBuilder.Entity<User>()
+            .HasIndex(u => u.Username)
+            .IsUnique();
+
+            base.OnModelCreating(modelBuilder);
 
         }
     }

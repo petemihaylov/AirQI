@@ -6,8 +6,7 @@ namespace ApiJwt.Models
     {
         [Key]
         public int Id { get; set; }
-        
-        [MaxLength(250)]
-        public string FirstName { get; set; }
+ 
+        public string Username { get; set; }
     }
 }

@@ -21,9 +21,9 @@ namespace ApiJwt.Data
             return await _context.Set<T>().ToListAsync();
         }
 
-        public async Task<T> GetByUsernameAsync<T>(string firstName) where T : BaseEntity
+        public async Task<T> GetByUsernameAsync<T>(string username) where T : BaseEntity
         {
-            return await _context.Set<T>().SingleOrDefaultAsync(e => e.FirstName == firstName);
+            return await _context.Set<T>().SingleOrDefaultAsync(e => e.Username == username);
         }
 
    }

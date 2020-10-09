@@ -4,7 +4,6 @@ using ApiBase.Data;
 using System.Collections.Generic;
 using ApiBase.Models;
 using ApiBase.DTOs;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 
 namespace ApiBase.Controllers
@@ -66,7 +65,7 @@ namespace ApiBase.Controllers
         
         // PUT api/users/{id}
         [HttpPut("{id}")]
-        public ActionResult UpdateUser(int id, UserUpdateDto userUpdateDto)
+        public ActionResult UpdateUser(int id, UserCreateDto userUpdateDto)
         {
             var userItem = _repository.GetByIdAsync<User>(id);
             if(userItem.Result == null)

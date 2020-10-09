@@ -1,12 +1,14 @@
 import axios from "axios";
 
-const API_URL = "http://20.50.209.228/api/token/";
+const JWT_URL = "http://localhost:5000/api/token/";
+const API_URL = "http://localhost:8080/api/users/";
 
-export default class AuthService ***REMOVED***
+class AuthService ***REMOVED***
+
   login(username, password) ***REMOVED***
     // must be changed according to the TokenController in jwt-api
     return axios
-      .post(API_URL, ***REMOVED***
+      .post(JWT_URL, ***REMOVED***
         username,
         password,
      ***REMOVED***)
@@ -23,15 +25,20 @@ export default class AuthService ***REMOVED***
     localStorage.removeItem("user");
  ***REMOVED***
 
-  register(username, email, password) ***REMOVED***
-    return axios.post(API_URL + "signup", ***REMOVED***
+  register(username, password, firstName, lastName, userRole) ***REMOVED***
+    return axios.post(API_URL, ***REMOVED***
       username,
-      email,
       password,
+      firstName,
+      lastName,
+      userRole
    ***REMOVED***);
  ***REMOVED***
 
   getCurrentUser() ***REMOVED***
     return JSON.parse(localStorage.getItem("user"));
  ***REMOVED***
+
 ***REMOVED***
+
+export default new AuthService();

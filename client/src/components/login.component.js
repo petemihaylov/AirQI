@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
+
 import AuthService from "../services/auth.service";
 import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
@@ -32,6 +33,7 @@ export default class Login extends Component {
   }
 
   onChangeUsername(e) {
+    
     this.setState({
       username: e.target.value,
     });

@@ -9,37 +9,30 @@ namespace Aqi.Repository
 {
     public interface IMongoRepo<TDocument> where TDocument : IDocument
     {
-        IQueryable<TDocument> AsQueryable();
-
         IEnumerable<TDocument> GetAll();
 
+        Task<IEnumerable<TDocument>> GetAllAsync();
+        
         TDocument GetObjectById(string id);
 
         Task<TDocument> GetObjectByIdAsync(string id);
 
-        void InsertOne(TDocument document);
+        void CreateObject(TDocument document);
 
-        Task InsertOneAsync(TDocument document);
+        Task CreateObjectAsync(TDocument document);
 
-        void InsertMany(IEnumerable<TDocument> documents);
+        void UpdateObject(string id, TDocument document);
 
-        Task InsertManyAsync(IEnumerable<TDocument> documents);
+        Task UpdateObjectAsync(string id, TDocument document);
 
-        void ReplaceOne(TDocument document);
+        void RemoveObject(TDocument document);
 
-        Task ReplaceOneAsync(TDocument document);
+        Task RemoveObjectAsync(TDocument document);
 
-        void DeleteOne(Expression<Func<TDocument, bool>> filterExpression);
+        void RemoveObjectById(string id);
 
-        Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression);
+        Task RemoveObjectByIdAsync(string id);
 
-        void DeleteById(string id);
-
-        Task DeleteByIdAsync(string id);
-
-        void DeleteMany(Expression<Func<TDocument, bool>> filterExpression);
-
-        Task DeleteManyAsync(Expression<Func<TDocument, bool>> filterExpression);
         IEnumerable<TDocument> FilterBy(Expression<Func<TDocument, bool>> filterExpression);
 
         IEnumerable<TProjected> FilterBy<TProjected>(Expression<Func<TDocument, bool>> filterExpression,Expression<Func<TDocument, TProjected>> projectionExpression);

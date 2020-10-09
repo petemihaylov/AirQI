@@ -30,9 +30,18 @@ namespace Aqi.Repository
                 typeof(BsonCollectionAttribute), true).FirstOrDefault())?.CollectionName;
         }
 
+
         public virtual IEnumerable<TDocument> GetAll()
         {
             return _collection.Find(doc => true).ToList();
+        }
+
+        public virtual Task<IEnumerable<TDocument>> GetAllAsync()
+        {
+            return Task.Run( () =>
+            {
+               return (IEnumerable<TDocument>) _collection.Find(doc => true).ToList();
+            });
         }
 
         public virtual TDocument GetObjectById(string id)
@@ -41,7 +50,7 @@ namespace Aqi.Repository
             return _collection.Find<TDocument>(doc => doc.Id == objectId).FirstOrDefault();
         }
 
-        public Task<TDocument> GetObjectByIdAsync(string id)
+        public virtual Task<TDocument> GetObjectByIdAsync(string id)
         {
             return Task.Run(() =>
             {
@@ -50,11 +59,58 @@ namespace Aqi.Repository
             });
         }
 
-        public IQueryable<TDocument> AsQueryable()
+        public virtual void CreateObject(TDocument document)
         {
-            return _collection.AsQueryable();
+            _collection.InsertOne(document);
         }
 
+        public virtual Task CreateObjectAsync(TDocument document)
+        {
+            return Task.Run(() => _collection.InsertOneAsync(document));
+        }
+
+        public virtual void UpdateObject(string id, TDocument document)
+        {
+            var objectId = new ObjectId(id);
+            _collection.ReplaceOne(doc => doc.Id == objectId, document);
+        }
+
+        public virtual Task UpdateObjectAsync(string id, TDocument document){
+            return Task.Run(() =>
+            {
+                var objectId = new ObjectId(id);
+                _collection.ReplaceOne(doc => doc.Id == objectId, document);
+            });
+        }
+
+        public void RemoveObject(TDocument document)
+        {
+            _collection.DeleteOne(doc => doc.Id == document.Id);
+        }
+
+        public virtual Task RemoveObjectAsync(TDocument document)
+        {
+            return Task.Run(() =>
+            {
+                _collection.DeleteOne(doc => doc.Id == document.Id);
+            });
+        }
+
+        public virtual void RemoveObjectById(string id)
+        {
+            var objectId = new ObjectId(id);
+            _collection.DeleteOne(doc => doc.Id == objectId);
+        }
+
+        public virtual Task RemoveObjectByIdAsync(string id)
+        {
+            return Task.Run(() =>
+            {
+                var objectId = new ObjectId(id);
+                _collection.DeleteOne(doc => doc.Id == objectId);
+            });
+        }
+        
         public virtual IEnumerable<TDocument> FilterBy(
             Expression<Func<TDocument, bool>> filterExpression)
         {
@@ -93,77 +149,6 @@ namespace Aqi.Repository
                 var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
                 return _collection.Find(filter).SingleOrDefaultAsync();
             });
-        }
-
-
-        public virtual void InsertOne(TDocument document)
-        {
-            _collection.InsertOne(document);
-        }
-
-        public virtual Task InsertOneAsync(TDocument document)
-        {
-            return Task.Run(() => _collection.InsertOneAsync(document));
-        }
-
-        public virtual void InsertMany(IEnumerable<TDocument> documents)
-        {
-            _collection.InsertMany(documents);
-        }
-
-
-        public virtual async Task InsertManyAsync(IEnumerable<TDocument> documents)
-        {
-            await _collection.InsertManyAsync(documents);
-        }
-
-        public void ReplaceOne(TDocument document)
-        {
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
-            _collection.FindOneAndReplace(filter, document);
-        }
-
-        public virtual async Task ReplaceOneAsync(TDocument document)
-        {
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, document.Id);
-            await _collection.FindOneAndReplaceAsync(filter, document);
-        }
-
-        public void DeleteOne(Expression<Func<TDocument, bool>> filterExpression)
-        {
-            _collection.FindOneAndDelete(filterExpression);
-        }
-
-        public Task DeleteOneAsync(Expression<Func<TDocument, bool>> filterExpression)
-        {
-            return Task.Run(() => _collection.FindOneAndDeleteAsync(filterExpression));
-        }
-
-        public void DeleteById(string id)
-        {
-            var objectId = new ObjectId(id);
-            var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
-            _collection.FindOneAndDelete(filter);
-        }
-
-        public Task DeleteByIdAsync(string id)
-        {
-            return Task.Run(() =>
-            {
-                var objectId = new ObjectId(id);
-                var filter = Builders<TDocument>.Filter.Eq(doc => doc.Id, objectId);
-                _collection.FindOneAndDeleteAsync(filter);
-            });
-        }
-
-        public void DeleteMany(Expression<Func<TDocument, bool>> filterExpression)
-        {
-            _collection.DeleteMany(filterExpression);
-        }
-
-        public Task DeleteManyAsync(Expression<Func<TDocument, bool>> filterExpression)
-        {
-            return Task.Run(() => _collection.DeleteManyAsync(filterExpression));
         }
 
     }

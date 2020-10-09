@@ -30,9 +30,9 @@ namespace ApiJwt.Controllers
         [HttpPost]
         public IActionResult Post(User _user)
         ***REMOVED***
-            if (_user != null && _user.FirstName != null && _user.Password != null)
+            if (_user != null && _user.Username != null && _user.Password != null)
             ***REMOVED***
-                User user =  _repository.GetByUsernameAsync<User>(_user.FirstName).Result;
+                User user =  _repository.GetByUsernameAsync<User>(_user.Username).Result;
  
                 if (user != null)
                 ***REMOVED***
@@ -42,8 +42,10 @@ namespace ApiJwt.Controllers
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
                     new Claim("Id", user.Id.ToString()),
+                    new Claim("Username", user.Username),
                     new Claim("FirstName", user.FirstName),
-                    new Claim("LastName", user.LastName)
+                    new Claim("LastName", user.LastName),
+                    new Claim("UserRole", user.UserRole.ToString())
                   ***REMOVED***;
  
 
@@ -56,12 +58,12 @@ namespace ApiJwt.Controllers
                ***REMOVED***
                 else
                 ***REMOVED***
-                    return BadRequest("Invalid credentials");
+                    return BadRequest(new ***REMOVED*** message = "Invalid credentials"***REMOVED***);
                ***REMOVED***
            ***REMOVED***
             else
             ***REMOVED***
-                return BadRequest();
+                return BadRequest(new ***REMOVED*** message = "Username or password is incorrect"***REMOVED***);
            ***REMOVED***
        ***REMOVED***
 

@@ -6,8 +6,7 @@ namespace ApiJwt.Models
     ***REMOVED***
         [Key]
         public int Id ***REMOVED*** get; set;***REMOVED***
-        
-        [MaxLength(250)]
-        public string FirstName ***REMOVED*** get; set;***REMOVED***
+ 
+        public string Username ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

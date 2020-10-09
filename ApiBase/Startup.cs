@@ -9,7 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using ApiBase.Models;
 
 namespace ApiBase
 ***REMOVED***
@@ -25,14 +25,14 @@ namespace ApiBase
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         ***REMOVED***
-            
+
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer
-            (Configuration.GetConnectionString("AzureConnection")));
+            (Configuration.GetConnectionString("ApiConnection")));
 
 
             services.AddScoped<IEFRepository, SqlRepository>();
 
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());            
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             services.AddControllers();
 
@@ -56,10 +56,15 @@ namespace ApiBase
 
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
                         Configuration["Jwt:Key"]))
-                    
+
                ***REMOVED***;
            ***REMOVED***);
 
+            services.AddAuthorization(config =>
+            ***REMOVED***
+                config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
+                config.AddPolicy(Policies.User, Policies.UserPolicy());
+           ***REMOVED***);
        ***REMOVED***
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -82,6 +87,7 @@ namespace ApiBase
             ***REMOVED***
                 endpoints.MapControllers();
            ***REMOVED***);
+
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

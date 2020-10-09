@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiBase.Migrations
 ***REMOVED***
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200930095718_Init")]
+    [Migration("20201008122727_Init")]
     partial class Init
     ***REMOVED***
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -19,22 +19,6 @@ namespace ApiBase.Migrations
                 .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("ApiBase.Models.Role", b =>
-                ***REMOVED***
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(250)")
-                        .HasMaxLength(250);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Roles");
-               ***REMOVED***);
 
             modelBuilder.Entity("ApiBase.Models.User", b =>
                 ***REMOVED***
@@ -55,24 +39,20 @@ namespace ApiBase.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<string>("UserRole")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RoleId")
+                    b.HasIndex("Username")
                         .IsUnique();
 
                     b.ToTable("Users");
-               ***REMOVED***);
-
-            modelBuilder.Entity("ApiBase.Models.User", b =>
-                ***REMOVED***
-                    b.HasOne("ApiBase.Models.Role", "UserRole")
-                        .WithOne("User")
-                        .HasForeignKey("ApiBase.Models.User", "RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                ***REMOVED***);
 #pragma warning restore 612, 618
        ***REMOVED***

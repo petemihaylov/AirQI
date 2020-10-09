@@ -13,3 +13,33 @@ Curretly we are using **JIRA** as a tool in order to use SCRUM methodology and a
 
 [Confluence](https://petarmihaylov.atlassian.net/l/c/QEGg4x6G)
 
+```json
+{
+    "_id":  "5f7c732d7be30a600ae8433b",
+    "city": "New York",
+    "country": {
+        "name" : "United States",
+        "code" : "US"
+    },
+    "location": {
+        "accuracy": 35.369,
+        "latitude": 55.8256671,
+        "longitude": 37.5962931
+    },
+    "measurements": [
+        {
+            "pm025": 15.32,
+            "pm100": 26.47,
+            "aqi": 67.67,
+            "p": 94015.89,
+            "h": 32.54,
+            "t": 24.53,
+            "o3": 16.63,
+            "no2": 6.21
+        }
+    ],
+    "createdAt":"2020-05-09T22:00:00.000+00:00",
+    "updatedAt":  "2020-05-09T22:00:00.000+00:00"
+    
+}
+```

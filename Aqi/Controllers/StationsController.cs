@@ -5,7 +5,6 @@ using Aqi.Models.Data;
 using Aqi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.JsonPatch;
 
 namespace Aqi.Controllers
 {

@@ -5,7 +5,7 @@ stages:
     
 build:
     stage: build
-    
+
     script:
         - "cd ApiBase"
         - "dotnet build"
@@ -14,5 +14,5 @@ test:
     stage: test
 
     script:
-    - "cd ApiBase.IntegrationTests"
-    - "dotnet test"
+        - "cd ApiBase.IntegrationTests"
+        - "dotnet test"

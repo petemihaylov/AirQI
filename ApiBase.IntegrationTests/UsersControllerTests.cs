@@ -26,17 +26,16 @@ namespace ApiBase.IntegrationTests
         [Fact]
         public async Task CreateUser_AddsUser()
         {
-        //     // Arrange
-        //     var user = new User { FirstName = "TestUser", Id = 2, LastName = "TestUser", Password = "12345678", RoleId = 3, UserRole = null };
-        //     var json = JsonConvert.SerializeObject(user);
+            //     // Arrange
+            //     var user = new User { FirstName = "TestUser", Id = 2, LastName = "TestUser", Password = "12345678", RoleId = 3, UserRole = null };
+            //     var json = JsonConvert.SerializeObject(user);
 
-        //     // Act
-        //     var response = await _client.PostAsync("/api/users", new StringContent(json, Encoding.UTF8, "application/json"));
+            //     // Act
+            //     var response = await _client.PostAsync("/api/users", new StringContent(json, Encoding.UTF8, "application/json"));
 
-        //     // Assert
-        //     response.StatusCode.Should().Be(HttpStatusCode.Created);
+            //     // Assert
+            //     response.StatusCode.Should().Be(HttpStatusCode.Created);
         }
-
 
         [Fact]
         public async Task GetAllUsers_ReturnsListResponses()
@@ -50,8 +49,8 @@ namespace ApiBase.IntegrationTests
             // Deserialize and examine results.
             var stringResponse = await response.Content.ReadAsStringAsync();
 
-             var users = JsonConvert.DeserializeObject<IEnumerable<User>>(stringResponse);
-             Assert.Contains(users, p => p.FirstName == "FirstName");
+            var users = JsonConvert.DeserializeObject<IEnumerable<User>>(stringResponse);
+            Assert.Contains(users, p => p.Username == "Username");
         }
     }
 }

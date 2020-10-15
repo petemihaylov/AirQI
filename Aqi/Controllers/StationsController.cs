@@ -1,10 +1,10 @@
 using Aqi.Dtos;
 using AutoMapper;
-using System.Collections.Generic;
 using Aqi.Models.Data;
 using Aqi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 using System;
 
 namespace Aqi.Controllers

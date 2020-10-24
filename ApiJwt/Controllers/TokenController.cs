@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApiJwt.Data;
 using ApiJwt.Models;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -14,6 +15,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace ApiJwt.Controllers
 ***REMOVED***
+
     [ApiController]
     [Route("api/[controller]")]
     public class TokenController : ControllerBase
@@ -32,8 +34,8 @@ namespace ApiJwt.Controllers
         ***REMOVED***
             if (_user != null && _user.Username != null && _user.Password != null)
             ***REMOVED***
-                User user =  _repository.GetByUsernameAsync<User>(_user.Username).Result;
- 
+                User user = _repository.GetByUserAsync<User>(_user.Username, _user.Password).Result;
+
                 if (user != null)
                 ***REMOVED***
                     //create claims details based on the user information
@@ -47,14 +49,26 @@ namespace ApiJwt.Controllers
                     new Claim("LastName", user.LastName),
                     new Claim("UserRole", user.UserRole.ToString())
                   ***REMOVED***;
- 
+
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                     var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
- 
+
                     var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
- 
-                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+
+                    var jwt = new JwtSecurityTokenHandler().WriteToken(token);
+                    
+                    var responseObj = new UserDto
+                    ***REMOVED***
+                        Id = user.Id,
+                        Username = user.Username,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        UserRole = user.UserRole.ToString(),
+                        accessToken = jwt
+                   ***REMOVED***;
+
+                    return Ok(responseObj);
                ***REMOVED***
                 else
                 ***REMOVED***

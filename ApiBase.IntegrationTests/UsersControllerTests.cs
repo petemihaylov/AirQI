@@ -23,19 +23,19 @@ namespace ApiBase.IntegrationTests
             _client = factory.CreateClient();
         }
 
-        [Fact]
-        public async Task CreateUser_AddsUser()
-        {
-            //     // Arrange
-            //     var user = new User { FirstName = "TestUser", Id = 2, LastName = "TestUser", Password = "12345678", RoleId = 3, UserRole = null };
-            //     var json = JsonConvert.SerializeObject(user);
+        // [Fact]
+        // public async Task CreateUser_AddsUser()
+        // {
+        //         // Arrange
+        //         var user = new User { FirstName = "TestUser", Id = 2, LastName = "TestUser", Password = "12345678", RoleId = 3, UserRole = null };
+        //         var json = JsonConvert.SerializeObject(user);
 
-            //     // Act
-            //     var response = await _client.PostAsync("/api/users", new StringContent(json, Encoding.UTF8, "application/json"));
+        //         // Act
+        //         var response = await _client.PostAsync("/api/users", new StringContent(json, Encoding.UTF8, "application/json"));
 
-            //     // Assert
-            //     response.StatusCode.Should().Be(HttpStatusCode.Created);
-        }
+        //         // Assert
+        //         response.StatusCode.Should().Be(HttpStatusCode.Created);
+        // }
 
         [Fact]
         public async Task GetAllUsers_ReturnsListResponses()

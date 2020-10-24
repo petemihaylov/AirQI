@@ -56,12 +56,13 @@ export default class Login extends Component {
     this.form.validateAll();
 
     if (this.checkBtn.context._errors.length === 0) {
-      AuthService.login(this.state.username, this.state.password).then(
+      
+     AuthService.login(this.state.username, this.state.password).then(
         () => {
           this.props.history.push("/profile");
           window.location.reload();
         },
-        (error) => {
+        error => {
           const resMessage =
             (error.response &&
               error.response.data &&
@@ -71,7 +72,7 @@ export default class Login extends Component {
 
           this.setState({
             loading: false,
-            message: resMessage,
+            message: resMessage
           });
         }
       );
@@ -84,15 +85,11 @@ export default class Login extends Component {
 
   render() {
     return (
-      <Container maxWidth="md">
-        <div className="col-md-12">
-          <div className="card card-container p-5 mt-4">
-            <Avatar
-              alt="Remy Sharp"
-              src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"
-              className="mb-4 mt-3"
-            />
-
+      <Container maxWidth="sm">
+        <div className="col-md-12 mt-5">
+          <div className="card card-container p-5 mt-5 d-flex">
+            
+            <h4 className="mb-5 mt-3 ">Login</h4>
             <Form
               onSubmit={this.handleLogin}
               ref={(c) => {
@@ -125,7 +122,7 @@ export default class Login extends Component {
 
               <div className="form-group">
                 <button
-                  className="btn btn-primary btn-block"
+                  className="btn btn-success btn-block"
                   disabled={this.state.loading}
                 >
                   {this.state.loading && (

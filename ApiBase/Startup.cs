@@ -15,6 +15,7 @@ namespace ApiBase
 {
     public class Startup
     {
+        readonly string AllowSpecificOrigins = "_AllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,6 +26,8 @@ namespace ApiBase
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors();
 
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer
             (Configuration.GetConnectionString("ApiConnection")));
@@ -69,6 +72,7 @@ namespace ApiBase
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+
             // Enable middleware to serve generated Swagger as a JSON endpoint.
             app.UseSwagger();
 
@@ -79,6 +83,10 @@ namespace ApiBase
                 c.RoutePrefix = string.Empty;
             });
             app.UseRouting();
+
+
+            // Enable CORS policies
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
 
             app.UseAuthentication();
             app.UseAuthorization();

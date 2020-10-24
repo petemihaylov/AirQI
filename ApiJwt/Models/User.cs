@@ -14,9 +14,6 @@ namespace ApiJwt.Models
         public string LastName { get; set; }
 
         [Required]
-        public string Password { get; set; }
-
-        [Required]
         public RoleEnum UserRole { get; set; }
     }
 

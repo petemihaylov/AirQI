@@ -8,6 +8,6 @@ namespace ApiJwt.Data
     {
         Task<IEnumerable<T>> GetAllAsync<T>() where T: BaseEntity;
         
-        Task<T> GetByUsernameAsync<T>(string username) where T : BaseEntity;
+        Task<T> GetByUserAsync<T>(string username, string password) where T : BaseEntity;
     }
 }

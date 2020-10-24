@@ -1,0 +1,19 @@
+@import './resets';
+
+$primary-color : #171914;
+$accent-color: #ff6527;
+$text-color: #273747;
+$background-color : #f3f3f3;
+
+
+body{
+    background: $background-color;
+}
+
+.nav-bg{
+    background: $background-color;
+
+    a{
+        color: $text-color;
+    }
+}

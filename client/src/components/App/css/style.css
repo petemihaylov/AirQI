@@ -1,0 +1,19 @@
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: #f3f3f3;
+}
+
+.nav-bg {
+  background: #f3f3f3;
+}
+
+.nav-bg a {
+  color: #273747;
+}
+/*# sourceMappingURL=style.css.map */

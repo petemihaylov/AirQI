@@ -6,7 +6,12 @@ namespace ApiJwt.Models
     ***REMOVED***
         [Key]
         public int Id ***REMOVED*** get; set;***REMOVED***
- 
+
+        [Required]
         public string Username ***REMOVED*** get; set;***REMOVED***
+
+        [Required]
+        public string Password ***REMOVED*** get; set;***REMOVED***
+
    ***REMOVED***
 ***REMOVED***

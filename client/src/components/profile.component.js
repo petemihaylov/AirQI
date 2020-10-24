@@ -2,6 +2,7 @@ import React, ***REMOVED*** Component***REMOVED*** from "react";
 import AuthService from "../services/auth.service";
 
 export default class Profile extends Component ***REMOVED***
+
     constructor(props) ***REMOVED***
         super(props);
 
@@ -42,11 +43,10 @@ export default class Profile extends Component ***REMOVED***
                     ***REMOVED***currentUser.lastName***REMOVED***
                 </p>
                 
-                <strong>Authorities:</strong>
-                <ul>
-                    ***REMOVED***currentUser.roles &&
-                        currentUser.roles.map((role, index) => <li key=***REMOVED***index***REMOVED***>***REMOVED***role***REMOVED***</li>)***REMOVED***
-                </ul>
+                <p>
+                    <strong>Authorities:</strong>***REMOVED***" "***REMOVED***
+                    ***REMOVED***currentUser.userRole***REMOVED***
+                </p>
                 
             </div>
         );

@@ -6,7 +6,7 @@ export default class BoardAdmin extends Component ***REMOVED***
         super(props);
 
         this.state = ***REMOVED***
-            content: ""
+            content: [],
        ***REMOVED***;
    ***REMOVED***
 
@@ -32,7 +32,7 @@ export default class BoardAdmin extends Component ***REMOVED***
         return (
             <div className="container">
                 <header className="jumbotron">
-                    <h3>***REMOVED***this.state.content***REMOVED***</h3>
+                    <h3>Admin</h3>
                 </header>
             </div>
         );

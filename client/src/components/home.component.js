@@ -33,7 +33,7 @@ export default class Home extends Component ***REMOVED***
       <div className="container mt-5">
         <table className="table">
           <tbody>
-            ***REMOVED***this.state.content.map((item) => (
+            ***REMOVED***this.state.content && this.state.content.map((item) => (
               <tr key=***REMOVED***item.id***REMOVED***>
                 <td>***REMOVED***item.id***REMOVED***</td>
                 <td>***REMOVED***item.username***REMOVED***</td>

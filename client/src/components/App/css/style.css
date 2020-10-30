@@ -16,4 +16,18 @@ body ***REMOVED***
 .nav-bg a ***REMOVED***
   color: #273747;
 ***REMOVED***
+
+footer ***REMOVED***
+  position: absolute;
+  bottom: 0;
+  font-size: 14px;
+  width: 100%;
+  opacity: 0.5;
+  background-color: #f3f3f3;
+***REMOVED***
+
+footer .footer-copyright a ***REMOVED***
+  text-decoration: none;
+  color: #273747;
+***REMOVED***
 /*# sourceMappingURL=style.css.map */

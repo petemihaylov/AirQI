@@ -16,4 +16,18 @@ body {
 .nav-bg a {
   color: #273747;
 }
+
+footer {
+  position: absolute;
+  bottom: 0;
+  font-size: 14px;
+  width: 100%;
+  opacity: 0.5;
+  background-color: #f3f3f3;
+}
+
+footer .footer-copyright a {
+  text-decoration: none;
+  color: #273747;
+}
 /*# sourceMappingURL=style.css.map */

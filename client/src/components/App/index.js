@@ -19,18 +19,18 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <Navigation props = {this.state} />
-          <main>
-            <Switch>
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/profile" component={Profile} />
-              <Route path="/user" component={BoardUser} />
-              <Route path="/mod" component={BoardModerator} />
-              <Route path="/admin" component={BoardAdmin} />
-              <Route path="/home" component={Home} />
-            </Switch>
-          </main>
+        <Navigation props={this.state} />
+        <main>
+          <Switch>
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/profile" component={Profile} />
+            <Route path="/user" component={BoardUser} />
+            <Route path="/mod" component={BoardModerator} />
+            <Route path="/admin" component={BoardAdmin} />
+            <Route path="/home" component={Home} />
+          </Switch>
+        </main>
 
         <Footer />
       </Router>

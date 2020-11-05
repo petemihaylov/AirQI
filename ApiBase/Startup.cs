@@ -15,7 +15,6 @@ namespace ApiBase
 {
     public class Startup
     {
-        readonly string AllowSpecificOrigins = "_AllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;

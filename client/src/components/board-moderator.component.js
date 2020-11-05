@@ -1,45 +1,34 @@
-import React, { Component } from "react";
-import UserService from "../services/user.service";
+import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchUsers } from '../actions/userActions';
 
-export default class BoardModerator extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      content: [],
-    };
-  }
-
+class BoardModerator extends Component {
   componentDidMount() {
-    UserService.getModeratorBoard().then(
-      (response) => {
-        this.setState({
-          content: response.data,
-        });
-      },
-      (error) => {
-        this.setState({
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString(),
-        });
-      }
-    );
+    this.props.fetchUsers();
   }
 
   render() {
     return (
       <div className="container">
-        <UserList props={this.state.content} />
+        <UserList props={this.props.users} />
       </div>
     );
   }
 }
 
-/* Listing users */
+BoardModerator.propTypes = {
+  fetchUsers: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired
+}
 
-const UserList = ({props}) =>{
+/* Mapping state to props*/
+const mapStateToProps = (state) => ({
+  users: state.users.items,
+});
+
+/* Listing users */
+const UserList = ({ props }) => {
   return (
     <div>
       <header className="jumbotron">
@@ -51,5 +40,7 @@ const UserList = ({props}) =>{
           ))}
       </header>
     </div>
-  ); 
-}
+  );
+};
+
+export default connect(mapStateToProps, { fetchUsers })(BoardModerator);

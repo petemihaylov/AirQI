@@ -9,13 +9,17 @@
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.2",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "^4.0.0",
     "react-validation": "^3.0.7",
     "recharts": "^1.8.5",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
     "validator": "^13.1.17"
   },
   "scripts": {
@@ -25,7 +29,9 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "plugin:react-hooks/recommended"
+    ]
   },
   "browserslist": {
     "production": [
@@ -38,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint-plugin-react-hooks": "^4.2.0"
   }
 }

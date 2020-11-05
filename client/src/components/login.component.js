@@ -20,9 +20,6 @@ const required = (value) => {
 export default class Login extends Component {
   constructor(props) {
     super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = {
       username: "",
@@ -30,18 +27,16 @@ export default class Login extends Component {
       loading: false,
       message: "",
     };
+
+    this.handleLogin = this.handleLogin.bind(this);
+    this.onChange = this.onChange.bind(this);
+
   }
 
-  onChangeUsername(e) {
+  onChange(e) {
     
     this.setState({
-      username: e.target.value,
-    });
-  }
-
-  onChangePassword(e) {
-    this.setState({
-      password: e.target.value,
+      [e.target.name]: e.target.value
     });
   }
 
@@ -103,7 +98,7 @@ export default class Login extends Component {
                   className="form-control"
                   name="username"
                   value={this.state.username}
-                  onChange={this.onChangeUsername}
+                  onChange={this.onChange}
                   validations={[required]}
                 />
               </div>
@@ -115,7 +110,7 @@ export default class Login extends Component {
                   className="form-control"
                   name="password"
                   value={this.state.password}
-                  onChange={this.onChangePassword}
+                  onChange={this.onChange}
                   validations={[required]}
                 />
               </div>

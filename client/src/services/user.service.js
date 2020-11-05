@@ -1,26 +1,23 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-// const API_URL = "http://apibase.westeurope.azurecontainer.io/api/users/";
-
-
- const API_URL = "http://localhost:8080/api/users/";
+const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
 
 class UserService ***REMOVED***
     getPublicContent() ***REMOVED***
-        return axios.get(API_URL);
+        return axios.get(REACT_APP_API_URL + "/users/");
    ***REMOVED***
 
     getUserBoard() ***REMOVED***
-        return axios.get(API_URL, ***REMOVED***headers: authHeader()***REMOVED***);
+        return axios.get(REACT_APP_API_URL + "/users/", ***REMOVED*** headers: authHeader()***REMOVED***);
    ***REMOVED***
 
     getModeratorBoard() ***REMOVED***
-        return axios.get(API_URL, ***REMOVED***headers: authHeader()***REMOVED***);
+        return axios.get(REACT_APP_API_URL + "/users/", ***REMOVED*** headers: authHeader()***REMOVED***);
    ***REMOVED***
 
     getAdminBoard() ***REMOVED***
-        return axios.get(API_URL, ***REMOVED***headers: authHeader()***REMOVED***);
+        return axios.get(REACT_APP_API_URL + "/users/", ***REMOVED*** headers: authHeader()***REMOVED***);
    ***REMOVED***
 ***REMOVED***
 

@@ -9,7 +9,7 @@ namespace ApiBase.Data
 ***REMOVED***
     public class SqlRepository : IEFRepository
     ***REMOVED***
-        
+
         private readonly ApplicationContext _context;
         public SqlRepository(ApplicationContext context)
         ***REMOVED***
@@ -18,7 +18,7 @@ namespace ApiBase.Data
 
         public async Task<bool> SaveChangesAsync()
         ***REMOVED***
-           return  (_context.SaveChangesAsync().GetAwaiter().GetResult() >= 0);
+            return (_context.SaveChangesAsync().GetAwaiter().GetResult() >= 0);
        ***REMOVED***
 
         public async Task<IEnumerable<T>> GetAllAsync<T>() where T : BaseEntity

@@ -19,18 +19,18 @@ class App extends Component ***REMOVED***
   render() ***REMOVED***
     return (
       <Router>
-        <Navigation props = ***REMOVED***this.state***REMOVED*** />
-          <main>
-            <Switch>
-              <Route exact path="/login" component=***REMOVED***Login***REMOVED*** />
-              <Route exact path="/register" component=***REMOVED***Register***REMOVED*** />
-              <Route exact path="/profile" component=***REMOVED***Profile***REMOVED*** />
-              <Route path="/user" component=***REMOVED***BoardUser***REMOVED*** />
-              <Route path="/mod" component=***REMOVED***BoardModerator***REMOVED*** />
-              <Route path="/admin" component=***REMOVED***BoardAdmin***REMOVED*** />
-              <Route path="/home" component=***REMOVED***Home***REMOVED*** />
-            </Switch>
-          </main>
+        <Navigation props=***REMOVED***this.state***REMOVED*** />
+        <main>
+          <Switch>
+            <Route exact path="/login" component=***REMOVED***Login***REMOVED*** />
+            <Route exact path="/register" component=***REMOVED***Register***REMOVED*** />
+            <Route exact path="/profile" component=***REMOVED***Profile***REMOVED*** />
+            <Route path="/user" component=***REMOVED***BoardUser***REMOVED*** />
+            <Route path="/mod" component=***REMOVED***BoardModerator***REMOVED*** />
+            <Route path="/admin" component=***REMOVED***BoardAdmin***REMOVED*** />
+            <Route path="/home" component=***REMOVED***Home***REMOVED*** />
+          </Switch>
+        </main>
 
         <Footer />
       </Router>

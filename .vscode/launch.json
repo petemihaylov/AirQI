@@ -5,7 +5,36 @@
     "version": "0.2.0",
     "configurations": [
         ***REMOVED***
+            "name": "Chrome",
+            "type": "node",
+            "request": "launch",
+            "cwd": "$***REMOVED***workspaceFolder***REMOVED***/Client",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": ["run-script","start"]
+       ***REMOVED***,
+        ***REMOVED***
             "name": ".NET Core Launch (web)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "$***REMOVED***workspaceFolder***REMOVED***/ApiJwt/bin/Debug/netcoreapp3.1/ApiJwt.dll",
+            "args": [],
+            "cwd": "$***REMOVED***workspaceFolder***REMOVED***/ApiJwt",
+            "stopAtEntry": false,
+            "serverReadyAction": ***REMOVED***
+                "action": "openExternally",
+                "pattern": "\\bNow listening on:\\s+(https?://\\S+)"
+           ***REMOVED***,
+            "env": ***REMOVED***
+                "ASPNETCORE_ENVIRONMENT": "Development"
+           ***REMOVED***,
+            "sourceFileMap": ***REMOVED***
+                "/Views": "$***REMOVED***workspaceFolder***REMOVED***/Views"
+           ***REMOVED***
+ 
+       ***REMOVED***,
+        ***REMOVED***
+            "name": ".NET Core Launch (api)",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
@@ -23,12 +52,15 @@
             "sourceFileMap": ***REMOVED***
                 "/Views": "$***REMOVED***workspaceFolder***REMOVED***/Views"
            ***REMOVED***
-       ***REMOVED***,
+       ***REMOVED***
+    ],
+    "compounds": [
         ***REMOVED***
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach",
-            "processId": "$***REMOVED***command:pickProcess***REMOVED***"
+            "name": ".NET Core Launch All",
+            "configurations": [
+                ".NET Core Launch (api)",
+                ".NET Core Launch (web)"
+            ]
        ***REMOVED***
     ]
 ***REMOVED***

@@ -20,9 +20,6 @@ const required = (value) => ***REMOVED***
 export default class Login extends Component ***REMOVED***
   constructor(props) ***REMOVED***
     super(props);
-    this.handleLogin = this.handleLogin.bind(this);
-    this.onChangeUsername = this.onChangeUsername.bind(this);
-    this.onChangePassword = this.onChangePassword.bind(this);
 
     this.state = ***REMOVED***
       username: "",
@@ -30,18 +27,16 @@ export default class Login extends Component ***REMOVED***
       loading: false,
       message: "",
    ***REMOVED***;
+
+    this.handleLogin = this.handleLogin.bind(this);
+    this.onChange = this.onChange.bind(this);
+
  ***REMOVED***
 
-  onChangeUsername(e) ***REMOVED***
+  onChange(e) ***REMOVED***
     
     this.setState(***REMOVED***
-      username: e.target.value,
-   ***REMOVED***);
- ***REMOVED***
-
-  onChangePassword(e) ***REMOVED***
-    this.setState(***REMOVED***
-      password: e.target.value,
+      [e.target.name]: e.target.value
    ***REMOVED***);
  ***REMOVED***
 
@@ -103,7 +98,7 @@ export default class Login extends Component ***REMOVED***
                   className="form-control"
                   name="username"
                   value=***REMOVED***this.state.username***REMOVED***
-                  onChange=***REMOVED***this.onChangeUsername***REMOVED***
+                  onChange=***REMOVED***this.onChange***REMOVED***
                   validations=***REMOVED***[required]***REMOVED***
                 />
               </div>
@@ -115,7 +110,7 @@ export default class Login extends Component ***REMOVED***
                   className="form-control"
                   name="password"
                   value=***REMOVED***this.state.password***REMOVED***
-                  onChange=***REMOVED***this.onChangePassword***REMOVED***
+                  onChange=***REMOVED***this.onChange***REMOVED***
                   validations=***REMOVED***[required]***REMOVED***
                 />
               </div>

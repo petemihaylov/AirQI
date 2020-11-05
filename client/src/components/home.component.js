@@ -4,7 +4,6 @@ import UserService from "./../services/user.service";
 export default class Home extends Component ***REMOVED***
   constructor(props) ***REMOVED***
     super(props);
-
     this.state = ***REMOVED***
       content: [],
    ***REMOVED***;
@@ -29,18 +28,23 @@ export default class Home extends Component ***REMOVED***
  ***REMOVED***
 
   render() ***REMOVED***
+    let content = this.state.content;
+
     return (
       <div className="container mt-5">
+        
+    
         <table className="table">
           <tbody>
-            ***REMOVED***this.state.content && this.state.content.map((item) => (
-              <tr key=***REMOVED***item.id***REMOVED***>
-                <td>***REMOVED***item.id***REMOVED***</td>
-                <td>***REMOVED***item.username***REMOVED***</td>
-                <td>***REMOVED***item.firstName***REMOVED***</td>
-                <td>***REMOVED***item.lastName***REMOVED***</td>
-              </tr>
-            ))***REMOVED***
+            ***REMOVED***content == [] &&
+              content.map((item) => (
+                <tr key=***REMOVED***item.id***REMOVED***>
+                  <td>***REMOVED***item.id***REMOVED***</td>
+                  <td>***REMOVED***item.username***REMOVED***</td>
+                  <td>***REMOVED***item.firstName***REMOVED***</td>
+                  <td>***REMOVED***item.lastName***REMOVED***</td>
+                </tr>
+              ))***REMOVED***
           </tbody>
         </table>
       </div>

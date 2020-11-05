@@ -15,7 +15,6 @@ namespace ApiBase
 ***REMOVED***
     public class Startup
     ***REMOVED***
-        readonly string AllowSpecificOrigins = "_AllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         ***REMOVED***
             Configuration = configuration;

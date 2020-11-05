@@ -1,45 +1,34 @@
-import React, ***REMOVED*** Component***REMOVED*** from "react";
-import UserService from "../services/user.service";
+import PropTypes from "prop-types";
+import React, ***REMOVED*** Component***REMOVED*** from 'react';
+import ***REMOVED*** connect***REMOVED*** from 'react-redux';
+import ***REMOVED*** fetchUsers***REMOVED*** from '../actions/userActions';
 
-export default class BoardModerator extends Component ***REMOVED***
-  constructor(props) ***REMOVED***
-    super(props);
-
-    this.state = ***REMOVED***
-      content: [],
-   ***REMOVED***;
- ***REMOVED***
-
+class BoardModerator extends Component ***REMOVED***
   componentDidMount() ***REMOVED***
-    UserService.getModeratorBoard().then(
-      (response) => ***REMOVED***
-        this.setState(***REMOVED***
-          content: response.data,
-       ***REMOVED***);
-     ***REMOVED***,
-      (error) => ***REMOVED***
-        this.setState(***REMOVED***
-          content:
-            (error.response && error.response.data) ||
-            error.message ||
-            error.toString(),
-       ***REMOVED***);
-     ***REMOVED***
-    );
+    this.props.fetchUsers();
  ***REMOVED***
 
   render() ***REMOVED***
     return (
       <div className="container">
-        <UserList props=***REMOVED***this.state.content***REMOVED*** />
+        <UserList props=***REMOVED***this.props.users***REMOVED*** />
       </div>
     );
  ***REMOVED***
 ***REMOVED***
 
-/* Listing users */
+BoardModerator.propTypes = ***REMOVED***
+  fetchUsers: PropTypes.func.isRequired,
+  users: PropTypes.array.isRequired
+***REMOVED***
 
-const UserList = (***REMOVED***props***REMOVED***) =>***REMOVED***
+/* Mapping state to props*/
+const mapStateToProps = (state) => (***REMOVED***
+  users: state.users.items,
+***REMOVED***);
+
+/* Listing users */
+const UserList = (***REMOVED*** props***REMOVED***) => ***REMOVED***
   return (
     <div>
       <header className="jumbotron">
@@ -51,5 +40,7 @@ const UserList = (***REMOVED***props***REMOVED***) =>***REMOVED***
           ))***REMOVED***
       </header>
     </div>
-  ); 
-***REMOVED***
+  );
+***REMOVED***;
+
+export default connect(mapStateToProps, ***REMOVED*** fetchUsers***REMOVED***)(BoardModerator);

@@ -16,7 +16,7 @@ namespace ApiBase.DTOs
         
         [MaxLength(250)]
         public string LastName ***REMOVED*** get; set;***REMOVED***
-        public RoleEnum UserRole ***REMOVED*** get; set;***REMOVED***
+        public string UserRole ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
     
 ***REMOVED***

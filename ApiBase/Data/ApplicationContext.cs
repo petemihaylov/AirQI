@@ -10,19 +10,15 @@ namespace ApiBase.Data
 
         
         public DbSet<User> Users ***REMOVED*** get; set;***REMOVED***
+        public DbSet<Notification> Notifications ***REMOVED***get; set;***REMOVED***
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         ***REMOVED***
-            modelBuilder.Entity<User>()
-                .Property(u => u.UserRole)
-                .HasConversion<string>();
-            
             modelBuilder.Entity<User>()
             .HasIndex(u => u.Username)
             .IsUnique();
 
             base.OnModelCreating(modelBuilder);
-
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

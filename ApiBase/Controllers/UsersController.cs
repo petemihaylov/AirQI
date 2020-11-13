@@ -52,11 +52,16 @@ namespace ApiBase.Controllers
         ***REMOVED***
             var userItem = _mapper.Map<User>(userCreateDto);
 
+            foreach (var user in _repository.GetAllAsync<User>().Result)
+            ***REMOVED***
+                if (user.Username == userItem.Username) return Conflict(new ***REMOVED***message = "There is an existing record with the same username. Try something different!"***REMOVED***);
+           ***REMOVED***
+
             if (_repository.Exists<User>(userItem))
             ***REMOVED***
                 return Conflict();
            ***REMOVED***
-            
+
             this._repository.AddAsync<User>(userItem);
             
 

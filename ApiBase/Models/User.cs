@@ -13,10 +13,10 @@ namespace ApiBase.Models
 
         [MaxLength(250)]
         public string FirstName ***REMOVED*** get; set;***REMOVED***
-        
+
         [MaxLength(250)]
         public string LastName ***REMOVED*** get; set;***REMOVED***
-        public RoleEnum UserRole ***REMOVED***get; set;***REMOVED***
+        public string UserRole ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
-    
+
 ***REMOVED***

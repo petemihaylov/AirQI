@@ -3,13 +3,14 @@
           box-sizing: border-box;
   margin: 0;
   padding: 0;
+  font-family: "Montserrat", sans-serif;
+}
+
+button:focus {
+  outline: none;
 }
 
 body {
-  background: #f3f3f3;
-}
-
-.nav-bg {
   background: #f3f3f3;
 }
 

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ApiBase.Models;
+using ApiBase.Hubs;
 
 namespace ApiBase
 {
@@ -25,8 +26,18 @@ namespace ApiBase
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ClientPermission", policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:3636")
+                        .AllowCredentials();
+                });
+            });
 
-            services.AddCors();
+
 
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer
             (Configuration.GetConnectionString("ApiConnection")));
@@ -67,6 +78,8 @@ namespace ApiBase
                 config.AddPolicy(Policies.Admin, Policies.AdminPolicy());
                 config.AddPolicy(Policies.User, Policies.UserPolicy());
             });
+
+            services.AddSignalR();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -84,15 +97,15 @@ namespace ApiBase
             app.UseRouting();
 
 
-            // Enable CORS policies
-            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-
+            // Enable CORS policies            
+            app.UseCors("ClientPermission");
             app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<LiveNotificationHub>("/livenotification");
             });
 
         }

@@ -13,10 +13,10 @@ namespace ApiBase.Models
 
         [MaxLength(250)]
         public string FirstName { get; set; }
-        
+
         [MaxLength(250)]
         public string LastName { get; set; }
-        public RoleEnum UserRole {get; set; }
+        public string UserRole { get; set; }
     }
-    
+
 }

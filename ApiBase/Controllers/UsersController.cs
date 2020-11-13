@@ -52,11 +52,16 @@ namespace ApiBase.Controllers
         {
             var userItem = _mapper.Map<User>(userCreateDto);
 
+            foreach (var user in _repository.GetAllAsync<User>().Result)
+            {
+                if (user.Username == userItem.Username) return Conflict(new {message = "There is an existing record with the same username. Try something different!"});
+            }
+
             if (_repository.Exists<User>(userItem))
             {
                 return Conflict();
             }
-            
+
             this._repository.AddAsync<User>(userItem);
             
 

@@ -24,8 +24,18 @@ namespace ApiJwt
         public void ConfigureServices(IServiceCollection services)
         ***REMOVED***
 
+            services.AddCors(options =>
+            ***REMOVED***
+                options.AddPolicy("ClientPermission", policy =>
+                ***REMOVED***
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .AllowAnyOrigin();
+               ***REMOVED***);
+           ***REMOVED***);
+
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer
-            (Configuration.GetConnectionString("ApiConnection")));
+            (Configuration.GetConnectionString("AzureConnection")));
 
             services.AddScoped<IEFRepository, SqlRepository>();
 
@@ -43,14 +53,8 @@ namespace ApiJwt
                 app.UseDeveloperExceptionPage();
            ***REMOVED***
 
-            app.UseCors(builder =>
-               ***REMOVED***
-                   builder
-                   .AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader();
-              ***REMOVED***);
-
+            // Enable CORS policies            
+            app.UseCors("ClientPermission");
             app.UseHttpsRedirection();
 
             app.UseRouting();

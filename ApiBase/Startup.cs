@@ -32,15 +32,14 @@ namespace ApiBase
                 {
                     policy.AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins("http://localhost:3636")
-                        .AllowCredentials();
+                        .AllowAnyOrigin();
                 });
             });
 
 
 
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer
-            (Configuration.GetConnectionString("ApiConnection")));
+            (Configuration.GetConnectionString("AzureConnection")));
 
 
             services.AddScoped<IEFRepository, SqlRepository>();

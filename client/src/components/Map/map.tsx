@@ -10,8 +10,9 @@ const Map = (props: any) => ***REMOVED***
 
   useEffect(() => ***REMOVED***
     const googleMapScript = document.createElement("script");
-    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=$***REMOVED***REACT_APP_MAP_KEY***REMOVED***&libraries=places`;
+    googleMapScript.src = `https://maps.googleapis.com/maps/api/js?key=$***REMOVED***REACT_APP_MAP_KEY***REMOVED***&libraries=places&map_ids=282d70afa0bb83db`;
     googleMapScript.async = true;
+
     window.document.body.appendChild(googleMapScript);
     googleMapScript.addEventListener("load", () => ***REMOVED***
       getLatLng();
@@ -31,14 +32,17 @@ const Map = (props: any) => ***REMOVED***
 
   const getLatLng = () => ***REMOVED***
     let lat, lng, placeId;
+
     new window.google.maps.Geocoder().geocode(
       ***REMOVED*** address: `$***REMOVED***placeName***REMOVED***`***REMOVED***,
+
       function (results, status) ***REMOVED***
         if (status === window.google.maps.GeocoderStatus.OK) ***REMOVED***
           placeId = results[0].place_id;
           createGoogleMap(results[0].geometry.location);
           lat = results[0].geometry.location.lat();
           lng = results[0].geometry.location.lng();
+
           new window.google.maps.Marker(***REMOVED***
             position: ***REMOVED*** lat, lng***REMOVED***,
             map: googleMap,
@@ -53,6 +57,7 @@ const Map = (props: any) => ***REMOVED***
      ***REMOVED***
     );
  ***REMOVED***;
+
   return (
     <div
       id="google-map"

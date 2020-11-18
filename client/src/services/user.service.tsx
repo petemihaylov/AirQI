@@ -1,30 +1,30 @@
 import axios from "axios";
 import User from "../entities/User";
-import authHeader from "./auth-header";
+import authHeader from "./auth.header";
 
 const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
 
 class UserService ***REMOVED***
   getPublicContent() ***REMOVED***
-    return axios.get(REACT_APP_API_URL + "/users/", ***REMOVED***
+    return axios.get(REACT_APP_API_URL + "users/", ***REMOVED***
       headers: authHeader(),
    ***REMOVED***);
  ***REMOVED***
 
   getUserBoard() ***REMOVED***
-    return axios.get(REACT_APP_API_URL + "/users/", ***REMOVED***
+    return axios.get(REACT_APP_API_URL + "users/", ***REMOVED***
       headers: authHeader(),
    ***REMOVED***);
  ***REMOVED***
 
   getModeratorBoard() ***REMOVED***
-    return axios.get(REACT_APP_API_URL + "/users/", ***REMOVED***
+    return axios.get(REACT_APP_API_URL + "users/", ***REMOVED***
       headers: authHeader(),
    ***REMOVED***);
  ***REMOVED***
 
   getAdminBoard() ***REMOVED***
-    return axios.get(REACT_APP_API_URL + "/users/", ***REMOVED***
+    return axios.get(REACT_APP_API_URL + "users/", ***REMOVED***
       headers: authHeader(),
    ***REMOVED***);
  ***REMOVED***

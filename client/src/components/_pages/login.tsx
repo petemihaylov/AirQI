@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { login } from "../actions/auth";
+import { login } from "../../actions/auth";
 import { useForm } from "react-hook-form";
 import { Card } from "react-bootstrap";
 

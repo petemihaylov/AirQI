@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import User from "../entities/User";
+import User from "../../entities/User";
 
-import UserService from "../services/user.service";
+import UserService from "../../services/user.service";
 
 const Dashboard = (props: any) => {
   const [content, handleContent] = useState([]);

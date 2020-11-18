@@ -2,10 +2,10 @@ import React, { useCallback, useState } from "react";
 import { connect } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Card } from "react-bootstrap";
-import { register as registerAction } from "../actions/auth";
+import { register as registerAction } from "../../actions/auth";
 
-import User from "../entities/User";
-import Roles from "../entities/Roles";
+import User from "../../entities/User";
+import Roles from "../../entities/Roles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 

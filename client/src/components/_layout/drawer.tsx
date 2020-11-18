@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Link } from "react-router-dom";
-import Navigation from "./navigation";
+import { Link } from "react-router-dom";
+import Navigation from "./navbar";
 
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,11 +22,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 
 /* Router :: Components */
 import { connect } from "react-redux";
-import Register from "../register";
-import Login from "../login";
-import Profile from "../profile";
-import Dashboard from "../dashboard";
-import Map from "../Map/map";
+import Main from "./main";
 
 /* Style rules of the component */
 var navShift = 73;
@@ -52,6 +48,7 @@ const NavDrawer = (props: any) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
+      
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -60,6 +57,7 @@ const NavDrawer = (props: any) => {
       >
         <Navigation />
       </AppBar>
+      
       {user ? (
         <Drawer
           variant="permanent"
@@ -126,22 +124,9 @@ const NavDrawer = (props: any) => {
 
           <Divider />
         </Drawer>
-      ) : (
-        ""
-      )}{" "}
-      <main className={classes.content}>
-        <div className={classes.toolbar} />
-        <Switch>
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/register" component={Register} />
-          <Route exact path="/profile" component={Profile} />
-          <Route path="/user" component={Drawer} />
-          <Route path="/mod" component={Drawer} />
-          <Route path="/admin" component={Drawer} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/map" component={Map} />
-        </Switch>
-      </main>
+      ) : (" ")}
+
+      <Main/>
     </div>
   );
 };
@@ -204,11 +189,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 2),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-  },
-  content: {
-    flexGrow: 1,
-    padding: theme.spacing(3),
-  },
+  }
 }));
 
 function mapStateToProps(state: any) {

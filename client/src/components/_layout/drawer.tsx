@@ -1,6 +1,6 @@
 import React, ***REMOVED*** useState, useEffect***REMOVED*** from "react";
-import ***REMOVED*** Switch, Route, Link***REMOVED*** from "react-router-dom";
-import Navigation from "./navigation";
+import ***REMOVED*** Link***REMOVED*** from "react-router-dom";
+import Navigation from "./navbar";
 
 import clsx from "clsx";
 import ***REMOVED*** makeStyles***REMOVED*** from "@material-ui/core/styles";
@@ -22,11 +22,7 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 
 /* Router :: Components */
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import Register from "../register";
-import Login from "../login";
-import Profile from "../profile";
-import Dashboard from "../dashboard";
-import Map from "../Map/map";
+import Main from "./main";
 
 /* Style rules of the component */
 var navShift = 73;
@@ -52,6 +48,7 @@ const NavDrawer = (props: any) => ***REMOVED***
   return (
     <div className=***REMOVED***classes.root***REMOVED***>
       <CssBaseline />
+      
       <AppBar
         position="fixed"
         className=***REMOVED***clsx(classes.appBar, ***REMOVED***
@@ -60,6 +57,7 @@ const NavDrawer = (props: any) => ***REMOVED***
       >
         <Navigation />
       </AppBar>
+      
       ***REMOVED***user ? (
         <Drawer
           variant="permanent"
@@ -126,22 +124,9 @@ const NavDrawer = (props: any) => ***REMOVED***
 
           <Divider />
         </Drawer>
-      ) : (
-        ""
-      )***REMOVED******REMOVED***" "***REMOVED***
-      <main className=***REMOVED***classes.content***REMOVED***>
-        <div className=***REMOVED***classes.toolbar***REMOVED*** />
-        <Switch>
-          <Route exact path="/login" component=***REMOVED***Login***REMOVED*** />
-          <Route exact path="/register" component=***REMOVED***Register***REMOVED*** />
-          <Route exact path="/profile" component=***REMOVED***Profile***REMOVED*** />
-          <Route path="/user" component=***REMOVED***Drawer***REMOVED*** />
-          <Route path="/mod" component=***REMOVED***Drawer***REMOVED*** />
-          <Route path="/admin" component=***REMOVED***Drawer***REMOVED*** />
-          <Route path="/dashboard" component=***REMOVED***Dashboard***REMOVED*** />
-          <Route path="/map" component=***REMOVED***Map***REMOVED*** />
-        </Switch>
-      </main>
+      ) : (" ")***REMOVED***
+
+      <Main/>
     </div>
   );
 ***REMOVED***;
@@ -204,11 +189,7 @@ const useStyles = makeStyles((theme) => (***REMOVED***
     padding: theme.spacing(0, 2),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
- ***REMOVED***,
-  content: ***REMOVED***
-    flexGrow: 1,
-    padding: theme.spacing(3),
- ***REMOVED***,
+ ***REMOVED***
 ***REMOVED***));
 
 function mapStateToProps(state: any) ***REMOVED***

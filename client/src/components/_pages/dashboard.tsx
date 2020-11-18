@@ -1,7 +1,7 @@
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
-import User from "../entities/User";
+import User from "../../entities/User";
 
-import UserService from "../services/user.service";
+import UserService from "../../services/user.service";
 
 const Dashboard = (props: any) => ***REMOVED***
   const [content, handleContent] = useState([]);

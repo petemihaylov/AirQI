@@ -2,10 +2,10 @@ import React, ***REMOVED*** useCallback, useState***REMOVED*** from "react";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
 import ***REMOVED*** Card***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** register as registerAction***REMOVED*** from "../actions/auth";
+import ***REMOVED*** register as registerAction***REMOVED*** from "../../actions/auth";
 
-import User from "../entities/User";
-import Roles from "../entities/Roles";
+import User from "../../entities/User";
+import Roles from "../../entities/Roles";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 import ***REMOVED*** faExclamationTriangle***REMOVED*** from "@fortawesome/free-solid-svg-icons";
 

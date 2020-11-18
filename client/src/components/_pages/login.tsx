@@ -1,7 +1,7 @@
 import React, ***REMOVED*** useState***REMOVED*** from "react";
 import ***REMOVED*** Redirect***REMOVED*** from "react-router-dom";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** login***REMOVED*** from "../actions/auth";
+import ***REMOVED*** login***REMOVED*** from "../../actions/auth";
 import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
 import ***REMOVED*** Card***REMOVED*** from "react-bootstrap";
 

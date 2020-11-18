@@ -1,7 +1,7 @@
 import React from "react";
 import ***REMOVED*** BrowserRouter as Router***REMOVED*** from "react-router-dom";
-import Footer from "../Layout/footer";
-import NavDrawer from "../Layout/nav-drawer";
+import Footer from "../_layout/footer";
+import NavDrawer from "../_layout/drawer";
 import "./css/style.css";
 
 /* Layout :: Components */

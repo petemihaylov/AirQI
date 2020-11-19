@@ -81,22 +81,36 @@ table.table td a {
 table.table td a:hover {
     color: #2196F3;
 }
-table.table td a.settings {
-    color: #83b4dd;
+table.table td button.settings {
+    color: white;
     margin-right: 25px;
     margin-left: -14px;
-    border: solid 1px#83b4dd;
+    border: none;
+    background: #83b4dd;
     padding: 2px 5px;
+    outline:none;
     border-radius: 20px;
 }
-table.table td a.delete {
-    color: #e0635a;
-    border: solid 1px #e0635a;
+table.table td button.setttings:hover {
+    background: #2240eb;
+}
+table.table td button.delete {
+    text-decoration: none;
+    color: white;
+    outline:none;
+    border: none;
+    background: #e0635a;
     padding: 2px 7px;
     border-radius: 20px;
 }
+table.table td button.delete:hover {
+    background: #eb2f22;
+}
 table.table td i {
     font-size: 19px;
+}
+
+table.table td button{
 }
 table.table .avatar {
     border-radius: 50%;

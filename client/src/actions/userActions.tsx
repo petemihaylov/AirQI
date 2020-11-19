@@ -8,7 +8,7 @@ export const fetchUsers = () => (dispatch: any) => {
     (response) => {
       dispatch({
         type: FETCH_USERS,
-        data: response.data,
+        payload: response.data,
       });
     },
     (error) => {

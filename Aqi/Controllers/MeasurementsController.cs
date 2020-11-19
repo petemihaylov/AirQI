@@ -27,7 +27,7 @@ namespace Aqi.Controllers
             var stationModelItems =  _repository.GetAll();
             
             if(stationModelItems != null)***REMOVED***
-                return Ok(_mapper.Map<IEnumerable<MeasurementsReadDto>>(stationModelItems));
+                return Ok(_mapper.Map<IEnumerable<MeasurementReadDto>>(stationModelItems));
            ***REMOVED***
 
             return NotFound();

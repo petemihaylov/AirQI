@@ -1,6 +1,6 @@
 using System;
 
-namespace Aqi.Repository
+namespace AirQi.Repository
 ***REMOVED***
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BsonCollectionAttribute : Attribute

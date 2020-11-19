@@ -1,4 +1,4 @@
-namespace Aqi.Settings
+namespace AirQi.Settings
 ***REMOVED***
     public interface IMongoDbSettings
     ***REMOVED***

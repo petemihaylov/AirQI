@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models.Data
+namespace AirQi.Models.Data
 ***REMOVED***
     [BsonIgnoreExtraElements]
     public class Measurement
@@ -15,7 +15,7 @@ namespace Aqi.Models.Data
         public double Pm100 ***REMOVED*** get; set;***REMOVED***
 
         [BsonElement]
-        public double Aqi ***REMOVED*** get; set;***REMOVED***
+        public double AirQi ***REMOVED*** get; set;***REMOVED***
 
         [BsonElement]
         public double P ***REMOVED*** get; set;***REMOVED***

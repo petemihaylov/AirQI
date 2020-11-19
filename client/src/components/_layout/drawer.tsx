@@ -16,7 +16,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import NotificationsActive from "@material-ui/icons/NotificationsActive";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
@@ -48,7 +48,7 @@ const NavDrawer = (props: any) => ***REMOVED***
   return (
     <div className=***REMOVED***classes.root***REMOVED***>
       <CssBaseline />
-      
+
       <AppBar
         position="fixed"
         className=***REMOVED***clsx(classes.appBar, ***REMOVED***
@@ -57,7 +57,7 @@ const NavDrawer = (props: any) => ***REMOVED***
       >
         <Navigation />
       </AppBar>
-      
+
       ***REMOVED***user ? (
         <Drawer
           variant="permanent"
@@ -115,7 +115,7 @@ const NavDrawer = (props: any) => ***REMOVED***
             >
               <ListItem button key="Messages">
                 <ListItemIcon>
-                  <InboxIcon />
+                  <NotificationsActive />
                 </ListItemIcon>
                 <ListItemText primary=***REMOVED***"Messages"***REMOVED*** />
               </ListItem>
@@ -124,9 +124,11 @@ const NavDrawer = (props: any) => ***REMOVED***
 
           <Divider />
         </Drawer>
-      ) : (" ")***REMOVED***
+      ) : (
+        " "
+      )***REMOVED***
 
-      <Main/>
+      <Main />
     </div>
   );
 ***REMOVED***;
@@ -189,7 +191,7 @@ const useStyles = makeStyles((theme) => (***REMOVED***
     padding: theme.spacing(0, 2),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
- ***REMOVED***
+ ***REMOVED***,
 ***REMOVED***));
 
 function mapStateToProps(state: any) ***REMOVED***

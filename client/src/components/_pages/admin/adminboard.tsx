@@ -1,19 +1,22 @@
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
-import ***REMOVED*** Container, Table***REMOVED*** from "react-bootstrap";
+import ***REMOVED*** Button, Col, Container, Row, Table***REMOVED*** from "react-bootstrap";
 import User from "../../../entities/User";
-import UserService from "../../../services/user.service";
-import ***REMOVED*** faCog, faTimes***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import "./css/style.css";
+import ***REMOVED*** faCog, faTimes, faUserPlus***REMOVED*** from "@fortawesome/free-solid-svg-icons";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** deleteUser, fetchUsers***REMOVED*** from "../../../actions/userActions";
+import "./css/style.css";
+import Searchbar from "./searchbar";
+import CreateModal from "./create-modal";
 
 const AdminBoard = (props: any) => ***REMOVED***
   const [content, handleContent] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => ***REMOVED***
     props.dispatch(fetchUsers());
     if (props.items !== []) handleContent(props.items);
+    
  ***REMOVED***, [props.items]);
 
   const handleDelete = (id: any, index: number) => ***REMOVED***
@@ -23,6 +26,23 @@ const AdminBoard = (props: any) => ***REMOVED***
 
   return (
     <Container fluid>
+      <Row className="d-flex align-items-center">
+        <Col sm=***REMOVED***8***REMOVED***>
+          <Searchbar />
+        </Col>
+        <Col sm=***REMOVED***4***REMOVED***>
+          <Button
+            variant="outline-dark"
+            size="sm"
+            className="pl-3 pr-3"
+            onClick=***REMOVED***() => setModalShow(true)***REMOVED***
+          >
+            <FontAwesomeIcon icon=***REMOVED***faUserPlus***REMOVED*** />
+          </Button>
+        </Col>
+      </Row>
+      <CreateModal show=***REMOVED***modalShow***REMOVED*** props=***REMOVED***props***REMOVED*** onHide=***REMOVED***() => setModalShow(false)***REMOVED*** />
+
       <Table responsive hover variant="dark">
         <thead>
           <tr>

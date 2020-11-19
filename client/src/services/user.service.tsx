@@ -30,13 +30,13 @@ class UserService ***REMOVED***
  ***REMOVED***
 
   createUser(user: User) ***REMOVED***
-    return axios.post(REACT_APP_API_URL + "/users/", user, ***REMOVED***
+    return axios.post(REACT_APP_API_URL + "users/", user, ***REMOVED***
       headers: authHeader(),
    ***REMOVED***);
  ***REMOVED***
 
   deleteUser(id: number) ***REMOVED***
-    return axios.delete(REACT_APP_API_URL + "/users/" + id, ***REMOVED***
+    return axios.delete(REACT_APP_API_URL + "users/" + id, ***REMOVED***
       headers: authHeader(),
    ***REMOVED***);
  ***REMOVED***

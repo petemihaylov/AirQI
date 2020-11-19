@@ -8,7 +8,7 @@ export const fetchUsers = () => (dispatch: any) => ***REMOVED***
     (response) => ***REMOVED***
       dispatch(***REMOVED***
         type: FETCH_USERS,
-        data: response.data,
+        payload: response.data,
      ***REMOVED***);
    ***REMOVED***,
     (error) => ***REMOVED***

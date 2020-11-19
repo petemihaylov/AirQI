@@ -24,7 +24,7 @@ export default class AuthService ***REMOVED***
  ***REMOVED***
 
   static register(user: User) ***REMOVED***
-    return axios.post(REACT_APP_API_URL + "/users/", user);
+    return axios.post(REACT_APP_API_URL + "users/", user);
  ***REMOVED***
 
   static getCurrentUser(): User ***REMOVED***

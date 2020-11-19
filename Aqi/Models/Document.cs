@@ -1,5 +1,6 @@
 using System;
 using MongoDB.Bson;
+using Aqi.Models.Data;
 
 namespace Aqi.Models
 ***REMOVED***
@@ -10,5 +11,6 @@ namespace Aqi.Models
         public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
 
         public DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
+        public Location Location ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

@@ -1,4 +1,5 @@
 using System;
+using Aqi.Models.Data;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -13,5 +14,6 @@ namespace Aqi.Models
         DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
 
         DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
+        public Location Location ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

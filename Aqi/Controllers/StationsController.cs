@@ -10,13 +10,14 @@ using System;
 namespace Aqi.Controllers
 ***REMOVED***
 
+    [Produces("application/json")]
+    [Route("api/stations/")]
     [ApiController]
-    [Route("[controller]")]
     public class StationsController : ControllerBase
     ***REMOVED***
-        private readonly IMongoRepo<Station> _repository;
+        private readonly IMongoDataRepository<Station> _repository;
         private readonly IMapper _mapper;
-        public StationsController(IMongoRepo<Station> repository, IMapper mapper)
+        public StationsController(IMongoDataRepository<Station> repository, IMapper mapper)
         ***REMOVED***
             _repository = repository;
             _mapper = mapper;

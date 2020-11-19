@@ -24,6 +24,13 @@ namespace Aqi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         ***REMOVED***
+            // Configurations
+            ConfigureSwaggerServices(services);
+            ConfigureDatabaseServices(services);
+            ConfigureCrossOriginResourceSharing(services);
+
+            // Scope
+            services.AddScoped(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -33,31 +40,42 @@ namespace Aqi
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
            ***REMOVED***);
 
-            // Configurations
-            ConfigureSwaggerServices(services);
-            ConfigureDatabaseServices(services);
-
-            // Scope
-            services.AddScoped(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
+            // SignalR
+            services.AddSignalR();
 
        ***REMOVED***
 
+        // MongoDB Configurations
         public void ConfigureDatabaseServices(IServiceCollection services)
         ***REMOVED***
-            // MongoDB Configuration
             services.Configure<MongoDbSettings>(Configuration.GetSection(nameof(MongoDbSettings)));
             services.AddSingleton<IMongoDbSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
        ***REMOVED***
 
+        // Swagger Configurations
         public void ConfigureSwaggerServices(IServiceCollection services)
         ***REMOVED***
-            // Swagger
             services.AddSwaggerGen(options =>
             ***REMOVED***
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 ***REMOVED***
                     Title = "API",
                     Version = "v1"
+               ***REMOVED***);
+           ***REMOVED***);
+       ***REMOVED***
+
+        // SignalR Configurations
+        public void ConfigureCrossOriginResourceSharing(IServiceCollection services)
+        ***REMOVED***
+            services.AddCors(options =>
+            ***REMOVED***
+                options.AddPolicy("ClientPermission", policy =>
+                ***REMOVED***
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
                ***REMOVED***);
            ***REMOVED***);
        ***REMOVED***
@@ -88,6 +106,9 @@ namespace Aqi
             ***REMOVED***
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
            ***REMOVED***);
+
+            // SignalR
+            app.UseCors("ClientPermission");
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

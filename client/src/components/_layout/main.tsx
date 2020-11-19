@@ -12,6 +12,7 @@ import Login from "../_pages/login";
 import Profile from "../_pages/profile";
 import Dashboard from "../_pages/dashboard";
 import AdminBoard from "../_pages/admin/adminboard";
+import Messages from "../_pages/messages";
 
 const Main = () => ***REMOVED***
   const classes = useStyles();
@@ -25,6 +26,7 @@ const Main = () => ***REMOVED***
         <Route exact path="/login" component=***REMOVED***Login***REMOVED*** />
         <Route exact path="/register" component=***REMOVED***Register***REMOVED*** />
         <Route exact path="/profile" component=***REMOVED***Profile***REMOVED*** />
+        <Route exact path="/messages" component=***REMOVED***Messages***REMOVED*** />
         <Route path="/user" component=***REMOVED***Drawer***REMOVED*** />
         <Route path="/mod" component=***REMOVED***Drawer***REMOVED*** />
         <Route path="/admin" component=***REMOVED***AdminBoard***REMOVED*** />

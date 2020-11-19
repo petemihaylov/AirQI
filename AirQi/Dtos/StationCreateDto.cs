@@ -1,10 +1,10 @@
-using Aqi.Models;
-using Aqi.Models.Data;
+using AirQi.Models;
+using AirQi.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Aqi.Dtos
+namespace AirQi.Dtos
 {
     public class StationCreateDto
     {

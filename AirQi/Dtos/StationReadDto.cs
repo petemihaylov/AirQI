@@ -1,12 +1,12 @@
-using Aqi.Models;
+using AirQi.Models;
 using System;
 using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson.Serialization.Attributes;
-using Aqi.Models.Data;
+using AirQi.Models.Data;
 
-namespace Aqi.Dtos
+namespace AirQi.Dtos
 {
     public class StationReadDto 
     {

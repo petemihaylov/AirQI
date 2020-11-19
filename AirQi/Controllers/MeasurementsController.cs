@@ -1,13 +1,11 @@
-using Aqi.Dtos;
+using AirQi.Dtos;
 using AutoMapper;
-using Aqi.Models.Data;
-using Aqi.Repository;
+using AirQi.Models.Data;
+using AirQi.Repository;
 using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
 using System.Collections.Generic;
-using System;
 
-namespace Aqi.Controllers
+namespace AirQi.Controllers
 {
     [ApiController]
     [Route("[controller]")]

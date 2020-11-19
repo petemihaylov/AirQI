@@ -1,16 +1,16 @@
-using Aqi.Repository;
+using AirQi.Repository;
 using System.Linq;
-using Aqi.Settings;
+using AirQi.Settings;
 using MongoDB.Driver;
-using Aqi.Models.Data;
+using AirQi.Models.Data;
 using System.Collections.Generic;
-using Aqi.Models;
+using AirQi.Models;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System;
 using MongoDB.Bson;
 
-namespace Aqi.Repository
+namespace AirQi.Repository
 {
     public class MongoDataRepository<TDocument> : IMongoDataRepository<TDocument> where TDocument : IDocument
     {

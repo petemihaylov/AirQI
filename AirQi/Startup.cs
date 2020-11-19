@@ -1,7 +1,7 @@
 using System;
 using AutoMapper;
-using Aqi.Settings;
-using Aqi.Repository;
+using AirQi.Settings;
+using AirQi.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -10,7 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Options;
 
-namespace Aqi
+namespace AirQi
 {
     public class Startup
     {

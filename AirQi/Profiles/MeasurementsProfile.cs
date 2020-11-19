@@ -1,8 +1,8 @@
 using AutoMapper;
-using Aqi.Dtos;
-using Aqi.Models.Data;
+using AirQi.Dtos;
+using AirQi.Models.Data;
 
-namespace Aqi.Profiles
+namespace AirQi.Profiles
 {
     public class MeasurementsProfile : Profile
     {

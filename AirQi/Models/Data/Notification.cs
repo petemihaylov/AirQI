@@ -1,7 +1,7 @@
-﻿using Aqi.Repository;
+﻿using AirQi.Repository;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models.Data
+namespace AirQi.Models.Data
 {
     [BsonCollection("notifications")]
     public class Notification : Document

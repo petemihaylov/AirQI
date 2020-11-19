@@ -1,8 +1,8 @@
 ﻿using System;
-using Aqi.Models.Data;
+using AirQi.Models.Data;
 using System.ComponentModel.DataAnnotations;
 
-namespace Aqi.Dtos
+namespace AirQi.Dtos
 {
     public class MeasurementCreateDto
     {
@@ -16,7 +16,7 @@ namespace Aqi.Dtos
         public double Pm100 { get; set; }
 
         [Required]
-        public double Aqi { get; set; }
+        public double AirQi { get; set; }
 
         [Required]
         public double P { get; set; }

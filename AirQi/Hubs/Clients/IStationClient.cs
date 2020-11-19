@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using Aqi.Models.Data;
+using AirQi.Models.Data;
 
-namespace Aqi.Hubs.Clients
+namespace AirQi.Hubs.Clients
 {
     public interface IStationClient
     {

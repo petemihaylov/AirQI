@@ -1,9 +1,9 @@
 using System;
-using Aqi.Models.Data;
+using AirQi.Models.Data;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models
+namespace AirQi.Models
 {
     public interface IDocument
     {

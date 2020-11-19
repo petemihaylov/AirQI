@@ -1,4 +1,4 @@
-namespace Aqi.Settings
+namespace AirQi.Settings
 {
     public class MongoDbSettings : IMongoDbSettings
     {

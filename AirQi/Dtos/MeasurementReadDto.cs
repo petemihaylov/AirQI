@@ -1,7 +1,7 @@
 using System;
-using Aqi.Models.Data;
+using AirQi.Models.Data;
 
-namespace Aqi.Dtos
+namespace AirQi.Dtos
 {
     public class MeasurementReadDto
     {
@@ -11,7 +11,7 @@ namespace Aqi.Dtos
         
         public double Pm100 { get; set; }
         
-        public double Aqi { get; set; }
+        public double AirQi { get; set; }
         
         public double P { get; set; }
 

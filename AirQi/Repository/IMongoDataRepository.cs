@@ -1,11 +1,11 @@
-using Aqi.Models;
+using AirQi.Models;
 using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System;
 using System.Threading.Tasks;
 
-namespace Aqi.Repository
+namespace AirQi.Repository
 {
     public interface IMongoDataRepository<TDocument> where TDocument : IDocument
     {

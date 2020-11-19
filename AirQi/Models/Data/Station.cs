@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using Aqi.Repository;
+using AirQi.Repository;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace Aqi.Models.Data
+namespace AirQi.Models.Data
 {
     [BsonCollection("stations")]
     public class Station : Document

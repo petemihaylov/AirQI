@@ -1,19 +1,22 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
-import { Container, Table } from "react-bootstrap";
+import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import User from "../../../entities/User";
-import UserService from "../../../services/user.service";
-import { faCog, faTimes } from "@fortawesome/free-solid-svg-icons";
-import "./css/style.css";
+import { faCog, faTimes, faUserPlus } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { deleteUser, fetchUsers } from "../../../actions/userActions";
+import "./css/style.css";
+import Searchbar from "./searchbar";
+import CreateModal from "./create-modal";
 
 const AdminBoard = (props: any) => {
   const [content, handleContent] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
 
   useEffect(() => {
     props.dispatch(fetchUsers());
     if (props.items !== []) handleContent(props.items);
+    
   }, [props.items]);
 
   const handleDelete = (id: any, index: number) => {
@@ -23,6 +26,23 @@ const AdminBoard = (props: any) => {
 
   return (
     <Container fluid>
+      <Row className="d-flex align-items-center">
+        <Col sm={8}>
+          <Searchbar />
+        </Col>
+        <Col sm={4}>
+          <Button
+            variant="outline-dark"
+            size="sm"
+            className="pl-3 pr-3"
+            onClick={() => setModalShow(true)}
+          >
+            <FontAwesomeIcon icon={faUserPlus} />
+          </Button>
+        </Col>
+      </Row>
+      <CreateModal show={modalShow} props={props} onHide={() => setModalShow(false)} />
+
       <Table responsive hover variant="dark">
         <thead>
           <tr>

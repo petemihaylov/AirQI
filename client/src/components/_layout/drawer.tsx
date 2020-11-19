@@ -16,7 +16,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import NotificationsActive from "@material-ui/icons/NotificationsActive";
 import HomeIcon from "@material-ui/icons/Home";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 
@@ -48,7 +48,7 @@ const NavDrawer = (props: any) => {
   return (
     <div className={classes.root}>
       <CssBaseline />
-      
+
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -57,7 +57,7 @@ const NavDrawer = (props: any) => {
       >
         <Navigation />
       </AppBar>
-      
+
       {user ? (
         <Drawer
           variant="permanent"
@@ -115,7 +115,7 @@ const NavDrawer = (props: any) => {
             >
               <ListItem button key="Messages">
                 <ListItemIcon>
-                  <InboxIcon />
+                  <NotificationsActive />
                 </ListItemIcon>
                 <ListItemText primary={"Messages"} />
               </ListItem>
@@ -124,9 +124,11 @@ const NavDrawer = (props: any) => {
 
           <Divider />
         </Drawer>
-      ) : (" ")}
+      ) : (
+        " "
+      )}
 
-      <Main/>
+      <Main />
     </div>
   );
 };
@@ -189,7 +191,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(0, 2),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
-  }
+  },
 }));
 
 function mapStateToProps(state: any) {

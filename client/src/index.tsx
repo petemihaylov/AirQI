@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./components/app";
+import App from "./components/App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import ***REMOVED*** Provider***REMOVED*** from "react-redux";
 import store from "./store";

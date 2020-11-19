@@ -8,8 +8,8 @@ namespace Aqi.Profiles
     {
         public MeasurementsProfile()
         {
-            CreateMap<Station, MeasurementsReadDto>();
-            CreateMap<MeasurementsReadDto, StationReadDto>().ForMember(dest => dest.Measurements, opt => opt.MapFrom(src => src));
+            CreateMap<Station, MeasurementReadDto>();
+            CreateMap<MeasurementReadDto, StationReadDto>().ForMember(dest => dest.Measurements, opt => opt.MapFrom(src => src));
             // https://stackoverflow.com/questions/10660623/automapper-map-from-source-nested-collection-to-another-collection
 
         }

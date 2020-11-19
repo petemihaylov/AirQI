@@ -24,28 +24,39 @@ namespace Aqi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // MongoDb Configurations
-            services.Configure<MongoDbSettings>(Configuration.GetSection(nameof(MongoDbSettings)));
 
-            services.AddSingleton<IMongoDbSettings>(serviceProvider =>
-                serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
-
+            // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
+            // Controllers Serialization
+            services.AddControllers().AddNewtonsoftJson(options => {
+                options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            });
+
+            // Configurations
+            ConfigureSwaggerServices(services);
+            ConfigureDatabaseServices(services);
+
+            // Scope
             services.AddScoped(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
 
-            // Controllers Serialization
-            services.AddControllers().AddNewtonsoftJson(s => {
-                s.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-            });            
+        }
 
+        public void ConfigureDatabaseServices(IServiceCollection services)
+        {
+            // MongoDB Configuration
+            services.Configure<MongoDbSettings>(Configuration.GetSection(nameof(MongoDbSettings)));
+            services.AddSingleton<IMongoDbSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
+        }
+
+        public void ConfigureSwaggerServices(IServiceCollection services)
+        {
             // Swagger
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1",
-                new Microsoft.OpenApi.Models.OpenApiInfo
+                options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
-                    Title = "AQI Rest API",
+                    Title = "API",
                     Version = "v1"
                 });
             });
@@ -70,11 +81,12 @@ namespace Aqi
                 endpoints.MapControllers();
             });
 
+            // Swagger config
             app.UseSwagger();
 
             app.UseSwaggerUI(options =>
             {
-                options.SwaggerEndpoint("/swagger/v1/swagger.json", "AQI Rest API");
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
             });
         }
     }

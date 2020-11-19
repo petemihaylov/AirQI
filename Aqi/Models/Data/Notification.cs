@@ -1,0 +1,15 @@
+﻿using Aqi.Repository;
+using MongoDB.Bson.Serialization.Attributes;
+
+namespace Aqi.Models.Data
+***REMOVED***
+    [BsonCollection("notifications")]
+    public class Notification : Document
+    ***REMOVED***
+        [BsonElement]
+        public string Title ***REMOVED*** get; set;***REMOVED***
+
+        [BsonElement]
+        public string Description ***REMOVED*** get; set;***REMOVED***
+   ***REMOVED***
+***REMOVED***

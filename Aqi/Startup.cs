@@ -24,6 +24,13 @@ namespace Aqi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Configurations
+            ConfigureSwaggerServices(services);
+            ConfigureDatabaseServices(services);
+            ConfigureCrossOriginResourceSharing(services);
+
+            // Scope
+            services.AddScoped(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -33,31 +40,42 @@ namespace Aqi
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
-            // Configurations
-            ConfigureSwaggerServices(services);
-            ConfigureDatabaseServices(services);
-
-            // Scope
-            services.AddScoped(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
+            // SignalR
+            services.AddSignalR();
 
         }
 
+        // MongoDB Configurations
         public void ConfigureDatabaseServices(IServiceCollection services)
         {
-            // MongoDB Configuration
             services.Configure<MongoDbSettings>(Configuration.GetSection(nameof(MongoDbSettings)));
             services.AddSingleton<IMongoDbSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
         }
 
+        // Swagger Configurations
         public void ConfigureSwaggerServices(IServiceCollection services)
         {
-            // Swagger
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
                 {
                     Title = "API",
                     Version = "v1"
+                });
+            });
+        }
+
+        // SignalR Configurations
+        public void ConfigureCrossOriginResourceSharing(IServiceCollection services)
+        {
+            services.AddCors(options =>
+            {
+                options.AddPolicy("ClientPermission", policy =>
+                {
+                    policy.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .WithOrigins("http://localhost:3000")
+                        .AllowCredentials();
                 });
             });
         }
@@ -88,6 +106,9 @@ namespace Aqi
             {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
             });
+
+            // SignalR
+            app.UseCors("ClientPermission");
         }
     }
 }

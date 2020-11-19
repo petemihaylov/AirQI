@@ -4,7 +4,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>dotnet-WorkerService-4385CA8E-222D-4765-8DD2-CB3F1D59BEAB</UserSecretsId>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    <DockerfileContext>..\Aqi</DockerfileContext>
+    <DockerfileContext>..\AirQi</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace Aqi
+namespace AirQi
 ***REMOVED***
     public class Program
     ***REMOVED***

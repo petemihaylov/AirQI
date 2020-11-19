@@ -81,22 +81,36 @@ table.table td a ***REMOVED***
 table.table td a:hover ***REMOVED***
     color: #2196F3;
 ***REMOVED***
-table.table td a.settings ***REMOVED***
-    color: #83b4dd;
+table.table td button.settings ***REMOVED***
+    color: white;
     margin-right: 25px;
     margin-left: -14px;
-    border: solid 1px#83b4dd;
+    border: none;
+    background: #83b4dd;
     padding: 2px 5px;
+    outline:none;
     border-radius: 20px;
 ***REMOVED***
-table.table td a.delete ***REMOVED***
-    color: #e0635a;
-    border: solid 1px #e0635a;
+table.table td button.setttings:hover ***REMOVED***
+    background: #2240eb;
+***REMOVED***
+table.table td button.delete ***REMOVED***
+    text-decoration: none;
+    color: white;
+    outline:none;
+    border: none;
+    background: #e0635a;
     padding: 2px 7px;
     border-radius: 20px;
 ***REMOVED***
+table.table td button.delete:hover ***REMOVED***
+    background: #eb2f22;
+***REMOVED***
 table.table td i ***REMOVED***
     font-size: 19px;
+***REMOVED***
+
+table.table td button***REMOVED***
 ***REMOVED***
 table.table .avatar ***REMOVED***
     border-radius: 50%;

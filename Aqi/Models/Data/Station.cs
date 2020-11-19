@@ -19,9 +19,6 @@ namespace Aqi.Models.Data
         public Country Country { get; set; }
 
         [BsonElement]
-        public Location Location { get; set; }
-
-        [BsonElement]
         public IEnumerable<Measurement> Measurements { get; set; }
 
     }

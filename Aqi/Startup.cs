@@ -32,7 +32,7 @@ namespace Aqi
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-            services.AddScoped(typeof(IMongoRepo<>), typeof(MongoRepo<>));
+            services.AddScoped(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
 
             // Controllers Serialization
             services.AddControllers().AddNewtonsoftJson(s => {

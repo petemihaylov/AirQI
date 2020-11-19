@@ -13,9 +13,9 @@ namespace Aqi.Controllers
     [Route("[controller]")]
     public class MeasurementsController : ControllerBase
     {
-        private readonly IMongoRepo<Station> _repository;
+        private readonly IMongoDataRepository<Station> _repository;
         private readonly IMapper _mapper;
-        public MeasurementsController(IMongoRepo<Station> repository, IMapper mapper)
+        public MeasurementsController(IMongoDataRepository<Station> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

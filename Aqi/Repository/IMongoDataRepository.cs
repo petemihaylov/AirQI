@@ -7,12 +7,16 @@ using System.Threading.Tasks;
 
 namespace Aqi.Repository
 {
-    public interface IMongoRepo<TDocument> where TDocument : IDocument
+    public interface IMongoDataRepository<TDocument> where TDocument : IDocument
     {
         IEnumerable<TDocument> GetAll();
 
         Task<IEnumerable<TDocument>> GetAllAsync();
-        
+
+        IEnumerable<TDocument> GetAllLatest();
+
+        Task<IEnumerable<TDocument>> GetAllLatestAsync();
+
         TDocument GetObjectById(string id);
 
         Task<TDocument> GetObjectByIdAsync(string id);

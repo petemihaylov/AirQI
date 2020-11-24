@@ -18,7 +18,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import NotificationsActive from "@material-ui/icons/NotificationsActive";
 import HomeIcon from "@material-ui/icons/Home";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import Person from "@material-ui/icons/Person";
 
 /* Router :: Components */
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
@@ -83,23 +83,34 @@ const NavDrawer = (props: any) => ***REMOVED***
               </IconButton>
             )***REMOVED***
           </div>
-          <Divider />
           <List>
             <Link
               to=***REMOVED***"/profile"***REMOVED***
               style=***REMOVED******REMOVED*** textDecoration: "none", color: "gray"***REMOVED******REMOVED***
             >
-              <ListItem button key="Profile">
+              <ListItem button key="Account">
                 <ListItemIcon>
-                  <AccountCircle />
+                  <Person />
                 </ListItemIcon>
-                <ListItemText primary=***REMOVED***"Profile"***REMOVED*** />
+                <ListItemText primary=***REMOVED***"Account settings"***REMOVED*** />
+              </ListItem>
+            </Link>
+
+            <Link
+              to=***REMOVED***"/Notifications"***REMOVED***
+              style=***REMOVED******REMOVED*** textDecoration: "none", color: "gray"***REMOVED******REMOVED***
+            >
+              <ListItem button key="Notifications">
+                <ListItemIcon>
+                  <NotificationsActive className=***REMOVED***"blob"***REMOVED*** />
+                </ListItemIcon>
+                <ListItemText primary=***REMOVED***"Notifications"***REMOVED*** />
               </ListItem>
             </Link>
 
             <Link
               to=***REMOVED***"/dashboard"***REMOVED***
-              style=***REMOVED******REMOVED*** textDecoration: "none", color: "gray"***REMOVED******REMOVED***
+              style=***REMOVED******REMOVED*** textDecoration: "none", color: "gray", marginTop: "-5px"***REMOVED******REMOVED***
             >
               <ListItem button key="Dashboard">
                 <ListItemIcon>
@@ -108,21 +119,7 @@ const NavDrawer = (props: any) => ***REMOVED***
                 <ListItemText primary=***REMOVED***"Dashboard"***REMOVED*** />
               </ListItem>
             </Link>
-
-            <Link
-              to=***REMOVED***"/messages"***REMOVED***
-              style=***REMOVED******REMOVED*** textDecoration: "none", color: "gray"***REMOVED******REMOVED***
-            >
-              <ListItem button key="Messages">
-                <ListItemIcon>
-                  <NotificationsActive />
-                </ListItemIcon>
-                <ListItemText primary=***REMOVED***"Messages"***REMOVED*** />
-              </ListItem>
-            </Link>
           </List>
-
-          <Divider />
         </Drawer>
       ) : (
         " "

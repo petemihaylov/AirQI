@@ -8,6 +8,7 @@ import User from "../../entities/User";
 import Roles from "../../entities/Roles";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 import ***REMOVED*** faExclamationTriangle***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import ***REMOVED*** BubbleButton***REMOVED*** from "./button/bubble";
 
 interface RegistrationFormData ***REMOVED***
   username: string;
@@ -44,7 +45,10 @@ const Register = (props: any) => ***REMOVED***
  ***REMOVED***, []);
 
   return (
-    <div className="container d-flex justify-content-center">
+    <div
+      className="container d-flex justify-content-center align-items-center"
+      style=***REMOVED******REMOVED*** height: "80vh"***REMOVED******REMOVED***
+    >
       <Card style=***REMOVED******REMOVED*** width: "20rem", height: "30rem"***REMOVED******REMOVED***>
         <Card.Title className="w-100 text-center pt-4">Register</Card.Title>
         <div className="d-flex align-items-center h-100">
@@ -118,17 +122,16 @@ const Register = (props: any) => ***REMOVED***
                 )***REMOVED***
               </div>
 
-              <div className="form-group">
-                <button
-                  className="btn btn-success btn-block"
-                  disabled=***REMOVED***loading***REMOVED***
-                  name="button"
-                >
+              <div
+                className="form-group"
+                style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***
+              >
+                <BubbleButton name=***REMOVED***"SignUp"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
                   ***REMOVED***loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )***REMOVED***
-                  ***REMOVED***!loading && <span>Sign Up</span>***REMOVED***
-                </button>
+                  ***REMOVED***!loading && <span>SignUp</span>***REMOVED***
+                </BubbleButton>
               </div>
 
               ***REMOVED***message && (

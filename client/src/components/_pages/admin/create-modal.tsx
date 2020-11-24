@@ -14,6 +14,7 @@ interface CreateFormData ***REMOVED***
   password: string;
   firstName: string;
   lastName: string;
+  role: string;
 ***REMOVED***
 
 const CreateModal = (props: any) => ***REMOVED***
@@ -22,17 +23,16 @@ const CreateModal = (props: any) => ***REMOVED***
 
   const onSubmit = useCallback((data: CreateFormData) => ***REMOVED***
     const ***REMOVED*** dispatch***REMOVED*** = props.props;
-    const ***REMOVED*** username, firstName, lastName, password***REMOVED*** = data;
+    const ***REMOVED*** username, firstName, lastName, password, role***REMOVED*** = data;
 
     let userObj = new User(
       username,
       firstName,
       lastName,
       password,
-      Roles.Moderator,
+      role,
       true
     );
-
     dispatch(registerAction(userObj)).then(() => ***REMOVED***
       props.onHide();
    ***REMOVED***);
@@ -110,6 +110,23 @@ const CreateModal = (props: any) => ***REMOVED***
               )***REMOVED***
             </div>
 
+            <div className="form-group">
+              <label>Role:</label>
+              <select
+                className="custom-select"
+                name="role"
+                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+              >
+                <option value="Moderator">Moderator</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+              </select>
+              ***REMOVED***errors.role?.type === "required" && (
+                <p>
+                  <small className="text-danger"> This is required</small>
+                </p>
+              )***REMOVED***
+            </div>
             <div className="form-group d-flex justify-content-center">
               <button className="btn btn-dark btn-block w-75">Create</button>
             </div>

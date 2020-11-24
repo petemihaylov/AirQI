@@ -2,7 +2,11 @@ import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fonta
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
 import ***REMOVED*** Button, Col, Container, Row, Table***REMOVED*** from "react-bootstrap";
 import User from "../../../entities/User";
-import ***REMOVED*** faCog, faTimes, faUserPlus***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import ***REMOVED***
+  faCog,
+  faTrashAlt,
+  faUserPlus,
+***REMOVED*** from "@fortawesome/free-solid-svg-icons";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** deleteUser, fetchUsers***REMOVED*** from "../../../actions/userActions";
 import "./css/style.css";
@@ -16,7 +20,6 @@ const AdminBoard = (props: any) => ***REMOVED***
   useEffect(() => ***REMOVED***
     props.dispatch(fetchUsers());
     if (props.items !== []) handleContent(props.items);
-    
  ***REMOVED***, [props.items]);
 
   const handleDelete = (id: any, index: number) => ***REMOVED***
@@ -25,7 +28,7 @@ const AdminBoard = (props: any) => ***REMOVED***
  ***REMOVED***;
 
   return (
-    <Container fluid>
+    <Container>
       <Row className="d-flex align-items-center">
         <Col sm=***REMOVED***8***REMOVED***>
           <Searchbar />
@@ -41,17 +44,21 @@ const AdminBoard = (props: any) => ***REMOVED***
           </Button>
         </Col>
       </Row>
-      <CreateModal show=***REMOVED***modalShow***REMOVED*** props=***REMOVED***props***REMOVED*** onHide=***REMOVED***() => setModalShow(false)***REMOVED*** />
+      <CreateModal
+        show=***REMOVED***modalShow***REMOVED***
+        props=***REMOVED***props***REMOVED***
+        onHide=***REMOVED***() => setModalShow(false)***REMOVED***
+      />
 
-      <Table responsive hover variant="dark">
+      <Table responsive hover variant="light">
         <thead>
           <tr>
-            <th>#</th>
+            <th></th>
             <th>Name</th>
             <th>Date Created</th>
             <th>Role</th>
             <th>Status</th>
-            <th>Action</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -66,7 +73,7 @@ const AdminBoard = (props: any) => ***REMOVED***
                 <td>04/10/2013</td>
                 <td>***REMOVED***item.userRole***REMOVED***</td>
                 <td>
-                  <span className="status text-success">&bull;</span> Active
+                  <span className="status text-info">&bull;</span> Active
                 </td>
                 <td>
                   <button
@@ -82,7 +89,7 @@ const AdminBoard = (props: any) => ***REMOVED***
                     data-toggle="tooltip"
                     onClick=***REMOVED***handleDelete.bind(this, item.id, index)***REMOVED***
                   >
-                    <FontAwesomeIcon icon=***REMOVED***faTimes***REMOVED*** />
+                    <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
                   </button>
                 </td>
               </tr>

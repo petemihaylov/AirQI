@@ -3,6 +3,7 @@ import ***REMOVED*** BrowserRouter as Router***REMOVED*** from "react-router-dom
 import Footer from "../_layout/footer";
 import NavDrawer from "../_layout/drawer";
 import "./css/style.css";
+import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
 
 /* Layout :: Components */
 

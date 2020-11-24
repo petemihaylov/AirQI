@@ -6,7 +6,7 @@ const ***REMOVED*** REACT_APP_JWT_URL, REACT_APP_API_URL***REMOVED*** = process.
 export default class AuthService ***REMOVED***
   static login(username: string, password: string) ***REMOVED***
     return axios
-      .post(REACT_APP_JWT_URL || "", ***REMOVED***
+      .post(REACT_APP_JWT_URL + "/api/token/" || "", ***REMOVED***
         username,
         password,
      ***REMOVED***)
@@ -24,7 +24,7 @@ export default class AuthService ***REMOVED***
  ***REMOVED***
 
   static register(user: User) ***REMOVED***
-    return axios.post(REACT_APP_API_URL + "users/", user);
+    return axios.post(REACT_APP_API_URL + "/api/users/", user);
  ***REMOVED***
 
   static getCurrentUser(): User ***REMOVED***

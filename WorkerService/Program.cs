@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using QueueServiceWorker;
 
 namespace WorkerService
 {
@@ -12,9 +13,11 @@ namespace WorkerService
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    services.AddHostedService<Worker>();
+                    services.AddHostedService<WorkerAirThings>();
+                    services.AddHostedService<QueueService>();
                 });
     }
 }

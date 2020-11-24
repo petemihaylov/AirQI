@@ -8,13 +8,13 @@ using Microsoft.Extensions.Logging;
 
 namespace WorkerService
 {
-    public class Worker : BackgroundService
+    public class WorkerAirThings : BackgroundService
     {
         public static string url;
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<WorkerAirThings> _logger;
         private HttpClient _client;
 
-        public Worker(ILogger<Worker> logger)
+        public WorkerAirThings(ILogger<WorkerAirThings> logger)
         {
             this._logger = logger;
             url = "https://airthings.azure-api.net/api/Devices";

@@ -19,11 +19,14 @@ const AdminBoard = (props: any) => ***REMOVED***
 
   useEffect(() => ***REMOVED***
     props.dispatch(fetchUsers());
-    if (props.items !== []) handleContent(props.items);
+ ***REMOVED***, []);
+
+  useEffect(() => ***REMOVED***
+    handleContent(props.items);
+    console.log(props.items);
  ***REMOVED***, [props.items]);
 
   const handleDelete = (id: any, index: number) => ***REMOVED***
-    console.log(id + ", " + index);
     props.dispatch(deleteUser(id, index));
  ***REMOVED***;
 
@@ -73,7 +76,7 @@ const AdminBoard = (props: any) => ***REMOVED***
                 <td>04/10/2013</td>
                 <td>***REMOVED***item.userRole***REMOVED***</td>
                 <td>
-                  <span className="status text-info">&bull;</span> Active
+                  <span className="status">&bull;</span> Active
                 </td>
                 <td>
                   <button

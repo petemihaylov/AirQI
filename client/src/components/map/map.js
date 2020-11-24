@@ -4,6 +4,7 @@ import MapGL, ***REMOVED*** SVGOverlay***REMOVED*** from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import ***REMOVED*** FlyToInterpolator, NavigationControl***REMOVED*** from "react-map-gl";
 import * as Locations from "./locations";
+import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
 import Goo from "./goo";
 import DeckGL, ***REMOVED*** ScatterplotLayer***REMOVED*** from "deck.gl";
 
@@ -55,7 +56,7 @@ const Map = () => ***REMOVED***
    ***REMOVED***),
   ];
   return (
-    <div style=***REMOVED******REMOVED*** height: "80vh"***REMOVED******REMOVED***>
+    <Container fluid style=***REMOVED******REMOVED*** height: "85vh", width: "90vw"***REMOVED******REMOVED***>
       <MapGL
         ref=***REMOVED***mapRef***REMOVED***
         ***REMOVED***...viewport***REMOVED***
@@ -79,7 +80,7 @@ const Map = () => ***REMOVED***
           position="top-left"
         />
       </MapGL>
-    </div>
+    </Container>
   );
 ***REMOVED***;
 
@@ -91,6 +92,7 @@ function SVGOverlayLayer(***REMOVED*** airData, radius***REMOVED***) ***REMOVED*
         <Goo>
           ***REMOVED***airData.map((data) => ***REMOVED***
             const [x, y] = project(data.position);
+
             return (
               <circle
                 key=***REMOVED***data.id***REMOVED***
@@ -99,6 +101,12 @@ function SVGOverlayLayer(***REMOVED*** airData, radius***REMOVED***) ***REMOVED*
                 r=***REMOVED***radius***REMOVED***
                 fill=***REMOVED***"#1cdaa3"***REMOVED***
                 fillOpacity=***REMOVED***0.4***REMOVED***
+                onClick=***REMOVED***() => ***REMOVED***
+                  alert(
+                    "The area location: (" + x + " - " + y + ") was clicked."
+                  );
+                  return false;
+               ***REMOVED******REMOVED***
               />
             );
          ***REMOVED***)***REMOVED***

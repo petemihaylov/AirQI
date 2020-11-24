@@ -4,6 +4,7 @@ import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** login***REMOVED*** from "../../actions/auth";
 import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
 import ***REMOVED*** Card***REMOVED*** from "react-bootstrap";
+import ***REMOVED*** BubbleButton***REMOVED*** from "./button/bubble";
 
 const Login = (props: any) => ***REMOVED***
   const ***REMOVED*** isLoggedIn, message***REMOVED*** = props;
@@ -29,7 +30,10 @@ const Login = (props: any) => ***REMOVED***
   if (isLoggedIn) return <Redirect to="/profile" />;
 
   return (
-    <div className="container d-flex justify-content-center">
+    <div
+      className="container d-flex justify-content-center align-items-center"
+      style=***REMOVED******REMOVED*** height: "80vh"***REMOVED******REMOVED***
+    >
       <Card style=***REMOVED******REMOVED*** width: "20rem", height: "20rem"***REMOVED******REMOVED***>
         <Card.Title className="w-100 text-center pt-4">Login</Card.Title>
         <div className="d-flex align-items-center h-100">
@@ -67,16 +71,13 @@ const Login = (props: any) => ***REMOVED***
                 )***REMOVED***
               </div>
 
-              <div className="form-group">
-                <button
-                  className="btn btn-success btn-block"
-                  disabled=***REMOVED***loading***REMOVED***
-                >
+              <div className="form-group" style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***>
+                <BubbleButton name=***REMOVED***"Login"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
                   ***REMOVED***loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )***REMOVED***
                   ***REMOVED***!loading && <span>Login</span>***REMOVED***
-                </button>
+                </BubbleButton>
               </div>
 
               ***REMOVED***message && (

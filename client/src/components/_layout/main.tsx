@@ -9,10 +9,11 @@ import ***REMOVED*** makeStyles***REMOVED*** from "@material-ui/core/styles";
 import Map from "../map/map";
 import Register from "../_pages/register";
 import Login from "../_pages/login";
-import Profile from "../_pages/profile";
+import Profile from "../_pages/profile/profile";
 import Dashboard from "../_pages/dashboard";
 import AdminBoard from "../_pages/admin/adminboard";
-import Messages from "../_pages/messages";
+import Notifications from "../_pages/notifications";
+import ***REMOVED*** WelcomePage***REMOVED*** from "../_pages/welcome";
 
 const Main = () => ***REMOVED***
   const classes = useStyles();
@@ -26,12 +27,14 @@ const Main = () => ***REMOVED***
         <Route exact path="/login" component=***REMOVED***Login***REMOVED*** />
         <Route exact path="/register" component=***REMOVED***Register***REMOVED*** />
         <Route exact path="/profile" component=***REMOVED***Profile***REMOVED*** />
-        <Route exact path="/messages" component=***REMOVED***Messages***REMOVED*** />
+        <Route exact path="/notifications" component=***REMOVED***Notifications***REMOVED*** />
         <Route path="/user" component=***REMOVED***Drawer***REMOVED*** />
         <Route path="/mod" component=***REMOVED***Drawer***REMOVED*** />
+        <Route path="/welcome" component=***REMOVED***WelcomePage***REMOVED*** />
         <Route path="/admin" component=***REMOVED***AdminBoard***REMOVED*** />
         <Route path="/dashboard" component=***REMOVED***Dashboard***REMOVED*** />
         <Route path="/map" component=***REMOVED***Map***REMOVED*** />
+        <Route path="/" component=***REMOVED***WelcomePage***REMOVED*** />
       </Switch>
     </main>
   );
@@ -50,6 +53,5 @@ const useStyles = makeStyles((theme) => (***REMOVED***
  ***REMOVED***,
   content: ***REMOVED***
     flexGrow: 1,
-    padding: theme.spacing(3),
  ***REMOVED***,
 ***REMOVED***));

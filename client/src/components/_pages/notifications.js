@@ -1,19 +1,35 @@
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import React, { useEffect, useState, useRef } from "react";
-import { Alert, Container } from "react-bootstrap";
+import { Alert, Container, Row, Col } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faExclamationTriangle,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 import authHeader from "../../services/auth.header";
+import { connect } from "react-redux";
+import {
+  fetchNotifications,
+  deleteNotification,
+} from "../../actions/notificationActions";
 
 const { REACT_APP_API_URL } = process.env;
 
-const Notifications = () => {
+const Notifications = (props) => {
+  // Stored notifications from the DB
+  const [content, handleContent] = useState([]);
+
+  // Live notifications from the WebSocket
   const [connection, setConnection] = useState(null);
-  const [Notification, setNotification] = useState([]);
-  const latestNotification = useRef(null);
+  const [notifications, setNotification] = useState([]);
 
-  latestNotification.current = Notification;
+  const handleDelete = (id, index) => {
+    props.dispatch(deleteNotification(id, index));
+    handleContent(props.items);
+  };
 
+  
+  {/* Gets WebSocket notification */}
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
       .withUrl(REACT_APP_API_URL + "/livenotification", {
@@ -33,34 +49,80 @@ const Notifications = () => {
           console.log("Connected!");
 
           connection.on("GetNewNotification", (Notification) => {
-            const updatedNotification = [...latestNotification.current];
-            updatedNotification.push(Notification);
-
-            setNotification(updatedNotification);
+            setNotification([Notification]);
           });
         })
         .catch((e) => console.log("Connection failed: ", e));
     }
   }, [connection]);
 
+  {/* Gets notifications from DB */}
+  
+  useEffect(() => {
+    props.dispatch(fetchNotifications());
+  }, []);
+
+  useEffect(() => {
+    handleContent(props.items);
+  }, [props.items]);
+
   return (
     <Container>
-      {["secondary", "dark"].map((variant, idx) => (
-        <Alert key={idx} variant={variant}>
-          <FontAwesomeIcon icon={faExclamationTriangle} /> Warning! There is
-          alert - check it out!
-        </Alert>
-      ))}
-
-      {Notification &&
-        Notification.map((m, idx) => (
-          <Alert key={idx} variant={"danger"}>
-            <FontAwesomeIcon icon={faExclamationTriangle} /> {m.title}{" "}
-            {m.description}
+      <div style={{ height: "7vh", marginTop: "5vh" }}>
+        {notifications &&
+          notifications.map((m, idx) => (
+            <Alert
+              key={idx}
+              variant={"danger"}
+              style={{ width: "50vw", height: "45px" }}
+            >
+              <FontAwesomeIcon icon={faExclamationTriangle} /> {m.title}{" "}
+              {m.description}
+            </Alert>
+          ))}
+      </div>
+      <div>
+        <small>Notifications </small>
+        <div className="border-bottom mb-4 mt-2" style={{ width: "50vw" }}>
+          {" "}
+        </div>
+        {content.map((item, idx) => (
+          <Alert
+            key={idx}
+            variant={"secondary"}
+            style={{ width: "50vw", height: "45px" }}
+            className="d-flex align-items-center"
+          >
+            <div className="w-100 d-flex align-items-center justify-content-between">
+              <div>
+                <FontAwesomeIcon
+                  icon={faExclamationTriangle}
+                  className="mr-3"
+                />
+                {item.title} - {item.description}
+              </div>
+              <div>
+                <button
+                  className="btn"
+                  title="Delete"
+                  onClick={handleDelete.bind(this, item.id, idx)}
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} />
+                </button>
+              </div>
+            </div>
           </Alert>
         ))}
+      </div>
     </Container>
   );
 };
 
-export default Notifications;
+function mapStateToProps(state) {
+  const { items } = state.notifications;
+  return {
+    items,
+  };
+}
+
+export default connect(mapStateToProps)(Notifications);

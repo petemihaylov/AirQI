@@ -50,7 +50,7 @@ const Profile = (props: any) => {
           <Row>
             <Col>
               <small>First name</small>
-              <div className="input-group">
+              <div className="input-group-sm">
                 <input
                   type="text"
                   className="form-control"
@@ -62,7 +62,7 @@ const Profile = (props: any) => {
             </Col>
             <Col>
               <small>Last name</small>
-              <div className="input-group">
+              <div className="input-group-sm">
                 <input
                   type="text"
                   className="form-control"
@@ -76,7 +76,7 @@ const Profile = (props: any) => {
           <Row>
             <Col>
               <small>Username</small>
-              <div className="input-group">
+              <div className="input-group-sm">
                 <input
                   type="text"
                   className="form-control"
@@ -90,7 +90,7 @@ const Profile = (props: any) => {
           <Row>
             <Col>
               <small>Access token</small>
-              <div className="input-group">
+              <div className="input-group-sm">
                 <input
                   type="text"
                   className="form-control"
@@ -105,7 +105,7 @@ const Profile = (props: any) => {
             </Col>
             <Col>
               <small>Authorities</small>
-              <div className="input-group">
+              <div className="input-group-sm">
                 <input
                   type="text"
                   className="form-control"

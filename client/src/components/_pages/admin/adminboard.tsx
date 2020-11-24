@@ -19,11 +19,14 @@ const AdminBoard = (props: any) => {
 
   useEffect(() => {
     props.dispatch(fetchUsers());
-    if (props.items !== []) handleContent(props.items);
+  }, []);
+
+  useEffect(() => {
+    handleContent(props.items);
+    console.log(props.items);
   }, [props.items]);
 
   const handleDelete = (id: any, index: number) => {
-    console.log(id + ", " + index);
     props.dispatch(deleteUser(id, index));
   };
 
@@ -73,7 +76,7 @@ const AdminBoard = (props: any) => {
                 <td>04/10/2013</td>
                 <td>{item.userRole}</td>
                 <td>
-                  <span className="status text-info">&bull;</span> Active
+                  <span className="status">&bull;</span> Active
                 </td>
                 <td>
                   <button

@@ -16,7 +16,7 @@ body {
 
 #root {
   background-color: whitesmoke;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 #root .navbar {
@@ -86,23 +86,23 @@ footer .footer-copyright a {
   0% {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
-    color: #6c63ff;
-    background-color: rgba(108, 99, 255, 0.3);
-    -webkit-box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.3);
-            box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.3);
+    color: #2c2c2c;
+    background-color: rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
   }
   70% {
     -webkit-transform: scale(1);
             transform: scale(1);
-    background-color: rgba(108, 99, 255, 0);
-    -webkit-box-shadow: 0 0 0 10px rgba(108, 99, 255, 0);
-            box-shadow: 0 0 0 10px rgba(108, 99, 255, 0);
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
   }
   100% {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
-    -webkit-box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
-            box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
 
@@ -110,23 +110,23 @@ footer .footer-copyright a {
   0% {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
-    color: #6c63ff;
-    background-color: rgba(108, 99, 255, 0.3);
-    -webkit-box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.3);
-            box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.3);
+    color: #2c2c2c;
+    background-color: rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
   }
   70% {
     -webkit-transform: scale(1);
             transform: scale(1);
-    background-color: rgba(108, 99, 255, 0);
-    -webkit-box-shadow: 0 0 0 10px rgba(108, 99, 255, 0);
-            box-shadow: 0 0 0 10px rgba(108, 99, 255, 0);
+    background-color: rgba(0, 0, 0, 0);
+    -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
   }
   100% {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
-    -webkit-box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
-            box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
+    -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+            box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
   }
 }
 /*# sourceMappingURL=style.css.map */

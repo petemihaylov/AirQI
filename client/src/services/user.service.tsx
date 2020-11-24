@@ -5,41 +5,41 @@ import authHeader from "./auth.header";
 const { REACT_APP_API_URL } = process.env;
 
 class UserService {
-  getPublicContent() {
+  getPublicContent = async () => {
     return axios.get(REACT_APP_API_URL + "/api/users/", {
       headers: authHeader(),
     });
-  }
+  };
 
-  getUserBoard() {
+  getUserBoard = async () => {
     return axios.get(REACT_APP_API_URL + "/api/users/", {
       headers: authHeader(),
     });
-  }
+  };
 
-  getModeratorBoard() {
+  getModeratorBoard = async () => {
     return axios.get(REACT_APP_API_URL + "/api/users/", {
       headers: authHeader(),
     });
-  }
+  };
 
-  getAdminBoard() {
+  getAdminBoard = async () => {
     return axios.get(REACT_APP_API_URL + "/api/users/", {
       headers: authHeader(),
     });
-  }
+  };
 
-  createUser(user: User) {
+  createUser = async (user: User) => {
     return axios.post(REACT_APP_API_URL + "/api/users/", user, {
       headers: authHeader(),
     });
-  }
+  };
 
-  deleteUser(id: number) {
+  deleteUser = async (id: number) => {
     return axios.delete(REACT_APP_API_URL + "/api/users/" + id, {
       headers: authHeader(),
     });
-  }
+  };
 }
 
 export default new UserService();

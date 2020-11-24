@@ -11,7 +11,7 @@ function App() {
   return (
     <Router>
       <NavDrawer />
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }

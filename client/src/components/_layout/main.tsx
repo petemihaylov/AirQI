@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Map from "../map/map";
 import Register from "../_pages/register";
 import Login from "../_pages/login";
-import Profile from "../_pages/profile/profile";
+import Profile from "../_pages/profile";
 import Dashboard from "../_pages/dashboard";
 import AdminBoard from "../_pages/admin/adminboard";
 import Notifications from "../_pages/notifications";

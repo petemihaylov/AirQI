@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import "./css/style.css";
 import { Container, Row, Col } from "react-bootstrap";
+import "./css/style.css";
 
 const Profile = (props: any) => {
   const { user } = props;
@@ -12,8 +12,8 @@ const Profile = (props: any) => {
   }
 
   return (
-    <Container className="centered wrapper" >
-      <Container className="w-75" >
+    <Container className="centered wrapper">
+      <Container className="w-75">
         <Row className="mb-5">
           <Col xs={12} md={8} className="centered">
             <div>
@@ -38,7 +38,7 @@ const Profile = (props: any) => {
             <img
               className="rounded-circle"
               src="https://www.juxtapoz.com/images/Hannah%20Stouffer/Jesse%2013/Tea-Wei_10.gif"
-              alt="Card image cap"
+              alt="Avatar"
               width={"90px"}
               height={"90px"}
             ></img>
@@ -46,73 +46,76 @@ const Profile = (props: any) => {
             <button className="btn btn-outline-dark btn-sm ml-4">Change</button>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <small>First name</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="first name"
-                value={user.firstName}
-              />
-            </div>
-          </Col>
-          <Col>
-            <small>Last name</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="last name"
-                value={user.lastName}
-              />
-            </div>
-          </Col>{" "}
-        </Row>
+        <form>
+          <Row>
+            <Col>
+              <small>First name</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="first name"
+                  defaultValue={user.firstName}
+                  name="firstName"
+                />
+              </div>
+            </Col>
+            <Col>
+              <small>Last name</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="last name"
+                  defaultValue={user.lastName}
+                />
+              </div>
+            </Col>{" "}
+          </Row>
 
-        <Row>
-          <Col>
-            <small>Username</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="username"
-                value={user.username}
-              />
-            </div>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <small>Username</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="username"
+                  defaultValue={user.username}
+                />
+              </div>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <small>Access token</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="token"
-                value={
-                  user.accessToken.substring(0, 20) +
-                  " . . . " +
-                  user.accessToken.substr(user.accessToken.length - 20)
-                }
-              />
-            </div>
-          </Col>
-          <Col>
-            <small>Authorities</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="Roles"
-                value={user.userRole}
-              />
-            </div>
-          </Col>{" "}
-        </Row>
+          <Row>
+            <Col>
+              <small>Access token</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="token"
+                  defaultValue={
+                    user.accessToken.substring(0, 20) +
+                    " . . . " +
+                    user.accessToken.substr(user.accessToken.length - 20)
+                  }
+                />
+              </div>
+            </Col>
+            <Col>
+              <small>Authorities</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="Roles"
+                  defaultValue={user.userRole}
+                />
+              </div>
+            </Col>{" "}
+          </Row>
+        </form>
       </Container>
     </Container>
   );

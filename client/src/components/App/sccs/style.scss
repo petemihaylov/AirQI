@@ -10,7 +10,7 @@ body ***REMOVED***
 ***REMOVED***
 #root ***REMOVED***
   background-color: $background-color;
-  height: 100vh;
+  min-height: 100vh;
   .navbar ***REMOVED***
     background: $background-color;
     color: $text-color;
@@ -66,19 +66,19 @@ footer ***REMOVED***
 @keyframes pulse ***REMOVED***
 	0% ***REMOVED***
     transform: scale(0.95);
-    color: rgb(108, 99, 255);
-    background-color: rgba(108, 99, 255, 0.3);
-		box-shadow: 0 0 0 0 rgba(108, 99, 255, 0.3);
+    color: rgb(44, 44, 44);
+    background-color: rgba(0, 0, 0, 0.3);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
 	***REMOVED***
 
 	70% ***REMOVED***
     transform: scale(1);
-    background-color: rgba(108, 99, 255, 0);
-		box-shadow: 0 0 0 10px rgba(108, 99, 255, 0);
+    background-color: rgba(0, 0, 0, 0);
+		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
 	***REMOVED***
 
 	100% ***REMOVED***
 		transform: scale(0.95);
-		box-shadow: 0 0 0 0 rgba(108, 99, 255, 0);
+		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
 	***REMOVED***
 ***REMOVED***

@@ -11,7 +11,7 @@ function App() ***REMOVED***
   return (
     <Router>
       <NavDrawer />
-      <Footer />
+      ***REMOVED***/* <Footer /> */***REMOVED***
     </Router>
   );
 ***REMOVED***

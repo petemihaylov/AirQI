@@ -4,7 +4,7 @@ import User from "../entities/User";
 const ***REMOVED*** REACT_APP_JWT_URL, REACT_APP_API_URL***REMOVED*** = process.env;
 
 export default class AuthService ***REMOVED***
-  static login(username: string, password: string) ***REMOVED***
+  static login = async (username: string, password: string) => ***REMOVED***
     return axios
       .post(REACT_APP_JWT_URL + "/api/token/" || "", ***REMOVED***
         username,
@@ -23,7 +23,7 @@ export default class AuthService ***REMOVED***
     localStorage.removeItem("user");
  ***REMOVED***
 
-  static register(user: User) ***REMOVED***
+  static register = async (user: User) => ***REMOVED***
     return axios.post(REACT_APP_API_URL + "/api/users/", user);
  ***REMOVED***
 

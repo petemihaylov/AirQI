@@ -1,7 +1,7 @@
+/* users :: table */
 .table-responsive ***REMOVED***
     margin: 30px 0;
 ***REMOVED***
-
 table.table tr th, table.table tr td ***REMOVED***
     border-color: #e9e9e9;
     padding: 12px 15px;
@@ -24,7 +24,6 @@ table.table th i ***REMOVED***
     margin: 0 5px;
     cursor: pointer;
 ***REMOVED***	
-
 table.table td button.settings ***REMOVED***
     margin-right: 25px;
     margin-left: -14px;
@@ -50,21 +49,11 @@ table.table td button.delete ***REMOVED***
     border-radius: 20px;
 ***REMOVED***
 table.table td button.delete:hover ***REMOVED***
-    background: #ff670f;
+    background: #cf2e23;
     color: white;
     transition: .1s ease;
 ***REMOVED***
-table.table td i ***REMOVED***
-    font-size: 19px;
-***REMOVED***
 
-table.table td button***REMOVED***
-***REMOVED***
-table.table .avatar ***REMOVED***
-    border-radius: 50%;
-    vertical-align: middle;
-    margin-right: 10px;
-***REMOVED***
 .status ***REMOVED***
     font-size: 50px;
     margin: 2px 2px 0 0;
@@ -72,53 +61,5 @@ table.table .avatar ***REMOVED***
     display: inline-block;
     vertical-align: middle;
     line-height: 10px;
-***REMOVED***
-.text-success ***REMOVED***
-    color: #10c469;
-***REMOVED***
-.text-info ***REMOVED***
-    color: #4038d1;
-***REMOVED***
-.text-warning ***REMOVED***
-    color: #FFC107;
-***REMOVED***
-.text-danger ***REMOVED***
-    color: #ff5b5b;
-***REMOVED***
-.pagination ***REMOVED***
-    float: right;
-    margin: 0 0 5px;
-***REMOVED***
-.pagination li a ***REMOVED***
-    border: none;
-    font-size: 13px;
-    min-width: 30px;
-    min-height: 30px;
-    color: #999;
-    margin: 0 2px;
-    line-height: 30px;
-    border-radius: 2px !important;
-    text-align: center;
-    padding: 0 6px;
-***REMOVED***
-.pagination li a:hover ***REMOVED***
-    color: #666;
-***REMOVED***	
-.pagination li.active a, .pagination li.active a.page-link ***REMOVED***
-    background: #03A9F4;
-***REMOVED***
-.pagination li.active a:hover ***REMOVED***        
-    background: #0397d6;
-***REMOVED***
-.pagination li.disabled i ***REMOVED***
-    color: #ccc;
-***REMOVED***
-.pagination li i ***REMOVED***
-    font-size: 16px;
-    padding-top: 6px
-***REMOVED***
-.hint-text ***REMOVED***
-    float: left;
-    margin-top: 10px;
-    font-size: 13px;
+    color: #4038d1b4;
 ***REMOVED***

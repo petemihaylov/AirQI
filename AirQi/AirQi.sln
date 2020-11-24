@@ -8,7 +8,9 @@ Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "Air
 		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED*** = ***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***
 	EndProjectSection
 EndProject
-Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "WorkerService", "..\WorkerService\WorkerService.csproj", "***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***"
+Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "WorkerService", "..\WorkerService\WorkerService.csproj", "***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***"
+EndProject
+Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "QueueServiceWorker", "..\QueueSubscriberWorker\QueueServiceWorker.csproj", "***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +26,10 @@ Global
 		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
 		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
 		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
+		***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
+		***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
+		***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

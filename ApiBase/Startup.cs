@@ -30,9 +30,10 @@ namespace ApiBase
             {
                 options.AddPolicy("ClientPermission", policy =>
                 {
-                    policy.AllowAnyHeader()
+                    policy.SetIsOriginAllowed(origin => true)
+                        .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .AllowAnyOrigin();
+                        .AllowCredentials();
                 });
             });
 
@@ -98,6 +99,7 @@ namespace ApiBase
 
             // Enable CORS policies            
             app.UseCors("ClientPermission");
+
             app.UseAuthentication();
             app.UseAuthorization();
 

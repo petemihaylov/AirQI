@@ -18,7 +18,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import NotificationsActive from "@material-ui/icons/NotificationsActive";
 import HomeIcon from "@material-ui/icons/Home";
-import AccountCircle from "@material-ui/icons/AccountCircle";
+import Person from "@material-ui/icons/Person";
 
 /* Router :: Components */
 import { connect } from "react-redux";
@@ -83,23 +83,34 @@ const NavDrawer = (props: any) => {
               </IconButton>
             )}
           </div>
-          <Divider />
           <List>
             <Link
               to={"/profile"}
               style={{ textDecoration: "none", color: "gray" }}
             >
-              <ListItem button key="Profile">
+              <ListItem button key="Account">
                 <ListItemIcon>
-                  <AccountCircle />
+                  <Person />
                 </ListItemIcon>
-                <ListItemText primary={"Profile"} />
+                <ListItemText primary={"Account settings"} />
+              </ListItem>
+            </Link>
+
+            <Link
+              to={"/Notifications"}
+              style={{ textDecoration: "none", color: "gray" }}
+            >
+              <ListItem button key="Notifications">
+                <ListItemIcon>
+                  <NotificationsActive className={"blob"} />
+                </ListItemIcon>
+                <ListItemText primary={"Notifications"} />
               </ListItem>
             </Link>
 
             <Link
               to={"/dashboard"}
-              style={{ textDecoration: "none", color: "gray" }}
+              style={{ textDecoration: "none", color: "gray", marginTop: "-5px" }}
             >
               <ListItem button key="Dashboard">
                 <ListItemIcon>
@@ -108,21 +119,7 @@ const NavDrawer = (props: any) => {
                 <ListItemText primary={"Dashboard"} />
               </ListItem>
             </Link>
-
-            <Link
-              to={"/messages"}
-              style={{ textDecoration: "none", color: "gray" }}
-            >
-              <ListItem button key="Messages">
-                <ListItemIcon>
-                  <NotificationsActive />
-                </ListItemIcon>
-                <ListItemText primary={"Messages"} />
-              </ListItem>
-            </Link>
           </List>
-
-          <Divider />
         </Drawer>
       ) : (
         " "

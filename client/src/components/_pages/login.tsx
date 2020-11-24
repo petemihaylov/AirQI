@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import { login } from "../../actions/auth";
 import { useForm } from "react-hook-form";
 import { Card } from "react-bootstrap";
+import { BubbleButton } from "./button/bubble";
 
 const Login = (props: any) => {
   const { isLoggedIn, message } = props;
@@ -29,7 +30,10 @@ const Login = (props: any) => {
   if (isLoggedIn) return <Redirect to="/profile" />;
 
   return (
-    <div className="container d-flex justify-content-center">
+    <div
+      className="container d-flex justify-content-center align-items-center"
+      style={{ height: "80vh" }}
+    >
       <Card style={{ width: "20rem", height: "20rem" }}>
         <Card.Title className="w-100 text-center pt-4">Login</Card.Title>
         <div className="d-flex align-items-center h-100">
@@ -67,16 +71,13 @@ const Login = (props: any) => {
                 )}
               </div>
 
-              <div className="form-group">
-                <button
-                  className="btn btn-success btn-block"
-                  disabled={loading}
-                >
+              <div className="form-group" style={{ marginTop: "35px", marginBottom: "100px" }}>
+                <BubbleButton name={"Login"} disabled={loading}>
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
                   {!loading && <span>Login</span>}
-                </button>
+                </BubbleButton>
               </div>
 
               {message && (

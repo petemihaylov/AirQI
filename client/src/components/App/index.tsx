@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Footer from "../_layout/footer";
 import NavDrawer from "../_layout/drawer";
 import "./css/style.css";
+import { Container } from "react-bootstrap";
 
 /* Layout :: Components */
 

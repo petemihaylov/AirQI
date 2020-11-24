@@ -14,6 +14,7 @@ interface CreateFormData {
   password: string;
   firstName: string;
   lastName: string;
+  role: string;
 }
 
 const CreateModal = (props: any) => {
@@ -22,17 +23,16 @@ const CreateModal = (props: any) => {
 
   const onSubmit = useCallback((data: CreateFormData) => {
     const { dispatch } = props.props;
-    const { username, firstName, lastName, password } = data;
+    const { username, firstName, lastName, password, role } = data;
 
     let userObj = new User(
       username,
       firstName,
       lastName,
       password,
-      Roles.Moderator,
+      role,
       true
     );
-
     dispatch(registerAction(userObj)).then(() => {
       props.onHide();
     });
@@ -110,6 +110,23 @@ const CreateModal = (props: any) => {
               )}
             </div>
 
+            <div className="form-group">
+              <label>Role:</label>
+              <select
+                className="custom-select"
+                name="role"
+                ref={register({ required: true })}
+              >
+                <option value="Moderator">Moderator</option>
+                <option value="Admin">Admin</option>
+                <option value="User">User</option>
+              </select>
+              {errors.role?.type === "required" && (
+                <p>
+                  <small className="text-danger"> This is required</small>
+                </p>
+              )}
+            </div>
             <div className="form-group d-flex justify-content-center">
               <button className="btn btn-dark btn-block w-75">Create</button>
             </div>

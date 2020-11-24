@@ -8,6 +8,7 @@ import User from "../../entities/User";
 import Roles from "../../entities/Roles";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { BubbleButton } from "./button/bubble";
 
 interface RegistrationFormData {
   username: string;
@@ -44,7 +45,10 @@ const Register = (props: any) => {
   }, []);
 
   return (
-    <div className="container d-flex justify-content-center">
+    <div
+      className="container d-flex justify-content-center align-items-center"
+      style={{ height: "80vh" }}
+    >
       <Card style={{ width: "20rem", height: "30rem" }}>
         <Card.Title className="w-100 text-center pt-4">Register</Card.Title>
         <div className="d-flex align-items-center h-100">
@@ -118,17 +122,16 @@ const Register = (props: any) => {
                 )}
               </div>
 
-              <div className="form-group">
-                <button
-                  className="btn btn-success btn-block"
-                  disabled={loading}
-                  name="button"
-                >
+              <div
+                className="form-group"
+                style={{ marginTop: "35px", marginBottom: "100px" }}
+              >
+                <BubbleButton name={"SignUp"} disabled={loading}>
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}
-                  {!loading && <span>Sign Up</span>}
-                </button>
+                  {!loading && <span>SignUp</span>}
+                </BubbleButton>
               </div>
 
               {message && (

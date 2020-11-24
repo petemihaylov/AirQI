@@ -2,7 +2,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import User from "../../../entities/User";
-import { faCog, faTimes, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCog,
+  faTrashAlt,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
 import { deleteUser, fetchUsers } from "../../../actions/userActions";
 import "./css/style.css";
@@ -16,7 +20,6 @@ const AdminBoard = (props: any) => {
   useEffect(() => {
     props.dispatch(fetchUsers());
     if (props.items !== []) handleContent(props.items);
-    
   }, [props.items]);
 
   const handleDelete = (id: any, index: number) => {
@@ -25,7 +28,7 @@ const AdminBoard = (props: any) => {
   };
 
   return (
-    <Container fluid>
+    <Container>
       <Row className="d-flex align-items-center">
         <Col sm={8}>
           <Searchbar />
@@ -41,17 +44,21 @@ const AdminBoard = (props: any) => {
           </Button>
         </Col>
       </Row>
-      <CreateModal show={modalShow} props={props} onHide={() => setModalShow(false)} />
+      <CreateModal
+        show={modalShow}
+        props={props}
+        onHide={() => setModalShow(false)}
+      />
 
-      <Table responsive hover variant="dark">
+      <Table responsive hover variant="light">
         <thead>
           <tr>
-            <th>#</th>
+            <th></th>
             <th>Name</th>
             <th>Date Created</th>
             <th>Role</th>
             <th>Status</th>
-            <th>Action</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -66,7 +73,7 @@ const AdminBoard = (props: any) => {
                 <td>04/10/2013</td>
                 <td>{item.userRole}</td>
                 <td>
-                  <span className="status text-success">&bull;</span> Active
+                  <span className="status text-info">&bull;</span> Active
                 </td>
                 <td>
                   <button
@@ -82,7 +89,7 @@ const AdminBoard = (props: any) => {
                     data-toggle="tooltip"
                     onClick={handleDelete.bind(this, item.id, index)}
                   >
-                    <FontAwesomeIcon icon={faTimes} />
+                    <FontAwesomeIcon icon={faTrashAlt} />
                   </button>
                 </td>
               </tr>

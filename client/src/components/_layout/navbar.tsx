@@ -3,29 +3,37 @@ import Navbar from "react-bootstrap/esm/Navbar";
 import Nav from "react-bootstrap/esm/Nav";
 import { connect } from "react-redux";
 import { logout } from "../../actions/auth";
+import { useEffect } from "react";
 
 const Navigation = (props: any) => {
   const { user } = props;
-  const showModeratorBoard = useState(false);
-  const showAdminBoard = useState(false);
+  const [moderatorBoard, showModeratorBoard] = useState(false);
+  const [adminBoard, showAdminBoard] = useState(false);
+
+  useEffect(() => {
+    showModeratorBoard(user && user.userRole === "Moderator");
+    showAdminBoard(user && user.userRole === "Admin");
+  }, []);
 
   function logOut() {
     props.dispatch(logout());
   }
 
   return (
-    <Navbar bg="light" variant="light">
-      <Navbar.Brand href={"/map"}>AirQI</Navbar.Brand>
+    <Navbar>
+      <Navbar.Brand href={"/welcome"}>
+        <img src="./logo192.png" width="18px" height="18px" /> AirQI
+      </Navbar.Brand>
       <Nav className="mr-auto">
         {/*  Moderator :: Board */}
-        {showModeratorBoard && (
+        {moderatorBoard && (
           <Nav.Link href={"/mod"} className="nav-link">
             Moderator
           </Nav.Link>
         )}
 
         {/* Administrator :: Board */}
-        {showAdminBoard && (
+        {adminBoard && (
           <Nav.Link href={"/admin"} className="nav-link">
             Admin
           </Nav.Link>

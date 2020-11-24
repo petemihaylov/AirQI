@@ -4,6 +4,7 @@ import MapGL, { SVGOverlay } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import { FlyToInterpolator, NavigationControl } from "react-map-gl";
 import * as Locations from "./locations";
+import { Container } from "react-bootstrap";
 import Goo from "./goo";
 import DeckGL, { ScatterplotLayer } from "deck.gl";
 
@@ -55,7 +56,7 @@ const Map = () => {
     }),
   ];
   return (
-    <div style={{ height: "80vh" }}>
+    <Container fluid style={{ height: "85vh", width: "90vw" }}>
       <MapGL
         ref={mapRef}
         {...viewport}
@@ -79,7 +80,7 @@ const Map = () => {
           position="top-left"
         />
       </MapGL>
-    </div>
+    </Container>
   );
 };
 
@@ -91,6 +92,7 @@ function SVGOverlayLayer({ airData, radius }) {
         <Goo>
           {airData.map((data) => {
             const [x, y] = project(data.position);
+
             return (
               <circle
                 key={data.id}
@@ -99,6 +101,12 @@ function SVGOverlayLayer({ airData, radius }) {
                 r={radius}
                 fill={"#1cdaa3"}
                 fillOpacity={0.4}
+                onClick={() => {
+                  alert(
+                    "The area location: (" + x + " - " + y + ") was clicked."
+                  );
+                  return false;
+                }}
               />
             );
           })}

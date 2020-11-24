@@ -1,8 +1,8 @@
 import React from "react";
 import ***REMOVED*** Redirect***REMOVED*** from "react-router-dom";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import "./css/style.css";
 import ***REMOVED*** Container, Row, Col***REMOVED*** from "react-bootstrap";
+import "./css/style.css";
 
 const Profile = (props: any) => ***REMOVED***
   const ***REMOVED*** user***REMOVED*** = props;
@@ -12,8 +12,8 @@ const Profile = (props: any) => ***REMOVED***
  ***REMOVED***
 
   return (
-    <Container className="centered wrapper" >
-      <Container className="w-75" >
+    <Container className="centered wrapper">
+      <Container className="w-75">
         <Row className="mb-5">
           <Col xs=***REMOVED***12***REMOVED*** md=***REMOVED***8***REMOVED*** className="centered">
             <div>
@@ -38,7 +38,7 @@ const Profile = (props: any) => ***REMOVED***
             <img
               className="rounded-circle"
               src="https://www.juxtapoz.com/images/Hannah%20Stouffer/Jesse%2013/Tea-Wei_10.gif"
-              alt="Card image cap"
+              alt="Avatar"
               width=***REMOVED***"90px"***REMOVED***
               height=***REMOVED***"90px"***REMOVED***
             ></img>
@@ -46,73 +46,76 @@ const Profile = (props: any) => ***REMOVED***
             <button className="btn btn-outline-dark btn-sm ml-4">Change</button>
           </Col>
         </Row>
-        <Row>
-          <Col>
-            <small>First name</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="first name"
-                value=***REMOVED***user.firstName***REMOVED***
-              />
-            </div>
-          </Col>
-          <Col>
-            <small>Last name</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="last name"
-                value=***REMOVED***user.lastName***REMOVED***
-              />
-            </div>
-          </Col>***REMOVED***" "***REMOVED***
-        </Row>
+        <form>
+          <Row>
+            <Col>
+              <small>First name</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="first name"
+                  defaultValue=***REMOVED***user.firstName***REMOVED***
+                  name="firstName"
+                />
+              </div>
+            </Col>
+            <Col>
+              <small>Last name</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="last name"
+                  defaultValue=***REMOVED***user.lastName***REMOVED***
+                />
+              </div>
+            </Col>***REMOVED***" "***REMOVED***
+          </Row>
 
-        <Row>
-          <Col>
-            <small>Username</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="username"
-                value=***REMOVED***user.username***REMOVED***
-              />
-            </div>
-          </Col>
-        </Row>
+          <Row>
+            <Col>
+              <small>Username</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="username"
+                  defaultValue=***REMOVED***user.username***REMOVED***
+                />
+              </div>
+            </Col>
+          </Row>
 
-        <Row>
-          <Col>
-            <small>Access token</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="token"
-                value=***REMOVED***
-                  user.accessToken.substring(0, 20) +
-                  " . . . " +
-                  user.accessToken.substr(user.accessToken.length - 20)
-               ***REMOVED***
-              />
-            </div>
-          </Col>
-          <Col>
-            <small>Authorities</small>
-            <div className="input-group">
-              <input
-                type="text"
-                className="form-control"
-                aria-describedby="Roles"
-                value=***REMOVED***user.userRole***REMOVED***
-              />
-            </div>
-          </Col>***REMOVED***" "***REMOVED***
-        </Row>
+          <Row>
+            <Col>
+              <small>Access token</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="token"
+                  defaultValue=***REMOVED***
+                    user.accessToken.substring(0, 20) +
+                    " . . . " +
+                    user.accessToken.substr(user.accessToken.length - 20)
+                 ***REMOVED***
+                />
+              </div>
+            </Col>
+            <Col>
+              <small>Authorities</small>
+              <div className="input-group">
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-describedby="Roles"
+                  defaultValue=***REMOVED***user.userRole***REMOVED***
+                />
+              </div>
+            </Col>***REMOVED***" "***REMOVED***
+          </Row>
+        </form>
       </Container>
     </Container>
   );

@@ -8,6 +8,7 @@ import ***REMOVED*** BubbleButton***REMOVED*** from "./button/bubble";
 
 const Login = (props: any) => ***REMOVED***
   const ***REMOVED*** isLoggedIn, message***REMOVED*** = props;
+  
   const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm();
   const [loading, handleChange] = useState(false);
 

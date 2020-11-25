@@ -28,8 +28,9 @@ const Notifications = (props) => {
     handleContent(props.items);
   };
 
-  
-  {/* Gets WebSocket notification */}
+  {
+    /* Gets WebSocket notification */
+  }
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
       .withUrl(REACT_APP_API_URL + "/livenotification", {
@@ -56,8 +57,10 @@ const Notifications = (props) => {
     }
   }, [connection]);
 
-  {/* Gets notifications from DB */}
-  
+  {
+    /* Gets notifications from DB */
+  }
+
   useEffect(() => {
     props.dispatch(fetchNotifications());
   }, []);
@@ -68,7 +71,10 @@ const Notifications = (props) => {
 
   return (
     <Container>
-      <div style={{ height: "7vh", marginTop: "5vh" }}>
+      <div
+        style={{ height: "7vh", marginTop: "5vh" }}
+        className="d-flex flex-column align-items-center"
+      >
         {notifications &&
           notifications.map((m, idx) => (
             <Alert
@@ -81,38 +87,42 @@ const Notifications = (props) => {
             </Alert>
           ))}
       </div>
-      <div>
-        <small>Notifications </small>
-        <div className="border-bottom mb-4 mt-2" style={{ width: "50vw" }}>
-          {" "}
+      <div className="d-flex flex-column align-items-center">
+        <div style={{ width: "50vw" }}>
+          <small>Notifications </small>
+          <div className="border-bottom mb-4 mt-2" style={{ width: "50vw" }}>
+            {" "}
+          </div>
         </div>
-        {content.map((item, idx) => (
-          <Alert
-            key={idx}
-            variant={"secondary"}
-            style={{ width: "50vw", height: "45px" }}
-            className="d-flex align-items-center"
-          >
-            <div className="w-100 d-flex align-items-center justify-content-between">
-              <div>
-                <FontAwesomeIcon
-                  icon={faExclamationTriangle}
-                  className="mr-3"
-                />
-                {item.title} - {item.description}
+        <div className="d-flex flex-column align-items-center">
+          {content.map((item, idx) => (
+            <Alert
+              key={idx}
+              variant={"secondary"}
+              style={{ width: "50vw", height: "45px" }}
+              className="d-flex align-items-center"
+            >
+              <div className="w-100 d-flex align-items-center justify-content-between">
+                <div>
+                  <FontAwesomeIcon
+                    icon={faExclamationTriangle}
+                    className="mr-3"
+                  />
+                  {item.title} - {item.description}
+                </div>
+                <div>
+                  <button
+                    className="btn"
+                    title="Delete"
+                    onClick={handleDelete.bind(this, item.id, idx)}
+                  >
+                    <FontAwesomeIcon icon={faTrashAlt} />
+                  </button>
+                </div>
               </div>
-              <div>
-                <button
-                  className="btn"
-                  title="Delete"
-                  onClick={handleDelete.bind(this, item.id, idx)}
-                >
-                  <FontAwesomeIcon icon={faTrashAlt} />
-                </button>
-              </div>
-            </div>
-          </Alert>
-        ))}
+            </Alert>
+          ))}
+        </div>
       </div>
     </Container>
   );

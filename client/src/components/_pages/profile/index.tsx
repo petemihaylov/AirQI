@@ -37,7 +37,7 @@ const Profile = (props: any) => {
           <Col>
             <img
               className="rounded-circle"
-              src="https://www.juxtapoz.com/images/Hannah%20Stouffer/Jesse%2013/Tea-Wei_10.gif"
+              src="https://i.pinimg.com/originals/07/0d/9f/070d9fa117f5c45d3efd306b8cfe5c08.gif"
               alt="Avatar"
               width={"90px"}
               height={"90px"}

@@ -21,20 +21,20 @@ const Navigation = (props: any) => ***REMOVED***
 
   return (
     <Navbar>
-      <Navbar.Brand href=***REMOVED***"/welcome"***REMOVED***>
-        <img src="./logo192.png" width="18px" height="18px" /> AirQI
+      <Navbar.Brand href=***REMOVED***"/welcome"***REMOVED*** className="ml-4">
+        <img src="./logo192.png" width="18px" height="18px" />
       </Navbar.Brand>
       <Nav className="mr-auto">
         ***REMOVED***/*  Moderator :: Board */***REMOVED***
         ***REMOVED***moderatorBoard && (
-          <Nav.Link href=***REMOVED***"/mod"***REMOVED*** className="nav-link">
+          <Nav.Link href=***REMOVED***"/mod"***REMOVED*** className="nav-link ml-5">
             Moderator
           </Nav.Link>
         )***REMOVED***
 
         ***REMOVED***/* Administrator :: Board */***REMOVED***
         ***REMOVED***adminBoard && (
-          <Nav.Link href=***REMOVED***"/admin"***REMOVED*** className="nav-link">
+          <Nav.Link href=***REMOVED***"/admin"***REMOVED*** className="nav-link ml-5">
             Admin
           </Nav.Link>
         )***REMOVED***

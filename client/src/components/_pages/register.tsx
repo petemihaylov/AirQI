@@ -8,7 +8,7 @@ import User from "../../entities/User";
 import Roles from "../../entities/Roles";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 import ***REMOVED*** faExclamationTriangle***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import ***REMOVED*** BubbleButton***REMOVED*** from "./button/bubble";
+import ***REMOVED*** BubbleButton***REMOVED*** from "../../assets/js/button/bubble";
 
 interface RegistrationFormData ***REMOVED***
   username: string;

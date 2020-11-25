@@ -4,7 +4,7 @@ import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** login***REMOVED*** from "../../actions/auth";
 import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
 import ***REMOVED*** Card***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** BubbleButton***REMOVED*** from "./button/bubble";
+import ***REMOVED*** BubbleButton***REMOVED*** from "../../assets/js/button/bubble";
 
 const Login = (props: any) => ***REMOVED***
   const ***REMOVED*** isLoggedIn, message***REMOVED*** = props;
@@ -19,7 +19,7 @@ const Login = (props: any) => ***REMOVED***
 
     dispatch(login(data.username, data.password))
       .then(() => ***REMOVED***
-        history.push("/profile");
+        history.push("/dashboard");
         window.location.reload();
      ***REMOVED***)
       .catch(() => ***REMOVED***

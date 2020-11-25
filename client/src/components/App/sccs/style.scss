@@ -8,6 +8,14 @@ $background-color: whitesmoke;
 body ***REMOVED***
   background: $background-color;
 ***REMOVED***
+
+body::-webkit-scrollbar ***REMOVED***
+  width: 0.25rem;
+***REMOVED***
+
+body::-webkit-scrollbar-track ***REMOVED***
+  background: $button-color;
+***REMOVED***
 #root ***REMOVED***
   background-color: $background-color;
   min-height: 100vh;
@@ -57,7 +65,7 @@ footer ***REMOVED***
 
 /* pulse animation */
 .blob ***REMOVED***
-	border-radius: 50%;
+  border-radius: 50%;
 
 	box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
 	transform: scale(1);

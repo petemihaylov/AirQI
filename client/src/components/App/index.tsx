@@ -1,16 +1,19 @@
 import React from "react";
 import ***REMOVED*** BrowserRouter as Router***REMOVED*** from "react-router-dom";
-import Footer from "../_layout/footer";
-import NavDrawer from "../_layout/drawer";
 import "./css/style.css";
-import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
+import Navigation from "../_layout/navbar";
+import Main from "../_layout/main";
+import Sidebar from "../_layout/sidebar/index";
+import Footer from "../_layout/footer";
 
 /* Layout :: Components */
 
 function App() ***REMOVED***
   return (
     <Router>
-      <NavDrawer />
+      <Navigation />
+      <Main />
+      <Sidebar/>
       ***REMOVED***/* <Footer /> */***REMOVED***
     </Router>
   );

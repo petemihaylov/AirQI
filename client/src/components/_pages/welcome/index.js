@@ -1,13 +1,13 @@
 import "./css/style.css";
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
-import { BubbleButton } from "../button/bubble";
 import Fade from "react-reveal/Fade";
-import { ReactComponent as SvgBackground } from "../../../assets/mind-map.svg";
+import { ReactComponent as Svg } from "../../../assets/media/svg/mind-map.svg";
+import { BubbleButton} from "../../../assets/js/button/bubble";
 
 export const WelcomePage = () => {
   return (
-    <Container fluid className="welcome">
+    <Container className="welcome">
       <Row>
         <Col>
           <Fade bottom>
@@ -20,13 +20,13 @@ export const WelcomePage = () => {
             </div>
           </Fade>
           <div className="btn">
-            <a href="/map">
+            <a href="/login">
               <BubbleButton name={"Find even more"} />
             </a>
           </div>
         </Col>
         <Col>
-          <SvgBackground style={{ width: "40vw", paddingLeft: "10vw" }} />
+          <Svg style={{ width: "40vw", paddingLeft: "10vw" }} />
         </Col>
       </Row>
     </Container>

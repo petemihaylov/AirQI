@@ -8,6 +8,14 @@ $background-color: whitesmoke;
 body {
   background: $background-color;
 }
+
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: $button-color;
+}
 #root {
   background-color: $background-color;
   min-height: 100vh;
@@ -57,7 +65,7 @@ footer {
 
 /* pulse animation */
 .blob {
-	border-radius: 50%;
+  border-radius: 50%;
 
 	box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
 	transform: scale(1);

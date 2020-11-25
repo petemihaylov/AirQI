@@ -21,20 +21,20 @@ const Navigation = (props: any) => {
 
   return (
     <Navbar>
-      <Navbar.Brand href={"/welcome"}>
-        <img src="./logo192.png" width="18px" height="18px" /> AirQI
+      <Navbar.Brand href={"/welcome"} className="ml-4">
+        <img src="./logo192.png" width="18px" height="18px" />
       </Navbar.Brand>
       <Nav className="mr-auto">
         {/*  Moderator :: Board */}
         {moderatorBoard && (
-          <Nav.Link href={"/mod"} className="nav-link">
+          <Nav.Link href={"/mod"} className="nav-link ml-5">
             Moderator
           </Nav.Link>
         )}
 
         {/* Administrator :: Board */}
         {adminBoard && (
-          <Nav.Link href={"/admin"} className="nav-link">
+          <Nav.Link href={"/admin"} className="nav-link ml-5">
             Admin
           </Nav.Link>
         )}

@@ -7,7 +7,7 @@ import * as Locations from "./locations";
 import { Container } from "react-bootstrap";
 import Goo from "./goo";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { ReactComponent as Pin } from "../../assets/pin-icon.svg";
+import { ReactComponent as Pin } from "../../assets/media/icons/pin-icon.svg";
 //import DeckGL, { ScatterplotLayer } from "deck.gl";
 
 const { REACT_APP_TOKEN } = process.env;
@@ -56,7 +56,7 @@ const Map = () => {
     setMarkers((markers) => [...markers, { longitude, latitude }]);
 
   return (
-    <Container fluid style={{ height: "85vh", width: "90vw" }}>
+    <Container fluid style={{ height: "85vh", width: "90vw", marginLeft: "7.5vw", marginTop: "3vh"}}>
       <MapGL
         ref={mapRef}
         {...viewport}

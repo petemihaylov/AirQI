@@ -4,7 +4,7 @@ import Map from "../map/map";
 const Dashboard = (props: any) => {
 
   return (
-      <Map/>
+      <Map />
   );
 };
 

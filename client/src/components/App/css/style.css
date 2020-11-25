@@ -14,6 +14,14 @@ body {
   background: whitesmoke;
 }
 
+body::-webkit-scrollbar {
+  width: 0.25rem;
+}
+
+body::-webkit-scrollbar-track {
+  background: #4947a3;
+}
+
 #root {
   background-color: whitesmoke;
   min-height: 100vh;

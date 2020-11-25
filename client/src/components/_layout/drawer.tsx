@@ -55,7 +55,6 @@ const NavDrawer = (props: any) => {
           [classes.appBarShift]: open,
         })}
       >
-        <Navigation />
       </AppBar>
 
       {user ? (
@@ -92,7 +91,8 @@ const NavDrawer = (props: any) => {
                 <ListItemIcon>
                   <Person />
                 </ListItemIcon>
-                <ListItemText primary={"Account settings"} />
+                <ListItemText primary={"Account settings"} /> 
+                
               </ListItem>
             </Link>
 
@@ -110,7 +110,7 @@ const NavDrawer = (props: any) => {
 
             <Link
               to={"/dashboard"}
-              style={{ textDecoration: "none", color: "gray", marginTop: "-5px" }}
+              style={{ textDecoration: "none", color: "gray", marginTop: "-" }}
             >
               <ListItem button key="Dashboard">
                 <ListItemIcon>
@@ -124,8 +124,6 @@ const NavDrawer = (props: any) => {
       ) : (
         " "
       )}
-
-      <Main />
     </div>
   );
 };

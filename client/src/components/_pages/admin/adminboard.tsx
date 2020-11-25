@@ -1,7 +1,8 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import User from "../../../entities/User";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faCog,
   faTrashAlt,

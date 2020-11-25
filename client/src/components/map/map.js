@@ -7,7 +7,7 @@ import * as Locations from "./locations";
 import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
 import Goo from "./goo";
 import "mapbox-gl/dist/mapbox-gl.css";
-import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../../assets/pin-icon.svg";
+import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../../assets/media/icons/pin-icon.svg";
 //import DeckGL, ***REMOVED*** ScatterplotLayer***REMOVED*** from "deck.gl";
 
 const ***REMOVED*** REACT_APP_TOKEN***REMOVED*** = process.env;
@@ -56,7 +56,7 @@ const Map = () => ***REMOVED***
     setMarkers((markers) => [...markers, ***REMOVED*** longitude, latitude***REMOVED***]);
 
   return (
-    <Container fluid style=***REMOVED******REMOVED*** height: "85vh", width: "90vw"***REMOVED******REMOVED***>
+    <Container fluid style=***REMOVED******REMOVED*** height: "85vh", width: "90vw", marginLeft: "7.5vw", marginTop: "3vh"***REMOVED******REMOVED***>
       <MapGL
         ref=***REMOVED***mapRef***REMOVED***
         ***REMOVED***...viewport***REMOVED***

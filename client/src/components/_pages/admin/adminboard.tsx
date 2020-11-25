@@ -1,7 +1,8 @@
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
+
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
 import ***REMOVED*** Button, Col, Container, Row, Table***REMOVED*** from "react-bootstrap";
 import User from "../../../entities/User";
+import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 import ***REMOVED***
   faCog,
   faTrashAlt,

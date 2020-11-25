@@ -1,10 +1,8 @@
 import React from "react";
 import ***REMOVED*** Switch, Route***REMOVED*** from "react-router-dom";
-import Drawer from "@material-ui/core/Drawer";
 
 /* Styling */
-import ***REMOVED*** makeStyles***REMOVED*** from "@material-ui/core/styles";
-
+import ***REMOVED*** createUseStyles***REMOVED*** from "react-jss";
 /* Components */
 import Map from "../map/map";
 import Register from "../_pages/register";
@@ -21,15 +19,13 @@ const Main = () => ***REMOVED***
   /* Routing the components */
   return (
     <main className=***REMOVED***classes.content***REMOVED***>
-      <div className=***REMOVED***classes.toolbar***REMOVED*** />
-
       <Switch>
         <Route exact path="/login" component=***REMOVED***Login***REMOVED*** />
         <Route exact path="/register" component=***REMOVED***Register***REMOVED*** />
         <Route exact path="/profile" component=***REMOVED***Profile***REMOVED*** />
         <Route exact path="/notifications" component=***REMOVED***Notifications***REMOVED*** />
-        <Route path="/user" component=***REMOVED***Drawer***REMOVED*** />
-        <Route path="/mod" component=***REMOVED***Drawer***REMOVED*** />
+        <Route path="/user" component=***REMOVED***Dashboard***REMOVED*** />
+        <Route path="/mod" component=***REMOVED***Dashboard***REMOVED*** />
         <Route path="/welcome" component=***REMOVED***WelcomePage***REMOVED*** />
         <Route path="/admin" component=***REMOVED***AdminBoard***REMOVED*** />
         <Route path="/dashboard" component=***REMOVED***Dashboard***REMOVED*** />
@@ -42,16 +38,9 @@ const Main = () => ***REMOVED***
 
 export default Main;
 
-const useStyles = makeStyles((theme) => (***REMOVED***
-  toolbar: ***REMOVED***
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "flex-end",
-    padding: theme.spacing(0, 2),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
- ***REMOVED***,
+const useStyles = createUseStyles(***REMOVED***
   content: ***REMOVED***
     flexGrow: 1,
+    zIndex: 0,
  ***REMOVED***,
-***REMOVED***));
+***REMOVED***);

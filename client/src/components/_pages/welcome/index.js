@@ -1,13 +1,13 @@
 import "./css/style.css";
 import React from "react";
 import ***REMOVED*** Container, Row, Col***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** BubbleButton***REMOVED*** from "../button/bubble";
 import Fade from "react-reveal/Fade";
-import ***REMOVED*** ReactComponent as SvgBackground***REMOVED*** from "../../../assets/mind-map.svg";
+import ***REMOVED*** ReactComponent as Svg***REMOVED*** from "../../../assets/media/svg/mind-map.svg";
+import ***REMOVED*** BubbleButton***REMOVED*** from "../../../assets/js/button/bubble";
 
 export const WelcomePage = () => ***REMOVED***
   return (
-    <Container fluid className="welcome">
+    <Container className="welcome">
       <Row>
         <Col>
           <Fade bottom>
@@ -20,13 +20,13 @@ export const WelcomePage = () => ***REMOVED***
             </div>
           </Fade>
           <div className="btn">
-            <a href="/map">
+            <a href="/login">
               <BubbleButton name=***REMOVED***"Find even more"***REMOVED*** />
             </a>
           </div>
         </Col>
         <Col>
-          <SvgBackground style=***REMOVED******REMOVED*** width: "40vw", paddingLeft: "10vw"***REMOVED******REMOVED*** />
+          <Svg style=***REMOVED******REMOVED*** width: "40vw", paddingLeft: "10vw"***REMOVED******REMOVED*** />
         </Col>
       </Row>
     </Container>

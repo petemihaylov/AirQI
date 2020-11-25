@@ -2,7 +2,7 @@ import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, ***REMOVED*** useEffect, useState, useRef, useCallback***REMOVED*** from "react";
 import MapGL, ***REMOVED*** SVGOverlay, Marker***REMOVED*** from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
-import ***REMOVED*** FlyToInterpolator, NavigationControl***REMOVED*** from "react-map-gl";
+import ***REMOVED*** FlyToInterpolator, NavigationControl, Popup***REMOVED*** from "react-map-gl";
 import * as Locations from "./locations";
 import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
 import Goo from "./goo";
@@ -50,13 +50,21 @@ const Map = () => ***REMOVED***
    ***REMOVED***,
     [handleViewportChange]
   );
-  
+
   const [markers, setMarkers] = React.useState([]);
   const handleClick = (***REMOVED*** lngLat: [longitude, latitude]***REMOVED***) =>
     setMarkers((markers) => [...markers, ***REMOVED*** longitude, latitude***REMOVED***]);
 
   return (
-    <Container fluid style=***REMOVED******REMOVED*** height: "85vh", width: "90vw", marginLeft: "7.5vw", marginTop: "3vh"***REMOVED******REMOVED***>
+    <Container
+      fluid
+      style=***REMOVED******REMOVED***
+        height: "85vh",
+        width: "90vw",
+        marginLeft: "7.5vw",
+        marginTop: "3vh",
+     ***REMOVED******REMOVED***
+    >
       <MapGL
         ref=***REMOVED***mapRef***REMOVED***
         ***REMOVED***...viewport***REMOVED***
@@ -70,9 +78,21 @@ const Map = () => ***REMOVED***
 
         <SVGOverlayLayer airData=***REMOVED***data***REMOVED*** radius=***REMOVED***30***REMOVED*** color=***REMOVED***"#1cdaa3"***REMOVED*** />
         ***REMOVED***markers.map((m, i) => (
-          <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
-            <Pin style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED*** />
-          </Marker>
+          <div>
+            <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
+              <Pin style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED*** />
+            </Marker>
+            <Popup
+              latitude=***REMOVED***m.latitude***REMOVED***
+              longitude=***REMOVED***m.longitude***REMOVED***
+              closeButton=***REMOVED***true***REMOVED***
+              closeOnClick=***REMOVED***true***REMOVED***
+              onClose=***REMOVED***() => this.setState(***REMOVED*** showPopup: false***REMOVED***)***REMOVED***
+              anchor="bottom"
+            >
+              <div>You are here</div>
+            </Popup>
+          </div>
         ))***REMOVED***
 
         <div style=***REMOVED******REMOVED*** position: "absolute", right: 10, top: 10***REMOVED******REMOVED***>
@@ -106,9 +126,11 @@ function SVGOverlayLayer(***REMOVED*** airData, radius, color***REMOVED***) ***R
     return (
       <g>
         <Goo>
-          ***REMOVED***airData.map((data) => ***REMOVED***
+          ***REMOVED***airData.map((data, index) => ***REMOVED***
             const [x, y] = project(data.position);
-
+            if ((index % 3) === 0) color = "#1daffe";
+            else color = "#1cdaa3";
+            
             return (
               <circle
                 key=***REMOVED***data.id***REMOVED***

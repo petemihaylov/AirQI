@@ -28,8 +28,9 @@ const Notifications = (props) => ***REMOVED***
     handleContent(props.items);
  ***REMOVED***;
 
-  
-  ***REMOVED***/* Gets WebSocket notification */***REMOVED***
+  ***REMOVED***
+    /* Gets WebSocket notification */
+ ***REMOVED***
   useEffect(() => ***REMOVED***
     const newConnection = new HubConnectionBuilder()
       .withUrl(REACT_APP_API_URL + "/livenotification", ***REMOVED***
@@ -56,8 +57,10 @@ const Notifications = (props) => ***REMOVED***
    ***REMOVED***
  ***REMOVED***, [connection]);
 
-  ***REMOVED***/* Gets notifications from DB */***REMOVED***
-  
+  ***REMOVED***
+    /* Gets notifications from DB */
+ ***REMOVED***
+
   useEffect(() => ***REMOVED***
     props.dispatch(fetchNotifications());
  ***REMOVED***, []);
@@ -68,7 +71,10 @@ const Notifications = (props) => ***REMOVED***
 
   return (
     <Container>
-      <div style=***REMOVED******REMOVED*** height: "7vh", marginTop: "5vh"***REMOVED******REMOVED***>
+      <div
+        style=***REMOVED******REMOVED*** height: "7vh", marginTop: "5vh"***REMOVED******REMOVED***
+        className="d-flex flex-column align-items-center"
+      >
         ***REMOVED***notifications &&
           notifications.map((m, idx) => (
             <Alert
@@ -81,38 +87,42 @@ const Notifications = (props) => ***REMOVED***
             </Alert>
           ))***REMOVED***
       </div>
-      <div>
-        <small>Notifications </small>
-        <div className="border-bottom mb-4 mt-2" style=***REMOVED******REMOVED*** width: "50vw"***REMOVED******REMOVED***>
-          ***REMOVED***" "***REMOVED***
+      <div className="d-flex flex-column align-items-center">
+        <div style=***REMOVED******REMOVED*** width: "50vw"***REMOVED******REMOVED***>
+          <small>Notifications </small>
+          <div className="border-bottom mb-4 mt-2" style=***REMOVED******REMOVED*** width: "50vw"***REMOVED******REMOVED***>
+            ***REMOVED***" "***REMOVED***
+          </div>
         </div>
-        ***REMOVED***content.map((item, idx) => (
-          <Alert
-            key=***REMOVED***idx***REMOVED***
-            variant=***REMOVED***"secondary"***REMOVED***
-            style=***REMOVED******REMOVED*** width: "50vw", height: "45px"***REMOVED******REMOVED***
-            className="d-flex align-items-center"
-          >
-            <div className="w-100 d-flex align-items-center justify-content-between">
-              <div>
-                <FontAwesomeIcon
-                  icon=***REMOVED***faExclamationTriangle***REMOVED***
-                  className="mr-3"
-                />
-                ***REMOVED***item.title***REMOVED*** - ***REMOVED***item.description***REMOVED***
+        <div className="d-flex flex-column align-items-center">
+          ***REMOVED***content.map((item, idx) => (
+            <Alert
+              key=***REMOVED***idx***REMOVED***
+              variant=***REMOVED***"secondary"***REMOVED***
+              style=***REMOVED******REMOVED*** width: "50vw", height: "45px"***REMOVED******REMOVED***
+              className="d-flex align-items-center"
+            >
+              <div className="w-100 d-flex align-items-center justify-content-between">
+                <div>
+                  <FontAwesomeIcon
+                    icon=***REMOVED***faExclamationTriangle***REMOVED***
+                    className="mr-3"
+                  />
+                  ***REMOVED***item.title***REMOVED*** - ***REMOVED***item.description***REMOVED***
+                </div>
+                <div>
+                  <button
+                    className="btn"
+                    title="Delete"
+                    onClick=***REMOVED***handleDelete.bind(this, item.id, idx)***REMOVED***
+                  >
+                    <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
+                  </button>
+                </div>
               </div>
-              <div>
-                <button
-                  className="btn"
-                  title="Delete"
-                  onClick=***REMOVED***handleDelete.bind(this, item.id, idx)***REMOVED***
-                >
-                  <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
-                </button>
-              </div>
-            </div>
-          </Alert>
-        ))***REMOVED***
+            </Alert>
+          ))***REMOVED***
+        </div>
       </div>
     </Container>
   );

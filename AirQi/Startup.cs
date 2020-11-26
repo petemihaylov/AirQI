@@ -97,7 +97,7 @@ namespace AirQi
 
             services.AddHangfireServer();
 
-            services.AddSingleton<IRecurringJob, AirThings>();
+            services.AddSingleton<IRecurringJobs, RecurringJobs>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -134,8 +134,12 @@ namespace AirQi
             app.UseHangfireDashboard();
 
             // ****************************** hangfire background jobs ******************************
-            // this job will fetch new data from AirThings every minute
-            RecurringJob.AddOrUpdate<IRecurringJob>("AirThings", x => x.ExecuteWorker() , Cron.Minutely);
+
+            // this job will fetch new data for Bulgaria from AirThings every minute
+            // RecurringJob.AddOrUpdate<IRecurringJob>("AirThings", x => x.ExecuteWorkerAsync() , Cron.Minutely);
+
+            // this job will fetch global data from OpenAqi every minute
+            RecurringJob.AddOrUpdate<IRecurringJobs>("OpenAqi", x => x.PullOpenAqiDataAsync() , Cron.Minutely);
 
         }
     }

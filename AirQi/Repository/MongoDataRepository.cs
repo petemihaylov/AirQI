@@ -70,16 +70,12 @@ namespace AirQi.Repository
         // Creates a record from the model.
         public void CreateObject(TDocument document)
         {
-            document.CreatedAt = DateTime.UtcNow;
-            document.UpdatedAt = DateTime.UtcNow;
             _collection.InsertOne(document);
         }
 
         // Creates a record from the model Async.
         public async Task CreateObjectAsync(TDocument document)
         {
-            document.CreatedAt = DateTime.UtcNow;
-            document.UpdatedAt = DateTime.UtcNow;
             await _collection.InsertOneAsync(document);
         }
 

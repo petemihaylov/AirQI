@@ -5,19 +5,18 @@ using System.Threading.Tasks;
 
 namespace AirQi
 {
-    public class AirThings 
+    public class OpenAqi 
     {
         private HttpClient _client = new HttpClient();
-        private string url = "https://airthings.azure-api.net/api/Devices";
+        private string url = "https://api.openaq.org/v1/latest";
 
         public void ExecuteWorker()
         {
-            throw new NotImplementedException();
+            throw new System.NotImplementedException();
         }
 
         public async Task ExecuteWorkerAsync()
         {
-            _client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "94fceb37077f44eb8cefa7d9fe6a4d1e");
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 

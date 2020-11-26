@@ -8,11 +8,19 @@ import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
 import Goo from "./goo";
 import "mapbox-gl/dist/mapbox-gl.css";
 import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../../assets/media/icons/pin-icon.svg";
+import ***REMOVED*** connect***REMOVED*** from "react-redux";
+import ***REMOVED*** fetchMarkers, createMarker***REMOVED*** from "../../actions/markerActions";
+import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
+import authHeader from "../../services/auth.header";
+import MarkerEntity  from "../../entities/Marker";
+
 //import DeckGL, ***REMOVED*** ScatterplotLayer***REMOVED*** from "deck.gl";
 
 const ***REMOVED*** REACT_APP_TOKEN***REMOVED*** = process.env;
+const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
 
-const Map = () => ***REMOVED***
+
+const Map = (props) => ***REMOVED***
   const [viewport, setViewport] = useState(***REMOVED***
     latitude: Locations.nyc.location.latitude,
     longitude: Locations.nyc.location.longitude,
@@ -27,13 +35,15 @@ const Map = () => ***REMOVED***
     []
   );
 
+
   const [data, setAirData] = useState([]);
   useEffect(() => ***REMOVED***
     setAirData(Locations.data);
-    console.log(Locations.data);
  ***REMOVED***, []);
 
-  // Custom settings for ViewportChange
+  
+
+  /* Custom settings for ViewportChange */
   const handleGeocoderViewportChange = useCallback(
     (newViewport) => ***REMOVED***
       const geocoderDefaultOverrides = ***REMOVED***
@@ -51,9 +61,80 @@ const Map = () => ***REMOVED***
     [handleViewportChange]
   );
 
-  const [markers, setMarkers] = React.useState([]);
-  const handleClick = (***REMOVED*** lngLat: [longitude, latitude]***REMOVED***) =>
+
+  
+  // Live markers from the WebSocket
+  const [connection, setConnection] = useState(null);
+  
+  /* Gets WebSocket marker */
+  useEffect(() => ***REMOVED***
+    const newConnection = new HubConnectionBuilder()
+      .withUrl(REACT_APP_API_URL + "/livemarker", ***REMOVED***
+        headers: authHeader(),
+     ***REMOVED***)
+      .withAutomaticReconnect()
+      .build();
+
+    setConnection(newConnection);
+ ***REMOVED***, []);
+
+
+
+  useEffect(() => ***REMOVED***
+    if (connection) ***REMOVED***
+      connection
+        .start()
+        .then((result) => ***REMOVED***
+          console.log("Connected!");
+
+          connection.on("GetNewMarker", (Marker) => ***REMOVED***
+            handleMarker(Marker.longitude, Marker.latitude);
+         ***REMOVED***);
+       ***REMOVED***)
+        .catch((e) => console.log("Connection failed: ", e));
+   ***REMOVED***
+ ***REMOVED***, [connection]);
+
+
+
+  /* Stored markers from the DB */
+  const [content, handleContent] = useState([]);
+
+  /* Gets markers from DB */
+  useEffect(() => ***REMOVED***
+    props.dispatch(fetchMarkers());
+ ***REMOVED***, [props]);
+
+  useEffect(() => ***REMOVED***
+    handleContent(props.items);
+ ***REMOVED***, [props.items]);
+
+  useEffect(() => ***REMOVED***
+    content.map((m) => handleMarker(m.longitude, m.latitude));
+ ***REMOVED***, [content]);
+
+
+
+
+  /* Markers */
+  const [markers, setMarkers] = useState([]);
+  const handleMarker = (longitude, latitude) => ***REMOVED***
     setMarkers((markers) => [...markers, ***REMOVED*** longitude, latitude***REMOVED***]);
+    setShowPopup(false);
+ ***REMOVED***;
+
+
+
+  /* Popup */
+  const [popups, setPopups] = useState([]);
+  const [showPopup, setShowPopup] = useState(true);
+
+  const handleClick = (***REMOVED*** lngLat: [longitude, latitude]***REMOVED***) => ***REMOVED***
+    setShowPopup(true);
+    setPopups([***REMOVED*** longitude, latitude***REMOVED***]);
+    // const m = new MarkerEntity(longitude, latitude);
+    // props.dispatch(createMarker(m));
+ ***REMOVED***;
 
   return (
     <Container
@@ -76,24 +157,34 @@ const Map = () => ***REMOVED***
       >
         ***REMOVED***/* <DeckGL viewState=***REMOVED***viewport***REMOVED*** layers=***REMOVED***layers***REMOVED*** /> */***REMOVED***
 
-        <SVGOverlayLayer airData=***REMOVED***data***REMOVED*** radius=***REMOVED***30***REMOVED*** color=***REMOVED***"#1cdaa3"***REMOVED*** />
+        <SVGOverlayLayer airData=***REMOVED***data***REMOVED*** radius=***REMOVED***30***REMOVED*** color=***REMOVED***""***REMOVED*** />
         ***REMOVED***markers.map((m, i) => (
-          <div>
             <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
               <Pin style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED*** />
             </Marker>
+        ))***REMOVED***
+
+        ***REMOVED***showPopup &&
+          popups.map((p, i) => (
             <Popup
-              latitude=***REMOVED***m.latitude***REMOVED***
-              longitude=***REMOVED***m.longitude***REMOVED***
-              closeButton=***REMOVED***true***REMOVED***
+              key=***REMOVED***i***REMOVED***
+              latitude=***REMOVED***p.latitude***REMOVED***
+              longitude=***REMOVED***p.longitude***REMOVED***
+              closeButton=***REMOVED***false***REMOVED***
               closeOnClick=***REMOVED***true***REMOVED***
-              onClose=***REMOVED***() => this.setState(***REMOVED*** showPopup: false***REMOVED***)***REMOVED***
               anchor="bottom"
             >
-              <div>You are here</div>
+              <div className="p-2">
+                <small>A warning will be created!</small>
+                <button
+                  className="btn btn-block btn-outline-dark btn-sm mt-2"
+                  onClick=***REMOVED***() => handleMarker(p.longitude, p.latitude)***REMOVED***
+                >
+                  Pin
+                </button>
+              </div>
             </Popup>
-          </div>
-        ))***REMOVED***
+          ))***REMOVED***
 
         <div style=***REMOVED******REMOVED*** position: "absolute", right: 10, top: 10***REMOVED******REMOVED***>
           <NavigationControl />
@@ -128,9 +219,9 @@ function SVGOverlayLayer(***REMOVED*** airData, radius, color***REMOVED***) ***R
         <Goo>
           ***REMOVED***airData.map((data, index) => ***REMOVED***
             const [x, y] = project(data.position);
-            if ((index % 3) === 0) color = "#1daffe";
+            if (index % 3 === 0) color = "#1daffe";
             else color = "#1cdaa3";
-            
+
             return (
               <circle
                 key=***REMOVED***data.id***REMOVED***
@@ -156,4 +247,11 @@ function SVGOverlayLayer(***REMOVED*** airData, radius, color***REMOVED***) ***R
   return <SVGOverlay redraw=***REMOVED***redraw***REMOVED*** />;
 ***REMOVED***
 
-export default Map;
+function mapStateToProps(state) ***REMOVED***
+  const ***REMOVED*** items***REMOVED*** = state.markers;
+  return ***REMOVED***
+    items,
+ ***REMOVED***;
+***REMOVED***
+
+export default connect(mapStateToProps)(Map);

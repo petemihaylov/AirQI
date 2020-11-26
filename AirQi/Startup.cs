@@ -1,7 +1,9 @@
 using System;
+using Hangfire;
 using AutoMapper;
 using AirQi.Settings;
 using AirQi.Repository;
+using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -27,7 +29,9 @@ namespace AirQi
             // Configurations
             ConfigureSwaggerServices(services);
             ConfigureDatabaseServices(services);
+            ConfiguraHangfireServices(services);
             ConfigureCrossOriginResourceSharing(services);
+            
 
             // Scope
             services.AddScoped(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
@@ -36,7 +40,8 @@ namespace AirQi
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
             // Controllers Serialization
-            services.AddControllers().AddNewtonsoftJson(options => {
+            services.AddControllers().AddNewtonsoftJson(options =>
+            {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             });
 
@@ -80,6 +85,21 @@ namespace AirQi
             });
         }
 
+        // Hangfire
+        public void ConfiguraHangfireServices(IServiceCollection services)
+        {
+            services.AddHangfire(config =>
+                config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
+                .UseSimpleAssemblyNameTypeSerializer()
+                .UseDefaultTypeSerializer()
+                .UseMemoryStorage()
+            );
+
+            services.AddHangfireServer();
+
+            services.AddSingleton<IRecurringJob, AirThings>();
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -109,6 +129,14 @@ namespace AirQi
 
             // SignalR
             app.UseCors("ClientPermission");
+
+            // Hangfire
+            app.UseHangfireDashboard();
+
+            // ****************************** hangfire background jobs ******************************
+            // this job will fetch new data from AirThings every minute
+            RecurringJob.AddOrUpdate<IRecurringJob>("AirThings", x => x.ExecuteWorker() , Cron.Minutely);
+
         }
     }
 }

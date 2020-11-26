@@ -10,16 +10,21 @@ namespace AirQi.Models.Data
     [BsonCollection("stations")]
     public class Station : Document
     {
+                    
+        [BsonElement]
+        public string Location { get; set; }
 
         [BsonElement]
-        [MaxLength(50)]
         public string City { get; set; }
 
         [BsonElement]
-        public Country Country { get; set; }
+        public string Country { get; set; }
 
         [BsonElement]
         public IEnumerable<Measurement> Measurements { get; set; }
+
+        [BsonElement]
+        public Coordinates Coordinates { get; set; }
 
     }
 }

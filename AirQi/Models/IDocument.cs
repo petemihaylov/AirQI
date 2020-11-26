@@ -14,6 +14,5 @@ namespace AirQi.Models
         DateTime CreatedAt { get; set; }
 
         DateTime UpdatedAt { get; set; }
-        public Location Location { get; set; }
     }
 }

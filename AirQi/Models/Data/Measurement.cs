@@ -1,5 +1,4 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
@@ -9,29 +8,19 @@ namespace AirQi.Models.Data
     public class Measurement
     {
         [BsonElement]
-        public double Pm025 { get; set; }
+        public string Parameter { get; set; }
 
         [BsonElement]
-        public double Pm100 { get; set; }
+        public double  Value { get; set; }
 
         [BsonElement]
-        public double AirQi { get; set; }
+        public DateTime LastUpdated { get; set; }
 
         [BsonElement]
-        public double P { get; set; }
-
+        public string Unit { get; set; }
+                
         [BsonElement]
-        public double H { get; set; }
-
-        [BsonElement]
-        public double T { get; set; }
-
-        [BsonElement]
-        public double O3 { get; set; }
-
-        [BsonElement]
-        public double No2 { get; set; }
-
+        public string SourceName { get; set; }
 
     }
 }

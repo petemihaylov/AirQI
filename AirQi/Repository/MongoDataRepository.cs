@@ -45,7 +45,8 @@ namespace AirQi.Repository
         // Returns all latest objects from db based on date.
         public IEnumerable<TDocument> GetAllLatest()
         {
-            return _collection.Find(doc => true).ToList().OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new { doc.Location }, (key, group) => group.First()).ToList();
+            return _collection.Find(doc => true).ToList().OrderByDescending(doc => doc.UpdatedAt).ToList();
+            // return _collection.Find(doc => true).ToList().OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new { doc.Location }, (key, group) => group.First()).ToList();
         }
 
         // Returns all latest objects from db based on date Async.

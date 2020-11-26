@@ -4,13 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirQi", "AirQi.csproj", "{6C6CD251-E034-4A72-B856-80329F78A11C}"
-	ProjectSection(ProjectDependencies) = postProject
-		{D86DA351-74B8-42D6-AD69-3DA06FF817C9} = {D86DA351-74B8-42D6-AD69-3DA06FF817C9}
-	EndProjectSection
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorkerService", "..\WorkerService\WorkerService.csproj", "{D86DA351-74B8-42D6-AD69-3DA06FF817C9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QueueServiceWorker", "..\QueueSubscriberWorker\QueueServiceWorker.csproj", "{03225813-B4A3-46D4-BF4F-3B13F38097EE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,14 +15,6 @@ Global
 		{6C6CD251-E034-4A72-B856-80329F78A11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C6CD251-E034-4A72-B856-80329F78A11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C6CD251-E034-4A72-B856-80329F78A11C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D86DA351-74B8-42D6-AD69-3DA06FF817C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D86DA351-74B8-42D6-AD69-3DA06FF817C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D86DA351-74B8-42D6-AD69-3DA06FF817C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D86DA351-74B8-42D6-AD69-3DA06FF817C9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{03225813-B4A3-46D4-BF4F-3B13F38097EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{03225813-B4A3-46D4-BF4F-3B13F38097EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{03225813-B4A3-46D4-BF4F-3B13F38097EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{03225813-B4A3-46D4-BF4F-3B13F38097EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

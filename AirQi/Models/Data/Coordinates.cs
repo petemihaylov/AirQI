@@ -5,11 +5,8 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace AirQi.Models.Data
 {
     [BsonIgnoreExtraElements]
-    public class Location
+    public class Coordinates
     {
-    
-        [BsonElement]
-        public double Accuracy { get; set; }
         
         [BsonElement]
         public double Latitude { get; set; }

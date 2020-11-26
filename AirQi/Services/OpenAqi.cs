@@ -27,6 +27,8 @@ namespace AirQi
             if (response.IsSuccessStatusCode)
             {
                 Console.WriteLine(responseBody);
+
+                
             }
             else
             {

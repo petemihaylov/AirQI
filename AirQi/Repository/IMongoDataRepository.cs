@@ -1,8 +1,7 @@
+using System;
 using AirQi.Models;
-using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using System;
 using System.Threading.Tasks;
 
 namespace AirQi.Repository

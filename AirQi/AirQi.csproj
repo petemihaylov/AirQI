@@ -12,6 +12,11 @@
     <!-- Entity Framework Core Dependecy Injection -->
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     
+    <!-- Hangfire -->
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.7.18" />
+    <PackageReference Include="Hangfire.Core" Version="1.7.18" />
+    <PackageReference Include="Hangfire.MemoryStorage" Version="1.7.0" />
+    
     <!-- AspNetCore JsonPatch -->
     <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="3.1.8" />
     
@@ -32,6 +37,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
 
     <!-- MongoDB packages-->

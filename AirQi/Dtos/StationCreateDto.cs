@@ -9,17 +9,19 @@ namespace AirQi.Dtos
     public class StationCreateDto
     ***REMOVED***
         [Required]
-        [MaxLength(50)]
+        public string Location ***REMOVED*** get; set;***REMOVED***
+
+        [Required]
         public string City ***REMOVED*** get; set;***REMOVED***
 
         [Required]
-        public Country Country ***REMOVED*** get; set;***REMOVED***
+        public string Country ***REMOVED*** get; set;***REMOVED***
 
         [Required]
-        public Location Location ***REMOVED*** get; set;***REMOVED***
+        public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
 
         [Required]
-        public ICollection<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
+        public Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
 
    ***REMOVED***
 ***REMOVED***

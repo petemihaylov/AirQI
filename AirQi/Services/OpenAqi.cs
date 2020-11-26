@@ -27,6 +27,8 @@ namespace AirQi
             if (response.IsSuccessStatusCode)
             ***REMOVED***
                 Console.WriteLine(responseBody);
+
+                
            ***REMOVED***
             else
             ***REMOVED***

@@ -2,6 +2,7 @@ using System;
 using Hangfire;
 using AutoMapper;
 using AirQi.Settings;
+using AirQi.Services;
 using AirQi.Repository;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;

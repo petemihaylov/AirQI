@@ -18,6 +18,7 @@ const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
 const Notifications = (props) => ***REMOVED***
   // Stored notifications from the DB
   const [content, handleContent] = useState([]);
+  
 
   // Live notifications from the WebSocket
   const [connection, setConnection] = useState(null);
@@ -57,9 +58,7 @@ const Notifications = (props) => ***REMOVED***
    ***REMOVED***
  ***REMOVED***, [connection]);
 
-  ***REMOVED***
-    /* Gets notifications from DB */
- ***REMOVED***
+  ***REMOVED***  /* Gets notifications from DB */***REMOVED***
 
   useEffect(() => ***REMOVED***
     props.dispatch(fetchNotifications());

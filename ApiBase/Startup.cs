@@ -107,6 +107,7 @@ namespace ApiBase
             ***REMOVED***
                 endpoints.MapControllers();
                 endpoints.MapHub<LiveNotificationHub>("/livenotification");
+                endpoints.MapHub<LiveMarkerHub>("/livemarker");
            ***REMOVED***);
 
        ***REMOVED***

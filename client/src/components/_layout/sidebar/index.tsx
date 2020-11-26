@@ -7,7 +7,6 @@ import "./global.css";
 import ***REMOVED***
   faUsersCog,
   faBell,
-  faLeaf,
   faMapMarked,
   faChevronRight,
 ***REMOVED*** from "@fortawesome/free-solid-svg-icons";

@@ -1,5 +1,4 @@
 import React from "react";
-import { Container, FormControl, InputGroup } from "react-bootstrap";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

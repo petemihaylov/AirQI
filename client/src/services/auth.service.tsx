@@ -24,7 +24,7 @@ export default class AuthService {
   }
 
   static register = async (user: User) => {
-    return axios.post(REACT_APP_API_URL + "/api/users/", user);
+    return await axios.post(REACT_APP_API_URL + "/api/users/", user);
   }
 
   static getCurrentUser(): User {

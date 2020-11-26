@@ -18,6 +18,7 @@ const { REACT_APP_API_URL } = process.env;
 const Notifications = (props) => {
   // Stored notifications from the DB
   const [content, handleContent] = useState([]);
+  
 
   // Live notifications from the WebSocket
   const [connection, setConnection] = useState(null);
@@ -57,9 +58,7 @@ const Notifications = (props) => {
     }
   }, [connection]);
 
-  {
-    /* Gets notifications from DB */
-  }
+  {  /* Gets notifications from DB */}
 
   useEffect(() => {
     props.dispatch(fetchNotifications());

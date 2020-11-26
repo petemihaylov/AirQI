@@ -1,7 +1,7 @@
 import UserService from "../services/user.service";
 import User from "../entities/User";
 
-import { FETCH_USERS, NEW_USER, DELETE_USER } from "./types";
+import { FETCH_USERS,  DELETE_USER } from "./types";
 
 export const fetchUsers = () => (dispatch: any) => {
   UserService.getModeratorBoard().then(

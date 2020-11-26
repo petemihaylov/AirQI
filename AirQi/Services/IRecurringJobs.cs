@@ -2,10 +2,8 @@ using System.Threading.Tasks;
 
 namespace AirQi
 ***REMOVED***
-    public interface IRecurringJob
+    public interface IRecurringJobs
     ***REMOVED***
-        void ExecuteWorker();
-
-        Task ExecuteWorkerAsync();
+        Task PullOpenAqiDataAsync();
    ***REMOVED***
 ***REMOVED***

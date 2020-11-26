@@ -12,13 +12,14 @@ namespace AirQi.Dtos
     ***REMOVED***
         public string Id ***REMOVED*** get; set;***REMOVED***
 
+        public string Location ***REMOVED*** get; set;***REMOVED***
+
         public string City ***REMOVED*** get; set;***REMOVED***
-  
-        public Country Country ***REMOVED*** get; set;***REMOVED***
-      
-        public Location Location ***REMOVED*** get; set;***REMOVED***
-      
-        public ICollection<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
+
+        public string Country ***REMOVED*** get; set;***REMOVED***
+
+        public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
+        public Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
 
         public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
 

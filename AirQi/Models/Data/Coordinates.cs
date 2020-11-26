@@ -5,16 +5,14 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace AirQi.Models.Data
 ***REMOVED***
     [BsonIgnoreExtraElements]
-    public class Country
+    public class Coordinates
     ***REMOVED***
+        
+        [BsonElement]
+        public double Latitude ***REMOVED*** get; set;***REMOVED***
 
         [BsonElement]
-        [MaxLength(50)]
-        public string Name ***REMOVED*** get; set;***REMOVED***
-
-        [BsonElement]
-        [MaxLength(3)]
-        public string Code ***REMOVED*** get; set;***REMOVED***
+        public double Longitude ***REMOVED*** get; set;***REMOVED***
 
    ***REMOVED***
 ***REMOVED***

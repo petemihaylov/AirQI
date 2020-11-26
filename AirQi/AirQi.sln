@@ -4,13 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "AirQi", "AirQi.csproj", "***REMOVED***6C6CD251-E034-4A72-B856-80329F78A11C***REMOVED***"
-	ProjectSection(ProjectDependencies) = postProject
-		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED*** = ***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***
-	EndProjectSection
-EndProject
-Project("***REMOVED***9A19103F-16F7-4668-BE54-9A1E7A4F7556***REMOVED***") = "WorkerService", "..\WorkerService\WorkerService.csproj", "***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***"
-EndProject
-Project("***REMOVED***FAE04EC0-301F-11D3-BF4B-00C04F79EFBC***REMOVED***") = "QueueServiceWorker", "..\QueueSubscriberWorker\QueueServiceWorker.csproj", "***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -22,14 +15,6 @@ Global
 		***REMOVED***6C6CD251-E034-4A72-B856-80329F78A11C***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
 		***REMOVED***6C6CD251-E034-4A72-B856-80329F78A11C***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
 		***REMOVED***6C6CD251-E034-4A72-B856-80329F78A11C***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
-		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
-		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
-		***REMOVED***D86DA351-74B8-42D6-AD69-3DA06FF817C9***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
-		***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***.Debug|Any CPU.Build.0 = Debug|Any CPU
-		***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***.Release|Any CPU.ActiveCfg = Release|Any CPU
-		***REMOVED***03225813-B4A3-46D4-BF4F-3B13F38097EE***REMOVED***.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

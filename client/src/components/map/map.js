@@ -12,13 +12,12 @@ import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** fetchMarkers, createMarker***REMOVED*** from "../../actions/markerActions";
 import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
-import MarkerEntity  from "../../entities/Marker";
+import MarkerEntity from "../../entities/Marker";
 
 //import DeckGL, ***REMOVED*** ScatterplotLayer***REMOVED*** from "deck.gl";
 
 const ***REMOVED*** REACT_APP_TOKEN***REMOVED*** = process.env;
 const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
-
 
 const Map = (props) => ***REMOVED***
   const [viewport, setViewport] = useState(***REMOVED***
@@ -35,13 +34,10 @@ const Map = (props) => ***REMOVED***
     []
   );
 
-
   const [data, setAirData] = useState([]);
   useEffect(() => ***REMOVED***
     setAirData(Locations.data);
  ***REMOVED***, []);
-
-  
 
   /* Custom settings for ViewportChange */
   const handleGeocoderViewportChange = useCallback(
@@ -61,11 +57,10 @@ const Map = (props) => ***REMOVED***
     [handleViewportChange]
   );
 
-
-  
   // Live markers from the WebSocket
   const [connection, setConnection] = useState(null);
-  
+
+
   /* Gets WebSocket marker */
   useEffect(() => ***REMOVED***
     const newConnection = new HubConnectionBuilder()
@@ -77,8 +72,6 @@ const Map = (props) => ***REMOVED***
 
     setConnection(newConnection);
  ***REMOVED***, []);
-
-
 
   useEffect(() => ***REMOVED***
     if (connection) ***REMOVED***
@@ -96,14 +89,13 @@ const Map = (props) => ***REMOVED***
  ***REMOVED***, [connection]);
 
 
-
   /* Stored markers from the DB */
   const [content, handleContent] = useState([]);
 
   /* Gets markers from DB */
   useEffect(() => ***REMOVED***
     props.dispatch(fetchMarkers());
- ***REMOVED***, [props]);
+ ***REMOVED***, []);
 
   useEffect(() => ***REMOVED***
     handleContent(props.items);
@@ -114,16 +106,12 @@ const Map = (props) => ***REMOVED***
  ***REMOVED***, [content]);
 
 
-
-
   /* Markers */
   const [markers, setMarkers] = useState([]);
   const handleMarker = (longitude, latitude) => ***REMOVED***
     setMarkers((markers) => [...markers, ***REMOVED*** longitude, latitude***REMOVED***]);
     setShowPopup(false);
  ***REMOVED***;
-
-
 
   /* Popup */
   const [popups, setPopups] = useState([]);
@@ -132,10 +120,17 @@ const Map = (props) => ***REMOVED***
   const handleClick = (***REMOVED*** lngLat: [longitude, latitude]***REMOVED***) => ***REMOVED***
     setShowPopup(true);
     setPopups([***REMOVED*** longitude, latitude***REMOVED***]);
-    // const m = new MarkerEntity(longitude, latitude);
-    // props.dispatch(createMarker(m));
  ***REMOVED***;
 
+  const handleCreate = (longitude, latitude) =>
+  ***REMOVED***
+      const m = new MarkerEntity(longitude, latitude);
+      props.dispatch(createMarker(m));
+      
+      console.log("create");
+      handleMarker(longitude, latitude);
+ ***REMOVED***;
+  
   return (
     <Container
       fluid
@@ -159,9 +154,9 @@ const Map = (props) => ***REMOVED***
 
         <SVGOverlayLayer airData=***REMOVED***data***REMOVED*** radius=***REMOVED***30***REMOVED*** color=***REMOVED***""***REMOVED*** />
         ***REMOVED***markers.map((m, i) => (
-            <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
-              <Pin style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED*** />
-            </Marker>
+          <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
+            <Pin style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED*** />
+          </Marker>
         ))***REMOVED***
 
         ***REMOVED***showPopup &&
@@ -178,7 +173,7 @@ const Map = (props) => ***REMOVED***
                 <small>A warning will be created!</small>
                 <button
                   className="btn btn-block btn-outline-dark btn-sm mt-2"
-                  onClick=***REMOVED***() => handleMarker(p.longitude, p.latitude)***REMOVED***
+                  onClick=***REMOVED***() => handleCreate(p.longitude, p.latitude)***REMOVED***
                 >
                   Pin
                 </button>

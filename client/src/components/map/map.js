@@ -12,13 +12,12 @@ import { connect } from "react-redux";
 import { fetchMarkers, createMarker } from "../../actions/markerActions";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
-import MarkerEntity  from "../../entities/Marker";
+import MarkerEntity from "../../entities/Marker";
 
 //import DeckGL, { ScatterplotLayer } from "deck.gl";
 
 const { REACT_APP_TOKEN } = process.env;
 const { REACT_APP_API_URL } = process.env;
-
 
 const Map = (props) => {
   const [viewport, setViewport] = useState({
@@ -35,13 +34,10 @@ const Map = (props) => {
     []
   );
 
-
   const [data, setAirData] = useState([]);
   useEffect(() => {
     setAirData(Locations.data);
   }, []);
-
-  
 
   /* Custom settings for ViewportChange */
   const handleGeocoderViewportChange = useCallback(
@@ -61,11 +57,10 @@ const Map = (props) => {
     [handleViewportChange]
   );
 
-
-  
   // Live markers from the WebSocket
   const [connection, setConnection] = useState(null);
-  
+
+
   /* Gets WebSocket marker */
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
@@ -77,8 +72,6 @@ const Map = (props) => {
 
     setConnection(newConnection);
   }, []);
-
-
 
   useEffect(() => {
     if (connection) {
@@ -96,14 +89,13 @@ const Map = (props) => {
   }, [connection]);
 
 
-
   /* Stored markers from the DB */
   const [content, handleContent] = useState([]);
 
   /* Gets markers from DB */
   useEffect(() => {
     props.dispatch(fetchMarkers());
-  }, [props]);
+  }, []);
 
   useEffect(() => {
     handleContent(props.items);
@@ -114,16 +106,12 @@ const Map = (props) => {
   }, [content]);
 
 
-
-
   /* Markers */
   const [markers, setMarkers] = useState([]);
   const handleMarker = (longitude, latitude) => {
     setMarkers((markers) => [...markers, { longitude, latitude }]);
     setShowPopup(false);
   };
-
-
 
   /* Popup */
   const [popups, setPopups] = useState([]);
@@ -132,10 +120,17 @@ const Map = (props) => {
   const handleClick = ({ lngLat: [longitude, latitude] }) => {
     setShowPopup(true);
     setPopups([{ longitude, latitude }]);
-    // const m = new MarkerEntity(longitude, latitude);
-    // props.dispatch(createMarker(m));
   };
 
+  const handleCreate = (longitude, latitude) =>
+  {
+      const m = new MarkerEntity(longitude, latitude);
+      props.dispatch(createMarker(m));
+      
+      console.log("create");
+      handleMarker(longitude, latitude);
+  };
+  
   return (
     <Container
       fluid
@@ -159,9 +154,9 @@ const Map = (props) => {
 
         <SVGOverlayLayer airData={data} radius={30} color={""} />
         {markers.map((m, i) => (
-            <Marker {...m} key={i} offsetLeft={-20} offsetTop={-30}>
-              <Pin style={{ width: "40px" }} />
-            </Marker>
+          <Marker {...m} key={i} offsetLeft={-20} offsetTop={-30}>
+            <Pin style={{ width: "40px" }} />
+          </Marker>
         ))}
 
         {showPopup &&
@@ -178,7 +173,7 @@ const Map = (props) => {
                 <small>A warning will be created!</small>
                 <button
                   className="btn btn-block btn-outline-dark btn-sm mt-2"
-                  onClick={() => handleMarker(p.longitude, p.latitude)}
+                  onClick={() => handleCreate(p.longitude, p.latitude)}
                 >
                   Pin
                 </button>

@@ -1,4 +1,5 @@
 
+using System;
 using System.Threading.Tasks;
 using ApiBase.Data;
 using ApiBase.Hubs;
@@ -17,10 +18,13 @@ namespace ApiBase.Controllers
         private readonly IEFRepository _repository;
         private readonly IHubContext<LiveMarkerHub> _hubContext;
 
-        public MarkersController(IEFRepository repository, IHubContext<LiveMarkerHub> hubContext)
+        private readonly IHubContext<LiveNotificationHub> _hubNotificationContext;
+
+        public MarkersController(IEFRepository repository, IHubContext<LiveMarkerHub> hubContext, IHubContext<LiveNotificationHub> hubNotificationContext)
         {
             this._repository = repository;
             this._hubContext = hubContext;
+            this._hubNotificationContext = hubNotificationContext;
         }
 
         // GET: api/markers
@@ -52,6 +56,9 @@ namespace ApiBase.Controllers
 
             // SignalR event
             await _hubContext.Clients.All.SendAsync("GetNewMarker", markerItem);
+
+            var notificationItem = new Notification("Warning! ", "New Marker has been created!", "Warning", DateTime.Now);
+            await _hubNotificationContext.Clients.All.SendAsync("GetNewNotification", notificationItem);
 
             return Ok();
         }

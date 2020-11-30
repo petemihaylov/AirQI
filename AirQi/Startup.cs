@@ -28,15 +28,13 @@ namespace AirQi
         public void ConfigureServices(IServiceCollection services)
         {
             // Configurations
-            ConfigureSwaggerServices(services);
             ConfigureDatabaseServices(services);
             ConfiguraHangfireServices(services);
-            ConfigureCrossOriginResourceSharing(services);
-            
+            ConfigureSwaggerServices(services);
 
-            // Scope
-            services.AddTransient(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
-            services.AddScoped<IWorkerService, WorkerService>();
+            // Scopes
+            services.AddTransient(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>)); // A refference to mutiple instances
+            services.AddSingleton<IWorkerService, WorkerService>();
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -48,8 +46,8 @@ namespace AirQi
             });
 
             // SignalR
+            ConfigureCrossOriginResourceSharing(services);
             services.AddSignalR();
-
         }
 
         // MongoDB Configurations
@@ -99,7 +97,9 @@ namespace AirQi
 
             services.AddHangfireServer();
 
-            services.AddSingleton<IWorkerService, WorkerService>();
+            // Worker Settings Configurations
+            services.Configure<WorkerSettings>(Configuration.GetSection(nameof(WorkerSettings)));
+            services.AddSingleton<IWorkerSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<WorkerSettings>>().Value);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -138,10 +138,10 @@ namespace AirQi
             // ****************************** hangfire background jobs ******************************
 
             // this job will fetch new data for Bulgaria from AirThings every minute
-            // RecurringJob.AddOrUpdate<IRecurringJob>("AirThings", x => x.ExecuteWorkerAsync() , Cron.Minutely);
+            RecurringJob.AddOrUpdate<AirThings>("Air-Things", service => service.PullDataAsync() , Cron.Minutely);
 
             // this job will fetch global data from OpenAqi every minute
-            // RecurringJob.AddOrUpdate<IRecurringJobs>("OpenAqi", x => x.PullOpenAqiDataAsync() , Cron.Minutely);
+            RecurringJob.AddOrUpdate<OpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
 
         }
     }

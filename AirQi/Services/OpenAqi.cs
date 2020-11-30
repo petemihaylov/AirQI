@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using AirQi.Models;
 using AirQi.Repository;
 using AirQi.Services;
+using AirQi.Settings;
 using Newtonsoft.Json.Linq;
 
 namespace AirQi
@@ -14,9 +15,10 @@ namespace AirQi
     {
         private HttpClient _client;
         private string url = "https://api.openaq.org/v1/latest";
-        public OpenAqi(IMongoDataRepository<Station> repository) : base(repository)
+        public OpenAqi(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
         {
             this.Repository = repository;
+            this.Settings = settings;
             this.Client = new HttpClient();
         }
 

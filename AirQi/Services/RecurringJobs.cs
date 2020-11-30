@@ -15,6 +15,10 @@ namespace AirQi.Services
         private HttpClient _client = new HttpClient();
         private string url = "https://api.openaq.org/v1/latest";
 
+        public RecurringJobs(IMongoDataRepository<Station> repository)
+        {
+            
+        }
         public async Task PullOpenAqiDataAsync()
         {
             _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

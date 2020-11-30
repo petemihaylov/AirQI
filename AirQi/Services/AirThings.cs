@@ -2,37 +2,36 @@ using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using AirQi.Models;
+using AirQi.Repository;
+using AirQi.Services;
+using AirQi.Settings;
 
 namespace AirQi
 ***REMOVED***
-    public class AirThings 
+    public class AirThings : WorkerService
     ***REMOVED***
-        private HttpClient _client = new HttpClient();
+        private HttpClient _client;
         private string url = "https://airthings.azure-api.net/api/Devices";
-
-        public void ExecuteWorker()
+        public AirThings(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
         ***REMOVED***
-            throw new NotImplementedException();
+            this.Repository = repository;
+            this.Settings = settings;
+            this.Client = new HttpClient();
        ***REMOVED***
 
-        public async Task ExecuteWorkerAsync()
+        public HttpClient Client ***REMOVED*** get => _client; set => _client = value;***REMOVED***
+
+        public override async Task PullDataAsync()
         ***REMOVED***
-            _client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", "94fceb37077f44eb8cefa7d9fe6a4d1e");
-            _client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            // Gets headers which should be sent in each request.
+                   
+            Client.DefaultRequestHeaders.Add("Ocp-Apim-Subscription-Key", this.Settings.OcpApimSubscriptionKey);
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            HttpResponseMessage response = await Client.GetAsync(url);
 
-
-            HttpResponseMessage response = await _client.GetAsync(url);
+            // Throws an Exception if the HttpResponseMessage.IsSuccessStatusCode property for HTTP response is 'false'. 
             response.EnsureSuccessStatusCode();
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            if (response.IsSuccessStatusCode)
-            ***REMOVED***
-                Console.WriteLine(responseBody);
-           ***REMOVED***
-            else
-            ***REMOVED***
-                Console.WriteLine("The website is down. Status code ***REMOVED***StatusCode***REMOVED***", response.StatusCode);
-           ***REMOVED***
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

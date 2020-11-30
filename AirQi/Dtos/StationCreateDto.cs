@@ -1,5 +1,4 @@
 using AirQi.Models;
-using AirQi.Models.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

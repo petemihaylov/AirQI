@@ -1,6 +1,6 @@
 using AirQi.Dtos;
 using AutoMapper;
-using AirQi.Models.Data;
+using AirQi.Models;
 using AirQi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;

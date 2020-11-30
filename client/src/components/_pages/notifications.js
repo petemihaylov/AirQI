@@ -29,9 +29,7 @@ const Notifications = (props) => {
     handleContent(props.items);
   };
 
-  {
-    /* Gets WebSocket notification */
-  }
+  /* Gets WebSocket notification */
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
       .withUrl(REACT_APP_API_URL + "/livenotification", {
@@ -58,8 +56,7 @@ const Notifications = (props) => {
     }
   }, [connection]);
 
-  {  /* Gets notifications from DB */}
-
+  /* Gets notifications from DB */
   useEffect(() => {
     props.dispatch(fetchNotifications());
   }, []);

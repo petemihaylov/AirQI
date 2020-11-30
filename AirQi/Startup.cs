@@ -35,7 +35,8 @@ namespace AirQi
             
 
             // Scope
-            services.AddScoped(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
+            services.AddTransient(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>));
+            services.AddScoped<IWorkerService, WorkerService>();
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -98,7 +99,7 @@ namespace AirQi
 
             services.AddHangfireServer();
 
-            services.AddSingleton<IRecurringJobs, RecurringJobs>();
+            services.AddSingleton<IWorkerService, WorkerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -140,7 +141,7 @@ namespace AirQi
             // RecurringJob.AddOrUpdate<IRecurringJob>("AirThings", x => x.ExecuteWorkerAsync() , Cron.Minutely);
 
             // this job will fetch global data from OpenAqi every minute
-            RecurringJob.AddOrUpdate<IRecurringJobs>("OpenAqi", x => x.PullOpenAqiDataAsync() , Cron.Minutely);
+            // RecurringJob.AddOrUpdate<IRecurringJobs>("OpenAqi", x => x.PullOpenAqiDataAsync() , Cron.Minutely);
 
         }
     }

@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using AirQi.Models.Data;
+using AirQi.Models;
 
 namespace AirQi.Hubs.Clients
 {

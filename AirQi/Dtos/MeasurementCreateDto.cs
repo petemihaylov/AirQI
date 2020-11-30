@@ -1,5 +1,5 @@
 ﻿using System;
-using AirQi.Models.Data;
+using AirQi.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace AirQi.Dtos

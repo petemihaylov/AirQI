@@ -1,6 +1,6 @@
 using System;
 using MongoDB.Bson;
-using AirQi.Models.Data;
+using AirQi.Models;
 
 namespace AirQi.Models
 {

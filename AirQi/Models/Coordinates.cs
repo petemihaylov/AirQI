@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace AirQi.Models.Data
+namespace AirQi.Models
 {
     [BsonIgnoreExtraElements]
     public class Coordinates

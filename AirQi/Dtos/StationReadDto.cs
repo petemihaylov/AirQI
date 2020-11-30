@@ -4,7 +4,6 @@ using MongoDB.Bson;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using MongoDB.Bson.Serialization.Attributes;
-using AirQi.Models.Data;
 
 namespace AirQi.Dtos
 {

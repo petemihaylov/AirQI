@@ -18,6 +18,7 @@ namespace AirQi.Dtos
         public string Country { get; set; }
 
         public IEnumerable<Measurement> Measurements { get; set; }
+
         public Coordinates Coordinates { get; set; }
 
         public DateTime CreatedAt { get; set; }

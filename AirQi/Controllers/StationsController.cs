@@ -4,7 +4,9 @@ using AirQi.Models;
 using AirQi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System;
+using MongoDB.Bson;
 
 namespace AirQi.Controllers
 {
@@ -23,75 +25,75 @@ namespace AirQi.Controllers
         }
 
        [HttpGet]
-        public ActionResult <IEnumerable<StationReadDto>> GetAllStations()
+        public async Task<IActionResult> GetAllStations()
         {
-            var stationModelItems =  _repository.GetAll();
+            var stations =  await _repository.GetAllLatestAsync();
             
-            if(stationModelItems != null){
-                return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stationModelItems));
+            if(stations != null){
+                return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stations));
             }
 
             return NotFound();
         }
 
         [HttpGet("{id}", Name="GetStationById")]
-        public ActionResult <StationReadDto> GetStationById(string id)
+        public async Task<IActionResult> GetStationById(string id)
         {
-            var stationModel = _repository.GetObjectById(id);
+            var station = await _repository.GetObjectByIdAsync(id);
 
-            if(stationModel != null)
+            if(station != null)
             {
-                return Ok(_mapper.Map<StationReadDto>(stationModel));    
+                return Ok(_mapper.Map<StationReadDto>(station));    
             }
 
             return NotFound();
         }
 
         [HttpPost]
-        public ActionResult <StationCreateDto> CreateStation(StationCreateDto stationCreateDto)
+        public async Task<IActionResult> CreateStation(StationCreateDto stationCreateDto)
         {
-            var stationModel = _mapper.Map<Station>(stationCreateDto);
+            var station = _mapper.Map<Station>(stationCreateDto);
 
-            stationModel.CreatedAt = stationModel.UpdatedAt = DateTime.UtcNow;
-            _repository.CreateObject(stationModel);
+            if (station != null)
+            {
+                station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;
+                await _repository.CreateObjectAsync(station);
 
-            var stationReadDto = _mapper.Map<StationReadDto>(stationModel);
-            
-            // https://docs.microsoft.com/en-us/dotnet/api/system.web.http.apicontroller.createdatroute?view=aspnetcore-2.2
-            return CreatedAtRoute(nameof(GetStationById), new {Id = stationReadDto.Id}, stationReadDto);
+                var stationReadDto = _mapper.Map<StationReadDto>(station);
+
+                // https://docs.microsoft.com/en-us/dotnet/api/system.web.http.apicontroller.createdatroute?view=aspnetcore-2.2
+                return CreatedAtRoute(nameof(GetStationById), new { Id = stationReadDto.Id }, stationReadDto);
+            }
+
+            return NotFound();
         }
 
         [HttpPut("{id}")]
-        public ActionResult <StationCreateDto> EditStation(string id, StationCreateDto stationCreateDto)
+        public async Task<IActionResult> UpdateStation(string id, StationCreateDto stationCreateDto)
         {
             var stationModel = _mapper.Map<Station>(stationCreateDto);
-            var station = _repository.GetObjectById(id);
-
+            var station = await _repository.GetObjectByIdAsync(id);
 
             if(station != null)
             {
                 stationModel.UpdatedAt = DateTime.UtcNow;
-                stationModel.Id = new MongoDB.Bson.ObjectId(id);
+                stationModel.Id = new ObjectId(id);
                 _repository.UpdateObject(id, stationModel);
                 return Ok(_mapper.Map<StationReadDto>(stationModel));    
             }
 
             return NotFound();
-
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteStation(string id)
+        public  async Task<ActionResult> DeleteStation(string id)
         {
-            var stationModel = _repository.GetObjectById(id);
+            var station= await _repository.GetObjectByIdAsync(id);
 
-            if(stationModel != null)
-            {
-                
-                _repository.RemoveObject(stationModel);
-
-                return Ok("Successfully deleted from collection!");
- 
+            if(station != null)
+            {                
+                await _repository.RemoveObjectAsync(station);
+                return Ok("Successfully deleted from collection!"); 
             } 
 
             return NotFound();

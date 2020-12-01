@@ -82,17 +82,15 @@ namespace AirQi.Repository
         // Updates the record from the model by bson _id.
         public void UpdateObject(string id, TDocument document)
         ***REMOVED***
-            var objectId = new ObjectId(id);
             document.UpdatedAt = DateTime.UtcNow;
-            _collection.ReplaceOne(doc => doc.Id == objectId, document);
+            _collection.ReplaceOne(doc => doc.Id == new ObjectId(id), document);
        ***REMOVED***
 
         // Updates the record from the model by bson _id Async.
         public async Task UpdateObjectAsync(string id, TDocument document)
         ***REMOVED***
-            var objectId = new ObjectId(id);
             document.UpdatedAt = DateTime.UtcNow;
-            await _collection.ReplaceOneAsync(doc => doc.Id == objectId, document);
+            await _collection.ReplaceOneAsync(doc => doc.Id == new ObjectId(id), document);
        ***REMOVED***
 
         // Removes the record from the db.
@@ -110,15 +108,13 @@ namespace AirQi.Repository
         // Removes the record from the db based on the bason _id.
         public void RemoveObjectById(string id)
         ***REMOVED***
-            var objectId = new ObjectId(id);
-            _collection.DeleteOne(doc => doc.Id == objectId);
+            _collection.DeleteOne(doc => doc.Id == new ObjectId(id));
        ***REMOVED***
 
         // Removes the record from the db based on the bason _id Async.
         public async Task RemoveObjectByIdAsync(string id)
         ***REMOVED***
-            var objectId = new ObjectId(id);
-            await _collection.DeleteOneAsync(doc => doc.Id == objectId);
+            await _collection.DeleteOneAsync(doc => doc.Id == new ObjectId(id));
        ***REMOVED***
 
         // Filters the record by lambda.

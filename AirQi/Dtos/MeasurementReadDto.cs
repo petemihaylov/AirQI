@@ -14,9 +14,5 @@ namespace AirQi.Dtos
         public string Unit ***REMOVED*** get; set;***REMOVED***
                 
         public string SourceName ***REMOVED*** get; set;***REMOVED***
-
-        public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
-
-        public DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

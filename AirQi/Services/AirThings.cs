@@ -6,6 +6,8 @@ using AirQi.Models;
 using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
+using MongoDB.Bson;
+using Newtonsoft.Json.Linq;
 
 namespace AirQi
 {
@@ -32,6 +34,11 @@ namespace AirQi
 
             // Throws an Exception if the HttpResponseMessage.IsSuccessStatusCode property for HTTP response is 'false'. 
             response.EnsureSuccessStatusCode();
+            
+            string responseBody = await response.Content.ReadAsStringAsync();
+
+            var json = JObject.Parse(responseBody);
+            System.Console.WriteLine(json);
         }
     }
 }

@@ -141,7 +141,7 @@ namespace AirQi
             RecurringJob.AddOrUpdate<AirThings>("Air-Things", service => service.PullDataAsync() , Cron.Minutely);
 
             // this job will fetch global data from OpenAqi every minute
-            RecurringJob.AddOrUpdate<OpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
+            // RecurringJob.AddOrUpdate<OpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
 
         }
     }

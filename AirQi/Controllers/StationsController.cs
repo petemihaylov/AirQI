@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using MongoDB.Bson;
+using AirQi.Services;
 
 namespace AirQi.Controllers
 {

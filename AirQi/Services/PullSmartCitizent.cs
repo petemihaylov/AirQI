@@ -7,6 +7,7 @@ using AirQi.Models;
 using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
+using MongoDB.Bson;
 using Newtonsoft.Json.Linq;
 
 namespace AirQi
@@ -27,17 +28,17 @@ namespace AirQi
         public override async Task PullDataAsync()
         {
             // Gets headers which should be sent in each request.
-            // Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
             HttpResponseMessage response = await Client.GetAsync(url);
 
             // Throws an Exception if the HttpResponseMessage.IsSuccessStatusCode property for HTTP response is 'false'. 
             response.EnsureSuccessStatusCode();
 
-            string responseBody = await response.Content.ReadAsStringAsync();
+            var responseBody = await response.Content.ReadAsStringAsync();
 
             var json = JObject.Parse(responseBody);
             
-            // System.Console.WriteLine(responseBody);
+            System.Console.WriteLine(json);
             
             // foreach (var s in json.SelectToken("results"))
             // {

@@ -11,11 +11,11 @@ using Newtonsoft.Json.Linq;
 
 namespace AirQi
 {
-    public class OpenAqi : WorkerService
+    public class PullOpenAqi : WorkerService
     {
         private HttpClient _client;
         private string url = "https://api.openaq.org/v1/latest";
-        public OpenAqi(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
+        public PullOpenAqi(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
         {
             this.Repository = repository;
             this.Settings = settings;

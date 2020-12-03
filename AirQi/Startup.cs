@@ -78,9 +78,14 @@ namespace AirQi
             ***REMOVED***
                 options.AddPolicy("ClientPermission", policy =>
                 ***REMOVED***
-                    policy.AllowAnyHeader()
+                    // policy.AllowAnyHeader()
+                    //     .AllowAnyMethod()
+                    //     .WithOrigins("http://localhost:3000")
+                    //     .AllowCredentials();
+
+                    policy.SetIsOriginAllowed(origin => true)
+                        .AllowAnyHeader()
                         .AllowAnyMethod()
-                        .WithOrigins("http://localhost:3000")
                         .AllowCredentials();
                ***REMOVED***);
            ***REMOVED***);
@@ -140,7 +145,7 @@ namespace AirQi
             // ****************************** hangfire background jobs ******************************
 
             // this job will fetch global data from OpenAqi every minute
-            RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
+            // RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
 
        ***REMOVED***
    ***REMOVED***

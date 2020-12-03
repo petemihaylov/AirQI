@@ -5,6 +5,6 @@ namespace AirQi.Hubs.Clients
 ***REMOVED***
     public interface IStationClient
     ***REMOVED***
-        Task ReceiveStation(Station station);
+        Task ReceiveStation(Station value);
    ***REMOVED***
 ***REMOVED***

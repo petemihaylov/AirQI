@@ -5,11 +5,11 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace AssetNXT.Hubs
 ***REMOVED***
-    public class RuuviStationHub : Hub<IStationClient>
+    public class StationHub : Hub
     ***REMOVED***
-        public async Task SendRuuviStation(Station station)
+        public Task ReceiveStation(Station value)
         ***REMOVED***
-            await Clients.All.ReceiveStation(station);
+            return Clients.All.SendAsync("GetNewStations", value);
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

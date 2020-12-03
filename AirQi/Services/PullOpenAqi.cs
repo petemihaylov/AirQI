@@ -35,9 +35,9 @@ namespace AirQi
 
             string responseBody = await response.Content.ReadAsStringAsync();
 
-            var json = JObject.Parse(responseBody);
+            JObject json = JObject.Parse(responseBody);
             
-            foreach (var s in json.SelectToken("results"))
+            foreach (JObject s in json.SelectToken("results"))
             {
                 Station station = new Station();
                 station.Location = s.SelectToken("location").Value<string>();
@@ -48,7 +48,7 @@ namespace AirQi
 
                 List<Measurement> measurementsCollection = new List<Measurement>();
 
-                foreach(var m in measurements)
+                foreach(JObject m in measurements)
                 {
                     Measurement measurement = new Measurement();
                     measurement.Parameter = m.SelectToken("parameter").Value<string>();

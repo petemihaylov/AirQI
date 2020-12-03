@@ -137,14 +137,8 @@ namespace AirQi
 
             // ****************************** hangfire background jobs ******************************
 
-            // this job will fetch global data from SmartCitizent every minute
-            RecurringJob.AddOrUpdate<PullSmartCitizen>("SmartCitizent", service => service.PullDataAsync() , Cron.Minutely);
-
-            // this job will fetch new data for Bulgaria from AirThings every minute
-            // RecurringJob.AddOrUpdate<PullAirThings>("Air-Things", service => service.PullDataAsync() , Cron.Minutely);
-
             // this job will fetch global data from OpenAqi every minute
-            // RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
+            RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
 
         }
     }

@@ -5,6 +5,6 @@ namespace AirQi.Hubs.Clients
 {
     public interface IStationClient
     {
-        Task ReceiveStation(Station station);
+        Task ReceiveStation(Station value);
     }
 }

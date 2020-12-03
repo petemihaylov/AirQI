@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Options;
+using AssetNXT.Hubs;
 
 namespace AirQi
 {
@@ -119,6 +120,7 @@ namespace AirQi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<StationHub>("/livestations");
             });
 
             // Swagger config

@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System;
 using MongoDB.Bson;
 using AirQi.Services;
+using Microsoft.AspNetCore.SignalR;
+using AssetNXT.Hubs;
 
 namespace AirQi.Controllers
 {
@@ -19,10 +21,12 @@ namespace AirQi.Controllers
     {
         private readonly IMongoDataRepository<Station> _repository;
         private readonly IMapper _mapper;
-        public StationsController(IMongoDataRepository<Station> repository, IMapper mapper)
+        public readonly IHubContext<StationHub> _hub;
+        public StationsController(IMongoDataRepository<Station> repository, IMapper mapper, IHubContext<StationHub> hub)
         {
             _repository = repository;
             _mapper = mapper;
+            _hub = hub;
         }
 
        [HttpGet]
@@ -59,6 +63,9 @@ namespace AirQi.Controllers
             {
                 station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;
                 await _repository.CreateObjectAsync(station);
+
+                // SignalR event
+                await _hub.Clients.All.SendAsync("GetNewStations", station);
 
                 var stationReadDto = _mapper.Map<StationReadDto>(station);
 

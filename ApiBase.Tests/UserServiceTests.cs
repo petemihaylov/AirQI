@@ -89,7 +89,7 @@ namespace ApiBase.Tests
        ***REMOVED***
 
         [Fact]
-        async Task DeleteUser_ShouldReturnNothing()
+        public async Task DeleteUser_ShouldReturnNothing()
         ***REMOVED***
             int userId = new Random().Next();
             // Arrange

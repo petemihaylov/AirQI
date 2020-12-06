@@ -89,7 +89,7 @@ namespace ApiBase.Tests
         }
 
         [Fact]
-        async Task DeleteUser_ShouldReturnNothing()
+        public async Task DeleteUser_ShouldReturnNothing()
         {
             int userId = new Random().Next();
             // Arrange

@@ -23,8 +23,5 @@ namespace AirQi.Models
         [BsonElement]
         public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
 
-        [BsonElement]
-        public Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
-
    ***REMOVED***
 ***REMOVED***

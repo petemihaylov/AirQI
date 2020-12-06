@@ -3,8 +3,11 @@ using ApiBase.Models;
 
 namespace ApiBase.DTOs
 ***REMOVED***
-    public class UserCreateDto
+    public class UserDto
     ***REMOVED***
+        
+        public int Id ***REMOVED*** get; set;***REMOVED***
+
         [Required]
         public string Username ***REMOVED*** get; set;***REMOVED***
 

@@ -7,8 +7,9 @@ using System.Collections.Generic;
 
 namespace AirQi.Controllers
 ***REMOVED***
+    [Produces("application/json")]
+    [Route("api/measurements/")]
     [ApiController]
-    [Route("[controller]")]
     public class MeasurementsController : ControllerBase
     ***REMOVED***
         private readonly IMongoDataRepository<Station> _repository;

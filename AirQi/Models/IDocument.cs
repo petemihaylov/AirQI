@@ -14,5 +14,7 @@ namespace AirQi.Models
         DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
 
         DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
+
+        Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

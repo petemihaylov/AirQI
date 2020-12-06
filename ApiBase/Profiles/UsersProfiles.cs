@@ -9,8 +9,8 @@ namespace Commander.Profiles
         public UsersProfile()
         {
             // source to destionation
-            CreateMap<User, UserReadDto>();
-            CreateMap<UserCreateDto, User>();
+            CreateMap<User, UserDto>();
+            CreateMap<UserDto, User>();
         }
     }
 }

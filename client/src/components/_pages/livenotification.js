@@ -25,6 +25,7 @@ const LiveNotification = (props) => {
     setConnection(newConnection);
   }, []);
 
+
   useEffect(() => {
     if (connection) {
       connection
@@ -39,6 +40,7 @@ const LiveNotification = (props) => {
         .catch((e) => console.log("Connection failed: ", e));
     }
   }, [connection]);
+
 
   return (
     <Container>

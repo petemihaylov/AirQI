@@ -14,7 +14,6 @@ namespace ApiBase.Controllers
     [ApiController]
     public class NotificationsController : ControllerBase
     {
-
         private readonly IEFRepository _repository;
         private readonly IHubContext<LiveNotificationHub> _hubContext;
 

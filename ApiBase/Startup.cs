@@ -11,6 +11,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using ApiBase.Models;
 using ApiBase.Hubs;
+using ApiBase.Services.Interfaces;
+using ApiBase.Services;
 
 namespace ApiBase
 {
@@ -44,6 +46,7 @@ namespace ApiBase
 
 
             services.AddScoped<IEFRepository, SqlRepository>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

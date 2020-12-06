@@ -25,6 +25,7 @@ const LiveNotification = (props) => ***REMOVED***
     setConnection(newConnection);
  ***REMOVED***, []);
 
+
   useEffect(() => ***REMOVED***
     if (connection) ***REMOVED***
       connection
@@ -39,6 +40,7 @@ const LiveNotification = (props) => ***REMOVED***
         .catch((e) => console.log("Connection failed: ", e));
    ***REMOVED***
  ***REMOVED***, [connection]);
+
 
   return (
     <Container>

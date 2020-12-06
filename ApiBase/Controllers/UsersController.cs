@@ -1,11 +1,8 @@
-using Microsoft.AspNetCore.Mvc;
-using AutoMapper;
-using ApiBase.Data;
+using ApiBase.Services.Interfaces;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc;
 using ApiBase.Models;
 using ApiBase.DTOs;
-using Microsoft.AspNetCore.Authorization;
-using System;
 
 namespace ApiBase.Controllers
 ***REMOVED***
@@ -14,78 +11,59 @@ namespace ApiBase.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     ***REMOVED***
-        private readonly IEFRepository _repository;
-        public readonly IMapper _mapper;
-
-        public UsersController(IEFRepository repository, IMapper mapper)
-        ***REMOVED***
-            this._repository = repository;
-            this._mapper = mapper;
-       ***REMOVED***
+        private readonly IUserService _userService;
+        public UsersController(IUserService userService) ***REMOVED*** this._userService = userService;***REMOVED***
 
 
         // GET api/users
         [HttpGet]
-        public ActionResult<IEnumerable<UserReadDto>> GetAllUsers()
+        public ActionResult<IEnumerable<UserDto>> GetAllUsers()
         ***REMOVED***
-            var userItems = _repository.GetAllAsync<User>();
-            return Ok(_mapper.Map<IEnumerable<UserReadDto>>(userItems.Result));
+            return Ok(_userService.GetUsers());
        ***REMOVED***
 
 
         // GET api/users/***REMOVED***id***REMOVED***
         [HttpGet("***REMOVED***id***REMOVED***", Name = "GetUserById")]
-        public ActionResult<UserReadDto> GetUserById(int id)
+        public ActionResult<UserDto> GetUserById(int id)
         ***REMOVED***
-            var userItem = _repository.GetByIdAsync<User>(id);
-            if (userItem != null)
-            ***REMOVED***
-                return Ok(_mapper.Map<UserReadDto>(userItem.Result));
-           ***REMOVED***
-            return NotFound();
+            var user = _userService.GetUserById(id);
+
+            if (user != null) return Ok(user);
+            else return NotFound();
        ***REMOVED***
 
 
         // POST api/users
         [HttpPost]
-        public ActionResult<User> CreateUser(UserCreateDto userCreateDto)
+        public ActionResult<User> CreateUser(UserDto userDto)
         ***REMOVED***
-            var userItem = _mapper.Map<User>(userCreateDto);
 
-            foreach (var user in _repository.GetAllAsync<User>().Result)
-            ***REMOVED***
-                if (user.Username == userItem.Username) return Conflict(new ***REMOVED***message = "There is an existing record with the same username. Try something different!"***REMOVED***);
-           ***REMOVED***
+            if (_userService.IsValid(userDto) == false)
+                return Conflict(new ***REMOVED*** message = "There is an existing record with the same username. Try something different!"***REMOVED***);
 
-            if (_repository.Exists<User>(userItem))
-            ***REMOVED***
+            if (_userService.UserExists(userDto))
                 return Conflict();
-           ***REMOVED***
 
-            this._repository.AddAsync<User>(userItem);
-            
+            var user = _userService.AddUser(userDto);
 
-            var userReadDto = _mapper.Map<UserReadDto>(userItem);
-
-            return CreatedAtRoute(nameof(GetUserById), new ***REMOVED*** Id = userReadDto.Id***REMOVED***, userReadDto);
+            return CreatedAtRoute(nameof(GetUserById), new ***REMOVED*** Id = user.Id***REMOVED***, user);
        ***REMOVED***
 
 
         // PUT api/users/***REMOVED***id***REMOVED***
         [HttpPut("***REMOVED***id***REMOVED***")]
-        public ActionResult UpdateUser(int id, UserCreateDto userUpdateDto)
+        public ActionResult UpdateUser(int id, UserDto userDto)
         ***REMOVED***
-            var userItem = _repository.GetByIdAsync<User>(id);
-            if (userItem.Result == null)
+            var repoUser = _userService.GetUserById(id);
+            if (repoUser == null)
             ***REMOVED***
                 return NotFound();
            ***REMOVED***
 
-            _mapper.Map(userUpdateDto, userItem.Result);
+            _userService.UpdateUser(userDto, repoUser);
 
-            _repository.UpdateAsync<User>(userItem.Result);
-
-            return NoContent();
+            return Ok();
        ***REMOVED***
 
 
@@ -93,15 +71,14 @@ namespace ApiBase.Controllers
         [HttpDelete("***REMOVED***id***REMOVED***")]
         public ActionResult DeleteUser(int id)
         ***REMOVED***
-            var userItem = _repository.GetByIdAsync<User>(id);
+            var userItem = _userService.GetUserById(id);
             if (userItem == null)
             ***REMOVED***
                 return NotFound();
            ***REMOVED***
 
-            _repository.DeleteAsync<User>(userItem.Result);
-
-            return NoContent();
+            _userService.DeleteUser(userItem);
+            return Ok();
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

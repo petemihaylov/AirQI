@@ -14,5 +14,7 @@ namespace AirQi.Models
         DateTime CreatedAt { get; set; }
 
         DateTime UpdatedAt { get; set; }
+
+        Coordinates Coordinates { get; set; }
     }
 }

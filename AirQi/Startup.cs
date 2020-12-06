@@ -76,7 +76,7 @@ namespace AirQi
         {
             services.AddCors(options =>
             {
-                options.AddPolicy("ClientPermission", policy =>
+                options.AddPolicy("CrosPolicy", policy =>
                 {
                     // policy.AllowAnyHeader()
                     //     .AllowAnyMethod()
@@ -137,7 +137,7 @@ namespace AirQi
             });
 
             // SignalR
-            app.UseCors("ClientPermission");
+            app.UseCors("CrosPolicy");
 
             // Hangfire
             app.UseHangfireDashboard();

@@ -47,7 +47,7 @@ namespace ApiBase.Controllers
 
             var user = _userService.AddUser(userDto);
 
-            return CreatedAtRoute(nameof(GetUserById), new { Id = user.Id }, user);
+            return CreatedAtRoute(nameof(GetUserById), new { id = user.Id }, user);
         }
 
 

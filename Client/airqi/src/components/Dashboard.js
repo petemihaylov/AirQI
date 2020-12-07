@@ -1,5 +1,5 @@
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from 'react';
-import fetchStationsData from '../actions/pull_stations';
+import fetchStationsData from '../services/pull_stations';
 
 export default function Dashboard() ***REMOVED***
     const [stations, setStationData] = useState([]);
@@ -17,7 +17,13 @@ export default function Dashboard() ***REMOVED***
 
     return (
         <div>
-            ***REMOVED***stations***REMOVED***
+            ***REMOVED***stations && stations.map((value, idx) => ***REMOVED*** 
+                return (
+                    <div>
+                     
+                    </div>
+                )
+           ***REMOVED***)***REMOVED***
         </div>
     );
 ***REMOVED*** 

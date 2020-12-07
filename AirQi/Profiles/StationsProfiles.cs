@@ -1,6 +1,6 @@
 using AutoMapper;
 using AirQi.Dtos;
-using AirQi.Models;
+using AirQi.Models.Core;
 
 namespace AirQi.Profiles
 {

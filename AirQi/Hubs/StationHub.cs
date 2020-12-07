@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
-using AirQi.Hubs.Clients;
-using AirQi.Models;
+using AirQi.Models.Core;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AssetNXT.Hubs

@@ -5,7 +5,7 @@ using AirQi.Repository;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace AirQi.Models
+namespace AirQi.Models.Core
 {
     [BsonCollection("stations")]
     public class Station : Document

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import fetchStationsData from '../actions/pull_stations';
+import fetchStationsData from '../services/pull_stations';
 
 export default function Dashboard() {
     const [stations, setStationData] = useState([]);
@@ -17,7 +17,13 @@ export default function Dashboard() {
 
     return (
         <div>
-            {stations}
+            {stations && stations.map((value, idx) => { 
+                return (
+                    <div>
+                     
+                    </div>
+                )
+            })}
         </div>
     );
 } 

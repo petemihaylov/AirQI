@@ -1,8 +1,7 @@
 using System;
 using MongoDB.Bson;
-using AirQi.Models;
 
-namespace AirQi.Models
+namespace AirQi.Models.Core
 {
     public abstract class Document : IDocument
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using AirQi.Models;
+using AirQi.Models.Core;
 using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
@@ -14,7 +14,6 @@ namespace AirQi
     public class PullOpenAqi : WorkerService
     {
         private HttpClient _client;
-        private string url = "https://api.openaq.org/v1/latest";
         public PullOpenAqi(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
         {
             this.Repository = repository;
@@ -28,7 +27,8 @@ namespace AirQi
         {
             // Gets headers which should be sent in each request.
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-            HttpResponseMessage response = await Client.GetAsync(url);
+
+            HttpResponseMessage response = await Client.GetAsync("https://api.openaq.org/v1/latest");
 
             // Throws an Exception if the HttpResponseMessage.IsSuccessStatusCode property for HTTP response is 'false'. 
             response.EnsureSuccessStatusCode();

@@ -3,7 +3,7 @@ using AirQi.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace AirQi.Models
+namespace AirQi.Models.Core
 {
     public interface IDocument
     {

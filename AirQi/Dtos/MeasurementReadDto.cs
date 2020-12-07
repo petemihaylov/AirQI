@@ -1,5 +1,6 @@
 using System;
 using AirQi.Models;
+using AirQi.Models.Core;
 
 namespace AirQi.Dtos
 {
@@ -14,5 +15,9 @@ namespace AirQi.Dtos
         public string Unit { get; set; }
                 
         public string SourceName { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+
+        public Coordinates Coordinates { get; set; }
     }
 }

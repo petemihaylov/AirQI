@@ -49,6 +49,11 @@ namespace AirQi
             // SignalR
             ConfigureCrossOriginResourceSharing(services);
             services.AddSignalR();
+
+            // Http Clients
+            services.AddHttpClient("openaq", client => ***REMOVED***
+                client.BaseAddress = new Uri("https://api.openaq.org/v1/latest");
+           ***REMOVED***);
        ***REMOVED***
 
         // MongoDB Configurations
@@ -116,6 +121,9 @@ namespace AirQi
                 app.UseDeveloperExceptionPage();
            ***REMOVED***
 
+            // SignalR
+            app.UseCors("CrosPolicy");
+
             app.UseHttpsRedirection();
 
             app.UseRouting();
@@ -135,9 +143,6 @@ namespace AirQi
             ***REMOVED***
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
            ***REMOVED***);
-
-            // SignalR
-            app.UseCors("CrosPolicy");
 
             // Hangfire
             app.UseHangfireDashboard();

@@ -2,10 +2,10 @@ using System;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace AirQi.Models
+namespace AirQi.Models.Core
 ***REMOVED***
     [BsonIgnoreExtraElements]
-    public class Measurement
+    public class Measurement : Document
     ***REMOVED***
         [BsonElement]
         public string Parameter ***REMOVED*** get; set;***REMOVED***

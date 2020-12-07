@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using AirQi.Models;
+using AirQi.Models.Core;
 using AirQi.Repository;
 using AirQi.Settings;
 using Microsoft.AspNetCore.Mvc;

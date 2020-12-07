@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-    <UserSecretsId>0ba53d0a-3f3d-43c5-88cd-d69832399fe8</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
   </PropertyGroup>
@@ -50,6 +49,9 @@
     
     <!-- Swagger dotnet core -->
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+
+    <!-- Http Json -->
+    <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
   </ItemGroup>
 
 

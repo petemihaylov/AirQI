@@ -1,4 +1,4 @@
-using AirQi.Models;
+using AirQi.Models.Core;
 using System;
 using MongoDB.Bson;
 using System.Collections.Generic;

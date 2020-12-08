@@ -3,5 +3,7 @@ namespace AirQi.Settings
     public interface IWorkerSettings
     ***REMOVED***
         string OcpApimSubscriptionKey ***REMOVED*** get; set;***REMOVED***
+
+        string AqicnSubscriptionKey ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

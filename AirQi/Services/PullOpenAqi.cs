@@ -7,6 +7,8 @@ using AirQi.Models.Core;
 using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
+using Microsoft.VisualBasic;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace AirQi
@@ -33,40 +35,38 @@ namespace AirQi
             // Throws an Exception if the HttpResponseMessage.IsSuccessStatusCode property for HTTP response is 'false'. 
             response.EnsureSuccessStatusCode();
 
-            string responseBody = await response.Content.ReadAsStringAsync();
-
-            JObject json = JObject.Parse(responseBody);
+            string result = await response.Content.ReadAsStringAsync();
             
-            foreach (JObject s in json.SelectToken("results"))
+            dynamic json = JsonConvert.DeserializeObject(result);
+            
+            foreach (var s in json.results)
             {
                 Station station = new Station();
-                station.Location = s.SelectToken("location").Value<string>();
-                station.City = s.SelectToken("city").Value<string>();
-                station.Country = s.SelectToken("country").Value<string>();
-
-                var measurements = s.SelectToken("measurements");
+                station.Location = s.location.ToString();
+                station.City = s.city.ToString();
+                station.Country = s.country.ToString();
 
                 List<Measurement> measurementsCollection = new List<Measurement>();
 
-                foreach(JObject m in measurements)
+                foreach(var m in s.measurements)
                 {
                     Measurement measurement = new Measurement();
-                    measurement.Parameter = m.SelectToken("parameter").Value<string>();
-                    measurement.Value = m.SelectToken("value").Value<double>();
-                    measurement.LastUpdated = m.SelectToken("lastUpdated").Value<DateTime>();
-                    measurement.Unit = m.SelectToken("unit").Value<string>();
-                    measurement.SourceName = m.SelectToken("sourceName").Value<string>();
+                    measurement.Parameter = m.parameter.ToString();
+                    measurement.Value = double.Parse(m.value);
+                    measurement.LastUpdated = DateTime.Parse(m.lastUpdated);
+                    measurement.Unit = m.unit.ToString();
+                    measurement.SourceName = m.sourceName.ToString();
 
                     measurementsCollection.Add(measurement);
                 }
 
                 station.Measurements = measurementsCollection;
 
-                if (s.SelectToken("coordinates") != null)
+                if (s.coordinates != null)
                 {
                     Coordinates coordinates = new Coordinates();
-                    coordinates.Latitude = s.SelectToken("coordinates").SelectToken("latitude").Value<double>();
-                    coordinates.Longitude = s.SelectToken("coordinates").SelectToken("longitude").Value<double>();
+                    coordinates.Latitude = double.Parse(s.coordinates.latitude);
+                    coordinates.Longitude = double.Parse(s.coordinates.longitude);
 
                     station.Coordinates = coordinates;
                     station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;

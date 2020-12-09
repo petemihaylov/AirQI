@@ -1,13 +1,20 @@
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
+using System.Globalization;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using AirQi.Models.Core;
 using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
+using Microsoft.CSharp.RuntimeBinder;
+using MongoDB.Bson;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -62,47 +69,84 @@ namespace AirQi
 
             dynamic json = JsonConvert.DeserializeObject(result);
 
-            if(json.status.ToString() == "ok")
+            if (json.status.ToString() == "ok")
             ***REMOVED***
                 var data = json.data;
-
                 
+                // Station
                 Station station = new Station();
-                station.Location = data.city.name.ToString();
-                station.City = data.city.name.ToString();
+                station.Location = Convert.ToString(data.city.name);
+                station.City = Convert.ToString(data.city.name);
                 station.Country = country;
 
-                var measurements = json.data.iaqi;
+                Coordinates coordinates = new Coordinates();
+                
+                NumberFormatInfo provider = new NumberFormatInfo();
+                provider.NumberDecimalSeparator = ",";
+                
+                coordinates.Latitude = Convert.ToDouble(data.city.geo[0], provider);
+                coordinates.Longitude = Convert.ToDouble(data.city.geo[1], provider);
+                station.Coordinates = coordinates;
+                station.CreatedAt = DateTime.UtcNow;
+                station.UpdatedAt = DateTime.UtcNow;
 
+                // Measurements
                 List<Measurement> measurementsCollection = new List<Measurement>();
 
-                foreach(var m in measurements)
-                ***REMOVED***
-                    System.Console.WriteLine(m.v);
-                    Measurement measurement = new Measurement();
-                    measurement.Parameter = m.ToString();
-                    measurement.Value = double.Parse(m.v);
-                    measurement.LastUpdated = DateTime.Parse(data.time.iso);
-                    measurement.Unit = "µg/m³";
-                    measurement.SourceName = data.attributions.name.ToString();
+                var measurements = data.iaqi;
 
+                foreach (var m in measurements)
+                ***REMOVED***
+                    Measurement measurement = new Measurement();
+                    measurement.LastUpdated = DateTime.UtcNow;
+                    measurement.Unit = "µg/m³";
+                    
+                    string aqi = data.aqi.ToString();
+                    measurement.Aqi = aqi.Contains("-") ? 0 : double.Parse(aqi);
+
+                    measurement.SourceName = Convert.ToString(data.attributions[0].name);
+
+                    string obj = GetType(m);
+
+                    measurement.Parameter = obj;
+                    measurement.Value = Convert.ToDouble(measurements[obj].v);
+                    measurement.Coordinates = coordinates;
+                    measurement.CreatedAt = DateTime.UtcNow;
+                    measurement.UpdatedAt = DateTime.UtcNow;
+                
                     measurementsCollection.Add(measurement);
                ***REMOVED***
 
                 station.Measurements = measurementsCollection;
 
-                Coordinates coordinates = new Coordinates();
-                coordinates.Latitude = double.Parse(data.city.geo.First());
-                coordinates.Longitude = double.Parse(data.city.geo.Last());
-
-                station.Coordinates = coordinates;
-                station.CreatedAt = DateTime.Parse(data.time.iso);
-                station.UpdatedAt = DateTime.UtcNow;
-
                 // Save the new Station in the repository only when there is a location
                 System.Console.WriteLine($"Aqicn saved ***REMOVED***station.Location***REMOVED*** station in ***REMOVED***station.City***REMOVED***, ***REMOVED***station.Country***REMOVED***");
-                // Repository.CreateObject(station);
+                Repository.CreateObject(station);
            ***REMOVED***
        ***REMOVED***
+
+        private static bool HasProperty(dynamic obj, string name)
+        ***REMOVED***
+            try
+            ***REMOVED***
+                var value = obj[name];
+                return true;
+           ***REMOVED***
+            catch (RuntimeBinderException)
+            ***REMOVED***
+                return false;
+           ***REMOVED***
+       ***REMOVED***
+
+        private static string GetType(Object obj)
+        ***REMOVED***
+            Type myType = obj.GetType();
+            IList<PropertyInfo> prop = new List<PropertyInfo>(myType.GetProperties());
+                   
+            return prop[0].GetValue(obj, null).ToString();
+       ***REMOVED***
+
+
    ***REMOVED***
+    
 ***REMOVED***

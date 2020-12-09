@@ -7,6 +7,9 @@ namespace AirQi.Dtos
     public class MeasurementCreateDto
     ***REMOVED***
         [Required]
+        public double  Aqi ***REMOVED*** get; set;***REMOVED***
+
+        [Required]
         public string Parameter ***REMOVED*** get; set;***REMOVED***
 
         [Required]

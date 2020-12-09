@@ -6,6 +6,9 @@ namespace AirQi.Dtos
 ***REMOVED***
     public class MeasurementReadDto
     ***REMOVED***
+        
+        public double  Aqi ***REMOVED*** get; set;***REMOVED***
+        
         public string Parameter ***REMOVED*** get; set;***REMOVED***
 
         public double  Value ***REMOVED*** get; set;***REMOVED***

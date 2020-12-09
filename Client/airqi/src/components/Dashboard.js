@@ -7,7 +7,7 @@ export default function Dashboard() ***REMOVED***
     useEffect(() => ***REMOVED***
         fetchStationsData()
             .then(json => ***REMOVED***
-                setStationData(json);
+                setStationData(json.data);
            ***REMOVED***)
             .catch(err => ***REMOVED***
                 console.error(err.message);
@@ -17,10 +17,10 @@ export default function Dashboard() ***REMOVED***
 
     return (
         <div>
-            ***REMOVED***stations && stations.map((value, idx) => ***REMOVED*** 
+            ***REMOVED***stations && stations.map(function(station, index)***REMOVED*** 
                 return (
                     <div>
-                     
+                        ***REMOVED***index***REMOVED***. Aqicn saved ***REMOVED***station.location***REMOVED***
                     </div>
                 )
            ***REMOVED***)***REMOVED***

@@ -6,6 +6,9 @@ namespace AirQi.Dtos
 {
     public class MeasurementReadDto
     {
+        
+        public double  Aqi { get; set; }
+        
         public string Parameter { get; set; }
 
         public double  Value { get; set; }

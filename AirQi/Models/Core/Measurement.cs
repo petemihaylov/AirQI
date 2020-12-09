@@ -8,6 +8,9 @@ namespace AirQi.Models.Core
     public class Measurement : Document
     {
         [BsonElement]
+        public double  Aqi { get; set; }
+
+        [BsonElement]
         public string Parameter { get; set; }
 
         [BsonElement]

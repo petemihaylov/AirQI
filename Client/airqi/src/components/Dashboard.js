@@ -7,7 +7,7 @@ export default function Dashboard() {
     useEffect(() => {
         fetchStationsData()
             .then(json => {
-                setStationData(json);
+                setStationData(json.data);
             })
             .catch(err => {
                 console.error(err.message);
@@ -17,10 +17,10 @@ export default function Dashboard() {
 
     return (
         <div>
-            {stations && stations.map((value, idx) => { 
+            {stations && stations.map(function(station, index){ 
                 return (
                     <div>
-                     
+                        {index}. Aqicn saved {station.location}
                     </div>
                 )
             })}

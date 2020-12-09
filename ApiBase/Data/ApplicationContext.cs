@@ -20,5 +20,6 @@ namespace ApiBase.Data
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

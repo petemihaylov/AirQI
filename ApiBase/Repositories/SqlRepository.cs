@@ -15,12 +15,7 @@ namespace ApiBase.Data
         {
             this._context = context;
         }
-
-        public async Task<bool> SaveChangesAsync()
-        {
-            return (_context.SaveChangesAsync().GetAwaiter().GetResult() >= 0);
-        }
-
+  
         public async Task<IEnumerable<T>> GetAllAsync<T>() where T : BaseEntity
         {
             return await _context.Set<T>().ToListAsync();
@@ -34,20 +29,20 @@ namespace ApiBase.Data
         public async Task<T> AddAsync<T>(T entity) where T : BaseEntity
         {
             await _context.Set<T>().AddAsync(entity);
-            await SaveChangesAsync();
+            await _context.SaveChangesAsync();
             return entity;
         }
 
         public async Task UpdateAsync<T>(T entity) where T : BaseEntity
         {
             _context.Entry(entity).State = EntityState.Modified;
-            await this.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public async Task DeleteAsync<T>(T entity) where T : BaseEntity
         {
-            _context.Set<T>().Remove(entity);
-            await _context.SaveChangesAsync();
+            _context.Set<T>().Remove(entity); 
+            _context.SaveChanges();
         }
 
         public bool Exists<T>(T entity) where T : BaseEntity

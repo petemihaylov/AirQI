@@ -11,6 +11,8 @@ namespace AirQi.Dtos
     {
         public string Id { get; set; }
 
+        public double  Aqi { get; set; }
+        
         public string Location { get; set; }
 
         public string City { get; set; }

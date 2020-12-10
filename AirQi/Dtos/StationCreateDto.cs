@@ -8,6 +8,9 @@ namespace AirQi.Dtos
     public class StationCreateDto
     {
         [Required]
+        public double  Aqi { get; set; }
+
+        [Required]
         public string Location { get; set; }
 
         [Required]

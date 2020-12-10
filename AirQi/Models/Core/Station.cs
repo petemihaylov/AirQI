@@ -10,6 +10,8 @@ namespace AirQi.Models.Core
     [BsonCollection("stations")]
     public class Station : Document
     {
+        [BsonElement]
+        public double  Aqi { get; set; }
                     
         [BsonElement]
         public string Location { get; set; }

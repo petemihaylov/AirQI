@@ -79,13 +79,16 @@ namespace AirQi
                 station.City = Convert.ToString(data.city.name);
                 station.Country = country;
 
-                Coordinates coordinates = new Coordinates();
-                
+                string aqi = data.aqi.ToString();
+                station.Aqi = aqi.Contains("-") ? 0 : double.Parse(aqi);
+
+                Coordinates coordinates = new Coordinates();                
                 NumberFormatInfo provider = new NumberFormatInfo();
                 provider.NumberDecimalSeparator = ",";
                 
                 coordinates.Latitude = Convert.ToDouble(data.city.geo[0], provider);
                 coordinates.Longitude = Convert.ToDouble(data.city.geo[1], provider);
+
                 station.Coordinates = coordinates;
                 station.CreatedAt = DateTime.UtcNow;
                 station.UpdatedAt = DateTime.UtcNow;
@@ -98,11 +101,8 @@ namespace AirQi
                 foreach (var m in measurements)
                 {
                     Measurement measurement = new Measurement();
-                    measurement.LastUpdated = DateTime.UtcNow;
+                    measurement.LastUpdated = Convert.ToString(data.time.iso);
                     measurement.Unit = "µg/m³";
-                    
-                    string aqi = data.aqi.ToString();
-                    measurement.Aqi = aqi.Contains("-") ? 0 : double.Parse(aqi);
 
                     measurement.SourceName = Convert.ToString(data.attributions[0].name);
 

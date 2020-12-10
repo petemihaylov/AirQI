@@ -49,11 +49,6 @@ namespace AirQi
             // SignalR
             ConfigureCrossOriginResourceSharing(services);
             services.AddSignalR();
-
-            // Http Clients
-            services.AddHttpClient("openaq", client => {
-                client.BaseAddress = new Uri("https://api.openaq.org/v1/latest");
-            });
         }
 
         // MongoDB Configurations
@@ -83,10 +78,6 @@ namespace AirQi
             {
                 options.AddPolicy("CrosPolicy", policy =>
                 {
-                    // policy.AllowAnyHeader()
-                    //     .AllowAnyMethod()
-                    //     .WithOrigins("http://localhost:3000")
-                    //     .AllowCredentials();
 
                     policy.SetIsOriginAllowed(origin => true)
                         .AllowAnyHeader()

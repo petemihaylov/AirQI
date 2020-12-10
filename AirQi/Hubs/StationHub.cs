@@ -1,14 +1,15 @@
 ﻿using System.Threading.Tasks;
+using AirQi.Hubs;
 using AirQi.Models.Core;
 using Microsoft.AspNetCore.SignalR;
 
 namespace AssetNXT.Hubs
 {
-    public class StationHub : Hub
+    public class StationHub : Hub, IStationClient
     {
-        public Task ReceiveStation(Station value)
+        public Task ReceiveStation(Station station)
         {
-            return Clients.All.SendAsync("GetNewStations", value);
+            return Clients.All.SendAsync("GetNewStations", station);
         }
     }
 }

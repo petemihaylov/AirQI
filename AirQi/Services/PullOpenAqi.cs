@@ -41,35 +41,51 @@ namespace AirQi
             
             foreach (var s in json.results)
             ***REMOVED***
+
+                if (s.coordinates != null)
+                ***REMOVED***
+                
                 Station station = new Station();
                 station.Location = s.location.ToString();
                 station.City = s.city.ToString();
                 station.Country = s.country.ToString();
+                
+                Coordinates coordinates = new Coordinates();
+                coordinates.Latitude = Convert.ToDouble(s.coordinates.latitude);
+                coordinates.Longitude = Convert.ToDouble(s.coordinates.longitude);
+                station.Coordinates = coordinates;
+                station.CreatedAt = DateTime.UtcNow;
+                station.UpdatedAt = DateTime.UtcNow;
+                station.Aqi = 0;
 
-                List<Measurement> measurementsCollection = new List<Measurement>();
+                    List<Measurement> measurementsCollection = new List<Measurement>();
 
-                foreach(var m in s.measurements)
-                ***REMOVED***
-                    Measurement measurement = new Measurement();
-                    measurement.Parameter = m.parameter.ToString();
-                    measurement.Value = double.Parse(m.value);
-                    measurement.LastUpdated = DateTime.Parse(m.lastUpdated);
-                    measurement.Unit = m.unit.ToString();
-                    measurement.SourceName = m.sourceName.ToString();
+                    foreach(var m in s.measurements)
+                    ***REMOVED***
+                        Measurement measurement = new Measurement();
+                        measurement.Parameter = Convert.ToString(m.parameter);
+                        measurement.Value = Convert.ToDouble(m.value);
+                        measurement.LastUpdated = Convert.ToString(m.lastUpdated);
+                        measurement.Unit = Convert.ToString(m.unit);
+                        measurement.SourceName = Convert.ToString(m.sourceName);
 
-                    measurementsCollection.Add(measurement);
-               ***REMOVED***
+                        measurement.Coordinates = coordinates;
+                        measurement.CreatedAt = DateTime.UtcNow;
+                        measurement.UpdatedAt = DateTime.UtcNow;
 
-                station.Measurements = measurementsCollection;
+                        if(Convert.ToString(m.parameter) == "pm10")
+                        ***REMOVED***
+                            station.Aqi = Convert.ToDouble(m.value);
+                       ***REMOVED*** 
+                        else if(Convert.ToString(m.parameter) == "pm25" && station.Aqi == 0)
+                        ***REMOVED***
+                            station.Aqi = Convert.ToDouble(m.value);
+                       ***REMOVED***
 
-                if (s.coordinates != null)
-                ***REMOVED***
-                    Coordinates coordinates = new Coordinates();
-                    coordinates.Latitude = double.Parse(s.coordinates.latitude);
-                    coordinates.Longitude = double.Parse(s.coordinates.longitude);
+                        measurementsCollection.Add(measurement);
+                   ***REMOVED***
 
-                    station.Coordinates = coordinates;
-                    station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;
+                    station.Measurements = measurementsCollection;
                     
                     // Save the new Station in the repository only when there is a location
                     System.Console.WriteLine($"OpenAqi saved ***REMOVED***station.Location***REMOVED*** station in ***REMOVED***station.City***REMOVED***, ***REMOVED***station.Country***REMOVED***");

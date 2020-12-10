@@ -6,8 +6,6 @@ namespace AirQi.Dtos
 ***REMOVED***
     public class MeasurementCreateDto
     ***REMOVED***
-        [Required]
-        public double  Aqi ***REMOVED*** get; set;***REMOVED***
 
         [Required]
         public string Parameter ***REMOVED*** get; set;***REMOVED***
@@ -16,7 +14,7 @@ namespace AirQi.Dtos
         public double  Value ***REMOVED*** get; set;***REMOVED***
 
         [Required]
-        public DateTime LastUpdated ***REMOVED*** get; set;***REMOVED***
+        public string LastUpdated ***REMOVED*** get; set;***REMOVED***
 
         [Required]
         public string Unit ***REMOVED*** get; set;***REMOVED***

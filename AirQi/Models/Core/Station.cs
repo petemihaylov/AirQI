@@ -10,6 +10,8 @@ namespace AirQi.Models.Core
     [BsonCollection("stations")]
     public class Station : Document
     ***REMOVED***
+        [BsonElement]
+        public double  Aqi ***REMOVED*** get; set;***REMOVED***
                     
         [BsonElement]
         public string Location ***REMOVED*** get; set;***REMOVED***

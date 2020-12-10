@@ -21,7 +21,7 @@ namespace AirQi.Controllers
     ***REMOVED***
         private readonly IMongoDataRepository<Station> _repository;
         private readonly IMapper _mapper;
-        public readonly IHubContext<StationHub> _hub;
+        private readonly IHubContext<StationHub> _hub;
         public StationsController(IMongoDataRepository<Station> repository, IMapper mapper, IHubContext<StationHub> hub)
         ***REMOVED***
             _repository = repository;

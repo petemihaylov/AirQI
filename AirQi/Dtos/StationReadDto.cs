@@ -11,6 +11,8 @@ namespace AirQi.Dtos
     ***REMOVED***
         public string Id ***REMOVED*** get; set;***REMOVED***
 
+        public double  Aqi ***REMOVED*** get; set;***REMOVED***
+        
         public string Location ***REMOVED*** get; set;***REMOVED***
 
         public string City ***REMOVED*** get; set;***REMOVED***

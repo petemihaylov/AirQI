@@ -7,13 +7,11 @@ namespace AirQi.Dtos
     public class MeasurementReadDto
     ***REMOVED***
         
-        public double  Aqi ***REMOVED*** get; set;***REMOVED***
-        
         public string Parameter ***REMOVED*** get; set;***REMOVED***
 
         public double  Value ***REMOVED*** get; set;***REMOVED***
 
-        public DateTime LastUpdated ***REMOVED*** get; set;***REMOVED***
+        public string LastUpdated ***REMOVED*** get; set;***REMOVED***
 
         public string Unit ***REMOVED*** get; set;***REMOVED***
                 

@@ -7,8 +7,6 @@ namespace AirQi.Models.Core
     [BsonIgnoreExtraElements]
     public class Measurement : Document
     ***REMOVED***
-        [BsonElement]
-        public double  Aqi ***REMOVED*** get; set;***REMOVED***
 
         [BsonElement]
         public string Parameter ***REMOVED*** get; set;***REMOVED***
@@ -17,7 +15,7 @@ namespace AirQi.Models.Core
         public double  Value ***REMOVED*** get; set;***REMOVED***
 
         [BsonElement]
-        public DateTime LastUpdated ***REMOVED*** get; set;***REMOVED***
+        public string LastUpdated ***REMOVED*** get; set;***REMOVED***
 
         [BsonElement]
         public string Unit ***REMOVED*** get; set;***REMOVED***

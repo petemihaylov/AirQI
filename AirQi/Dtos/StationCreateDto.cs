@@ -8,6 +8,9 @@ namespace AirQi.Dtos
     public class StationCreateDto
     ***REMOVED***
         [Required]
+        public double  Aqi ***REMOVED*** get; set;***REMOVED***
+
+        [Required]
         public string Location ***REMOVED*** get; set;***REMOVED***
 
         [Required]

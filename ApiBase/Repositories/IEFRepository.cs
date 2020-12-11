@@ -6,7 +6,6 @@ namespace ApiBase.Data
 {
     public interface IEFRepository
     {
-        Task<bool> SaveChangesAsync();
         Task<IEnumerable<T>> GetAllAsync<T>() where T: BaseEntity;
         Task<T> GetByIdAsync<T>(int id) where T: BaseEntity;
         Task<T> AddAsync<T>(T entity) where T: BaseEntity;

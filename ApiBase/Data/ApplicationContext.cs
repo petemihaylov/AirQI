@@ -1,4 +1,3 @@
-using System.Linq;
 using ApiBase.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,5 +20,6 @@ namespace ApiBase.Data
 
             base.OnModelCreating(modelBuilder);
         }
+
     }
 }

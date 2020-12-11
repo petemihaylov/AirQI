@@ -8,7 +8,7 @@ import { BubbleButton } from "../../assets/js/button/bubble";
 
 const Login = (props: any) => {
   const { isLoggedIn, message } = props;
-  
+
   const { register, handleSubmit, errors } = useForm();
   const [loading, handleChange] = useState(false);
 
@@ -72,7 +72,10 @@ const Login = (props: any) => {
                 )}
               </div>
 
-              <div className="form-group" style={{ marginTop: "35px", marginBottom: "100px" }}>
+              <div
+                className="form-group"
+                style={{ marginTop: "35px", marginBottom: "100px" }}
+              >
                 <BubbleButton name={"Login"} disabled={loading}>
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>

@@ -1,10 +1,11 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ApiBase.Models
+namespace ApiBase.AcceptanceTests.Models
 ***REMOVED***
-    public class User : BaseEntity
+    public class User 
     ***REMOVED***
+        public int Id ***REMOVED*** get; set;***REMOVED***
+
         [Required]
         public string Username ***REMOVED*** get; set;***REMOVED***
 

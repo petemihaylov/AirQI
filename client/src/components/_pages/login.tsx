@@ -8,7 +8,7 @@ import ***REMOVED*** BubbleButton***REMOVED*** from "../../assets/js/button/bubb
 
 const Login = (props: any) => ***REMOVED***
   const ***REMOVED*** isLoggedIn, message***REMOVED*** = props;
-  
+
   const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm();
   const [loading, handleChange] = useState(false);
 
@@ -72,7 +72,10 @@ const Login = (props: any) => ***REMOVED***
                 )***REMOVED***
               </div>
 
-              <div className="form-group" style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***>
+              <div
+                className="form-group"
+                style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***
+              >
                 <BubbleButton name=***REMOVED***"Login"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
                   ***REMOVED***loading && (
                     <span className="spinner-border spinner-border-sm"></span>

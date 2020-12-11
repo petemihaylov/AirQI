@@ -1,0 +1,153 @@
+.button ***REMOVED***
+  -webkit-font-smoothing: antialiased;
+  background-color: #222;
+  border: none;
+  color: #fff;
+  display: inline-block;
+  font-family: "Montserrat", sans-serif;
+  font-size: 12px;
+  font-weight: 100;
+  text-decoration: none;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  letter-spacing: 1px;
+  color: white;
+  min-width: 280px;
+  padding: 13px 10px;
+  text-transform: uppercase;
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+***REMOVED***
+
+.button:hover ***REMOVED***
+  background-color: #222;
+  color: #fff;
+***REMOVED***
+
+.button:active ***REMOVED***
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+***REMOVED***
+
+.button--bubble ***REMOVED***
+  position: relative;
+  z-index: 2;
+  color: white;
+  background: none;
+***REMOVED***
+
+.button--bubble:hover ***REMOVED***
+  background: none;
+  text-decoration: none;
+***REMOVED***
+
+.button--bubble:hover + .button--bubble__effect-container .circle ***REMOVED***
+  background: black;
+***REMOVED***
+
+.button--bubble:hover + .button--bubble__effect-container .button ***REMOVED***
+  background: black;
+***REMOVED***
+
+.button--bubble:active + .button--bubble__effect-container ***REMOVED***
+  -webkit-transform: scale(0.95);
+          transform: scale(0.95);
+***REMOVED***
+
+.button--bubble__container ***REMOVED***
+  position: relative;
+  display: inline-block;
+***REMOVED***
+
+.button--bubble__container .effect-button ***REMOVED***
+  position: absolute;
+  width: 50%;
+  height: 25%;
+  top: 50%;
+  left: 25%;
+  z-index: 1;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  background: #222;
+  -webkit-transition: background 0.1s ease-out;
+  transition: background 0.1s ease-out;
+***REMOVED***
+
+.button--bubble__effect-container ***REMOVED***
+  position: absolute;
+  display: block;
+  width: 200%;
+  height: 400%;
+  top: -150%;
+  left: -50%;
+  -webkit-filter: url("#goo");
+  filter: url("#goo");
+  -webkit-transition: all 0.1s ease-out;
+  transition: all 0.1s ease-out;
+  pointer-events: none;
+***REMOVED***
+
+.button--bubble__effect-container .circle ***REMOVED***
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  background: #222;
+  -webkit-transition: background 0.1s ease-out;
+  transition: background 0.1s ease-out;
+***REMOVED***
+
+.button--bubble__effect-container .circle.top-left ***REMOVED***
+  top: 40%;
+  left: 27%;
+***REMOVED***
+
+.button--bubble__effect-container .circle.bottom-right ***REMOVED***
+  bottom: 40%;
+  right: 27%;
+***REMOVED***
+
+.goo ***REMOVED***
+  position: absolute;
+  visibility: hidden;
+  width: 1px;
+  height: 1px;
+***REMOVED***
+
+.button--bubble__container ***REMOVED***
+  top: 50%;
+  margin-top: -25px;
+***REMOVED***
+
+@-webkit-keyframes hue-rotate ***REMOVED***
+  from ***REMOVED***
+    -webkit-filter: hue-rotate(0);
+    -moz-filter: hue-rotate(0);
+    -ms-filter: hue-rotate(0);
+    filter: hue-rotate(0);
+ ***REMOVED***
+  to ***REMOVED***
+    -webkit-filter: hue-rotate(360deg);
+    -moz-filter: hue-rotate(360deg);
+    -ms-filter: hue-rotate(360deg);
+    filter: hue-rotate(360deg);
+ ***REMOVED***
+***REMOVED***
+
+@keyframes hue-rotate ***REMOVED***
+  from ***REMOVED***
+    -webkit-filter: hue-rotate(0);
+    -moz-filter: hue-rotate(0);
+    -ms-filter: hue-rotate(0);
+    filter: hue-rotate(0);
+ ***REMOVED***
+  to ***REMOVED***
+    -webkit-filter: hue-rotate(360deg);
+    -moz-filter: hue-rotate(360deg);
+    -ms-filter: hue-rotate(360deg);
+    filter: hue-rotate(360deg);
+ ***REMOVED***
+***REMOVED***
+/*# sourceMappingURL=style.css.map */

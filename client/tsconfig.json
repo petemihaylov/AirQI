@@ -20,7 +20,12 @@
     "noEmit": true,
     "jsx": "react"
  ***REMOVED***,
+  "paths": ***REMOVED***
+    "components/*": [
+      "src/components/*"
+    ]
+ ***REMOVED***,
   "include": [
-    "src"
+    "src",
   ]
 ***REMOVED***

@@ -6,14 +6,14 @@ stages:
   - test
 
 core:
-  stage: Base API
+  stage: core
 
   script:
     - "cd Core/ApiBase"
     - "dotnet build"
 
 data:
-  stage: Data API
+  stage: data
 
   script:
     - "cd Data/AirQi"

@@ -1,0 +1,35 @@
+$text-color: #222525;
+$secondary-color: #333ba7;
+$button-color: #4947a3;
+$background-color: #f7f8fa;
+
+.welcome {
+  min-height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .row {
+    width: 90vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .col {
+      .title {
+        font-weight: bold;
+        color: $button-color;
+        opacity: 0.6;
+        font-size: 3rem;
+      }
+      .sub {
+        margin-top: 3vh;
+        font-size: 1rem;
+      }
+      .btn {
+        margin-top: 5vh;
+        padding: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+html,
+body ***REMOVED***
+  height: 100%;
+***REMOVED***
+
+body ***REMOVED***
+  background: white;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+***REMOVED***
+
+.loader ***REMOVED***
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+***REMOVED***
+.loader .bar ***REMOVED***
+  width: 10px;
+  height: 5px;
+  background: black;
+  margin: 2px;
+  animation: bar 1s infinite linear;
+***REMOVED***
+.loader .bar:nth-child(1) ***REMOVED***
+  animation-delay: 0s;
+***REMOVED***
+.loader .bar:nth-child(2) ***REMOVED***
+  animation-delay: 0.25s;
+***REMOVED***
+.loader .bar:nth-child(3) ***REMOVED***
+  animation-delay: 0.5s;
+***REMOVED***
+
+@keyframes bar ***REMOVED***
+  0% ***REMOVED***
+    transform: scaleY(1) scaleX(0.5);
+ ***REMOVED***
+  50% ***REMOVED***
+    transform: scaleY(10) scaleX(1);
+ ***REMOVED***
+  100% ***REMOVED***
+    transform: scaleY(1) scaleX(0.5);
+ ***REMOVED***
+***REMOVED***

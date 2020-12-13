@@ -5,7 +5,7 @@ import Dashboard from './components/Dashboard';
 function App() ***REMOVED***
   return (
     <Router>
-        <Dashboard />
+      
         <Route exact path=***REMOVED***'/'***REMOVED*** component=***REMOVED***Dashboard***REMOVED***/> 
 
     </Router>

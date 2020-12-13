@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using AirQi.Hubs;
 using AirQi.Models.Core;
@@ -8,9 +9,9 @@ namespace AssetNXT.Hubs
 ***REMOVED***
     public class StationHub<TDocument> : Hub, IStationClient<TDocument>
     ***REMOVED***
-        public Task ReceiveStationAsync(TDocument document)
+        public Task ReceiveStationAsync(List<TDocument> documents)
         ***REMOVED***
-            return Clients.All.SendAsync("GetNewStations", document);
+            return Clients.All.SendAsync("GetNewStations", documents);
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

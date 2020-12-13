@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>

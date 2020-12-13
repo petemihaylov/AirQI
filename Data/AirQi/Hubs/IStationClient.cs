@@ -3,8 +3,8 @@ using AirQi.Models.Core;
 
 namespace AirQi.Hubs
 ***REMOVED***
-    public interface IStationClient
+    public interface IStationClient<TDocument>
     ***REMOVED***
-        Task ReceiveStation(Station value);
+        Task ReceiveStationAsync(TDocument document);
    ***REMOVED***
 ***REMOVED***

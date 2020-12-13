@@ -35,6 +35,7 @@ export default function Dashboard() ***REMOVED***
                 console.log("Connected!");
 
                 connection.on("GetNewStations", (station) => ***REMOVED***
+                    console.log(station);
                 setStationData([station]);
                ***REMOVED***);
            ***REMOVED***)
@@ -46,7 +47,7 @@ export default function Dashboard() ***REMOVED***
         <div>
             ***REMOVED***stations && stations.map(function(station, index)***REMOVED*** 
                 return (
-                    <div>
+                    <div key=***REMOVED***index***REMOVED***>
                         ***REMOVED***index***REMOVED***. Aqicn saved ***REMOVED***station.location***REMOVED***
                     </div>
                 )

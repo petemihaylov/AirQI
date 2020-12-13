@@ -32,7 +32,7 @@ namespace AirQi.Controllers
         public async Task<IActionResult> GetAllStations()
         {
             var stations =  await _repository.GetAllLatestAsync();
-            stations = stations.ToList().FindAll(station => station.Country == "US").ToList();
+            // stations = stations.ToList().FindAll(station => station.Country == "US").ToList();
 
             if(stations != null){
                 return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stations));

@@ -89,7 +89,7 @@ namespace AirQi
                     
                     // Save the new Station in the repository only when there is a location
                     System.Console.WriteLine($"OpenAqi saved ***REMOVED***station.Location***REMOVED*** station in ***REMOVED***station.City***REMOVED***, ***REMOVED***station.Country***REMOVED***");
-                    Repository.CreateObject(station);
+                    await Repository.CreateObjectAsync(station);
                ***REMOVED***
 
            ***REMOVED***

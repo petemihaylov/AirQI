@@ -8,15 +8,20 @@ using System.Threading.Tasks;
 using System.Linq.Expressions;
 using System;
 using MongoDB.Bson;
+using Microsoft.AspNetCore.SignalR;
+using AssetNXT.Hubs;
 
 namespace AirQi.Repository
 ***REMOVED***
     public class MongoDataRepository<TDocument> : IMongoDataRepository<TDocument> where TDocument : IDocument
     ***REMOVED***
         private readonly IMongoCollection<TDocument> _collection;
+      
+        private readonly IHubContext<StationHub<TDocument>> _hub;
 
-        public MongoDataRepository(IMongoDbSettings settings)
+        public MongoDataRepository(IMongoDbSettings settings, IHubContext<StationHub<TDocument>> hub)
         ***REMOVED***
+            _hub = hub;
             var client = new MongoClient(settings.ConnectionString);
             var database = client.GetDatabase(settings.DatabaseName);
 
@@ -75,6 +80,8 @@ namespace AirQi.Repository
         // Creates a record from the model Async.
         public async Task CreateObjectAsync(TDocument document)
         ***REMOVED***
+            // SignalR event
+            await _hub.Clients.All.SendAsync("GetNewStations", document);
             await _collection.InsertOneAsync(document);
        ***REMOVED***
 

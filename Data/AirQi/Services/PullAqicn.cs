@@ -121,7 +121,7 @@ namespace AirQi
 
                 // Save the new Station in the repository only when there is a location
                 System.Console.WriteLine($"Aqicn saved {station.Location} station in {station.City}, {station.Country}");
-                Repository.CreateObject(station);
+                await Repository.CreateObjectAsync(station);
             }
         }
 

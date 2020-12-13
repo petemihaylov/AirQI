@@ -21,12 +21,10 @@ namespace AirQi.Controllers
     {
         private readonly IMongoDataRepository<Station> _repository;
         private readonly IMapper _mapper;
-        private readonly IHubContext<StationHub> _hub;
-        public StationsController(IMongoDataRepository<Station> repository, IMapper mapper, IHubContext<StationHub> hub)
+        public StationsController(IMongoDataRepository<Station> repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-            _hub = hub;
         }
 
        [HttpGet]
@@ -63,9 +61,6 @@ namespace AirQi.Controllers
             {
                 station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;
                 await _repository.CreateObjectAsync(station);
-
-                // SignalR event
-                await _hub.Clients.All.SendAsync("GetNewStations", station);
 
                 var stationReadDto = _mapper.Map<StationReadDto>(station);
 

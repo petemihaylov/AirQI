@@ -35,6 +35,7 @@ export default function Dashboard() {
                 console.log("Connected!");
 
                 connection.on("GetNewStations", (station) => {
+                    console.log(station);
                 setStationData([station]);
                 });
             })
@@ -46,7 +47,7 @@ export default function Dashboard() {
         <div>
             {stations && stations.map(function(station, index){ 
                 return (
-                    <div>
+                    <div key={index}>
                         {index}. Aqicn saved {station.location}
                     </div>
                 )

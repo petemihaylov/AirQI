@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using AirQi.Models.Core;
 
 namespace AirQi.Hubs
 {
     public interface IStationClient<TDocument>
     {
-        Task ReceiveStationAsync(TDocument document);
+        Task ReceiveStationAsync(List<TDocument> documents);
     }
 }

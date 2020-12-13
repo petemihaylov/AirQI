@@ -14,6 +14,7 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Options;
 using AssetNXT.Hubs;
 using AirQi.Models.Core;
+using Hangfire.Server;
 
 namespace AirQi
 {
@@ -36,7 +37,7 @@ namespace AirQi
 
             // Scopes
             services.AddTransient(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>)); // A refference to mutiple instances
-            services.AddSingleton<IWorkerService, WorkerService>();
+            services.AddTransient<IWorkerService, WorkerService>();
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -140,6 +141,9 @@ namespace AirQi
             app.UseHangfireDashboard();
 
             // ****************************** hangfire background jobs ******************************
+
+            // this job will trigger the SignalR Hub connection to the Client every hour
+            RecurringJob.AddOrUpdate<WorkerService>("Websocket", service => service.PullDataAsync() , Cron.Hourly);
 
             // this job will fetch global data from OpenAqi every minute
             RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);

@@ -1,8 +1,8 @@
 image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 stages:
-  - core
   - data
+  - core
   - test
 
 core:

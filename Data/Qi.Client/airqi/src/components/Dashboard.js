@@ -1,10 +1,9 @@
 import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from 'react';
 import fetchStationsData from '../services/pull_stations';
-import Layout from "./Layout";
 import Loading from "./Loading";
-
 const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
+
 export default function Dashboard() ***REMOVED***
 
     const [hubConnection, setHubConnection] = useState(null);
@@ -23,6 +22,7 @@ export default function Dashboard() ***REMOVED***
                 .catch(err => ***REMOVED***
                     console.error(err.message);
                ***REMOVED***);
+            setLoading(false);
        ***REMOVED***
 
         setStationsData();
@@ -55,9 +55,10 @@ export default function Dashboard() ***REMOVED***
                     .then((result) => ***REMOVED***
                         console.log("Hub Connected!");
 
-                        hubConnection.on("GetNewStations", (stations) => ***REMOVED***
+                        hubConnection.on("GetNewStationsAsync", (stations) => ***REMOVED***
+                            console.log("NEW UPDATE");
                             console.log(stations);
-                            setStationData([stations]);
+                            setStationData(stations);
                        ***REMOVED***);
                    ***REMOVED***)
                     .catch((e) => console.log("Connection failed: ", e));
@@ -70,6 +71,15 @@ export default function Dashboard() ***REMOVED***
 
 
     // Render the information
-    return loading ? <Loading /> : <Layout collection=***REMOVED***stations***REMOVED*** />;
+    return loading ? <Loading /> :
+    <div>
+        ***REMOVED***Array.isArray(stations) && stations.length && stations.map(function (station, index) ***REMOVED***
+            return (
+                <div key=***REMOVED***index***REMOVED***>
+                    ***REMOVED***index***REMOVED***. Station: ***REMOVED***station.location***REMOVED*** Data: ***REMOVED***station.createdAt***REMOVED***
+                </div>
+            )
+       ***REMOVED***)***REMOVED***
+    </div>;
 
 ***REMOVED*** 

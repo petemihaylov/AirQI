@@ -18,11 +18,11 @@ namespace AirQi.Services
     public class WorkerService : IWorkerService
     {
         private IMongoDataRepository<Station> _repository;
-        private IHubContext<StationHub<StationReadDto>> _hub;
+        private IHubContext<StationHub> _hub;
         private IWorkerSettings _settings;
         private IMapper _mapper;
 
-        public WorkerService(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub<StationReadDto>> hub, IMapper mapper)
+        public WorkerService(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper)
         {
             this.Hub = hub;
             this.Mapper = mapper;
@@ -32,8 +32,8 @@ namespace AirQi.Services
 
         public IWorkerSettings Settings { get => _settings; set => _settings = value; }
         public IMapper Mapper { get => _mapper; set => _mapper = value; }
-        protected IMongoDataRepository<Station> Repository { get => _repository; set => _repository = value; }
-        protected IHubContext<StationHub<StationReadDto>> Hub { get => _hub; set => _hub = value; }
+        public IMongoDataRepository<Station> Repository { get => _repository; set => _repository = value; }
+        public IHubContext<StationHub> Hub { get => _hub; set => _hub = value; }
 
 
         public virtual async Task PullDataAsync()
@@ -43,7 +43,7 @@ namespace AirQi.Services
             IEnumerable<StationReadDto> stationDtos = Mapper.Map<IEnumerable<StationReadDto>>(stations);
           
             // SignalR event
-            await _hub.Clients.All.SendAsync("GetNewStations", stations);
+            await Hub.Clients.All.SendAsync("GetNewStationsAsync", stations);
             Console.WriteLine("Trigger Websocket");
 
         }

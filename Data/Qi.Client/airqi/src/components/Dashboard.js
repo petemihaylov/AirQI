@@ -1,10 +1,9 @@
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import React, { useEffect, useState } from 'react';
 import fetchStationsData from '../services/pull_stations';
-import Layout from "./Layout";
 import Loading from "./Loading";
-
 const { REACT_APP_API_URL } = process.env;
+
 export default function Dashboard() {
 
     const [hubConnection, setHubConnection] = useState(null);
@@ -23,6 +22,7 @@ export default function Dashboard() {
                 .catch(err => {
                     console.error(err.message);
                 });
+            setLoading(false);
         }
 
         setStationsData();
@@ -55,9 +55,10 @@ export default function Dashboard() {
                     .then((result) => {
                         console.log("Hub Connected!");
 
-                        hubConnection.on("GetNewStations", (stations) => {
+                        hubConnection.on("GetNewStationsAsync", (stations) => {
+                            console.log("NEW UPDATE");
                             console.log(stations);
-                            setStationData([stations]);
+                            setStationData(stations);
                         });
                     })
                     .catch((e) => console.log("Connection failed: ", e));
@@ -70,6 +71,15 @@ export default function Dashboard() {
 
 
     // Render the information
-    return loading ? <Loading /> : <Layout collection={stations} />;
+    return loading ? <Loading /> :
+    <div>
+        {Array.isArray(stations) && stations.length && stations.map(function (station, index) {
+            return (
+                <div key={index}>
+                    {index}. Station: {station.location} Data: {station.createdAt}
+                </div>
+            )
+        })}
+    </div>;
 
 } 

@@ -38,13 +38,13 @@ namespace AirQi.Repository
         // Returns all objects from the db Async.
         public async Task<IEnumerable<TDocument>> GetAllAsync()
         {
-            return await Task.FromResult(GetAll());
+            return await _collection.Find(doc => true).ToListAsync();
         }
 
         // Returns all latest objects from db based on date.
         public IEnumerable<TDocument> GetAllLatest()
         {
-            return _collection.Find(doc => true).ToList().OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new { doc.Coordinates }, (key, group) => group.First()).ToList();
+            return _collection.Find(doc => true).ToList().OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new { doc.Coordinates }, (key, group) => group.First());
         }
 
         // Returns all latest objects from db based on date Async.

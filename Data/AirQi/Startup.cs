@@ -126,7 +126,7 @@ namespace AirQi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<StationHub<Station>>("/livestations");
+                endpoints.MapHub<StationHub>("/livestations");
             });
 
             // Swagger config
@@ -146,7 +146,7 @@ namespace AirQi
             RecurringJob.AddOrUpdate<WorkerService>("Websocket", service => service.PullDataAsync() , Cron.Hourly);
 
             // this job will fetch global data from OpenAqi every minute
-            RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
+            RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Hourly);
 
             // this job will fetch world data from Aqicn once every day
             RecurringJob.AddOrUpdate<PullAqicn>("Aqicn", service => service.PullDataAsync() , Cron.Daily);
@@ -155,7 +155,7 @@ namespace AirQi
             RecurringJob.AddOrUpdate<PullSmartCitizen>("Smart-Citizen", service => service.PullDataAsync() , "*/2 * * * *");
 
             // this job will fetch data from AirThings at every 30 minutes
-            // RecurringJob.AddOrUpdate<PullAirThings>("Air-Things", service => service.PullDataAsync() , "*/30 * * * *");
+            RecurringJob.AddOrUpdate<PullAirThings>("Air-Things", service => service.PullDataAsync() , "*/30 * * * *");
         }
     }
 }

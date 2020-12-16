@@ -17,9 +17,9 @@ namespace AirQi
     {
         private HttpClient _client;
         private string url = "https://airthings.azure-api.net/api/Devices";
-        public PullAirThings(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub<StationReadDto>> hub, IMapper mapper) : base(repository, settings, hub, mapper)
+        public PullAirThings(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
         {
-            this.Hub = hub;
+            this.Hub = base.Hub;
             this.Mapper = mapper;
             this.Repository = repository;
             this.Settings = settings;

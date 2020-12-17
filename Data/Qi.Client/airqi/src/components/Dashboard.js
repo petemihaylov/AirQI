@@ -1,40 +1,32 @@
+// https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, ***REMOVED*** textFilter***REMOVED*** from 'react-bootstrap-table2-filter';
+import ToolkitProvider, ***REMOVED*** Search***REMOVED*** from 'react-bootstrap-table2-toolkit';
+//
 import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
+
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from 'react';
-import fetchStationsData from '../services/pull_stations';
-import Loading from "./Loading";
-const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
+import ***REMOVED*** Container***REMOVED*** from 'reactstrap';
+import useSwr from "swr";
+
+// Data fetching method
+const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 export default function Dashboard() ***REMOVED***
 
     const [hubConnection, setHubConnection] = useState(null);
-    const [stations, setStationData] = useState([]);
-    const [loading, setLoading] = useState(true);
-
+    
+    // Load and prepare data
+    const ***REMOVED*** data, error***REMOVED*** = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
+    const stations = (data && !error) ? data : [];
+    
     useEffect(() => ***REMOVED***
-        // Fetching data
-        const setStationsData = async () => ***REMOVED***
-            fetchStationsData()
-                .then(json => ***REMOVED***
-                    setLoading(false);
-                    console.log(json.data);
-                    setStationData(json.data);
-               ***REMOVED***)
-                .catch(err => ***REMOVED***
-                    console.error(err.message);
-               ***REMOVED***);
-            setLoading(false);
-       ***REMOVED***
-
-        setStationsData();
-   ***REMOVED***, []);
-
-    useEffect(() => ***REMOVED***
-
         // Create Hub Connection.
         const createHubConnection = async () => ***REMOVED***
 
             const hubConnect = new HubConnectionBuilder()
-            .withUrl(REACT_APP_API_URL + "livestations")
+            .withUrl(process.env.REACT_APP_API_URL + "livestations")
             .withAutomaticReconnect()
             .build();
             
@@ -54,12 +46,12 @@ export default function Dashboard() ***REMOVED***
                 await hubConnection
                     .start()
                     .then((result) => ***REMOVED***
-                        console.log("Hub Connected!");
+                        console.log("SignalR Connected!");
 
                         hubConnection.on("GetNewStationsAsync", (stations) => ***REMOVED***
-                            console.log("NEW UPDATE");
+                            console.log("New Updated Data");
                             console.log(stations);
-                            setStationData(stations);
+                            this.stations = stations;
                        ***REMOVED***);
                    ***REMOVED***)
                     .catch((e) => console.log("Connection failed: ", e));
@@ -72,15 +64,45 @@ export default function Dashboard() ***REMOVED***
 
 
     // Render the information
-    return loading ? <Loading /> :
-    <div>
-        ***REMOVED***Array.isArray(stations) && stations.length && stations.map(function (station, index) ***REMOVED***
-            return (
-                <div key=***REMOVED***index***REMOVED***>
-                    ***REMOVED***index***REMOVED***. Station: ***REMOVED***station.location***REMOVED*** Location: ***REMOVED***station.coordinates.longitude***REMOVED*** ***REMOVED***station.coordinates.latitude***REMOVED***
+    const ***REMOVED*** SearchBar***REMOVED*** = Search;
+
+    const columns = [***REMOVED***
+        dataField: 'id',
+        text: '_id',
+        sort: true
+     ***REMOVED***, ***REMOVED***
+        dataField: 'location',
+        text: 'Name',
+        sort: true
+     ***REMOVED***, ***REMOVED***
+        dataField: 'city',
+        text: 'City',
+        sort: true
+     ***REMOVED***, ***REMOVED***
+        dataField: 'country',
+        text: 'Country',
+        // filter: textFilter(),
+        sort: true
+     ***REMOVED***, ***REMOVED***
+        dataField: 'aqi',
+        text: 'Aqi',
+        sort: true
+   ***REMOVED***];
+    
+    return(
+        <Container>
+            <ToolkitProvider keyField="id" data=***REMOVED***stations***REMOVED*** columns=***REMOVED***columns***REMOVED*** search>
+            ***REMOVED***
+                props => (
+                <div>
+                    <h3>AirQi Stations Data </h3>
+                    <SearchBar ***REMOVED*** ...props.searchProps***REMOVED*** />
+                    <BootstrapTable ***REMOVED*** ...props.baseProps***REMOVED*** filter=***REMOVED***filterFactory()***REMOVED*** pagination=***REMOVED***paginationFactory()***REMOVED*** striped hover />
                 </div>
-            )
-       ***REMOVED***)***REMOVED***
-    </div>;
+                )
+           ***REMOVED***
+            </ToolkitProvider>
+        </Container>
+    );
 
 ***REMOVED*** 

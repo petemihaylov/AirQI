@@ -1,8 +1,7 @@
 /// app.js
 import useSwr from "swr";
 import React, { useState } from 'react';
-import { Container } from 'reactstrap';
-import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import ReactMapGL, { Marker } from 'react-map-gl';
 import { ReactComponent as Pin } from "../assets/media/pin-icon.svg";
 
 // Data fetching method
@@ -12,8 +11,8 @@ const fetcher = (...args) => fetch(...args).then(response => response.json());
 export default function Map() {
   // Viewport settings
   const [viewport, setViewport] = useState({
-    latitude: 51.442089,
-    longitude: 5.475200,
+    latitude: 50.8503,
+    longitude: 4.3517,
     width: "100vw",
     height: "100vh",
     zoom: 12
@@ -24,7 +23,7 @@ export default function Map() {
   const stations = (data && !error) ? data : [];
   
   return (
-    <Container>
+    <div>
       <ReactMapGL
         {...viewport}
         mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
@@ -44,7 +43,7 @@ export default function Map() {
 
       </ReactMapGL>
         
-    </Container>
+    </div>
   );
 
 }

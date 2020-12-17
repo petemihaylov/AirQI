@@ -1,40 +1,32 @@
+// https://react-bootstrap-table.github.io/react-bootstrap-table2/storybook/
+import BootstrapTable from 'react-bootstrap-table-next';
+import paginationFactory from 'react-bootstrap-table2-paginator';
+import filterFactory, { textFilter } from 'react-bootstrap-table2-filter';
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+//
 import { HubConnectionBuilder } from "@microsoft/signalr";
+
 import React, { useEffect, useState } from 'react';
-import fetchStationsData from '../services/pull_stations';
-import Loading from "./Loading";
-const { REACT_APP_API_URL } = process.env;
+import { Container } from 'reactstrap';
+import useSwr from "swr";
+
+// Data fetching method
+const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 export default function Dashboard() {
 
     const [hubConnection, setHubConnection] = useState(null);
-    const [stations, setStationData] = useState([]);
-    const [loading, setLoading] = useState(true);
-
+    
+    // Load and prepare data
+    const { data, error } = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
+    const stations = (data && !error) ? data : [];
+    
     useEffect(() => {
-        // Fetching data
-        const setStationsData = async () => {
-            fetchStationsData()
-                .then(json => {
-                    setLoading(false);
-                    console.log(json.data);
-                    setStationData(json.data);
-                })
-                .catch(err => {
-                    console.error(err.message);
-                });
-            setLoading(false);
-        }
-
-        setStationsData();
-    }, []);
-
-    useEffect(() => {
-
         // Create Hub Connection.
         const createHubConnection = async () => {
 
             const hubConnect = new HubConnectionBuilder()
-            .withUrl(REACT_APP_API_URL + "livestations")
+            .withUrl(process.env.REACT_APP_API_URL + "livestations")
             .withAutomaticReconnect()
             .build();
             
@@ -54,12 +46,12 @@ export default function Dashboard() {
                 await hubConnection
                     .start()
                     .then((result) => {
-                        console.log("Hub Connected!");
+                        console.log("SignalR Connected!");
 
                         hubConnection.on("GetNewStationsAsync", (stations) => {
-                            console.log("NEW UPDATE");
+                            console.log("New Updated Data");
                             console.log(stations);
-                            setStationData(stations);
+                            this.stations = stations;
                         });
                     })
                     .catch((e) => console.log("Connection failed: ", e));
@@ -72,15 +64,45 @@ export default function Dashboard() {
 
 
     // Render the information
-    return loading ? <Loading /> :
-    <div>
-        {Array.isArray(stations) && stations.length && stations.map(function (station, index) {
-            return (
-                <div key={index}>
-                    {index}. Station: {station.location} Location: {station.coordinates.longitude} {station.coordinates.latitude}
+    const { SearchBar } = Search;
+
+    const columns = [{
+        dataField: 'id',
+        text: '_id',
+        sort: true
+      }, {
+        dataField: 'location',
+        text: 'Name',
+        sort: true
+      }, {
+        dataField: 'city',
+        text: 'City',
+        sort: true
+      }, {
+        dataField: 'country',
+        text: 'Country',
+        // filter: textFilter(),
+        sort: true
+      }, {
+        dataField: 'aqi',
+        text: 'Aqi',
+        sort: true
+    }];
+    
+    return(
+        <Container>
+            <ToolkitProvider keyField="id" data={stations} columns={columns} search>
+            {
+                props => (
+                <div>
+                    <h3>AirQi Stations Data </h3>
+                    <SearchBar { ...props.searchProps } />
+                    <BootstrapTable { ...props.baseProps } filter={filterFactory()} pagination={paginationFactory()} striped hover />
                 </div>
-            )
-        })}
-    </div>;
+                )
+            }
+            </ToolkitProvider>
+        </Container>
+    );
 
 } 

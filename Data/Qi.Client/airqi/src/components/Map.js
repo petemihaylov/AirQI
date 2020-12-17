@@ -1,37 +1,50 @@
 /// app.js
-import React from 'react';
-import DeckGL from '@deck.gl/react';
-import ***REMOVED*** LineLayer***REMOVED*** from '@deck.gl/layers';
-import ***REMOVED***StaticMap***REMOVED*** from 'react-map-gl';
+import useSwr from "swr";
+import React, ***REMOVED*** useState***REMOVED*** from 'react';
+import ***REMOVED*** Container***REMOVED*** from 'reactstrap';
+import ReactMapGL, ***REMOVED*** Marker, Popup***REMOVED*** from 'react-map-gl';
+import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../assets/media/pin-icon.svg";
 
-// Set your mapbox access token here
-const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicGVwc20iLCJhIjoiY2tobDQxZ2VxMGN2aDJzbG5raXJoN2VqcSJ9.ttIT-eWF2PYMSdxfZxk3Xw';
-
-// Viewport settings
-const INITIAL_VIEW_STATE = ***REMOVED***
-  longitude: -122.41669,
-  latitude: 37.7853,
-  zoom: 13,
-  pitch: 0,
-  bearing: 0
-***REMOVED***;
-
-// Data to be used by the LineLayer
-const data = [
-  ***REMOVED***sourcePosition: [-122.41669, 37.7853], targetPosition: [-122.41669, 37.781]***REMOVED***
-];
+// Data fetching method
+const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 // DeckGL react component
 export default function Map() ***REMOVED***
-  const layers = [
-    new LineLayer(***REMOVED***id: 'line-layer', data***REMOVED***)
-  ];
+  // Viewport settings
+  const [viewport, setViewport] = useState(***REMOVED***
+    latitude: 51.442089,
+    longitude: 5.475200,
+    width: "100vw",
+    height: "100vh",
+    zoom: 12
+ ***REMOVED***);
 
-  return <DeckGL
-      initialViewState=***REMOVED***INITIAL_VIEW_STATE***REMOVED***
-      controller=***REMOVED***true***REMOVED***
-      layers=***REMOVED***layers***REMOVED***>
+  // Load and prepare data
+  const ***REMOVED*** data, error***REMOVED*** = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
+  const stations = (data && !error) ? data : [];
+  
+  return (
+    <Container>
+      <ReactMapGL
+        ***REMOVED***...viewport***REMOVED***
+        mapboxApiAccessToken=***REMOVED***process.env.REACT_APP_MAPBOX_TOKEN***REMOVED***
+        mapStyle="mapbox://styles/constantimi/ckisx2s921doh19sz2tyod230"
+        onViewportChange=***REMOVED***viewport => ***REMOVED***
+          setViewport(viewport);
+       ***REMOVED******REMOVED***
+      >
+        
+        ***REMOVED***stations.map(function (station, index) ***REMOVED***
+          return (
+            <Marker key=***REMOVED***index***REMOVED*** latitude=***REMOVED***station.coordinates.latitude***REMOVED*** longitude=***REMOVED***station.coordinates.longitude***REMOVED***>
+              <Pin />
+            </Marker>
+          );
+       ***REMOVED***)***REMOVED***
 
-        <StaticMap mapboxApiAccessToken=***REMOVED***MAPBOX_ACCESS_TOKEN***REMOVED*** />
-      </DeckGL>
+      </ReactMapGL>
+        
+    </Container>
+  );
+
 ***REMOVED***

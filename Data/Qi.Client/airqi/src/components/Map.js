@@ -1,37 +1,50 @@
 /// app.js
-import React from 'react';
-import DeckGL from '@deck.gl/react';
-import { LineLayer } from '@deck.gl/layers';
-import {StaticMap} from 'react-map-gl';
+import useSwr from "swr";
+import React, { useState } from 'react';
+import { Container } from 'reactstrap';
+import ReactMapGL, { Marker, Popup } from 'react-map-gl';
+import { ReactComponent as Pin } from "../assets/media/pin-icon.svg";
 
-// Set your mapbox access token here
-const MAPBOX_ACCESS_TOKEN = 'pk.eyJ1IjoicGVwc20iLCJhIjoiY2tobDQxZ2VxMGN2aDJzbG5raXJoN2VqcSJ9.ttIT-eWF2PYMSdxfZxk3Xw';
-
-// Viewport settings
-const INITIAL_VIEW_STATE = {
-  longitude: -122.41669,
-  latitude: 37.7853,
-  zoom: 13,
-  pitch: 0,
-  bearing: 0
-};
-
-// Data to be used by the LineLayer
-const data = [
-  {sourcePosition: [-122.41669, 37.7853], targetPosition: [-122.41669, 37.781]}
-];
+// Data fetching method
+const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 // DeckGL react component
 export default function Map() {
-  const layers = [
-    new LineLayer({id: 'line-layer', data})
-  ];
+  // Viewport settings
+  const [viewport, setViewport] = useState({
+    latitude: 51.442089,
+    longitude: 5.475200,
+    width: "100vw",
+    height: "100vh",
+    zoom: 12
+  });
 
-  return <DeckGL
-      initialViewState={INITIAL_VIEW_STATE}
-      controller={true}
-      layers={layers}>
+  // Load and prepare data
+  const { data, error } = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
+  const stations = (data && !error) ? data : [];
+  
+  return (
+    <Container>
+      <ReactMapGL
+        {...viewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
+        mapStyle="mapbox://styles/constantimi/ckisx2s921doh19sz2tyod230"
+        onViewportChange={viewport => {
+          setViewport(viewport);
+        }}
+      >
+        
+        {stations.map(function (station, index) {
+          return (
+            <Marker key={index} latitude={station.coordinates.latitude} longitude={station.coordinates.longitude}>
+              <Pin />
+            </Marker>
+          );
+        })}
 
-        <StaticMap mapboxApiAccessToken={MAPBOX_ACCESS_TOKEN} />
-      </DeckGL>
+      </ReactMapGL>
+        
+    </Container>
+  );
+
 }

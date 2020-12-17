@@ -45,7 +45,8 @@ export default function Dashboard() {
 
         createHubConnection();
     }, []);
-
+    
+    // Websocket
     useEffect(() => {
 
         const startHubConnection = async () => {
@@ -76,7 +77,7 @@ export default function Dashboard() {
         {Array.isArray(stations) && stations.length && stations.map(function (station, index) {
             return (
                 <div key={index}>
-                    {index}. Station: {station.location} Data: {station.createdAt}
+                    {index}. Station: {station.location} Location: {station.coordinates.longitude} {station.coordinates.latitude}
                 </div>
             )
         })}

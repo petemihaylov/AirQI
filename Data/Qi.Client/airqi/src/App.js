@@ -7,9 +7,9 @@ function App() {
   return (
     <Router>
       
-      <Route exact path={'/'} component={Dashboard} /> 
-      <Route exact path={'/map'} component={Map}/> 
-
+      <Route exact path={'/'} component={Dashboard} />
+      <Route exact path={'/map'} component={Map} /> 
+      
     </Router>
   );
 }

@@ -7,9 +7,9 @@ function App() ***REMOVED***
   return (
     <Router>
       
-      <Route exact path=***REMOVED***'/'***REMOVED*** component=***REMOVED***Dashboard***REMOVED*** /> 
-      <Route exact path=***REMOVED***'/map'***REMOVED*** component=***REMOVED***Map***REMOVED***/> 
-
+      <Route exact path=***REMOVED***'/'***REMOVED*** component=***REMOVED***Dashboard***REMOVED*** />
+      <Route exact path=***REMOVED***'/map'***REMOVED*** component=***REMOVED***Map***REMOVED*** /> 
+      
     </Router>
   );
 ***REMOVED***

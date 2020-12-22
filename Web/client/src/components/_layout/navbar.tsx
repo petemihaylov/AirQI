@@ -11,6 +11,7 @@ const Navigation = (props: any) => ***REMOVED***
   const [adminBoard, showAdminBoard] = useState(false);
 
   useEffect(() => ***REMOVED***
+    
     showModeratorBoard(user && user.userRole === "Moderator");
     showAdminBoard(user && user.userRole === "Admin");
  ***REMOVED***, []);

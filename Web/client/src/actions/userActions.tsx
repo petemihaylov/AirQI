@@ -1,7 +1,9 @@
 import UserService from "../services/user.service";
 import User from "../entities/User";
 
-import ***REMOVED*** FETCH_USERS,  DELETE_USER***REMOVED*** from "./types";
+import AuthService from "../services/auth.service";
+
+import ***REMOVED*** FETCH_USERS, DELETE_USER, SET_MESSAGE, CREATE_USER***REMOVED*** from "./types";
 
 export const fetchUsers = () => (dispatch: any) => ***REMOVED***
   UserService.getModeratorBoard().then(
@@ -16,6 +18,7 @@ export const fetchUsers = () => (dispatch: any) => ***REMOVED***
    ***REMOVED***
   );
 ***REMOVED***;
+
 
 export const deleteUser = (id: number, index: number) => (dispatch: any) => ***REMOVED***
   UserService.deleteUser(id).then(
@@ -32,7 +35,37 @@ export const deleteUser = (id: number, index: number) => (dispatch: any) => ***R
 ***REMOVED***;
 
 export const createUser = (user: User) => (dispatch: any) => ***REMOVED***
-  console.log("Create User action");
-***REMOVED***;
+  return AuthService.register(user).then(
+    (response) => ***REMOVED***
+      console.log(response);
 
+      dispatch(***REMOVED***
+        type: CREATE_USER,
+        payload: user,
+     ***REMOVED***);
+
+      dispatch(***REMOVED***
+        type: SET_MESSAGE,
+        payload: response.data.message,
+     ***REMOVED***);
+
+      return Promise.resolve();
+   ***REMOVED***,
+    (error) => ***REMOVED***
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch(***REMOVED***
+        type: SET_MESSAGE,
+        payload: message,
+     ***REMOVED***);
+
+      return Promise.reject();
+   ***REMOVED***
+  );
+***REMOVED***;
 

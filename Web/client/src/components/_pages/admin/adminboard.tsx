@@ -1,4 +1,3 @@
-
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
 import ***REMOVED*** Button, Col, Container, Row, Table***REMOVED*** from "react-bootstrap";
 import User from "../../../entities/User";
@@ -68,8 +67,8 @@ const AdminBoard = (props: any) => ***REMOVED***
         <tbody>
           ***REMOVED***content !== [] &&
             content.map((item: User, index) => (
-              <tr key=***REMOVED***item.id***REMOVED***>
-                <td>***REMOVED***item.id***REMOVED***</td>
+              <tr>
+                <td key=***REMOVED***item.id***REMOVED***>***REMOVED***index + 1***REMOVED***</td>
                 <td>
                   ***REMOVED***" "***REMOVED***
                   ***REMOVED***item.firstName***REMOVED*** ***REMOVED***item.lastName***REMOVED***

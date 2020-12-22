@@ -2,7 +2,7 @@ import ***REMOVED*** Container, Modal***REMOVED*** from "react-bootstrap";
 import React, ***REMOVED*** useCallback, useState***REMOVED*** from "react";
 import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** register as registerAction***REMOVED*** from "../../../actions/auth";
+import ***REMOVED*** createUser***REMOVED*** from "../../../actions/userActions";
 
 import User from "../../../entities/User";
 import Roles from "../../../entities/Roles";
@@ -30,10 +30,9 @@ const CreateModal = (props: any) => ***REMOVED***
       firstName,
       lastName,
       password,
-      role,
-      true
+      role
     );
-    dispatch(registerAction(userObj)).then(() => ***REMOVED***
+    dispatch(createUser(userObj)).then(() => ***REMOVED***
       props.onHide();
    ***REMOVED***);
  ***REMOVED***, []);
@@ -147,8 +146,10 @@ const CreateModal = (props: any) => ***REMOVED***
 
 function mapStateToProps(state: any) ***REMOVED***
   const ***REMOVED*** message***REMOVED*** = state.message;
+  const ***REMOVED*** users***REMOVED*** = state.users;
   return ***REMOVED***
     message,
+    users
  ***REMOVED***;
 ***REMOVED***
 

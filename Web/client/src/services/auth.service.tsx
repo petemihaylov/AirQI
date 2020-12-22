@@ -17,7 +17,7 @@ export default class AuthService ***REMOVED***
 
         return response.data;
      ***REMOVED***);
- ***REMOVED***
+ ***REMOVED***;
 
   static logout() ***REMOVED***
     localStorage.removeItem("user");
@@ -25,7 +25,7 @@ export default class AuthService ***REMOVED***
 
   static register = async (user: User) => ***REMOVED***
     return await axios.post(REACT_APP_API_URL + "/api/users/", user);
- ***REMOVED***
+ ***REMOVED***;
 
   static getCurrentUser(): User ***REMOVED***
     return JSON.parse(localStorage.getItem("user") || "***REMOVED******REMOVED***");

@@ -1,10 +1,14 @@
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using AirQi.Dtos;
 using AirQi.Models.Core;
 using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
+using AssetNXT.Hubs;
+using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json.Linq;
 
 namespace AirQi
@@ -13,8 +17,10 @@ namespace AirQi
     {
         private HttpClient _client;
         private string url = "https://airthings.azure-api.net/api/Devices";
-        public PullAirThings(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
+        public PullAirThings(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
         {
+            this.Hub = base.Hub;
+            this.Mapper = mapper;
             this.Repository = repository;
             this.Settings = settings;
             this.Client = new HttpClient();

@@ -14,17 +14,22 @@ using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
 using Microsoft.CSharp.RuntimeBinder;
-using MongoDB.Bson;
+using AssetNXT.Hubs;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using AutoMapper;
+using AirQi.Dtos;
 
 namespace AirQi
 {
     public class PullAqicn : WorkerService
     {
         private HttpClient _client;
-        public PullAqicn(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
+        public PullAqicn(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
         {
+            this.Hub = base.Hub;
+            this.Mapper = mapper;
             this.Repository = repository;
             this.Settings = settings;
             this.Client = new HttpClient();
@@ -121,7 +126,7 @@ namespace AirQi
 
                 // Save the new Station in the repository only when there is a location
                 System.Console.WriteLine($"Aqicn saved {station.Location} station in {station.City}, {station.Country}");
-                Repository.CreateObject(station);
+                await Repository.CreateObjectAsync(station);
             }
         }
 

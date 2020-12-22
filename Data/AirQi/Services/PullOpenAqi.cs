@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using AirQi.Dtos;
 using AirQi.Models.Core;
 using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
-using Microsoft.VisualBasic;
+using AssetNXT.Hubs;
+using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+
 
 namespace AirQi
 {
     public class PullOpenAqi : WorkerService
     {
         private HttpClient _client;
-        public PullOpenAqi(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
+        public PullOpenAqi(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
         {
+            this.Hub = base.Hub;
+            this.Mapper = mapper;
             this.Repository = repository;
             this.Settings = settings;
             this.Client = new HttpClient();
@@ -89,7 +94,7 @@ namespace AirQi
                     
                     // Save the new Station in the repository only when there is a location
                     System.Console.WriteLine($"OpenAqi saved {station.Location} station in {station.City}, {station.Country}");
-                    Repository.CreateObject(station);
+                    await Repository.CreateObjectAsync(station);
                 }
 
             }

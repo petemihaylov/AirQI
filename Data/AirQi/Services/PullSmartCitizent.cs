@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using AirQi.Dtos;
 using AirQi.Models.Core;
 using AirQi.Repository;
 using AirQi.Services;
 using AirQi.Settings;
-using MongoDB.Bson;
+using AssetNXT.Hubs;
+using AutoMapper;
+using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 
 namespace AirQi
 {
@@ -17,8 +19,10 @@ namespace AirQi
     {
         private HttpClient _client;
         private string url = "https://api.smartcitizen.me/v0/devices/world_map";
-        public PullSmartCitizen(IMongoDataRepository<Station> repository, IWorkerSettings settings) : base(repository, settings)
+        public PullSmartCitizen(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
         {
+            this.Hub = base.Hub;
+            this.Mapper = mapper;
             this.Repository = repository;
             this.Settings = settings;
             this.Client = new HttpClient();

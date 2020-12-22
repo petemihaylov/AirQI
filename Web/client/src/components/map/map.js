@@ -143,6 +143,7 @@ const Map = (props) => {
         width="100%"
         height="100%"
         onViewportChange={handleViewportChange}
+        mapStyle="mapbox://styles/constantimi/ckisx2s921doh19sz2tyod230"
         mapboxApiAccessToken={REACT_APP_TOKEN}
         onClick={handleClick}
       >

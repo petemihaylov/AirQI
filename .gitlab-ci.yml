@@ -1,19 +1,19 @@
 image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 stages:
-  - core
   - data
+  - core
   - test
 
 core:
-  stage: Base API
+  stage: core
 
   script:
     - "cd Core/ApiBase"
     - "dotnet build"
 
 data:
-  stage: Data API
+  stage: data
 
   script:
     - "cd Data/AirQi"

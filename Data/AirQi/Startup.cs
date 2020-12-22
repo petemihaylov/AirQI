@@ -13,6 +13,8 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Options;
 using AssetNXT.Hubs;
+using AirQi.Models.Core;
+using Hangfire.Server;
 
 namespace AirQi
 {
@@ -35,7 +37,7 @@ namespace AirQi
 
             // Scopes
             services.AddTransient(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>)); // A refference to mutiple instances
-            services.AddSingleton<IWorkerService, WorkerService>();
+            services.AddTransient<IWorkerService, WorkerService>();
 
             // AutoMapper
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
@@ -140,14 +142,17 @@ namespace AirQi
 
             // ****************************** hangfire background jobs ******************************
 
+            // this job will trigger the SignalR Hub connection to the Client every hour
+            RecurringJob.AddOrUpdate<WorkerService>("Websocket", service => service.PullDataAsync() , Cron.Hourly);
+
             // this job will fetch global data from OpenAqi every minute
-            RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Minutely);
+            // RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Hourly);
 
             // this job will fetch world data from Aqicn once every day
-            RecurringJob.AddOrUpdate<PullAqicn>("Aqicn", service => service.PullDataAsync() , Cron.Daily);
+            // RecurringJob.AddOrUpdate<PullAqicn>("Aqicn", service => service.PullDataAsync() , Cron.Daily);
 
             // this job will fetch data from SmartCitizen at every 2nd minute
-            RecurringJob.AddOrUpdate<PullSmartCitizen>("Smart-Citizen", service => service.PullDataAsync() , "*/2 * * * *");
+            // RecurringJob.AddOrUpdate<PullSmartCitizen>("Smart-Citizen", service => service.PullDataAsync() , "*/2 * * * *");
 
             // this job will fetch data from AirThings at every 30 minutes
             // RecurringJob.AddOrUpdate<PullAirThings>("Air-Things", service => service.PullDataAsync() , "*/30 * * * *");

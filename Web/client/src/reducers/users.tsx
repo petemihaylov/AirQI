@@ -1,4 +1,4 @@
-import { FETCH_USERS, DELETE_USER } from "../actions/types";
+import { FETCH_USERS, DELETE_USER, CREATE_USER } from "../actions/types";
 
 const initialState = { items: [] };
 
@@ -15,6 +15,11 @@ export default function (state = initialState, action: any) {
       return {
         ...state,
         items: state.items.filter((item, index) => index !== action.payload)
+      };
+    case CREATE_USER:
+      return {
+        ...state,
+        items: [...state.items, payload]
       };
     default:
       return state;

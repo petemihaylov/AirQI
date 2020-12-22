@@ -13,8 +13,11 @@ import User from "../entities/User";
 export const register = (user: User) => (dispatch: any) => {
   return AuthService.register(user).then(
     (response) => {
+      console.log(response);
+
       dispatch({
         type: REGISTER_SUCCESS,
+        payload: user
       });
 
       dispatch({
@@ -46,18 +49,19 @@ export const register = (user: User) => (dispatch: any) => {
   );
 };
 
-export const login = (username: string, password: string) => (dispatch: any) => {
+export const login = (username: string, password: string) => (
+  dispatch: any
+) => {
   return AuthService.login(username, password).then(
     (response) => {
       dispatch({
         type: LOGIN_SUCCESS,
         payload: { user: response },
       });
-      
+
       return Promise.resolve();
     },
     (error) => {
-     
       const message =
         (error.response &&
           error.response.data &&

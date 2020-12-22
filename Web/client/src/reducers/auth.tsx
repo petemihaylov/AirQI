@@ -10,7 +10,7 @@ const user = JSON.parse(localStorage.getItem("user") || "null");
 
 const initialState = user
   ? { isLoggedIn: true, user }
-  : { isLoggedIn: false, user: null };
+  : { isLoggedIn: false, user: null};
 
 export default function (state = initialState, action: any) {
   const { type, payload } = action;

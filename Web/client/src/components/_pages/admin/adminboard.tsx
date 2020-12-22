@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Row, Table } from "react-bootstrap";
 import User from "../../../entities/User";
@@ -68,8 +67,8 @@ const AdminBoard = (props: any) => {
         <tbody>
           {content !== [] &&
             content.map((item: User, index) => (
-              <tr key={item.id}>
-                <td>{item.id}</td>
+              <tr>
+                <td key={item.id}>{index + 1}</td>
                 <td>
                   {" "}
                   {item.firstName} {item.lastName}

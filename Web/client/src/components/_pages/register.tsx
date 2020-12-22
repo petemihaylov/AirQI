@@ -33,8 +33,7 @@ const Register = (props: any) => {
       firstName,
       lastName,
       password,
-      Roles.Moderator,
-      true
+      Roles.Moderator
     );
 
     dispatch(registerAction(userObj)).then(() => {

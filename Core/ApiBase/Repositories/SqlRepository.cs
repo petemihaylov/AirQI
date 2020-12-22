@@ -29,7 +29,7 @@ namespace ApiBase.Data
         public async Task<T> AddAsync<T>(T entity) where T : BaseEntity
         {
             await _context.Set<T>().AddAsync(entity);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return entity;
         }
 

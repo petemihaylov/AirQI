@@ -22,7 +22,7 @@ namespace ApiBase.Services
         {
             var user = _mapper.Map<User>(userDto);
 
-            this._repository.AddAsync<User>(user);
+           this._repository.AddAsync<User>(user);
 
             return userDto;
         }

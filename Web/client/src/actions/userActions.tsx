@@ -1,7 +1,9 @@
 import UserService from "../services/user.service";
 import User from "../entities/User";
 
-import { FETCH_USERS,  DELETE_USER } from "./types";
+import AuthService from "../services/auth.service";
+
+import { FETCH_USERS, DELETE_USER, SET_MESSAGE, CREATE_USER } from "./types";
 
 export const fetchUsers = () => (dispatch: any) => {
   UserService.getModeratorBoard().then(
@@ -16,6 +18,7 @@ export const fetchUsers = () => (dispatch: any) => {
     }
   );
 };
+
 
 export const deleteUser = (id: number, index: number) => (dispatch: any) => {
   UserService.deleteUser(id).then(
@@ -32,7 +35,37 @@ export const deleteUser = (id: number, index: number) => (dispatch: any) => {
 };
 
 export const createUser = (user: User) => (dispatch: any) => {
-  console.log("Create User action");
-};
+  return AuthService.register(user).then(
+    (response) => {
+      console.log(response);
 
+      dispatch({
+        type: CREATE_USER,
+        payload: user,
+      });
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: response.data.message,
+      });
+
+      return Promise.resolve();
+    },
+    (error) => {
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+
+      dispatch({
+        type: SET_MESSAGE,
+        payload: message,
+      });
+
+      return Promise.reject();
+    }
+  );
+};
 

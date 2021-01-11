@@ -42,7 +42,7 @@ namespace ApiBase
 
 
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer
-            (Configuration.GetConnectionString("AzureConnection")));
+            (Configuration.GetConnectionString("ApiConnection")));
 
 
             services.AddScoped<IEFRepository, SqlRepository>();

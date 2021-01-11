@@ -14,6 +14,8 @@ interface CreateFormData {
   password: string;
   firstName: string;
   lastName: string;
+  lastActive: Date;
+  isActive: boolean;
   role: string;
 }
 
@@ -23,12 +25,22 @@ const CreateModal = (props: any) => {
 
   const onSubmit = useCallback((data: CreateFormData) => {
     const { dispatch } = props.props;
-    const { username, firstName, lastName, password, role } = data;
+    const {
+      username,
+      firstName,
+      lastName,
+      password,
+      role,
+      lastActive,
+      isActive,
+    } = data;
 
     let userObj = new User(
       username,
       firstName,
       lastName,
+      lastActive,
+      isActive,
       password,
       role
     );
@@ -146,10 +158,10 @@ const CreateModal = (props: any) => {
 
 function mapStateToProps(state: any) {
   const { message } = state.message;
-  const { users} = state.users;
+  const { users } = state.users;
   return {
     message,
-    users
+    users,
   };
 }
 

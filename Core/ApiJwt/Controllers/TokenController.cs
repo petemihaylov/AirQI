@@ -47,6 +47,8 @@ namespace ApiJwt.Controllers
                     new Claim("Username", user.Username),
                     new Claim("FirstName", user.FirstName),
                     new Claim("LastName", user.LastName),
+                    new Claim("LastActive", user.LastActive.ToString()),
+                    new Claim("IsActive", user.IsActive.ToString()),
                     new Claim("UserRole", user.UserRole.ToString())
                    };
 
@@ -64,6 +66,8 @@ namespace ApiJwt.Controllers
                         Username = user.Username,
                         FirstName = user.FirstName,
                         LastName = user.LastName,
+                        LastActive = user.LastActive,
+                        IsActive = user.IsActive,
                         UserRole = user.UserRole.ToString(),
                         accessToken = jwt
                     };

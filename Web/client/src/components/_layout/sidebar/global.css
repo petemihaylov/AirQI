@@ -1,8 +1,10 @@
 :root{
-  --text-primary: #b6b6b6;
-  --text-secondary: #ececec;
-  --bg-primary: #23232e;
+  --text-primary: #000000;
+  --text-secondary: #000000;
+  --bg-primary: #fff;
   --transition-speed: 600ms;
-  --bg-secondary: #141418;}
+  --bg-secondary:  #fff;
+  --bg-hover: #fff;
+}
 
 

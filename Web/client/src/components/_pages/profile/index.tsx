@@ -1,11 +1,47 @@
-import React from "react";
+import React, {useCallback} from "react";
 import { Redirect } from "react-router-dom";
+import { updateUser } from "../../../actions/userActions";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+import ProfileImage from "./image";
 import "./css/style.css";
+import User from "../../../entities/User";
+
+
+interface CreateFormData {
+  username: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
 
 const Profile = (props: any) => {
+
+  const { register, handleSubmit, errors } = useForm<CreateFormData>();  
   const { user } = props;
+
+
+  const onSubmit = useCallback((data: CreateFormData) => {
+    const { dispatch } = props;
+    const {
+      username,
+      firstName,
+      lastName,
+    } = data;
+
+    let userObj = new User(
+      username,
+      firstName,
+      lastName,
+      new Date(),
+      true,
+      user.password,
+      user.userRole
+    );
+    console.log(userObj);
+  }, []);
+
 
   if (!user) {
     return <Redirect to="/login" />;
@@ -14,62 +50,70 @@ const Profile = (props: any) => {
   return (
     <Container className="centered wrapper">
       <Container className="w-75">
-        <Row className="mb-5">
-          <Col xs={12} md={8} className="centered">
-            <div>
-              <h2>
-                <b>Edit profile</b>
-              </h2>
-              <small>
-                People on AirQI will get to know you with the info below
-              </small>
-            </div>
-          </Col>
-          <Col xs={6} md={4} className="centered">
-            <div>
-              <button className="btn btn-sm">Cancel</button>
-              <button className="btn btn-dark btn-sm ml-3">Save</button>
-            </div>
-          </Col>
-        </Row>
-        <small>Photo</small>
         <Row>
+          <Col></Col>
           <Col>
-            <img
-              className="rounded-circle"
-              src="https://i.pinimg.com/originals/07/0d/9f/070d9fa117f5c45d3efd306b8cfe5c08.gif"
-              alt="Avatar"
-              width={"90px"}
-              height={"90px"}
-            ></img>
-
-            <button className="btn btn-outline-dark btn-sm ml-4">Change</button>
+            <ProfileImage />
           </Col>
+          <Col></Col>
         </Row>
-        <form>
+
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Row className="mb-5">
+            <Col xs={12} md={8} className="centered">
+              <div>
+                <h2>
+                  <b>Edit profile</b>
+                </h2>
+                <small>
+                  People on AirQI will get to know you with the info below
+                </small>
+              </div>
+            </Col>
+            <Col xs={6} md={4} className="centered">
+              <div>
+                <button className="btn btn-sm">Cancel</button>
+                <button className="btn btn-dark btn-sm ml-3">Save</button>
+              </div>
+            </Col>
+          </Row>
+        
           <Row>
             <Col>
               <small>First name</small>
               <div className="input-group-sm">
                 <input
                   type="text"
+                  ref={register({ required: true })}
                   className="form-control"
                   aria-describedby="first name"
                   defaultValue={user.firstName}
                   name="firstName"
                 />
               </div>
+              {errors.firstName?.type === "required" && (
+                <p>
+                  <small className="text-danger"> This is required</small>
+                </p>
+              )}
             </Col>
             <Col>
               <small>Last name</small>
               <div className="input-group-sm">
                 <input
                   type="text"
+                  name="lastName"
+                  ref={register({ required: true })}
                   className="form-control"
                   aria-describedby="last name"
                   defaultValue={user.lastName}
                 />
               </div>
+              {errors.lastName?.type === "required" && (
+                <p>
+                  <small className="text-danger"> This is required</small>
+                </p>
+              )}
             </Col>{" "}
           </Row>
 
@@ -79,11 +123,18 @@ const Profile = (props: any) => {
               <div className="input-group-sm">
                 <input
                   type="text"
+                  name="username"
+                  ref={register({ required: true })}
                   className="form-control"
                   aria-describedby="username"
                   defaultValue={user.username}
                 />
               </div>
+              {errors.username?.type === "required" && (
+                <p>
+                  <small className="text-danger"> This is required</small>
+                </p>
+              )}
             </Col>
           </Row>
 

@@ -64,7 +64,6 @@ const Sidebar = (props: any) => {
   );
 };
 
-
 function mapStateToProps(state: any) {
   const { user } = state.auth;
   return {
@@ -74,14 +73,13 @@ function mapStateToProps(state: any) {
 
 export default connect(mapStateToProps)(Sidebar);
 
-
 /* Custom sidebar style */
 
 const useStyles = createUseStyles({
   navbar: {
     position: "fixed",
     zIndex: 2,
-    transition: "width 600ms ease",
+    transition: "width 100ms ease",
     backgroundColor: "var(--bg-primary)",
   },
   navList: {
@@ -102,13 +100,13 @@ const useStyles = createUseStyles({
     composes: ["$logoText", "$linkText"],
   },
   fontIcon: {
-    fontSize: "1.2rem",
+    fontSize: "1.1rem",
     width: "40px",
     height: "40px",
     minWidth: "40px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   logo: {
     textTransform: "uppercase",
@@ -137,10 +135,9 @@ const useStyles = createUseStyles({
     display: "flex",
     alignItems: "center",
     height: "5rem",
-    color: "white",
+    color: "var(--text-primary)",
     textDecoration: "none",
     filter: "grayscale(100%) opacity(0.7)",
-    transition: "600ms ease-in-out",
     "& $fontIcon": {
       width: "40px",
       minWidth: "40px",
@@ -148,13 +145,13 @@ const useStyles = createUseStyles({
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      transition: "600ms",
+      transition: "200ms",
     },
     "&:hover": {
       textDecoration: "none",
       filter: "grayscale(0%) opacity(1)",
       color: "var(--text-secondary)",
-      background: "var(--bg-secondary)",
+      background: "var(--bg-hover)",
     },
   },
 
@@ -172,13 +169,12 @@ const useStyles = createUseStyles({
         justifyContent: "center",
       },
       "&:hover $linkText": {
-        transition: "700ms ease",
+        transition: "400ms ease",
         display: "inline",
       },
       "&:hover $logo $fontIcon": {
         transform: "rotate(-180deg)",
         marginLeft: "11rem",
-        transition: "var(--transition-speed)",
       },
       "&:hover $logoText": {
         left: "1.3rem",

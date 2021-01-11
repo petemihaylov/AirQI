@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace ApiBase.Models
 ***REMOVED***
@@ -15,7 +16,12 @@ namespace ApiBase.Models
 
         [MaxLength(250)]
         public string LastName ***REMOVED*** get; set;***REMOVED***
+
         public string UserRole ***REMOVED*** get; set;***REMOVED***
+
+        public bool IsActive ***REMOVED***get; set;***REMOVED***
+
+        public DateTime LastActive ***REMOVED***get; set;***REMOVED***
    ***REMOVED***
 
 ***REMOVED***

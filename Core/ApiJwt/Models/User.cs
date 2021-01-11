@@ -15,6 +15,10 @@ namespace ApiJwt.Models
 
         [Required]
         public RoleEnum UserRole ***REMOVED*** get; set;***REMOVED***
+        
+        public bool IsActive ***REMOVED***get; set;***REMOVED***
+        
+        public DateTime LastActive ***REMOVED***get; set;***REMOVED***
    ***REMOVED***
 
     public enum RoleEnum ***REMOVED*** Admin, Moderator, User***REMOVED*** 

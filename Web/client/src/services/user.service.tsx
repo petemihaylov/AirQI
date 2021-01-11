@@ -35,6 +35,11 @@ class UserService ***REMOVED***
    ***REMOVED***);
  ***REMOVED***;
 
+  updateUser = async (user: User) =>***REMOVED***
+      return axios.put(REACT_APP_API_URL + "/api/users/", user, ***REMOVED***
+        headers: authHeader(),
+     ***REMOVED***);
+ ***REMOVED***
   deleteUser = async (id: number) => ***REMOVED***
     return axios.delete(REACT_APP_API_URL + "/api/users/" + id, ***REMOVED***
       headers: authHeader(),

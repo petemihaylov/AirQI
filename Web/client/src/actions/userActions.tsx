@@ -3,7 +3,7 @@ import User from "../entities/User";
 
 import AuthService from "../services/auth.service";
 
-import ***REMOVED*** FETCH_USERS, DELETE_USER, SET_MESSAGE, CREATE_USER***REMOVED*** from "./types";
+import ***REMOVED*** FETCH_USERS, DELETE_USER, SET_MESSAGE, CREATE_USER, UPDATE_USER***REMOVED*** from "./types";
 
 export const fetchUsers = () => (dispatch: any) => ***REMOVED***
   UserService.getModeratorBoard().then(
@@ -30,6 +30,31 @@ export const deleteUser = (id: number, index: number) => (dispatch: any) => ***R
    ***REMOVED***,
     (error) => ***REMOVED***
       console.log(error);
+   ***REMOVED***
+  );
+***REMOVED***;
+
+
+export const updateUser = (user: User) => (dispatch: any) => ***REMOVED***
+  return UserService.updateUser(user).then(
+    (response) => ***REMOVED***
+      console.log(response);
+
+      dispatch(***REMOVED***
+        type: UPDATE_USER,
+        payload: user,
+     ***REMOVED***);
+
+      return Promise.resolve();
+   ***REMOVED***,
+    (error) => ***REMOVED***
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
+      return Promise.reject();
    ***REMOVED***
   );
 ***REMOVED***;

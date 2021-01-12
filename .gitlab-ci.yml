@@ -12,8 +12,8 @@ build:
   script:
     - cd Data/AirQi
     - dotnet build
-    # - cd ../Core/ApiBase"
-    # - dotnet build
+    - cd ../Core/ApiBase"
+    - dotnet build
   # only:
   #   - master
 
@@ -23,8 +23,8 @@ test:
   script:
     - cd Data/AirQi
     - dotnet test
-    # - cd ../Core
-    # - dotnet test
+    - cd ../Core
+    - dotnet test
   # only:
   #   - master
 

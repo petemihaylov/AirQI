@@ -2,10 +2,22 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+    
+    <!-- Assembly configurations for multiple end-points-->
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    
+    <!-- Optimizations -->
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    
+    <!-- Docker Integration -->
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>.</DockerfileContext>
+
+    <!-- Entry auto generated directives for xUnit class -->
+    <GenerateProgramFile>false</GenerateProgramFile>
+
   </PropertyGroup>
 
   <ItemGroup>
@@ -37,6 +49,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.3" />
     
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.9" />
 
@@ -53,6 +66,12 @@
 
     <!-- Http Json -->
     <PackageReference Include="System.Net.Http.Json" Version="5.0.0" />
+    
+    <!-- xUnit -->
+    <PackageReference Include="xunit" Version="2.4.0" />
+    
+    <!-- Moq -->
+    <PackageReference Include="Moq" Version="4.15.2" />
   </ItemGroup>
 
 

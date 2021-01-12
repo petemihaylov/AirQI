@@ -1,6 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
+    <!-- Docker Integration -->
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>.</DockerfileContext>
+
+    <!-- Target Framework -->
     <TargetFramework>netcoreapp3.1</TargetFramework>
     
     <!-- Assembly configurations for multiple end-points-->
@@ -10,10 +15,6 @@
     <!-- Optimizations -->
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
-    
-    <!-- Docker Integration -->
-    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
 
     <!-- Entry auto generated directives for xUnit class -->
     <GenerateProgramFile>false</GenerateProgramFile>

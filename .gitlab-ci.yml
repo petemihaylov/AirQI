@@ -14,8 +14,8 @@ build:
     - dotnet build
     # - cd ../Core/ApiBase"
     # - dotnet build
-  # only:
-  #   - master
+  only:
+    - master
 
 test:
   stage: test
@@ -25,21 +25,21 @@ test:
     - dotnet test
     # - cd ../Core
     # - dotnet test
-  # only:
-  #   - master
+  only:
+    - master
 
 publish:
   stage: publish
 
   script:
     - echo "Publish the web application"
-  # only:
-  #   - master
+  only:
+    - master
 
 deploy:
   stage: deploy
-  when: manual
+  # when: manual
   script:
     - echo "Deploy to production"
-  # only:
-  #   - master
+  only:
+    - master

@@ -10,23 +10,30 @@ build:
   stage: build
 
   script:
-    - cd Data/AirQi
-    - dotnet build
-    - cd ../Core/ApiBase"
-    - dotnet build
+    - dotnet build 
+    # - cd ../Core/ApiBase"
+    # - dotnet build
   # only:
   #   - master
+
+  artifacts:
+    paths:
+      - Data/AirQi
+    
 
 test:
   stage: test
 
   script:
-    - cd Data/AirQi
     - dotnet test
-    - cd ../Core
-    - dotnet test
+    # - cd ../Core
+    # - dotnet test
   # only:
   #   - master
+
+  artifacts:
+    paths:
+      - Data/AirQi/Tests
 
 publish:
   stage: publish

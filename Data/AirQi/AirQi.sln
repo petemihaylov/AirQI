@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30621.155
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AirQi", "AirQi.csproj", "{6C6CD251-E034-4A72-B856-80329F78A11C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qi.Tests", "..\Qi.Tests\Qi.Tests.csproj", "{9C8D2916-36B5-437B-87FF-2E14E71454E6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Qi.Tests", "Tests\Qi.Tests.csproj", "{EAB797D4-99D1-429E-8E76-A011C06BB277}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6C6CD251-E034-4A72-B856-80329F78A11C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C6CD251-E034-4A72-B856-80329F78A11C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C6CD251-E034-4A72-B856-80329F78A11C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9C8D2916-36B5-437B-87FF-2E14E71454E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9C8D2916-36B5-437B-87FF-2E14E71454E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9C8D2916-36B5-437B-87FF-2E14E71454E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9C8D2916-36B5-437B-87FF-2E14E71454E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAB797D4-99D1-429E-8E76-A011C06BB277}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAB797D4-99D1-429E-8E76-A011C06BB277}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAB797D4-99D1-429E-8E76-A011C06BB277}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAB797D4-99D1-429E-8E76-A011C06BB277}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

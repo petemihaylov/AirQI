@@ -2,8 +2,10 @@ image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 stages:
   - data
+  - data.tests
+
   - core
-  - test
+  - core.tests
 
 core:
   stage: core
@@ -12,6 +14,13 @@ core:
     - "cd Core/ApiBase"
     - "dotnet build"
 
+core.tests:
+  stage: core.tests
+
+  script:
+    - "cd Core"
+    - "dotnet test"
+
 data:
   stage: data
 
@@ -19,9 +28,9 @@ data:
     - "cd Data/AirQi"
     - "dotnet build"
 
-test:
-  stage: test
+data.tests:
+  stage: data.tests
 
   script:
-    - "cd Core"
+    - "cd Data/AirQi"
     - "dotnet test"

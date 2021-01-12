@@ -31,6 +31,8 @@ test:
 publish:
   stage: publish
 
+  when: manual
+
   script:
     - echo "Publish the web application"
   # only:
@@ -39,7 +41,7 @@ publish:
 deploy:
   stage: deploy
   
-  # when: manual
+  when: manual
   
   script:
     - echo "Deploy to production"

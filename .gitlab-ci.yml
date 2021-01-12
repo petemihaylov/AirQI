@@ -1,35 +1,45 @@
-image: mcr.microsoft.com/dotnet/core/sdk:5
+image: microsoft/dotnet:latest
 
 stages:
-  - data
-  - datatests
-  - core
-  - coretests
+  - build
+  - test
+  - publish
+  - deploy
 
-core:
-  stage: core
-
-  script:
-    - "cd Core/ApiBase"
-    - "dotnet build"
-
-coretests:
-  stage: coretests
+build:
+  stage: build
 
   script:
-    - "cd Core"
-    - "dotnet test"
+    - cd Data/AirQi
+    - dotnet build
+    # - cd ../Core/ApiBase"
+    # - dotnet build
+  # only:
+  #   - master
 
-data:
-  stage: data
-
-  script:
-    - "cd Data/AirQi"
-    - "dotnet build"
-
-datatests:
-  stage: datatests
+test:
+  stage: test
 
   script:
-    - "cd Data/AirQi"
-    - "dotnet test"
+    - cd Data/AirQi
+    - dotnet test
+    # - cd ../Core
+    # - dotnet test
+  # only:
+  #   - master
+
+publish:
+  stage: publish
+
+  script:
+    - echo "Publish the web application"
+  # only:
+  #   - master
+
+deploy:
+  stage: deploy
+  when: manual
+  script:
+    - echo "Deploy to production"
+  # only:
+  #   - master

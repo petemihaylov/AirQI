@@ -15,6 +15,8 @@ const initialState = user
 export default function (state = initialState, action: any) ***REMOVED***
   const ***REMOVED*** type, payload***REMOVED*** = action;
 
+  console.log(action);
+
   switch (type) ***REMOVED***
     case REGISTER_SUCCESS:
       return ***REMOVED***
@@ -44,6 +46,7 @@ export default function (state = initialState, action: any) ***REMOVED***
         isLoggedIn: false,
         user: null,
      ***REMOVED***;
+      
     default:
       return state;
  ***REMOVED***

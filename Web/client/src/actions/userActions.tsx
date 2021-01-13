@@ -44,7 +44,7 @@ export const updateUser = (user: User) => (dispatch: any) => ***REMOVED***
         type: UPDATE_USER,
         payload: user,
      ***REMOVED***);
-
+      
       return Promise.resolve();
    ***REMOVED***,
     (error) => ***REMOVED***

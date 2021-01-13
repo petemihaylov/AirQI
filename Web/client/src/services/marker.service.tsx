@@ -10,9 +10,15 @@ class MarkerService ***REMOVED***
    ***REMOVED***);
  ***REMOVED***;
 
-  createMarker = async(marker: IMarker) =>***REMOVED***
-      return await axios.post(REACT_APP_API_URL + "/api/markers/", marker);
- ***REMOVED***
+  createMarker = async (marker: IMarker) => ***REMOVED***
+    return await axios.post(REACT_APP_API_URL + "/api/markers/", marker);
+ ***REMOVED***;
+
+  deleteMarker = async (id: number) => ***REMOVED***
+    return axios.delete(REACT_APP_API_URL + "/api/markers/" + id, ***REMOVED***
+      headers: authHeader(),
+   ***REMOVED***);
+ ***REMOVED***;
 ***REMOVED***
 
 export default new MarkerService();

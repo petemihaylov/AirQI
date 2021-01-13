@@ -1,13 +1,10 @@
-import React, {useCallback} from "react";
+import React, { useCallback } from "react";
 import { Redirect } from "react-router-dom";
-import { updateUser } from "../../../actions/userActions";
 import { connect } from "react-redux";
 import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import ProfileImage from "./image";
 import "./css/style.css";
-import User from "../../../entities/User";
-
 
 interface CreateFormData {
   username: string;
@@ -17,31 +14,13 @@ interface CreateFormData {
 }
 
 const Profile = (props: any) => {
-
-  const { register, handleSubmit, errors } = useForm<CreateFormData>();  
+  const { register, handleSubmit, errors } = useForm<CreateFormData>();
   const { user } = props;
-
 
   const onSubmit = useCallback((data: CreateFormData) => {
     const { dispatch } = props;
-    const {
-      username,
-      firstName,
-      lastName,
-    } = data;
-
-    let userObj = new User(
-      username,
-      firstName,
-      lastName,
-      new Date(),
-      true,
-      user.password,
-      user.userRole
-    );
-    console.log(userObj);
+    const { username, firstName, lastName } = data;
   }, []);
-
 
   if (!user) {
     return <Redirect to="/login" />;
@@ -77,7 +56,7 @@ const Profile = (props: any) => {
               </div>
             </Col>
           </Row>
-        
+
           <Row>
             <Col>
               <small>First name</small>
@@ -139,21 +118,7 @@ const Profile = (props: any) => {
           </Row>
 
           <Row>
-            <Col>
-              <small>Access token</small>
-              <div className="input-group-sm">
-                <input
-                  type="text"
-                  className="form-control"
-                  aria-describedby="token"
-                  defaultValue={
-                    user.accessToken.substring(0, 20) +
-                    " . . . " +
-                    user.accessToken.substr(user.accessToken.length - 20)
-                  }
-                />
-              </div>
-            </Col>
+            <Col></Col>
             <Col>
               <small>Authorities</small>
               <div className="input-group-sm">

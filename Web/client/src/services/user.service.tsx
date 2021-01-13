@@ -36,7 +36,7 @@ class UserService {
   };
 
   updateUser = async (user: User) =>{
-      return axios.put(REACT_APP_API_URL + "/api/users/", user, {
+      return axios.put(REACT_APP_API_URL + `/api/users/${user.id}`, user, {
         headers: authHeader(),
       });
   }
@@ -45,6 +45,12 @@ class UserService {
       headers: authHeader(),
     });
   };
+
+  getUser = async (id: number) => {
+    return axios.get(REACT_APP_API_URL + "/api/users/" + id, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new UserService();

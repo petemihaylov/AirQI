@@ -1,6 +1,6 @@
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import MapGL, { SVGOverlay, Marker } from "react-map-gl";
+import MapGL, { SVGOverlay, Marker, FullscreenControl } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import { FlyToInterpolator, NavigationControl, Popup } from "react-map-gl";
 import * as Locations from "./locations";
@@ -13,6 +13,8 @@ import { fetchMarkers, createMarker } from "../../actions/markerActions";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
+import { faMapMarkerAlt, faFire, faSmog, faCloudRain } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import DeckGL, { ScatterplotLayer } from "deck.gl";
 
@@ -87,8 +89,6 @@ const Map = (props) => {
     }
   }, [connection]);
 
-  /* Stored markers from the DB */
-  const [content, handleContent] = useState([]);
 
   /* Gets markers from DB */
   useEffect(() => {
@@ -96,37 +96,61 @@ const Map = (props) => {
   }, []);
 
   useEffect(() => {
-    handleContent(props.items);
+    props.items.map((m) => handleMarker(m.longitude, m.latitude, m.id));
+    console.log(props.items);
   }, [props.items]);
 
-  useEffect(() => {
-    content.map((m) => handleMarker(m.longitude, m.latitude));
-  }, [content]);
 
   /* Markers */
   const [markers, setMarkers] = useState([]);
-  const handleMarker = (longitude, latitude) => {
-    setMarkers((markers) => [...markers, { longitude, latitude }]);
-    setShowPopup(false);
+  const handleMarker = (longitude, latitude, id) => {
+    setMarkers((markers) => [...markers, { longitude, latitude, id }]);
   };
 
   /* Popup */
   const [popups, setPopups] = useState([]);
-  const [showPopup, setShowPopup] = useState(true);
-
-  const handleClick = ({ lngLat: [longitude, latitude] }) => {
-    setShowPopup(true);
-    setPopups([{ longitude, latitude }]);
+  const [controllerSelect, setController] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [feature, setFeature] = useState(false);
+  
+  const handleController = () => {
+    setController(!controllerSelect);
+    setShowPopup(false);
+    setFeature(false);
   };
 
+  const handleClick = ({ lngLat: [longitude, latitude] }) => {
+    if(controllerSelect){
+
+      if(feature){
+        setShowPopup(true);
+        setPopups([{ longitude, latitude }]);
+      }
+      setFeature(true);
+    }
+  };
+  const handleDelete = () => {
+      console.log( `Delete`);
+  }
   const handleCreate = (longitude, latitude) => {
     const m = new MarkerEntity(longitude, latitude);
     props.dispatch(createMarker(m));
 
-    console.log("create");
-    handleMarker(longitude, latitude);
+    //    handleMarker(longitude, latitude);
   };
 
+  // Creating a marker tool
+  const renderMarkerTool = () => {
+    return (
+      <div className="mapboxgl-ctrl-top-left mt-5">
+        <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
+          <button className="" title="Marker" onClick={handleController}>
+            <FontAwesomeIcon icon={faMapMarkerAlt} />
+          </button>
+        </div>
+      </div>
+    );
+  };
   return (
     <Container
       fluid
@@ -152,22 +176,52 @@ const Map = (props) => {
         <SVGOverlayLayer airData={data} radius={30} color={""} />
         {markers.map((m, i) => (
           <Marker {...m} key={i} offsetLeft={-20} offsetTop={-30}>
-            <Pin style={{ width: "40px" }} />
+            <Pin
+              onClick={() => console.log(markers)}
+              style={{ width: "40px" }}
+            />
           </Marker>
         ))}
 
         {showPopup &&
           popups.map((p, i) => (
             <Popup
-              key={i}
               latitude={p.latitude}
               longitude={p.longitude}
               closeButton={false}
               closeOnClick={true}
               anchor="bottom"
+              key={i}
             >
               <div className="p-2">
                 <small>A warning will be created!</small>
+
+                <div
+                  style={{ height: "50px", overflowY: "auto" }}
+                  className="mt-2 mb-2"
+                >
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon={faFire} /> Fire
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon={faSmog} /> Smog
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon={faCloudRain} />
+                    Clouds
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon={faFire} /> Fire
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon={faSmog} /> Smog
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon={faCloudRain} />
+                    Clouds
+                  </div>
+                </div>
+
                 <button
                   className="btn btn-block btn-outline-dark btn-sm mt-2"
                   onClick={() => handleCreate(p.longitude, p.latitude)}
@@ -178,8 +232,13 @@ const Map = (props) => {
             </Popup>
           ))}
 
+        {renderMarkerTool()}
+
         <div style={{ position: "absolute", right: 10, top: 10 }}>
           <NavigationControl />
+        </div>
+        <div style={{ position: "absolute", right: 10, top: 110 }}>
+          <FullscreenControl />
         </div>
 
         <Geocoder

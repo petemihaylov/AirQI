@@ -44,7 +44,7 @@ export const updateUser = (user: User) => (dispatch: any) => {
         type: UPDATE_USER,
         payload: user,
       });
-
+      
       return Promise.resolve();
     },
     (error) => {

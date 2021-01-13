@@ -1,4 +1,4 @@
-import { CREATE_MARKER, FETCH_MARKERS } from "../actions/types";
+import { CREATE_MARKER, FETCH_MARKERS, DELETE_MARKER } from "../actions/types";
 
 const initialState = { items: [] };
 
@@ -14,6 +14,12 @@ export default function (state = initialState, action: any) {
     case CREATE_MARKER:
       return {
         ...state,
+        items: [...state.items, payload],
+      };
+    case DELETE_MARKER:
+      return {
+        ...state,
+        items: state.items.filter((item, index) => index !== action.payload),
       };
     default:
       return state;

@@ -50,9 +50,9 @@ namespace ApiBase.Controllers
 
         // POST: api/markers
         [HttpPost]
-        public async Task<IActionResult> AddMarker(Marker message)
+        public async Task<IActionResult> AddMarker(Marker marker)
         {
-            var markerItem = await _repository.AddAsync(message);
+            var markerItem = await _repository.AddAsync(marker);
 
             // SignalR event
             await _hubContext.Clients.All.SendAsync("GetNewMarker", markerItem);
@@ -60,7 +60,7 @@ namespace ApiBase.Controllers
             var notificationItem = new Notification("Warning! ", "New Marker has been created!", "Warning", DateTime.Now);
             await _hubNotificationContext.Clients.All.SendAsync("GetNewNotification", notificationItem);
 
-            return Ok();
+            return Ok(markerItem);
         }
 
         // Delete: api/markers/{id}

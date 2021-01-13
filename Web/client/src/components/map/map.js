@@ -9,11 +9,16 @@ import Goo from "./goo";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { ReactComponent as Pin } from "../../assets/media/icons/pin-icon.svg";
 import { connect } from "react-redux";
-import { fetchMarkers, createMarker } from "../../actions/markerActions";
+import { fetchMarkers, createMarker, deleteMarker } from "../../actions/markerActions";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
-import { faMapMarkerAlt, faFire, faSmog, faCloudRain } from "@fortawesome/free-solid-svg-icons";
+import {
+  faMapPin,
+  faFire,
+  faSmog,
+  faCloudRain,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import DeckGL, { ScatterplotLayer } from "deck.gl";
@@ -31,15 +36,7 @@ const Map = (props) => {
   });
   const mapRef = useRef();
 
-  const handleViewportChange = useCallback(
-    (newViewport) => setViewport(newViewport),
-    []
-  );
-
-  const [data, setAirData] = useState([]);
-  useEffect(() => {
-    setAirData(Locations.data);
-  }, []);
+  const handleViewportChange = useCallback((newViewport) => setViewport(newViewport),[]);
 
   /* Custom settings for ViewportChange */
   const handleGeocoderViewportChange = useCallback(
@@ -59,11 +56,20 @@ const Map = (props) => {
     [handleViewportChange]
   );
 
-  // Live markers from the WebSocket
+  /* Live markers from the WebSocket */
   const [connection, setConnection] = useState(null);
 
-  /* Gets WebSocket marker */
+  /* Mock up data */
+  const [data, setAirData] = useState([]);
+
   useEffect(() => {
+    /* Sets the mockup data */
+    setAirData(Locations.data);
+
+    /* Gets markers from DB */
+    props.dispatch(fetchMarkers());
+
+    /* Gets WebSocket marker */
     const newConnection = new HubConnectionBuilder()
       .withUrl(REACT_APP_API_URL + "/livemarker", {
         headers: authHeader(),
@@ -74,6 +80,7 @@ const Map = (props) => {
     setConnection(newConnection);
   }, []);
 
+  /* WebSocket connection */
   useEffect(() => {
     if (connection) {
       connection
@@ -82,7 +89,7 @@ const Map = (props) => {
           console.log("Connected!");
 
           connection.on("GetNewMarker", (Marker) => {
-            handleMarker(Marker.longitude, Marker.latitude);
+            setMarkers(markers => [...markers, Marker]);
           });
         })
         .catch((e) => console.log("Connection failed: ", e));
@@ -90,29 +97,14 @@ const Map = (props) => {
   }, [connection]);
 
 
-  /* Gets markers from DB */
-  useEffect(() => {
-    props.dispatch(fetchMarkers());
-  }, []);
-
-  useEffect(() => {
-    props.items.map((m) => handleMarker(m.longitude, m.latitude, m.id));
-    console.log(props.items);
-  }, [props.items]);
 
 
   /* Markers */
   const [markers, setMarkers] = useState([]);
-  const handleMarker = (longitude, latitude, id) => {
-    setMarkers((markers) => [...markers, { longitude, latitude, id }]);
-  };
+  useEffect(() => {
+    setMarkers(props.items);
+  }, [props.items]);
 
-  /* Popup */
-  const [popups, setPopups] = useState([]);
-  const [controllerSelect, setController] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [feature, setFeature] = useState(false);
-  
   const handleController = () => {
     setController(!controllerSelect);
     setShowPopup(false);
@@ -120,37 +112,57 @@ const Map = (props) => {
   };
 
   const handleClick = ({ lngLat: [longitude, latitude] }) => {
-    if(controllerSelect){
-
-      if(feature){
+    if (controllerSelect) {
+      if (feature) {
         setShowPopup(true);
         setPopups([{ longitude, latitude }]);
       }
       setFeature(true);
     }
   };
-  const handleDelete = () => {
-      console.log( `Delete`);
-  }
+
+  const handleDelete = obj => () => {
+    props.dispatch(deleteMarker(obj.marker.id, obj.index));
+  };
+
   const handleCreate = (longitude, latitude) => {
     const m = new MarkerEntity(longitude, latitude);
     props.dispatch(createMarker(m));
-
-    //    handleMarker(longitude, latitude);
+    setShowPopup(false);
   };
 
-  // Creating a marker tool
-  const renderMarkerTool = () => {
+
+
+
+  /* Popup */
+  const [popups, setPopups] = useState([]);
+  const [controllerSelect, setController] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [feature, setFeature] = useState(false);
+
+  const _renderMarkerTool = () => {
     return (
-      <div className="mapboxgl-ctrl-top-left mt-5">
+      <div
+        className="mapboxgl-ctrl-top-right"
+        style={{ position: "absolute",  top: 140 }}
+      >
         <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
           <button className="" title="Marker" onClick={handleController}>
-            <FontAwesomeIcon icon={faMapMarkerAlt} />
+            <FontAwesomeIcon icon={faMapPin} />
           </button>
         </div>
       </div>
     );
   };
+
+  const _renderMarkers = () => {
+    return markers.map((m, i) => (
+      <Marker {...m} key={i} offsetLeft={-20} offsetTop={-30}>
+        <Pin onClick={handleDelete({marker: m, index: i})} style={{ width: "40px" }} />
+      </Marker>
+    ));
+  };
+
   return (
     <Container
       fluid
@@ -174,14 +186,9 @@ const Map = (props) => {
         {/* <DeckGL viewState={viewport} layers={layers} /> */}
 
         <SVGOverlayLayer airData={data} radius={30} color={""} />
-        {markers.map((m, i) => (
-          <Marker {...m} key={i} offsetLeft={-20} offsetTop={-30}>
-            <Pin
-              onClick={() => console.log(markers)}
-              style={{ width: "40px" }}
-            />
-          </Marker>
-        ))}
+
+        {_renderMarkers()}
+        {_renderMarkerTool()}
 
         {showPopup &&
           popups.map((p, i) => (
@@ -232,7 +239,6 @@ const Map = (props) => {
             </Popup>
           ))}
 
-        {renderMarkerTool()}
 
         <div style={{ position: "absolute", right: 10, top: 10 }}>
           <NavigationControl />

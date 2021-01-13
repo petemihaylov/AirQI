@@ -1,6 +1,6 @@
 import ***REMOVED*** IMarker***REMOVED*** from "../entities/IMarker";
 import MarkerService from "../services/marker.service";
-import ***REMOVED*** CREATE_MARKER, FETCH_MARKERS***REMOVED*** from "./types";
+import ***REMOVED*** CREATE_MARKER, DELETE_MARKER, FETCH_MARKERS***REMOVED*** from "./types";
 
 export const fetchMarkers = () => (dispatch: any) => ***REMOVED***
   MarkerService.getAllMarkers().then(
@@ -20,6 +20,21 @@ export const createMarker = (marker: IMarker) => (dispatch: any) => ***REMOVED**
   return MarkerService.createMarker(marker).then((response) => ***REMOVED***
     dispatch(***REMOVED***
       type: CREATE_MARKER,
+      payload: response.data
    ***REMOVED***);
  ***REMOVED***);
+***REMOVED***;
+
+export const deleteMarker = (id: number, index: number) => (dispatch: any) => ***REMOVED***
+  MarkerService.deleteMarker(id).then(
+    (response) => ***REMOVED***
+      dispatch(***REMOVED***
+        type: DELETE_MARKER,
+        payload: index,
+     ***REMOVED***);
+   ***REMOVED***,
+    (error) => ***REMOVED***
+      console.log(error);
+   ***REMOVED***
+  );
 ***REMOVED***;

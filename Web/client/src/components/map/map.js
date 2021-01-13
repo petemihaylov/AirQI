@@ -9,11 +9,16 @@ import Goo from "./goo";
 import "mapbox-gl/dist/mapbox-gl.css";
 import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../../assets/media/icons/pin-icon.svg";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** fetchMarkers, createMarker***REMOVED*** from "../../actions/markerActions";
+import ***REMOVED*** fetchMarkers, createMarker, deleteMarker***REMOVED*** from "../../actions/markerActions";
 import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
-import ***REMOVED*** faMapMarkerAlt, faFire, faSmog, faCloudRain***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import ***REMOVED***
+  faMapPin,
+  faFire,
+  faSmog,
+  faCloudRain,
+***REMOVED*** from "@fortawesome/free-solid-svg-icons";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 
 import DeckGL, ***REMOVED*** ScatterplotLayer***REMOVED*** from "deck.gl";
@@ -31,15 +36,7 @@ const Map = (props) => ***REMOVED***
  ***REMOVED***);
   const mapRef = useRef();
 
-  const handleViewportChange = useCallback(
-    (newViewport) => setViewport(newViewport),
-    []
-  );
-
-  const [data, setAirData] = useState([]);
-  useEffect(() => ***REMOVED***
-    setAirData(Locations.data);
- ***REMOVED***, []);
+  const handleViewportChange = useCallback((newViewport) => setViewport(newViewport),[]);
 
   /* Custom settings for ViewportChange */
   const handleGeocoderViewportChange = useCallback(
@@ -59,11 +56,20 @@ const Map = (props) => ***REMOVED***
     [handleViewportChange]
   );
 
-  // Live markers from the WebSocket
+  /* Live markers from the WebSocket */
   const [connection, setConnection] = useState(null);
 
-  /* Gets WebSocket marker */
+  /* Mock up data */
+  const [data, setAirData] = useState([]);
+
   useEffect(() => ***REMOVED***
+    /* Sets the mockup data */
+    setAirData(Locations.data);
+
+    /* Gets markers from DB */
+    props.dispatch(fetchMarkers());
+
+    /* Gets WebSocket marker */
     const newConnection = new HubConnectionBuilder()
       .withUrl(REACT_APP_API_URL + "/livemarker", ***REMOVED***
         headers: authHeader(),
@@ -74,6 +80,7 @@ const Map = (props) => ***REMOVED***
     setConnection(newConnection);
  ***REMOVED***, []);
 
+  /* WebSocket connection */
   useEffect(() => ***REMOVED***
     if (connection) ***REMOVED***
       connection
@@ -82,7 +89,7 @@ const Map = (props) => ***REMOVED***
           console.log("Connected!");
 
           connection.on("GetNewMarker", (Marker) => ***REMOVED***
-            handleMarker(Marker.longitude, Marker.latitude);
+            setMarkers(markers => [...markers, Marker]);
          ***REMOVED***);
        ***REMOVED***)
         .catch((e) => console.log("Connection failed: ", e));
@@ -90,29 +97,14 @@ const Map = (props) => ***REMOVED***
  ***REMOVED***, [connection]);
 
 
-  /* Gets markers from DB */
-  useEffect(() => ***REMOVED***
-    props.dispatch(fetchMarkers());
- ***REMOVED***, []);
-
-  useEffect(() => ***REMOVED***
-    props.items.map((m) => handleMarker(m.longitude, m.latitude, m.id));
-    console.log(props.items);
- ***REMOVED***, [props.items]);
 
 
   /* Markers */
   const [markers, setMarkers] = useState([]);
-  const handleMarker = (longitude, latitude, id) => ***REMOVED***
-    setMarkers((markers) => [...markers, ***REMOVED*** longitude, latitude, id***REMOVED***]);
- ***REMOVED***;
+  useEffect(() => ***REMOVED***
+    setMarkers(props.items);
+ ***REMOVED***, [props.items]);
 
-  /* Popup */
-  const [popups, setPopups] = useState([]);
-  const [controllerSelect, setController] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [feature, setFeature] = useState(false);
-  
   const handleController = () => ***REMOVED***
     setController(!controllerSelect);
     setShowPopup(false);
@@ -120,37 +112,57 @@ const Map = (props) => ***REMOVED***
  ***REMOVED***;
 
   const handleClick = (***REMOVED*** lngLat: [longitude, latitude]***REMOVED***) => ***REMOVED***
-    if(controllerSelect)***REMOVED***
-
-      if(feature)***REMOVED***
+    if (controllerSelect) ***REMOVED***
+      if (feature) ***REMOVED***
         setShowPopup(true);
         setPopups([***REMOVED*** longitude, latitude***REMOVED***]);
      ***REMOVED***
       setFeature(true);
    ***REMOVED***
  ***REMOVED***;
-  const handleDelete = () => ***REMOVED***
-      console.log( `Delete`);
- ***REMOVED***
+
+  const handleDelete = obj => () => ***REMOVED***
+    props.dispatch(deleteMarker(obj.marker.id, obj.index));
+ ***REMOVED***;
+
   const handleCreate = (longitude, latitude) => ***REMOVED***
     const m = new MarkerEntity(longitude, latitude);
     props.dispatch(createMarker(m));
-
-    //    handleMarker(longitude, latitude);
+    setShowPopup(false);
  ***REMOVED***;
 
-  // Creating a marker tool
-  const renderMarkerTool = () => ***REMOVED***
+
+
+
+  /* Popup */
+  const [popups, setPopups] = useState([]);
+  const [controllerSelect, setController] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [feature, setFeature] = useState(false);
+
+  const _renderMarkerTool = () => ***REMOVED***
     return (
-      <div className="mapboxgl-ctrl-top-left mt-5">
+      <div
+        className="mapboxgl-ctrl-top-right"
+        style=***REMOVED******REMOVED*** position: "absolute",  top: 140***REMOVED******REMOVED***
+      >
         <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
           <button className="" title="Marker" onClick=***REMOVED***handleController***REMOVED***>
-            <FontAwesomeIcon icon=***REMOVED***faMapMarkerAlt***REMOVED*** />
+            <FontAwesomeIcon icon=***REMOVED***faMapPin***REMOVED*** />
           </button>
         </div>
       </div>
     );
  ***REMOVED***;
+
+  const _renderMarkers = () => ***REMOVED***
+    return markers.map((m, i) => (
+      <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
+        <Pin onClick=***REMOVED***handleDelete(***REMOVED***marker: m, index: i***REMOVED***)***REMOVED*** style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED*** />
+      </Marker>
+    ));
+ ***REMOVED***;
+
   return (
     <Container
       fluid
@@ -174,14 +186,9 @@ const Map = (props) => ***REMOVED***
         ***REMOVED***/* <DeckGL viewState=***REMOVED***viewport***REMOVED*** layers=***REMOVED***layers***REMOVED*** /> */***REMOVED***
 
         <SVGOverlayLayer airData=***REMOVED***data***REMOVED*** radius=***REMOVED***30***REMOVED*** color=***REMOVED***""***REMOVED*** />
-        ***REMOVED***markers.map((m, i) => (
-          <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
-            <Pin
-              onClick=***REMOVED***() => console.log(markers)***REMOVED***
-              style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED***
-            />
-          </Marker>
-        ))***REMOVED***
+
+        ***REMOVED***_renderMarkers()***REMOVED***
+        ***REMOVED***_renderMarkerTool()***REMOVED***
 
         ***REMOVED***showPopup &&
           popups.map((p, i) => (
@@ -232,7 +239,6 @@ const Map = (props) => ***REMOVED***
             </Popup>
           ))***REMOVED***
 
-        ***REMOVED***renderMarkerTool()***REMOVED***
 
         <div style=***REMOVED******REMOVED*** position: "absolute", right: 10, top: 10***REMOVED******REMOVED***>
           <NavigationControl />

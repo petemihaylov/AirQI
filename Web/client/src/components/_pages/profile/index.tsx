@@ -1,13 +1,10 @@
-import React, ***REMOVED***useCallback***REMOVED*** from "react";
+import React, ***REMOVED*** useCallback***REMOVED*** from "react";
 import ***REMOVED*** Redirect***REMOVED*** from "react-router-dom";
-import ***REMOVED*** updateUser***REMOVED*** from "../../../actions/userActions";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** Container, Row, Col***REMOVED*** from "react-bootstrap";
 import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
 import ProfileImage from "./image";
 import "./css/style.css";
-import User from "../../../entities/User";
-
 
 interface CreateFormData ***REMOVED***
   username: string;
@@ -17,31 +14,13 @@ interface CreateFormData ***REMOVED***
 ***REMOVED***
 
 const Profile = (props: any) => ***REMOVED***
-
-  const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm<CreateFormData>();  
+  const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm<CreateFormData>();
   const ***REMOVED*** user***REMOVED*** = props;
-
 
   const onSubmit = useCallback((data: CreateFormData) => ***REMOVED***
     const ***REMOVED*** dispatch***REMOVED*** = props;
-    const ***REMOVED***
-      username,
-      firstName,
-      lastName,
-   ***REMOVED*** = data;
-
-    let userObj = new User(
-      username,
-      firstName,
-      lastName,
-      new Date(),
-      true,
-      user.password,
-      user.userRole
-    );
-    console.log(userObj);
+    const ***REMOVED*** username, firstName, lastName***REMOVED*** = data;
  ***REMOVED***, []);
-
 
   if (!user) ***REMOVED***
     return <Redirect to="/login" />;
@@ -77,7 +56,7 @@ const Profile = (props: any) => ***REMOVED***
               </div>
             </Col>
           </Row>
-        
+
           <Row>
             <Col>
               <small>First name</small>
@@ -139,21 +118,7 @@ const Profile = (props: any) => ***REMOVED***
           </Row>
 
           <Row>
-            <Col>
-              <small>Access token</small>
-              <div className="input-group-sm">
-                <input
-                  type="text"
-                  className="form-control"
-                  aria-describedby="token"
-                  defaultValue=***REMOVED***
-                    user.accessToken.substring(0, 20) +
-                    " . . . " +
-                    user.accessToken.substr(user.accessToken.length - 20)
-                 ***REMOVED***
-                />
-              </div>
-            </Col>
+            <Col></Col>
             <Col>
               <small>Authorities</small>
               <div className="input-group-sm">

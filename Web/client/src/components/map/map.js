@@ -1,6 +1,6 @@
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, ***REMOVED*** useEffect, useState, useRef, useCallback***REMOVED*** from "react";
-import MapGL, ***REMOVED*** SVGOverlay, Marker***REMOVED*** from "react-map-gl";
+import MapGL, ***REMOVED*** SVGOverlay, Marker, FullscreenControl***REMOVED*** from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import ***REMOVED*** FlyToInterpolator, NavigationControl, Popup***REMOVED*** from "react-map-gl";
 import * as Locations from "./locations";
@@ -13,6 +13,8 @@ import ***REMOVED*** fetchMarkers, createMarker***REMOVED*** from "../../actions
 import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
+import ***REMOVED*** faMapMarkerAlt, faFire, faSmog, faCloudRain***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 
 import DeckGL, ***REMOVED*** ScatterplotLayer***REMOVED*** from "deck.gl";
 
@@ -87,8 +89,6 @@ const Map = (props) => ***REMOVED***
    ***REMOVED***
  ***REMOVED***, [connection]);
 
-  /* Stored markers from the DB */
-  const [content, handleContent] = useState([]);
 
   /* Gets markers from DB */
   useEffect(() => ***REMOVED***
@@ -96,37 +96,61 @@ const Map = (props) => ***REMOVED***
  ***REMOVED***, []);
 
   useEffect(() => ***REMOVED***
-    handleContent(props.items);
+    props.items.map((m) => handleMarker(m.longitude, m.latitude, m.id));
+    console.log(props.items);
  ***REMOVED***, [props.items]);
 
-  useEffect(() => ***REMOVED***
-    content.map((m) => handleMarker(m.longitude, m.latitude));
- ***REMOVED***, [content]);
 
   /* Markers */
   const [markers, setMarkers] = useState([]);
-  const handleMarker = (longitude, latitude) => ***REMOVED***
-    setMarkers((markers) => [...markers, ***REMOVED*** longitude, latitude***REMOVED***]);
-    setShowPopup(false);
+  const handleMarker = (longitude, latitude, id) => ***REMOVED***
+    setMarkers((markers) => [...markers, ***REMOVED*** longitude, latitude, id***REMOVED***]);
  ***REMOVED***;
 
   /* Popup */
   const [popups, setPopups] = useState([]);
-  const [showPopup, setShowPopup] = useState(true);
-
-  const handleClick = (***REMOVED*** lngLat: [longitude, latitude]***REMOVED***) => ***REMOVED***
-    setShowPopup(true);
-    setPopups([***REMOVED*** longitude, latitude***REMOVED***]);
+  const [controllerSelect, setController] = useState(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [feature, setFeature] = useState(false);
+  
+  const handleController = () => ***REMOVED***
+    setController(!controllerSelect);
+    setShowPopup(false);
+    setFeature(false);
  ***REMOVED***;
 
+  const handleClick = (***REMOVED*** lngLat: [longitude, latitude]***REMOVED***) => ***REMOVED***
+    if(controllerSelect)***REMOVED***
+
+      if(feature)***REMOVED***
+        setShowPopup(true);
+        setPopups([***REMOVED*** longitude, latitude***REMOVED***]);
+     ***REMOVED***
+      setFeature(true);
+   ***REMOVED***
+ ***REMOVED***;
+  const handleDelete = () => ***REMOVED***
+      console.log( `Delete`);
+ ***REMOVED***
   const handleCreate = (longitude, latitude) => ***REMOVED***
     const m = new MarkerEntity(longitude, latitude);
     props.dispatch(createMarker(m));
 
-    console.log("create");
-    handleMarker(longitude, latitude);
+    //    handleMarker(longitude, latitude);
  ***REMOVED***;
 
+  // Creating a marker tool
+  const renderMarkerTool = () => ***REMOVED***
+    return (
+      <div className="mapboxgl-ctrl-top-left mt-5">
+        <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
+          <button className="" title="Marker" onClick=***REMOVED***handleController***REMOVED***>
+            <FontAwesomeIcon icon=***REMOVED***faMapMarkerAlt***REMOVED*** />
+          </button>
+        </div>
+      </div>
+    );
+ ***REMOVED***;
   return (
     <Container
       fluid
@@ -152,22 +176,52 @@ const Map = (props) => ***REMOVED***
         <SVGOverlayLayer airData=***REMOVED***data***REMOVED*** radius=***REMOVED***30***REMOVED*** color=***REMOVED***""***REMOVED*** />
         ***REMOVED***markers.map((m, i) => (
           <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
-            <Pin style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED*** />
+            <Pin
+              onClick=***REMOVED***() => console.log(markers)***REMOVED***
+              style=***REMOVED******REMOVED*** width: "40px"***REMOVED******REMOVED***
+            />
           </Marker>
         ))***REMOVED***
 
         ***REMOVED***showPopup &&
           popups.map((p, i) => (
             <Popup
-              key=***REMOVED***i***REMOVED***
               latitude=***REMOVED***p.latitude***REMOVED***
               longitude=***REMOVED***p.longitude***REMOVED***
               closeButton=***REMOVED***false***REMOVED***
               closeOnClick=***REMOVED***true***REMOVED***
               anchor="bottom"
+              key=***REMOVED***i***REMOVED***
             >
               <div className="p-2">
                 <small>A warning will be created!</small>
+
+                <div
+                  style=***REMOVED******REMOVED*** height: "50px", overflowY: "auto"***REMOVED******REMOVED***
+                  className="mt-2 mb-2"
+                >
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon=***REMOVED***faFire***REMOVED*** /> Fire
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon=***REMOVED***faSmog***REMOVED*** /> Smog
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon=***REMOVED***faCloudRain***REMOVED*** />
+                    Clouds
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon=***REMOVED***faFire***REMOVED*** /> Fire
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon=***REMOVED***faSmog***REMOVED*** /> Smog
+                  </div>
+                  <div className="d-flex justify-content-around">
+                    <FontAwesomeIcon icon=***REMOVED***faCloudRain***REMOVED*** />
+                    Clouds
+                  </div>
+                </div>
+
                 <button
                   className="btn btn-block btn-outline-dark btn-sm mt-2"
                   onClick=***REMOVED***() => handleCreate(p.longitude, p.latitude)***REMOVED***
@@ -178,8 +232,13 @@ const Map = (props) => ***REMOVED***
             </Popup>
           ))***REMOVED***
 
+        ***REMOVED***renderMarkerTool()***REMOVED***
+
         <div style=***REMOVED******REMOVED*** position: "absolute", right: 10, top: 10***REMOVED******REMOVED***>
           <NavigationControl />
+        </div>
+        <div style=***REMOVED******REMOVED*** position: "absolute", right: 10, top: 110***REMOVED******REMOVED***>
+          <FullscreenControl />
         </div>
 
         <Geocoder

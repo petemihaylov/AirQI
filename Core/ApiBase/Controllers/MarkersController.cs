@@ -2,6 +2,7 @@
 using System;
 using System.Threading.Tasks;
 using ApiBase.Data;
+using ApiBase.DTOs;
 using ApiBase.Hubs;
 using ApiBase.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -57,8 +58,6 @@ namespace ApiBase.Controllers
             // SignalR event
             await _hubContext.Clients.All.SendAsync("GetNewMarker", markerItem);
 
-            var notificationItem = new Notification("Warning! ", "New Marker has been created!", "Warning", DateTime.Now);
-            await _hubNotificationContext.Clients.All.SendAsync("GetNewNotification", notificationItem);
 
             return Ok(markerItem);
         }

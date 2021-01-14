@@ -7,16 +7,19 @@ import * as Locations from "./locations";
 import { Container } from "react-bootstrap";
 import Goo from "./goo";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { ReactComponent as Pin } from "../../assets/media/icons/pin-icon.svg";
 import { connect } from "react-redux";
 import {
   fetchMarkers,
   createMarker,
   deleteMarker,
 } from "../../actions/markerActions";
+import {
+  createNotification,
+} from "../../actions/notificationActions";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
+import Notification from "../../entities/Notification";
 import {
   faMapPin,
   faFire,
@@ -132,9 +135,12 @@ const Map = (props) => {
     }
   };
 
-  const handleCreate = (longitude, latitude, ico) => {
+  const handleCreate = (longitude, latitude, ico, message) => {
     const m = new MarkerEntity(longitude, latitude, "marker", JSON.stringify(ico));
     props.dispatch(createMarker(m));
+
+    const n = new Notification(message.title, message.description, "Marker", Date.now);
+    props.dispatch(createNotification(n));
     setShowPopup(false);
     enableAddMarker(false);
     setController(false);
@@ -182,7 +188,7 @@ const Map = (props) => {
         <FontAwesomeIcon
           icon={JSON.parse(m.ico)}
           onClick={handleDelete({ marker: m, index: i })}
-          style={{ fontSize: "20px", color: "#3a3a3a" }}
+          style={{ fontSize: "20px", color: "#3a3a3a", cursor: "pointer" }}
         />{" "}
       </Marker>
     ));
@@ -225,7 +231,13 @@ const Map = (props) => {
             <div className="d-flex justify-content-around mt-2 mb3">
               <button
                 className="btn btn-info btn-sm mt-2 mr-2"
-                onClick={() => handleCreate(p.longitude, p.latitude, faSmog)}
+                onClick={() =>
+                  handleCreate(p.longitude, p.latitude, faSmog, {
+                    title: "Smog",
+                    description:
+                      "Danger for people with emphysema, bronchitis, and asthma.",
+                  })
+                }
               >
                 <FontAwesomeIcon icon={faSmog} />
               </button>
@@ -233,14 +245,24 @@ const Map = (props) => {
               <button
                 className="btn btn-dark btn-sm mt-2 mr-2"
                 onClick={() =>
-                  handleCreate(p.longitude, p.latitude, faCloudRain)
+                  handleCreate(p.longitude, p.latitude, faCloudRain, {
+                    title: "Heavy rainfall",
+                    description:
+                      "There is a risk of flooding and damaged infrastructure.",
+                  })
                 }
               >
                 <FontAwesomeIcon icon={faCloudRain} />
               </button>
               <button
                 className="btn btn-danger btn-sm mt-2"
-                onClick={() => handleCreate(p.longitude, p.latitude, faFire)}
+                onClick={() =>
+                  handleCreate(p.longitude, p.latitude, faFire, {
+                    title: "Danger of Fire",
+                    description:
+                      "It might have toxic gases, thick black smoke, and lack of oxygen.",
+                  })
+                }
               >
                 <FontAwesomeIcon icon={faFire} />
               </button>

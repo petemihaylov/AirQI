@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ApiBase.Models
@@ -12,8 +11,8 @@ namespace ApiBase.Models
         public double longitude { get; set; }
 
         [Required]
-        public string type {get; set; }
-        
-        public string ico {get; set;}
+        public string type { get; set; }
+
+        public string ico { get; set; }
     }
 }

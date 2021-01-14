@@ -32,6 +32,7 @@ const LiveNotification = (props) => {
         .start()
         .then((result) => {
           connection.on("GetNewNotification", (Notification) => {
+            console.log(Notification);
             setNotification([Notification]);
           });
         })
@@ -44,6 +45,9 @@ const LiveNotification = (props) => {
   return (
     <Container
       style={{ position: "absolute", top: "3vh", left: "15vw", zIndex: "2" }}
+      onClick={() => {
+        setNotification([]);
+      }}
     >
       {notifications &&
         notifications.map((m, idx) => (
@@ -52,7 +56,7 @@ const LiveNotification = (props) => {
             variant={"default"}
             style={{
               width: "100%",
-              background: "#ff5233",
+              background: "#f89b3e",
               height: "40px",
               fontSize: "14px",
               display: "grid",
@@ -65,10 +69,10 @@ const LiveNotification = (props) => {
               <Col md={"1"}>
                 <FontAwesomeIcon icon={faExclamationTriangle} />
               </Col>
-              <Col md={"8"}>
-                {m.title} {m.description}
+              <Col md={"9"} >
+                {m.title}! <span className="mr-5">  </span> {m.description}
               </Col>
-              <Col md={"3"}>{m.createdAt}</Col>
+              <Col md={"2"}>{m.createdAt}</Col>
             </Row>
           </Alert>
         ))}

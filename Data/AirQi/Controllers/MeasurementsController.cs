@@ -16,14 +16,14 @@ namespace AirQi.Controllers
         private readonly IMapper _mapper;
         public MeasurementsController(IMongoDataRepository<Station> repository, IMapper mapper)
         ***REMOVED***
-            _repository = repository;
-            _mapper = mapper;
+            this._repository = repository;
+            this._mapper = mapper;
        ***REMOVED***
 
         [HttpGet]
         public ActionResult <IEnumerable<StationReadDto>> GetAllMeasurements()
         ***REMOVED***
-            var stationModelItems =  _repository.GetAll();
+            var stationModelItems =  this._repository.GetAll();
             
             if(stationModelItems != null)***REMOVED***
                 return Ok(_mapper.Map<IEnumerable<MeasurementReadDto>>(stationModelItems));

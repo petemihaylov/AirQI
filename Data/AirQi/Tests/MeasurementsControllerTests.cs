@@ -2,6 +2,7 @@ using AirQi.Controllers;
 using AirQi.Models.Core;
 using AirQi.Repository;
 using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;
 
@@ -26,9 +27,13 @@ namespace Qi.Tests
         public Mock<IMapper> Mapper => _mapper;
 
         [Fact]
-        public void Test_GetAllMeasurements_NotFound()
+        public void Test_GetAllMeasurements_OkResult()
         {
-            
+            // Act
+            var okResult = _controller.GetAllMeasurements();
+
+            // Assert
+            Assert.IsType<OkObjectResult>(okResult.Result);
         }
     }
 }

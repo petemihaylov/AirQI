@@ -6,7 +6,7 @@ namespace Qi.Tests
     public class StationsControllerTests
     ***REMOVED***
         [Fact]
-        public void Test1()
+        public void Test()
         ***REMOVED***
 
 

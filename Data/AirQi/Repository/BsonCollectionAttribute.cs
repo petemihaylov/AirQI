@@ -5,7 +5,8 @@ namespace AirQi.Repository
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BsonCollectionAttribute : Attribute
     ***REMOVED***
-        public string CollectionName ***REMOVED*** get;***REMOVED***
+        private string _collectionName;
+        public string CollectionName ***REMOVED*** get => this._collectionName; set => this._collectionName = value;***REMOVED***
 
         public BsonCollectionAttribute(string collectionName)
         ***REMOVED***

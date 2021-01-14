@@ -4,19 +4,15 @@ import ***REMOVED***
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT,
-  ADD_PROFILE,
   SET_MESSAGE,
 ***REMOVED*** from "./types";
 
 import AuthService from "../services/auth.service";
-import UserService from "../services/user.service";
 import User from "../entities/User";
 
 export const register = (user: User) => (dispatch: any) => ***REMOVED***
   return AuthService.register(user).then(
     (response) => ***REMOVED***
-      console.log(response);
-
       dispatch(***REMOVED***
         type: REGISTER_SUCCESS,
         payload: user,
@@ -54,36 +50,35 @@ export const register = (user: User) => (dispatch: any) => ***REMOVED***
 export const login = (username: string, password: string) => (
   dispatch: any
 ) => ***REMOVED***
-  return AuthService.login(username, password)
-    .then(
-      (response) => ***REMOVED***
-        dispatch(***REMOVED***
-          type: LOGIN_SUCCESS,
-          payload: ***REMOVED*** user: response***REMOVED***,
-       ***REMOVED***);
+  return AuthService.login(username, password).then(
+    (response) => ***REMOVED***
+      dispatch(***REMOVED***
+        type: LOGIN_SUCCESS,
+        payload: ***REMOVED*** user: response***REMOVED***,
+     ***REMOVED***);
 
-        return Promise.resolve();
-     ***REMOVED***,
-      (error) => ***REMOVED***
-        const message =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString();
+      return Promise.resolve();
+   ***REMOVED***,
+    (error) => ***REMOVED***
+      const message =
+        (error.response &&
+          error.response.data &&
+          error.response.data.message) ||
+        error.message ||
+        error.toString();
 
-        dispatch(***REMOVED***
-          type: LOGIN_FAIL,
-       ***REMOVED***);
+      dispatch(***REMOVED***
+        type: LOGIN_FAIL,
+     ***REMOVED***);
 
-        dispatch(***REMOVED***
-          type: SET_MESSAGE,
-          payload: message,
-       ***REMOVED***);
+      dispatch(***REMOVED***
+        type: SET_MESSAGE,
+        payload: message,
+     ***REMOVED***);
 
-        return Promise.reject();
-     ***REMOVED***
-    )
+      return Promise.reject();
+   ***REMOVED***
+  );
 ***REMOVED***;
 
 export const logout = () => (dispatch: any) => ***REMOVED***

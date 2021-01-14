@@ -31,29 +31,32 @@ const LiveNotification = (props) => ***REMOVED***
       connection
         .start()
         .then((result) => ***REMOVED***
-          console.log("Connected!");
-
           connection.on("GetNewNotification", (Notification) => ***REMOVED***
             setNotification([Notification]);
          ***REMOVED***);
        ***REMOVED***)
-        .catch((e) => console.log("Connection failed: ", e));
+        .catch((e) => 
+          console.log(***REMOVED***type: "livenotification", connection: "failed", error: e***REMOVED***));
    ***REMOVED***
  ***REMOVED***, [connection]);
 
 
   return (
-    <Container>
+    <Container
+      style=***REMOVED******REMOVED*** position: "absolute", top: "3vh", left: "15vw", zIndex: "2"***REMOVED******REMOVED***
+    >
       ***REMOVED***notifications &&
         notifications.map((m, idx) => (
           <Alert
             key=***REMOVED***idx***REMOVED***
-            variant=***REMOVED***"danger"***REMOVED***
+            variant=***REMOVED***"default"***REMOVED***
             style=***REMOVED******REMOVED***
               width: "100%",
+              background: "#ff5233",
               height: "40px",
               fontSize: "14px",
               display: "grid",
+              color: "white",
               alignItems: "center",
               padding: ".35rem 1.25rem",
            ***REMOVED******REMOVED***

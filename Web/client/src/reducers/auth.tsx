@@ -15,7 +15,6 @@ const initialState = user
 export default function (state = initialState, action: any) ***REMOVED***
   const ***REMOVED*** type, payload***REMOVED*** = action;
 
-  console.log(action);
 
   switch (type) ***REMOVED***
     case REGISTER_SUCCESS:

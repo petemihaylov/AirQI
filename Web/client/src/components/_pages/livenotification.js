@@ -32,6 +32,7 @@ const LiveNotification = (props) => ***REMOVED***
         .start()
         .then((result) => ***REMOVED***
           connection.on("GetNewNotification", (Notification) => ***REMOVED***
+            console.log(Notification);
             setNotification([Notification]);
          ***REMOVED***);
        ***REMOVED***)
@@ -44,6 +45,9 @@ const LiveNotification = (props) => ***REMOVED***
   return (
     <Container
       style=***REMOVED******REMOVED*** position: "absolute", top: "3vh", left: "15vw", zIndex: "2"***REMOVED******REMOVED***
+      onClick=***REMOVED***() => ***REMOVED***
+        setNotification([]);
+     ***REMOVED******REMOVED***
     >
       ***REMOVED***notifications &&
         notifications.map((m, idx) => (
@@ -52,7 +56,7 @@ const LiveNotification = (props) => ***REMOVED***
             variant=***REMOVED***"default"***REMOVED***
             style=***REMOVED******REMOVED***
               width: "100%",
-              background: "#ff5233",
+              background: "#f89b3e",
               height: "40px",
               fontSize: "14px",
               display: "grid",
@@ -65,10 +69,10 @@ const LiveNotification = (props) => ***REMOVED***
               <Col md=***REMOVED***"1"***REMOVED***>
                 <FontAwesomeIcon icon=***REMOVED***faExclamationTriangle***REMOVED*** />
               </Col>
-              <Col md=***REMOVED***"8"***REMOVED***>
-                ***REMOVED***m.title***REMOVED*** ***REMOVED***m.description***REMOVED***
+              <Col md=***REMOVED***"9"***REMOVED*** >
+                ***REMOVED***m.title***REMOVED***! <span className="mr-5">  </span> ***REMOVED***m.description***REMOVED***
               </Col>
-              <Col md=***REMOVED***"3"***REMOVED***>***REMOVED***m.createdAt***REMOVED***</Col>
+              <Col md=***REMOVED***"2"***REMOVED***>***REMOVED***m.createdAt***REMOVED***</Col>
             </Row>
           </Alert>
         ))***REMOVED***

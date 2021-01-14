@@ -97,8 +97,6 @@ namespace AirQi.Controllers
             } 
 
             return NotFound();
-        }
-        
-
+        }      
     }
 }

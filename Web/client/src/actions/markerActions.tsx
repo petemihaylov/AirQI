@@ -33,7 +33,7 @@ export const deleteMarker = (id: number, index: number) => (dispatch: any) => **
         payload: index,
      ***REMOVED***);
    ***REMOVED***,
-    (error) => ***REMOVED***
+    (error) => ***REMOVED***  
       console.log(error);
    ***REMOVED***
   );

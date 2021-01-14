@@ -7,16 +7,19 @@ import * as Locations from "./locations";
 import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
 import Goo from "./goo";
 import "mapbox-gl/dist/mapbox-gl.css";
-import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../../assets/media/icons/pin-icon.svg";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED***
   fetchMarkers,
   createMarker,
   deleteMarker,
 ***REMOVED*** from "../../actions/markerActions";
+import ***REMOVED***
+  createNotification,
+***REMOVED*** from "../../actions/notificationActions";
 import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
+import Notification from "../../entities/Notification";
 import ***REMOVED***
   faMapPin,
   faFire,
@@ -132,9 +135,12 @@ const Map = (props) => ***REMOVED***
    ***REMOVED***
  ***REMOVED***;
 
-  const handleCreate = (longitude, latitude, ico) => ***REMOVED***
+  const handleCreate = (longitude, latitude, ico, message) => ***REMOVED***
     const m = new MarkerEntity(longitude, latitude, "marker", JSON.stringify(ico));
     props.dispatch(createMarker(m));
+
+    const n = new Notification(message.title, message.description, "Marker", Date.now);
+    props.dispatch(createNotification(n));
     setShowPopup(false);
     enableAddMarker(false);
     setController(false);
@@ -182,7 +188,7 @@ const Map = (props) => ***REMOVED***
         <FontAwesomeIcon
           icon=***REMOVED***JSON.parse(m.ico)***REMOVED***
           onClick=***REMOVED***handleDelete(***REMOVED*** marker: m, index: i***REMOVED***)***REMOVED***
-          style=***REMOVED******REMOVED*** fontSize: "20px", color: "#3a3a3a"***REMOVED******REMOVED***
+          style=***REMOVED******REMOVED*** fontSize: "20px", color: "#3a3a3a", cursor: "pointer"***REMOVED******REMOVED***
         />***REMOVED***" "***REMOVED***
       </Marker>
     ));
@@ -225,7 +231,13 @@ const Map = (props) => ***REMOVED***
             <div className="d-flex justify-content-around mt-2 mb3">
               <button
                 className="btn btn-info btn-sm mt-2 mr-2"
-                onClick=***REMOVED***() => handleCreate(p.longitude, p.latitude, faSmog)***REMOVED***
+                onClick=***REMOVED***() =>
+                  handleCreate(p.longitude, p.latitude, faSmog, ***REMOVED***
+                    title: "Smog",
+                    description:
+                      "Danger for people with emphysema, bronchitis, and asthma.",
+                 ***REMOVED***)
+               ***REMOVED***
               >
                 <FontAwesomeIcon icon=***REMOVED***faSmog***REMOVED*** />
               </button>
@@ -233,14 +245,24 @@ const Map = (props) => ***REMOVED***
               <button
                 className="btn btn-dark btn-sm mt-2 mr-2"
                 onClick=***REMOVED***() =>
-                  handleCreate(p.longitude, p.latitude, faCloudRain)
+                  handleCreate(p.longitude, p.latitude, faCloudRain, ***REMOVED***
+                    title: "Heavy rainfall",
+                    description:
+                      "There is a risk of flooding and damaged infrastructure.",
+                 ***REMOVED***)
                ***REMOVED***
               >
                 <FontAwesomeIcon icon=***REMOVED***faCloudRain***REMOVED*** />
               </button>
               <button
                 className="btn btn-danger btn-sm mt-2"
-                onClick=***REMOVED***() => handleCreate(p.longitude, p.latitude, faFire)***REMOVED***
+                onClick=***REMOVED***() =>
+                  handleCreate(p.longitude, p.latitude, faFire, ***REMOVED***
+                    title: "Danger of Fire",
+                    description:
+                      "It might have toxic gases, thick black smoke, and lack of oxygen.",
+                 ***REMOVED***)
+               ***REMOVED***
               >
                 <FontAwesomeIcon icon=***REMOVED***faFire***REMOVED*** />
               </button>

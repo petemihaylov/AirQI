@@ -15,7 +15,6 @@ const initialState = user
 export default function (state = initialState, action: any) {
   const { type, payload } = action;
 
-  console.log(action);
 
   switch (type) {
     case REGISTER_SUCCESS:

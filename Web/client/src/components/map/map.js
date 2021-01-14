@@ -9,7 +9,11 @@ import Goo from "./goo";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { ReactComponent as Pin } from "../../assets/media/icons/pin-icon.svg";
 import { connect } from "react-redux";
-import { fetchMarkers, createMarker, deleteMarker } from "../../actions/markerActions";
+import {
+  fetchMarkers,
+  createMarker,
+  deleteMarker,
+} from "../../actions/markerActions";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
@@ -17,10 +21,12 @@ import {
   faMapPin,
   faFire,
   faSmog,
+  faTrashAlt,
   faCloudRain,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+/* Uncomment the code below */
 import DeckGL, { ScatterplotLayer } from "deck.gl";
 
 const { REACT_APP_TOKEN } = process.env;
@@ -36,7 +42,10 @@ const Map = (props) => {
   });
   const mapRef = useRef();
 
-  const handleViewportChange = useCallback((newViewport) => setViewport(newViewport),[]);
+  const handleViewportChange = useCallback(
+    (newViewport) => setViewport(newViewport),
+    []
+  );
 
   /* Custom settings for ViewportChange */
   const handleGeocoderViewportChange = useCallback(
@@ -86,18 +95,13 @@ const Map = (props) => {
       connection
         .start()
         .then((result) => {
-          console.log("Connected!");
-
           connection.on("GetNewMarker", (Marker) => {
-            setMarkers(markers => [...markers, Marker]);
+            setMarkers((markers) => [...markers, Marker]);
           });
         })
         .catch((e) => console.log("Connection failed: ", e));
     }
   }, [connection]);
-
-
-
 
   /* Markers */
   const [markers, setMarkers] = useState([]);
@@ -106,49 +110,65 @@ const Map = (props) => {
   }, [props.items]);
 
   const handleController = () => {
-    setController(!controllerSelect);
+    setController(true);
     setShowPopup(false);
-    setFeature(false);
+    enableAddMarker(false);
   };
 
   const handleClick = ({ lngLat: [longitude, latitude] }) => {
     if (controllerSelect) {
-      if (feature) {
+      if (addMarker) {
         setShowPopup(true);
         setPopups([{ longitude, latitude }]);
       }
-      setFeature(true);
+      enableAddMarker(true);
     }
   };
 
-  const handleDelete = obj => () => {
-    props.dispatch(deleteMarker(obj.marker.id, obj.index));
+  const handleDelete = (obj) => () => {
+    if (eraseMarker) {
+      props.dispatch(deleteMarker(obj.marker.id, obj.index));
+      enableEraseMarker(false);
+    }
   };
 
-  const handleCreate = (longitude, latitude) => {
-    const m = new MarkerEntity(longitude, latitude);
+  const handleCreate = (longitude, latitude, ico) => {
+    const m = new MarkerEntity(longitude, latitude, "marker", JSON.stringify(ico));
     props.dispatch(createMarker(m));
     setShowPopup(false);
+    enableAddMarker(false);
+    setController(false);
   };
-
-
-
 
   /* Popup */
   const [popups, setPopups] = useState([]);
   const [controllerSelect, setController] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
-  const [feature, setFeature] = useState(false);
+  const [addMarker, enableAddMarker] = useState(false);
+  const [eraseMarker, enableEraseMarker] = useState(false);
 
-  const _renderMarkerTool = () => {
+  const _renderMarkerTools = () => {
     return (
       <div
         className="mapboxgl-ctrl-top-right"
-        style={{ position: "absolute",  top: 140 }}
+        style={{ position: "absolute", top: 140 }}
       >
         <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
-          <button className="" title="Marker" onClick={handleController}>
+          <button className="" title="Add marker" onClick={handleController}>
             <FontAwesomeIcon icon={faMapPin} />
+          </button>
+        </div>
+        <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
+          <button
+            className=""
+            title="Delete marker"
+            onClick={() => {
+              enableEraseMarker(true);
+              setShowPopup(false);
+              setController(false);
+            }}
+          >
+            <FontAwesomeIcon icon={faTrashAlt} />
           </button>
         </div>
       </div>
@@ -156,11 +176,79 @@ const Map = (props) => {
   };
 
   const _renderMarkers = () => {
+    
     return markers.map((m, i) => (
       <Marker {...m} key={i} offsetLeft={-20} offsetTop={-30}>
-        <Pin onClick={handleDelete({marker: m, index: i})} style={{ width: "40px" }} />
+        <FontAwesomeIcon
+          icon={JSON.parse(m.ico)}
+          onClick={handleDelete({ marker: m, index: i })}
+          style={{ fontSize: "20px", color: "#3a3a3a" }}
+        />{" "}
       </Marker>
     ));
+  };
+
+  const _renderMapTools = () => {
+    return (
+      <div>
+        <div style={{ position: "absolute", right: 10, top: 10 }}>
+          <NavigationControl />
+        </div>
+        <div style={{ position: "absolute", right: 10, top: 110 }}>
+          <FullscreenControl />
+        </div>
+
+        <Geocoder
+          mapRef={mapRef}
+          onViewportChange={handleGeocoderViewportChange}
+          mapboxApiAccessToken={REACT_APP_TOKEN}
+          position="top-left"
+        />
+      </div>
+    );
+  };
+
+  const _renderPopup = () => {
+    return (
+      showPopup &&
+      popups.map((p, i) => (
+        <Popup
+          latitude={p.latitude}
+          longitude={p.longitude}
+          closeButton={false}
+          closeOnClick={true}
+          anchor="bottom"
+          key={i}
+        >
+          <div className="p-2 ">
+            <small>Pin and notify the others</small>
+            <div className="d-flex justify-content-around mt-2 mb3">
+              <button
+                className="btn btn-info btn-sm mt-2 mr-2"
+                onClick={() => handleCreate(p.longitude, p.latitude, faSmog)}
+              >
+                <FontAwesomeIcon icon={faSmog} />
+              </button>
+
+              <button
+                className="btn btn-dark btn-sm mt-2 mr-2"
+                onClick={() =>
+                  handleCreate(p.longitude, p.latitude, faCloudRain)
+                }
+              >
+                <FontAwesomeIcon icon={faCloudRain} />
+              </button>
+              <button
+                className="btn btn-danger btn-sm mt-2"
+                onClick={() => handleCreate(p.longitude, p.latitude, faFire)}
+              >
+                <FontAwesomeIcon icon={faFire} />
+              </button>
+            </div>
+          </div>
+        </Popup>
+      ))
+    );
   };
 
   return (
@@ -188,85 +276,12 @@ const Map = (props) => {
         <SVGOverlayLayer airData={data} radius={30} color={""} />
 
         {_renderMarkers()}
-        {_renderMarkerTool()}
-
-        {showPopup &&
-          popups.map((p, i) => (
-            <Popup
-              latitude={p.latitude}
-              longitude={p.longitude}
-              closeButton={false}
-              closeOnClick={true}
-              anchor="bottom"
-              key={i}
-            >
-              <div className="p-2">
-                <small>A warning will be created!</small>
-
-                <div
-                  style={{ height: "50px", overflowY: "auto" }}
-                  className="mt-2 mb-2"
-                >
-                  <div className="d-flex justify-content-around">
-                    <FontAwesomeIcon icon={faFire} /> Fire
-                  </div>
-                  <div className="d-flex justify-content-around">
-                    <FontAwesomeIcon icon={faSmog} /> Smog
-                  </div>
-                  <div className="d-flex justify-content-around">
-                    <FontAwesomeIcon icon={faCloudRain} />
-                    Clouds
-                  </div>
-                  <div className="d-flex justify-content-around">
-                    <FontAwesomeIcon icon={faFire} /> Fire
-                  </div>
-                  <div className="d-flex justify-content-around">
-                    <FontAwesomeIcon icon={faSmog} /> Smog
-                  </div>
-                  <div className="d-flex justify-content-around">
-                    <FontAwesomeIcon icon={faCloudRain} />
-                    Clouds
-                  </div>
-                </div>
-
-                <button
-                  className="btn btn-block btn-outline-dark btn-sm mt-2"
-                  onClick={() => handleCreate(p.longitude, p.latitude)}
-                >
-                  Pin
-                </button>
-              </div>
-            </Popup>
-          ))}
-
-
-        <div style={{ position: "absolute", right: 10, top: 10 }}>
-          <NavigationControl />
-        </div>
-        <div style={{ position: "absolute", right: 10, top: 110 }}>
-          <FullscreenControl />
-        </div>
-
-        <Geocoder
-          mapRef={mapRef}
-          onViewportChange={handleGeocoderViewportChange}
-          mapboxApiAccessToken={REACT_APP_TOKEN}
-          position="top-left"
-        />
+        {_renderMarkerTools()}
+        {_renderMapTools()}
+        {_renderPopup()}
       </MapGL>
     </Container>
   );
-
-  // const layers = [
-  //     new ScatterplotLayer({
-  //       id: "scatterplot-layer",
-  //       data: data,
-  //       getRadius: 16 * 500,
-  //       radiusMaxPixels: 18,
-  //       getFillColor: [28, 218, 163],
-  //       autoHighlight: true,
-  //     }),
-  //   ];
 };
 
 function SVGOverlayLayer({ airData, radius, color }) {
@@ -303,6 +318,17 @@ function SVGOverlayLayer({ airData, radius, color }) {
 
   return <SVGOverlay redraw={redraw} />;
 }
+
+// const layers = [
+//     new ScatterplotLayer({
+//       id: "scatterplot-layer",
+//       data: data,
+//       getRadius: 16 * 500,
+//       radiusMaxPixels: 18,
+//       getFillColor: [28, 218, 163],
+//       autoHighlight: true,
+//     }),
+//   ];
 
 function mapStateToProps(state) {
   const { items } = state.markers;

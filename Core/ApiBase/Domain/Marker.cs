@@ -10,6 +10,10 @@ namespace ApiBase.Models
 
         [Required]
         public double longitude { get; set; }
-    }
 
+        [Required]
+        public string type {get; set; }
+        
+        public string ico {get; set;}
+    }
 }

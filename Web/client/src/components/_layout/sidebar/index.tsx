@@ -5,7 +5,7 @@ import ***REMOVED*** Item***REMOVED*** from "./item";
 import "./global.css";
 
 import ***REMOVED***
-  faUsersCog,
+  faTools,
   faBell,
   faMapMarked,
   faChevronRight,
@@ -33,7 +33,7 @@ const Sidebar = (props: any) => ***REMOVED***
             <Item
               title=***REMOVED***"Profile"***REMOVED***
               reference=***REMOVED***"/profile"***REMOVED***
-              fontIcon=***REMOVED***faUsersCog***REMOVED***
+              fontIcon=***REMOVED***faTools***REMOVED***
               classes=***REMOVED***classes***REMOVED***
               animation=***REMOVED***""***REMOVED***
             />

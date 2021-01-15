@@ -24,6 +24,5 @@ namespace AirQi.Models.Core
 
         [BsonElement]
         public IEnumerable<Measurement> Measurements { get; set; }
-
     }
 }

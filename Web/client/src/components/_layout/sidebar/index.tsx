@@ -5,7 +5,7 @@ import { Item } from "./item";
 import "./global.css";
 
 import {
-  faUsersCog,
+  faTools,
   faBell,
   faMapMarked,
   faChevronRight,
@@ -33,7 +33,7 @@ const Sidebar = (props: any) => {
             <Item
               title={"Profile"}
               reference={"/profile"}
-              fontIcon={faUsersCog}
+              fontIcon={faTools}
               classes={classes}
               animation={""}
             />

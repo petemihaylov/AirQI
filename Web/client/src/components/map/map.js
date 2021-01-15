@@ -1,6 +1,6 @@
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import MapGL, { SVGOverlay, Marker, FullscreenControl } from "react-map-gl";
+import MapGL, { SVGOverlay, Marker, FullscreenControl, GeolocateControl } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import { FlyToInterpolator, NavigationControl, Popup } from "react-map-gl";
 import * as Locations from "./locations";
@@ -209,6 +209,16 @@ const Map = (props) => {
           onViewportChange={handleGeocoderViewportChange}
           mapboxApiAccessToken={REACT_APP_TOKEN}
           position="top-left"
+        />
+        <GeolocateControl
+          style={{
+            position: "absolute",
+            right: 10,
+            top: "29vh"
+          }}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
+          auto
         />
       </div>
     );

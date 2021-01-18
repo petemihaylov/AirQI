@@ -10,11 +10,12 @@ body ***REMOVED***
 ***REMOVED***
 
 body::-webkit-scrollbar ***REMOVED***
-  width: 0.25rem;
+  width: 0.35rem;
 ***REMOVED***
 
 body::-webkit-scrollbar-track ***REMOVED***
-  background: $button-color;
+  background: rgb(255,0,0);
+background: linear-gradient(0, rgba(255,0,0,1) 0%, rgba(255,132,31,1) 27%, rgba(0,212,255,1) 100%);
 ***REMOVED***
 #root ***REMOVED***
   background-color: $background-color;

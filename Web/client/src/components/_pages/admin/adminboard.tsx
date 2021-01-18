@@ -1,5 +1,5 @@
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
-import ***REMOVED*** Button, Col, Container, Row, Table***REMOVED*** from "react-bootstrap";
+import ***REMOVED*** Button, Col, Container, Row, Table, Collapse, InputGroup***REMOVED*** from "react-bootstrap";
 import User from "../../../entities/User";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 import ***REMOVED***
@@ -12,7 +12,7 @@ import ***REMOVED*** deleteUser, fetchUsers***REMOVED*** from "../../../actions/
 import "./css/style.css";
 import Searchbar from "./searchbar";
 import CreateModal from "./create-modal";
-import Polygon from "./polygon";
+import ***REMOVED*** Sla***REMOVED*** from "./sla";
 
 const AdminBoard = (props: any) => ***REMOVED***
   const [content, handleContent] = useState([]);
@@ -52,7 +52,6 @@ const AdminBoard = (props: any) => ***REMOVED***
         props=***REMOVED***props***REMOVED***
         onHide=***REMOVED***() => setModalShow(false)***REMOVED***
       />
-
       <Table responsive hover variant="light">
         <thead>
           <tr>
@@ -99,7 +98,8 @@ const AdminBoard = (props: any) => ***REMOVED***
             ))***REMOVED***
         </tbody>
       </Table>
-      <Polygon/>
+     
+      <Sla/>
     </Container>
   );
 ***REMOVED***;

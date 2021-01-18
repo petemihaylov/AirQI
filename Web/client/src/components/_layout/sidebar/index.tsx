@@ -1,4 +1,4 @@
-import React from "react";
+import React, ***REMOVED***useState, useEffect***REMOVED*** from "react";
 import ***REMOVED*** createUseStyles***REMOVED*** from "react-jss";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** Item***REMOVED*** from "./item";
@@ -8,6 +8,7 @@ import ***REMOVED***
   faTools,
   faBell,
   faMapMarked,
+  faUserShield,
   faChevronRight,
 ***REMOVED*** from "@fortawesome/free-solid-svg-icons";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
@@ -15,6 +16,12 @@ import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fonta
 const Sidebar = (props: any) => ***REMOVED***
   const classes = useStyles();
   const ***REMOVED*** user***REMOVED*** = props;
+  const [adminBoard, showAdminBoard] = useState(false);
+
+
+  useEffect(() => ***REMOVED***
+    showAdminBoard(user && user.userRole === "Admin");
+ ***REMOVED***, []);
 
   return (
     <div>
@@ -53,7 +60,15 @@ const Sidebar = (props: any) => ***REMOVED***
               classes=***REMOVED***classes***REMOVED***
               animation=***REMOVED***""***REMOVED***
             />
-
+            ***REMOVED***adminBoard && (
+              <Item
+                title=***REMOVED***"Admin"***REMOVED***
+                reference=***REMOVED***"/admin"***REMOVED***
+                fontIcon=***REMOVED***faUserShield***REMOVED***
+                classes=***REMOVED***classes***REMOVED***
+                animation=***REMOVED***""***REMOVED***
+              />
+            )***REMOVED***
             <li className=***REMOVED***classes.navItem***REMOVED***></li>
           </ul>
         </nav>

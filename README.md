@@ -84,34 +84,7 @@ Verify the deployment by navigating to your server address in your preferred bro
 ```sh
 127.0.0.1:8000
 ```
-
-## Licenses
-AirQi repo typically uses either the [MIT](LICENSE.TXT) or
-[Apache 2](https://www.apache.org/licenses/LICENSE-2.0) licenses for code.
-Some projects license documentation and other forms of content under
-[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-
-
-
-   [.NetCore]: <https://dotnet.microsoft.com/download/dotnet-core>
-   [node.js]: <https://nodejs.org>
-   [jQuery]: <https://jquery.com>
-   [ReactJS]: <https://reactjs.org/>
-   [SignalR]: <https://dotnet.microsoft.com/apps/aspnet/signalr>
-   [Redux]: <https://redux.js.org/>
-   [DeckGL]: <https://deck.gl/>
-   [Hangfire]: <https://www.hangfire.io/>
-   [Kubernetes]: <https://kubernetes.io/>
-
-
-
-
-[DevOps](https://dev.azure.com/429937/AirQI%20Project)
-
-[JIRA](https://petarmihaylov.atlassian.net/secure/RapidBoard.jspa?projectKey=AIR&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYWI1M2M1YWVmMmIyNGJkYmIwYWRiNjFlMGE4NmRlOTYiLCJwIjoiaiJ9)
-
-[Confluence](https://petarmihaylov.atlassian.net/l/c/QEGg4x6G)
+## Source Details
 
 ```json
 {
@@ -142,3 +115,25 @@ Some projects license documentation and other forms of content under
   "updatedAt": "2020-05-09T22:00:00.000+00:00"
 }
 ```
+
+## Licenses
+AirQi repo typically uses either the [MIT](LICENSE.TXT) or
+[Apache 2](https://www.apache.org/licenses/LICENSE-2.0) licenses for code.
+Some projects license documentation and other forms of content under
+[Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
+
+
+
+
+   [.NetCore]: <https://dotnet.microsoft.com/download/dotnet-core>
+   [node.js]: <https://nodejs.org>
+   [jQuery]: <https://jquery.com>
+   [ReactJS]: <https://reactjs.org/>
+   [SignalR]: <https://dotnet.microsoft.com/apps/aspnet/signalr>
+   [Redux]: <https://redux.js.org/>
+   [DeckGL]: <https://deck.gl/>
+   [Hangfire]: <https://www.hangfire.io/>
+   [Kubernetes]: <https://kubernetes.io/>
+
+[[DevOps](https://dev.azure.com/429937/AirQI%20Project)][[JIRA](https://petarmihaylov.atlassian.net/secure/RapidBoard.jspa?projectKey=AIR&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYWI1M2M1YWVmMmIyNGJkYmIwYWRiNjFlMGE4NmRlOTYiLCJwIjoiaiJ9)][[Confluence](https://petarmihaylov.atlassian.net/l/c/QEGg4x6G)]
+

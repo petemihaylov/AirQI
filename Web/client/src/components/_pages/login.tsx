@@ -84,17 +84,19 @@ const Login = (props: any) => ***REMOVED***
                 </BubbleButton>
               </div>
 
-              ***REMOVED***message && (
+            </form>
+          </Card.Body>
+        </div>
+            ***REMOVED***message && (
                 <div className="form-group">
                   <div className="alert alert-secondary" role="alert">
                     ***REMOVED***message***REMOVED***
                   </div>
                 </div>
               )***REMOVED***
-            </form>
-          </Card.Body>
-        </div>
+          
       </Card>
+      
     </div>
   );
 ***REMOVED***;

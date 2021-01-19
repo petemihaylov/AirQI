@@ -1,6 +1,6 @@
 import ***REMOVED*** SET_MESSAGE, CLEAR_MESSAGE***REMOVED*** from "../actions/types";
 
-const initialState = ***REMOVED******REMOVED***;
+const initialState = ***REMOVED***message: null***REMOVED***;
 
 export default function (state = initialState, action: any) ***REMOVED***
   const ***REMOVED*** type, payload***REMOVED*** = action;

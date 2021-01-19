@@ -26,7 +26,7 @@ namespace AirQi
     public class PullAqicn : WorkerService
     {
         private HttpClient _client;
-        public PullAqicn(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
+        public PullAqicn(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<LiveStationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
         {
             this.Hub = base.Hub;
             this.Mapper = mapper;
@@ -87,14 +87,15 @@ namespace AirQi
                 string aqi = data.aqi.ToString();
                 station.Aqi = aqi.Contains("-") ? 0 : double.Parse(aqi);
 
-                Coordinates coordinates = new Coordinates();                
+                           
                 NumberFormatInfo provider = new NumberFormatInfo();
                 provider.NumberDecimalSeparator = ",";
                 
-                coordinates.Latitude = Convert.ToDouble(data.city.geo[0], provider);
-                coordinates.Longitude = Convert.ToDouble(data.city.geo[1], provider);
+                var latitude = Convert.ToDouble(data.city.geo[0], provider);
+                var longitude = Convert.ToDouble(data.city.geo[1], provider);
+                double[] position = new double[] { longitude, latitude };
 
-                station.Coordinates = coordinates;
+                station.Position = position;
                 station.CreatedAt = DateTime.UtcNow;
                 station.UpdatedAt = DateTime.UtcNow;
 
@@ -115,9 +116,6 @@ namespace AirQi
 
                     measurement.Parameter = obj;
                     measurement.Value = Convert.ToDouble(measurements[obj].v);
-                    measurement.Coordinates = coordinates;
-                    measurement.CreatedAt = DateTime.UtcNow;
-                    measurement.UpdatedAt = DateTime.UtcNow;
                 
                     measurementsCollection.Add(measurement);
                 }

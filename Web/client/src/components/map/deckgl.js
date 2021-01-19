@@ -3,9 +3,6 @@ import DeckGL, { ScatterplotLayer, TextLayer } from "deck.gl";
 // ReactJS
 import useSwr from "swr";
 import React, { useEffect, useState } from 'react';
-// Markers
-import ReactMapGL, { Marker } from 'react-map-gl';
-import { ReactComponent as Pin } from "../assets/media/pin-icon.svg";
 // SignalR
 import { HubConnectionBuilder } from "@microsoft/signalr";
 
@@ -14,14 +11,14 @@ import { HubConnectionBuilder } from "@microsoft/signalr";
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 
-export default function Map() {
+export default function DeckGLMap() {
 
   // SignalR
   const [hubConnection, setHubConnection] = useState(null);
-  const [zoom, setZoom] = useState(null);
+  const [zoom, setZoom] = useState(0);
     
   // Load and prepare data
-  const { data, error } = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
+  const { data, error } = useSwr(process.env.REACT_APP_DATA_URL + "/api/stations", fetcher);
   const stations = (data && !error) ? data : [];
   
   useEffect(() => {
@@ -29,7 +26,7 @@ export default function Map() {
       const createHubConnection = async () => {
 
           const hubConnect = new HubConnectionBuilder()
-          .withUrl(process.env.REACT_APP_API_URL + "livestations")
+          .withUrl(process.env.REACT_APP_DATA_URL + "/livestations")
           .withAutomaticReconnect()
           .build();
           
@@ -65,7 +62,6 @@ export default function Map() {
 
   }, [hubConnection]);
 
-  // Viewport settings
   const [viewport, setViewport] = useState({
     latitude: 52.3676,
     longitude: 4.9041,
@@ -75,7 +71,8 @@ export default function Map() {
     minZoom: 3,
   });
 
-  const changeColor = (aqi) => {
+const changeColor = (aqi) => {
+      
     if (aqi >= 0 && aqi <= 50) {
       return [162, 219, 96, 20];      
     }
@@ -105,7 +102,7 @@ export default function Map() {
   const scatterplotlayer = [
     new ScatterplotLayer({
         id: "scatterplot-layer",
-        data: data,
+        data: stations,
         getRadius: zoom * 100,
         radiusMaxPixels: 100,
         radiusMinPixels: 20,
@@ -129,17 +126,7 @@ export default function Map() {
   ];
   
 
-  return (
-    <div>
-      <ReactMapGL
-        {...viewport}
-        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
-        mapStyle="mapbox://styles/constantimi/ckisx2s921doh19sz2tyod230"
-        onViewportChange={viewport => {
-          setViewport(viewport);
-        }}
-      >
-        
+  return (       
         <DeckGL initialViewState={viewport}
           height={viewport.height}
           width={viewport.width}
@@ -150,10 +137,6 @@ export default function Map() {
             setZoom(viewState.zoom);
           }}
         />
-
-      </ReactMapGL>
-        
-    </div>
   );
 
 }

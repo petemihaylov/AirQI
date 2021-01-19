@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using MongoDB.Bson;
+using System.Linq;
+using Microsoft.AspNetCore.SignalR;
+using AssetNXT.Hubs;
 
 namespace AirQi.Controllers
 {
@@ -17,17 +20,20 @@ namespace AirQi.Controllers
     public class StationsController : ControllerBase
     {
         private readonly IMongoDataRepository<Station> _repository;
+        private readonly IHubContext<LiveStationHub> _hub;
         private readonly IMapper _mapper;
-        public StationsController(IMongoDataRepository<Station> repository, IMapper mapper)
+        public StationsController(IMongoDataRepository<Station> repository, IHubContext<LiveStationHub> hub, IMapper mapper)
         {
-           this._repository = repository;
-           this._mapper = mapper;
+            this._repository = repository;
+            this._hub = hub;
+            this._mapper = mapper;
         }
 
        [HttpGet]
         public async Task<IActionResult> GetAllStations()
         {
-            var stations =  await this._repository.GetAllLatestAsync();
+            var stations = await this._repository.GetAllAsync();
+            stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new { doc.Position }, (key, group) => group.First());
 
             if(stations != null){
                 return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stations));
@@ -52,14 +58,17 @@ namespace AirQi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateStation(StationCreateDto stationCreateDto)
         {
-            var station =this._mapper.Map<Station>(stationCreateDto);
+            var station = this._mapper.Map<Station>(stationCreateDto);
 
             if (station != null)
             {
                 station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;
                 await this._repository.CreateObjectAsync(station);
 
-                var stationReadDto =this._mapper.Map<StationReadDto>(station);
+                // SignalR event
+                await this._hub.Clients.All.SendAsync("GetNewStationsAsync", station);
+
+                var stationReadDto = this._mapper.Map<StationReadDto>(station);
 
                 // https://docs.microsoft.com/en-us/dotnet/api/system.web.http.apicontroller.createdatroute?view=aspnetcore-2.2
                 return CreatedAtRoute(nameof(GetStationById), new { Id = stationReadDto.Id }, stationReadDto);

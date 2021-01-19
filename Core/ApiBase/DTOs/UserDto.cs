@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using ApiBase.Models;
+using System;
 
 namespace ApiBase.DTOs
 {
@@ -19,7 +20,12 @@ namespace ApiBase.DTOs
         
         [MaxLength(250)]
         public string LastName { get; set; }
+        
         public string UserRole { get; set; }
+
+        public bool IsActive {get; set; }
+
+        public DateTime LastActive {get; set;}
     }
     
 }

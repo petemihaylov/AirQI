@@ -10,9 +10,15 @@ class MarkerService {
     });
   };
 
-  createMarker = async(marker: IMarker) =>{
-      return await axios.post(REACT_APP_API_URL + "/api/markers/", marker);
-  }
+  createMarker = async (marker: IMarker) => {
+    return await axios.post(REACT_APP_API_URL + "/api/markers/", marker);
+  };
+
+  deleteMarker = async (id: number) => {
+    return axios.delete(REACT_APP_API_URL + "/api/markers/" + id, {
+      headers: authHeader(),
+    });
+  };
 }
 
 export default new MarkerService();

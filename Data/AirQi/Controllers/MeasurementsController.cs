@@ -25,12 +25,12 @@ namespace AirQi.Controllers
         }
 
         [HttpGet]
-        public ActionResult <IEnumerable<StationReadDto>> GetAllMeasurements()
+        public ActionResult <IEnumerable<MeasurementReadDto>> GetAllMeasurements()
         {
             var stationModelItems =  this._repository.GetAll();
             
             if(stationModelItems != null){
-                return Ok(_mapper.Map<IEnumerable<MeasurementReadDto>>(stationModelItems));
+                return Ok(_mapper.Map<IEnumerable<StationMeasurementReadDto>>(stationModelItems));
             }
 
             return NotFound();
@@ -43,25 +43,23 @@ namespace AirQi.Controllers
 
             if(station != null)
             {
-                return Ok(_mapper.Map<MeasurementReadDto>(station));    
+                return Ok(_mapper.Map<StationMeasurementReadDto>(station));    
             }
 
             return NotFound();
         }
 
-        [HttpPost("id")]
-        public async Task<IActionResult> CreateMeasurementByStationId(string id, MeasurementCreateDto measurementCreateDto)
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateStation(string id, StationMeasurementCreateDto stationCreateDto)
         {
+            var stationModel =this._mapper.Map<Station>(stationCreateDto);
             var station = await this._repository.GetObjectByIdAsync(id);
-            var measurementModel = this._mapper.Map<Measurement>(measurementCreateDto);
-            var stationModel = this._mapper.Map<Station>(station);
 
             if(station != null)
             {
                 stationModel.UpdatedAt = DateTime.UtcNow;
                 stationModel.Id = new ObjectId(id);
-                stationModel.Measurements.ToList().Add(measurementModel);
-
                 this._repository.UpdateObject(id, stationModel);
                 return Ok(_mapper.Map<StationReadDto>(stationModel));    
             }
@@ -69,50 +67,18 @@ namespace AirQi.Controllers
             return NotFound();
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateMeasurementBySourceName(string id, MeasurementCreateDto measurementCreateDto)
+        [HttpDelete("{id}")]
+        public  async Task<ActionResult> DeleteStation(string id)
         {
             var station = await this._repository.GetObjectByIdAsync(id);
-            var measurementModel = this._mapper.Map<Measurement>(measurementCreateDto);
-            var stationModel = this._mapper.Map<Station>(station);
 
             if(station != null)
-            {
-                stationModel.UpdatedAt = DateTime.UtcNow;
-                stationModel.Id = new ObjectId(id);
-                var measurements = stationModel.Measurements.ToList();
-                var mObj = measurements.FirstOrDefault(m => m.SourceName == measurementModel.SourceName);
-
-                if (mObj != null)
-                {
-                    measurements.Remove(mObj);
-                    measurements.Add(measurementModel);
-                    this._repository.UpdateObject(id, stationModel);
-                    return Ok(_mapper.Map<StationReadDto>(stationModel));    
-                }
-                    
-            }
-
-            return NotFound();
-        }
-
-        [HttpDelete("{id}")]
-        public  async Task<ActionResult> DeleteMeasurement(string id, MeasurementCreateDto measurementCreateDto)
-        {
-            var station = await this._repository.GetObjectByIdAsync(id);
-            var measurementModel = this._mapper.Map<Measurement>(measurementCreateDto);
-            var stationModel = this._mapper.Map<Station>(station);
-            var measurements = stationModel.Measurements.ToList();
-            var mObj = measurements.FirstOrDefault(m => m.SourceName == measurementModel.SourceName);
-
-            if (mObj != null)
-            {
-                    measurements.Remove(mObj);
- 
+            {                
+                await this._repository.RemoveObjectAsync(station);
                 return Ok("Successfully deleted from collection!"); 
             } 
 
             return NotFound();
-        }
+        }      
     }
 }

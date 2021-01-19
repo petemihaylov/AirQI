@@ -35,11 +35,22 @@ class UserService {
     });
   };
 
+  updateUser = async (user: User) =>{
+      return axios.put(REACT_APP_API_URL + `/api/users/${user.id}`, user, {
+        headers: authHeader(),
+      });
+  }
   deleteUser = async (id: number) => {
     return axios.delete(REACT_APP_API_URL + "/api/users/" + id, {
       headers: authHeader(),
     });
   };
+
+  getUser = async (id: number) => {
+    return axios.get(REACT_APP_API_URL + "/api/users/" + id, {
+      headers: authHeader(),
+    });
+  }
 }
 
 export default new UserService();

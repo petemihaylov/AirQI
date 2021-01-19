@@ -15,6 +15,8 @@ interface RegistrationFormData {
   password: string;
   firstName: string;
   lastName: string;
+  lastActive: Date;
+  isActive: boolean;
 }
 
 const Register = (props: any) => {
@@ -26,12 +28,14 @@ const Register = (props: any) => {
     handleChange(false);
 
     const { dispatch, history } = props;
-    const { username, firstName, lastName, password } = data;
-
+    const { username, firstName, lastName, password, lastActive, isActive } = data;
+    
     let userObj = new User(
       username,
       firstName,
       lastName,
+      new Date(),
+      true,
       password,
       Roles.Moderator
     );

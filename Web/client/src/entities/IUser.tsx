@@ -5,4 +5,6 @@ export interface IUser {
   firstName: string | undefined;
   lastName: string | undefined;
   userRole: string | undefined;
+  lastActive: Date | undefined;
+  isActive: boolean | undefined;
 }

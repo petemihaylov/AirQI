@@ -15,6 +15,10 @@ namespace ApiJwt.Models
 
         [Required]
         public RoleEnum UserRole { get; set; }
+        
+        public bool IsActive {get; set; }
+        
+        public DateTime LastActive {get; set;}
     }
 
     public enum RoleEnum { Admin, Moderator, User } 

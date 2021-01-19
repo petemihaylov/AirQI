@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 
 namespace AirQi.Models.Core
@@ -10,7 +11,5 @@ namespace AirQi.Models.Core
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
-                
-        public Coordinates Coordinates { get; set; }
     }
 }

@@ -12,6 +12,7 @@ import { deleteUser, fetchUsers } from "../../../actions/userActions";
 import "./css/style.css";
 import Searchbar from "./searchbar";
 import CreateModal from "./create-modal";
+import Polygon from "./polygon";
 
 const AdminBoard = (props: any) => {
   const [content, handleContent] = useState([]);
@@ -23,7 +24,6 @@ const AdminBoard = (props: any) => {
 
   useEffect(() => {
     handleContent(props.items);
-    console.log(props.items);
   }, [props.items]);
 
   const handleDelete = (id: any, index: number) => {
@@ -67,8 +67,8 @@ const AdminBoard = (props: any) => {
         <tbody>
           {content !== [] &&
             content.map((item: User, index) => (
-              <tr>
-                <td key={item.id}>{index + 1}</td>
+              <tr key={index}>
+                <td>{index + 1}</td>
                 <td>
                   {" "}
                   {item.firstName} {item.lastName}
@@ -99,6 +99,7 @@ const AdminBoard = (props: any) => {
             ))}
         </tbody>
       </Table>
+      <Polygon/>
     </Container>
   );
 };

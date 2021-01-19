@@ -27,11 +27,12 @@ namespace AirQi.Data
 
         private static Station MockStation()
         ***REMOVED***
-            var coordinates = new Coordinates
-            ***REMOVED***
-                Latitude = (_random.NextDouble() * (53.2193835 - 51.1913202)) + 51.1913202,
-                Longitude = (_random.NextDouble() * (6.8936619 - 4.4777325)) + 4.4777325
-           ***REMOVED***;
+
+            var latitude = (_random.NextDouble() * (53.2193835 - 51.1913202)) + 51.1913202;
+            var longitude = (_random.NextDouble() * (6.8936619 - 4.4777325)) + 4.4777325;
+
+
+            double[,] position = new double[,] ***REMOVED******REMOVED*** latitude, longitude***REMOVED******REMOVED***;
 
             var station = new Station
             ***REMOVED***
@@ -39,26 +40,26 @@ namespace AirQi.Data
                 Id = new ObjectId(NewSeeder().ToString().Substring(0, 8)),
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                Coordinates = coordinates,
+                Position = position,
                 Aqi = _random.NextDouble(),
                 // https://github.com/vivet/GoogleApi
                 Location = "Netherlands",
                 City = "",
                 Country = "Netherlands",
-                Measurements = Enumerable.Range(0, _random.Next(4, 5)).Select(m => MockMeasurement(coordinates)).ToList()
+                Measurements = Enumerable.Range(0, _random.Next(4, 5)).Select(m => MockMeasurement(position)).ToList()
            ***REMOVED***;
 
             return station;
        ***REMOVED***
 
-        private static Measurement MockMeasurement(Coordinates coordinates)
+        private static Measurement MockMeasurement(double[,] position)
         ***REMOVED***
             var measuerment = new Measurement
             ***REMOVED***
                 Id = new ObjectId(NewSeeder().ToString().Substring(0, 8)),
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
-                Coordinates = coordinates,
+                Position = position,
                 Parameter = "aqi",
                 Value = _random.Next(50, 150),
                 LastUpdated = DateTime.UtcNow.ToString(),

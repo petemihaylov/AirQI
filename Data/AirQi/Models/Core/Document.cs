@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using MongoDB.Bson;
 
 namespace AirQi.Models.Core
@@ -11,6 +12,6 @@ namespace AirQi.Models.Core
 
         public DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
                 
-        public Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
+        public double[,] Position ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

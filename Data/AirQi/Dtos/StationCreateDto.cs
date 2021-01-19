@@ -23,7 +23,7 @@ namespace AirQi.Dtos
         public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
 
         [Required]
-        public Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
+        public double[,] Position ***REMOVED*** get; set;***REMOVED***
 
    ***REMOVED***
 ***REMOVED***

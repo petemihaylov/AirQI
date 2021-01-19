@@ -21,7 +21,7 @@ namespace AirQi.Dtos
 
         public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
 
-        public Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
+        public double[,] Position ***REMOVED*** get; set;***REMOVED***
 
         public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
 

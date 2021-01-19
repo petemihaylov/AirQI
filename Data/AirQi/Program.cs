@@ -15,6 +15,7 @@ namespace AirQi
                 .ConfigureWebHostDefaults(webBuilder =>
                 ***REMOVED***
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls("http://localhost:9000/");
                ***REMOVED***);
    ***REMOVED***
 ***REMOVED***

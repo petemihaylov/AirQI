@@ -126,7 +126,7 @@ namespace AirQi
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<StationHub>("/livestations");
+                endpoints.MapHub<LiveStationHub>("/livestations");
             });
 
             // Swagger config
@@ -143,19 +143,19 @@ namespace AirQi
             // ****************************** hangfire background jobs ******************************
 
             // this job will trigger the SignalR Hub connection to the Client every hour
-            // RecurringJob.AddOrUpdate<WorkerService>("Websocket", service => service.PullDataAsync(), Cron.Hourly);
+            RecurringJob.AddOrUpdate<WorkerService>("Websocket", service => service.PullDataAsync(), Cron.Hourly);
             
             // this job will fetch global data from OpenAqi every minute
             RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Hourly);
 
             // this job will fetch world data from Aqicn once every day
-            // RecurringJob.AddOrUpdate<PullAqicn>("Aqicn", service => service.PullDataAsync() , Cron.Daily);
+            RecurringJob.AddOrUpdate<PullAqicn>("Aqicn", service => service.PullDataAsync() , Cron.Daily);
 
             // this job will fetch data from SmartCitizen at every 2nd minute
-            // RecurringJob.AddOrUpdate<PullSmartCitizen>("Smart-Citizen", service => service.PullDataAsync() , "*/2 * * * *");
+            RecurringJob.AddOrUpdate<PullSmartCitizen>("Smart-Citizen", service => service.PullDataAsync() , "*/2 * * * *");
 
             // this job will fetch data from AirThings at every 30 minutes
-            // RecurringJob.AddOrUpdate<PullAirThings>("Air-Things", service => service.PullDataAsync() , "*/30 * * * *");
+            RecurringJob.AddOrUpdate<PullAirThings>("Air-Things", service => service.PullDataAsync() , "*/30 * * * *");
         }
     }
 }

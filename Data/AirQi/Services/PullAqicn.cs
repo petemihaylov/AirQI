@@ -26,7 +26,7 @@ namespace AirQi
     public class PullAqicn : WorkerService
     {
         private HttpClient _client;
-        public PullAqicn(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
+        public PullAqicn(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<LiveStationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
         {
             this.Hub = base.Hub;
             this.Mapper = mapper;

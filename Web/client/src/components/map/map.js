@@ -1,11 +1,10 @@
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import MapGL, { SVGOverlay, Marker, FullscreenControl, GeolocateControl } from "react-map-gl";
+import MapGL, { Marker, FullscreenControl, GeolocateControl } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import { FlyToInterpolator, NavigationControl, Popup } from "react-map-gl";
-import * as Locations from "./locations";
 import { Container } from "react-bootstrap";
-import Goo from "./goo";
+import DeckGLMap from "./deckgl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { connect } from "react-redux";
 import {
@@ -29,26 +28,80 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-/* Uncomment the code below */
-import DeckGL, { ScatterplotLayer } from "deck.gl";
+import DeckGL, { ScatterplotLayer, TextLayer } from "deck.gl";
+import useSwr from "swr";
+
+
+// Data fetching method
+const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 const { REACT_APP_TOKEN } = process.env;
 const { REACT_APP_API_URL } = process.env;
 
 const Map = (props) => {
+  // Viewport settings
   const [viewport, setViewport] = useState({
-    latitude: Locations.nyc.location.latitude,
-    longitude: Locations.nyc.location.longitude,
-    pitch: 60,
+    latitude: 52.3676,
+    longitude: 4.9041,
+    width: "100vw",
+    height: "100vh",
+    pitch: 67,
     bearing: 0.7,
-    zoom: 11,
+    zoom: 6,
+    minZoom: 3
   });
+
   const mapRef = useRef();
 
-  const handleViewportChange = useCallback(
-    (newViewport) => setViewport(newViewport),
-    []
-  );
+  const handleViewportChange = useCallback((newViewport) => setViewport(newViewport),[]);
+
+   /* SignalR */
+   const [hubConnection, setHubConnection] = useState(null);
+   const [zoom, setZoom] = useState(null);
+     
+   /* Load and prepare data */
+   const { data, error } = useSwr(process.env.REACT_APP_DATA_URL + "/api/stations", fetcher);
+   const stations = (data && !error) ? data : [];
+   
+   useEffect(() => {
+       /* Create Hub Connection. */
+       const createHubConnection = async () => {
+ 
+           const hubConnect = new HubConnectionBuilder()
+           .withUrl(process.env.REACT_APP_DATA_URL + "/livestations")
+           .withAutomaticReconnect()
+           .build();
+           
+           /* Set the initial SignalR Hub Connection. */
+           setHubConnection(hubConnect);
+           
+       }
+ 
+       createHubConnection();
+   }, []);
+   
+   /* Websocket */
+   useEffect(() => {
+ 
+      
+           if (hubConnection) {
+                hubConnection
+                   .start()
+                   .then((result) => {
+                       console.log("SignalR Connected!");
+ 
+                       hubConnection.on("GetNewStationsAsync", (stations) => {
+                           console.log("New Updated Data");
+                           console.log(stations);
+                           this.stations = stations;
+                       });
+                   })
+                   .catch((e) => console.log("Connection failed: ", e));
+           }
+       
+        
+ 
+   }, [hubConnection]);
 
   /* Custom settings for ViewportChange */
   const handleGeocoderViewportChange = useCallback(
@@ -57,13 +110,11 @@ const Map = (props) => {
         transitionDuration: 2000,
         pitch: 67,
         bearing: 0.7,
+        zoom: 4,
         transitionInterpolator: new FlyToInterpolator(),
       };
 
-      return handleViewportChange({
-        ...newViewport,
-        ...geocoderDefaultOverrides,
-      });
+      return handleViewportChange({...newViewport, ...geocoderDefaultOverrides});
     },
     [handleViewportChange]
   );
@@ -71,12 +122,7 @@ const Map = (props) => {
   /* Live markers from the WebSocket */
   const [connection, setConnection] = useState(null);
 
-  /* Mock up data */
-  const [data, setAirData] = useState([]);
-
   useEffect(() => {
-    /* Sets the mockup data */
-    setAirData(Locations.data);
 
     /* Gets markers from DB */
     props.dispatch(fetchMarkers());
@@ -283,6 +329,58 @@ const Map = (props) => {
     );
   };
 
+  const _changeColor = (aqi) => {
+      
+    if (aqi >= 0 && aqi <= 50) {
+      return [162, 219, 96, 40];      
+    }
+    
+    if (aqi >= 51 && aqi <= 100) {
+      return [250, 213, 80, 40];      
+    }
+
+    if (aqi >= 101 && aqi <= 150) {
+      return [253, 154, 87, 40];     
+    }
+
+    if (aqi >= 151 && aqi <= 200) {
+      return [254, 104, 109, 40];      
+    }
+
+    if (aqi >= 201 && aqi <= 300) {
+      return [155, 89, 117, 40];      
+    }
+
+    return [152, 86, 114, 40];  
+  }
+
+  // DeckGl Layers
+  const scatterplotlayer = [
+    new ScatterplotLayer({
+        id: "scatterplot-layer",
+        data: stations,
+        getRadius: zoom * 100,
+        radiusMaxPixels: 100,
+        radiusMinPixels: 20,
+        getFillColor: d => _changeColor(d.aqi),
+        autoHighlight: true,
+      })
+  ];
+  
+  const textLayer = [
+    new TextLayer({
+      id: 'text-layer',
+      data,
+      pickable: true,
+      getPosition: d => d.position,
+      getText: d => `${d.aqi}`,
+      getSize: zoom + 8,
+      getAngle: 0,
+      getTextAnchor: 'middle',
+      getAlignmentBaseline: 'center'
+    })
+  ];
+
   return (
     <Container
       fluid
@@ -303,64 +401,28 @@ const Map = (props) => {
         mapboxApiAccessToken={REACT_APP_TOKEN}
         onClick={handleClick}
       >
-        {/* <DeckGL viewState={viewport} layers={layers} /> */}
-
-        <SVGOverlayLayer airData={data} radius={30} color={""} />
+        
+        <DeckGL initialViewState={viewport}
+          height={viewport.height}
+          width={viewport.width}
+          controller={true}
+          layers={[scatterplotlayer, textLayer]}
+          onViewStateChange={({ viewState }) => {
+            console.log(`state: ${viewState.zoom}`);
+            setZoom(viewState.zoom);
+          }}
+        />
 
         {_renderMarkers()}
         {_renderMarkerTools()}
         {_renderMapTools()}
-        {_renderPopup()}
+        {_renderPopup() }
       </MapGL>
     </Container>
   );
 };
 
-function SVGOverlayLayer({ airData, radius, color }) {
-  const redraw = ({ project }) => {
-    return (
-      <g>
-        <Goo>
-          {airData.map((data, index) => {
-            const [x, y] = project(data.position);
-            if (index % 3 === 0) color = "#1daffe";
-            else color = "#1cdaa3";
 
-            return (
-              <circle
-                key={data.id}
-                cx={x}
-                cy={y}
-                r={radius}
-                fill={color}
-                fillOpacity={0.4}
-                onClick={() => {
-                  alert(
-                    "The area location: (" + x + " - " + y + ") was clicked."
-                  );
-                  return false;
-                }}
-              />
-            );
-          })}
-        </Goo>
-      </g>
-    );
-  };
-
-  return <SVGOverlay redraw={redraw} />;
-}
-
-// const layers = [
-//     new ScatterplotLayer({
-//       id: "scatterplot-layer",
-//       data: data,
-//       getRadius: 16 * 500,
-//       radiusMaxPixels: 18,
-//       getFillColor: [28, 218, 163],
-//       autoHighlight: true,
-//     }),
-//   ];
 
 function mapStateToProps(state) {
   const { items } = state.markers;

@@ -19,7 +19,7 @@ namespace AirQi
     public class PullOpenAqi : WorkerService
     {
         private HttpClient _client;
-        public PullOpenAqi(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
+        public PullOpenAqi(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<LiveStationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
         {
             this.Hub = base.Hub;
             this.Mapper = mapper;

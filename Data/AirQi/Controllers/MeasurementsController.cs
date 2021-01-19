@@ -60,7 +60,7 @@ namespace AirQi.Controllers
             {
                 stationModel.UpdatedAt = DateTime.UtcNow;
                 stationModel.Id = new ObjectId(id);
-               this._repository.UpdateObject(id, stationModel);
+                this._repository.UpdateObject(id, stationModel);
                 return Ok(_mapper.Map<StationReadDto>(stationModel));    
             }
 

@@ -93,7 +93,7 @@ namespace AirQi
                 
                 var latitude = Convert.ToDouble(data.city.geo[0], provider);
                 var longitude = Convert.ToDouble(data.city.geo[1], provider);
-                double[,] position = new double[,] ***REMOVED******REMOVED*** latitude, longitude***REMOVED******REMOVED***;
+                double[] position = new double[] ***REMOVED*** longitude, latitude***REMOVED***;
 
                 station.Position = position;
                 station.CreatedAt = DateTime.UtcNow;

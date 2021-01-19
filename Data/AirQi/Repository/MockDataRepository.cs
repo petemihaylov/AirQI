@@ -32,7 +32,7 @@ namespace AirQi.Data
             var longitude = (_random.NextDouble() * (6.8936619 - 4.4777325)) + 4.4777325;
 
 
-            double[,] position = new double[,] {{ latitude, longitude }};
+            double[] position = new double[] { latitude, longitude };
 
             var station = new Station
             {
@@ -52,7 +52,7 @@ namespace AirQi.Data
             return station;
         }
 
-        private static Measurement MockMeasurement(double[,] position)
+        private static Measurement MockMeasurement(double[] position)
         {
             var measuerment = new Measurement
             {

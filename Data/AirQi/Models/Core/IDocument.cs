@@ -16,6 +16,6 @@ namespace AirQi.Models.Core
 
         DateTime UpdatedAt { get; set; }
 
-        double[,] Position { get; set; }
+        double[] Position { get; set; }
     }
 }

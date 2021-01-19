@@ -58,7 +58,7 @@ namespace AirQi
                 
                 var latitude = Convert.ToDouble(s.coordinates.latitude);
                 var longitude = Convert.ToDouble(s.coordinates.longitude);
-                double[,] position = new double[,] {{ latitude, longitude}};
+                double[] position = new double[] { longitude, latitude };
 
                 station.Position = position;
                 

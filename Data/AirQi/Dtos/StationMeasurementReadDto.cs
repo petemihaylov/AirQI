@@ -7,19 +7,13 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace AirQi.Dtos
 ***REMOVED***
-    public class StationReadDto 
+    public class StationMeasurementReadDto 
     ***REMOVED***
         public string Id ***REMOVED*** get; set;***REMOVED***
 
         public double  Aqi ***REMOVED*** get; set;***REMOVED***
-        
-        public string Location ***REMOVED*** get; set;***REMOVED***
 
-        public string City ***REMOVED*** get; set;***REMOVED***
-
-        public string Country ***REMOVED*** get; set;***REMOVED***
-
-        public IEnumerable<MeasurementStationReadDto> Measurements ***REMOVED*** get; set;***REMOVED***
+        public IEnumerable<MeasurementReadDto> Measurements ***REMOVED*** get; set;***REMOVED***
 
         public double[] Position ***REMOVED*** get; set;***REMOVED***
 

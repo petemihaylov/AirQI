@@ -41,18 +41,6 @@ namespace AirQi.Repository
             return await this._collection.Find(doc => true).ToListAsync();
        ***REMOVED***
 
-        // Returns all latest objects from db based on date.
-        public IEnumerable<TDocument> GetAllLatest()
-        ***REMOVED***
-            return this._collection.Find(doc => true).ToList().OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new ***REMOVED*** doc.Position***REMOVED***, (key, group) => group.First());
-       ***REMOVED***
-
-        // Returns all latest objects from db based on date Async.
-        public async Task<IEnumerable<TDocument>> GetAllLatestAsync()
-        ***REMOVED***
-            return await Task.FromResult(GetAllLatest());
-       ***REMOVED***
-
         // Returns an object by the bson _id of the record.
         public TDocument GetObjectById(string id)
         ***REMOVED***

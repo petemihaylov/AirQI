@@ -14,8 +14,6 @@ import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr"
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
 
-import DeckGL, ***REMOVED*** ScatterplotLayer***REMOVED*** from "deck.gl";
-
 const ***REMOVED*** REACT_APP_TOKEN***REMOVED*** = process.env;
 const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
 
@@ -191,17 +189,6 @@ const Map = (props) => ***REMOVED***
       </MapGL>
     </Container>
   );
-
-  // const layers = [
-  //     new ScatterplotLayer(***REMOVED***
-  //       id: "scatterplot-layer",
-  //       data: data,
-  //       getRadius: 16 * 500,
-  //       radiusMaxPixels: 18,
-  //       getFillColor: [28, 218, 163],
-  //       autoHighlight: true,
-  //    ***REMOVED***),
-  //   ];
 ***REMOVED***;
 
 function SVGOverlayLayer(***REMOVED*** airData, radius, color***REMOVED***) ***REMOVED***

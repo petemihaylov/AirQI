@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using MongoDB.Bson;
+using System.Linq;
 
 namespace AirQi.Controllers
 ***REMOVED***
@@ -27,7 +28,8 @@ namespace AirQi.Controllers
        [HttpGet]
         public async Task<IActionResult> GetAllStations()
         ***REMOVED***
-            var stations =  await this._repository.GetAllLatestAsync();
+            var stations = await this._repository.GetAllAsync();
+            stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new ***REMOVED*** doc.Position***REMOVED***, (key, group) => group.First());
 
             if(stations != null)***REMOVED***
                 return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stations));
@@ -52,14 +54,14 @@ namespace AirQi.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateStation(StationCreateDto stationCreateDto)
         ***REMOVED***
-            var station =this._mapper.Map<Station>(stationCreateDto);
+            var station = this._mapper.Map<Station>(stationCreateDto);
 
             if (station != null)
             ***REMOVED***
                 station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;
                 await this._repository.CreateObjectAsync(station);
 
-                var stationReadDto =this._mapper.Map<StationReadDto>(station);
+                var stationReadDto = this._mapper.Map<StationReadDto>(station);
 
                 // https://docs.microsoft.com/en-us/dotnet/api/system.web.http.apicontroller.createdatroute?view=aspnetcore-2.2
                 return CreatedAtRoute(nameof(GetStationById), new ***REMOVED*** Id = stationReadDto.Id***REMOVED***, stationReadDto);

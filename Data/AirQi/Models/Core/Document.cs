@@ -11,7 +11,5 @@ namespace AirQi.Models.Core
         public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
 
         public DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
-                
-        public double [] Position ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

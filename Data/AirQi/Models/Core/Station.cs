@@ -23,6 +23,9 @@ namespace AirQi.Models.Core
         public string Country ***REMOVED*** get; set;***REMOVED***
 
         [BsonElement]
+        public double [] Position ***REMOVED*** get; set;***REMOVED***
+
+        [BsonElement]
         public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

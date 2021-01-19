@@ -25,12 +25,12 @@ namespace AirQi.Controllers
        ***REMOVED***
 
         [HttpGet]
-        public ActionResult <IEnumerable<StationReadDto>> GetAllMeasurements()
+        public ActionResult <IEnumerable<MeasurementReadDto>> GetAllMeasurements()
         ***REMOVED***
             var stationModelItems =  this._repository.GetAll();
             
             if(stationModelItems != null)***REMOVED***
-                return Ok(_mapper.Map<IEnumerable<MeasurementReadDto>>(stationModelItems));
+                return Ok(_mapper.Map<IEnumerable<StationMeasurementReadDto>>(stationModelItems));
            ***REMOVED***
 
             return NotFound();
@@ -43,76 +43,42 @@ namespace AirQi.Controllers
 
             if(station != null)
             ***REMOVED***
-                return Ok(_mapper.Map<MeasurementReadDto>(station));    
+                return Ok(_mapper.Map<StationMeasurementReadDto>(station));    
            ***REMOVED***
 
             return NotFound();
        ***REMOVED***
 
-        [HttpPost("id")]
-        public async Task<IActionResult> CreateMeasurementByStationId(string id, MeasurementCreateDto measurementCreateDto)
+
+        [HttpPut("***REMOVED***id***REMOVED***")]
+        public async Task<IActionResult> UpdateStation(string id, StationMeasurementCreateDto stationCreateDto)
         ***REMOVED***
+            var stationModel =this._mapper.Map<Station>(stationCreateDto);
             var station = await this._repository.GetObjectByIdAsync(id);
-            var measurementModel = this._mapper.Map<Measurement>(measurementCreateDto);
-            var stationModel = this._mapper.Map<Station>(station);
 
             if(station != null)
             ***REMOVED***
                 stationModel.UpdatedAt = DateTime.UtcNow;
                 stationModel.Id = new ObjectId(id);
-                stationModel.Measurements.ToList().Add(measurementModel);
-
-                this._repository.UpdateObject(id, stationModel);
+               this._repository.UpdateObject(id, stationModel);
                 return Ok(_mapper.Map<StationReadDto>(stationModel));    
            ***REMOVED***
 
             return NotFound();
        ***REMOVED***
 
-        [HttpPut("***REMOVED***id***REMOVED***")]
-        public async Task<IActionResult> UpdateMeasurementBySourceName(string id, MeasurementCreateDto measurementCreateDto)
+        [HttpDelete("***REMOVED***id***REMOVED***")]
+        public  async Task<ActionResult> DeleteStation(string id)
         ***REMOVED***
             var station = await this._repository.GetObjectByIdAsync(id);
-            var measurementModel = this._mapper.Map<Measurement>(measurementCreateDto);
-            var stationModel = this._mapper.Map<Station>(station);
 
             if(station != null)
-            ***REMOVED***
-                stationModel.UpdatedAt = DateTime.UtcNow;
-                stationModel.Id = new ObjectId(id);
-                var measurements = stationModel.Measurements.ToList();
-                var mObj = measurements.FirstOrDefault(m => m.SourceName == measurementModel.SourceName);
-
-                if (mObj != null)
-                ***REMOVED***
-                    measurements.Remove(mObj);
-                    measurements.Add(measurementModel);
-                    this._repository.UpdateObject(id, stationModel);
-                    return Ok(_mapper.Map<StationReadDto>(stationModel));    
-               ***REMOVED***
-                    
-           ***REMOVED***
-
-            return NotFound();
-       ***REMOVED***
-
-        [HttpDelete("***REMOVED***id***REMOVED***")]
-        public  async Task<ActionResult> DeleteMeasurement(string id, MeasurementCreateDto measurementCreateDto)
-        ***REMOVED***
-            var station = await this._repository.GetObjectByIdAsync(id);
-            var measurementModel = this._mapper.Map<Measurement>(measurementCreateDto);
-            var stationModel = this._mapper.Map<Station>(station);
-            var measurements = stationModel.Measurements.ToList();
-            var mObj = measurements.FirstOrDefault(m => m.SourceName == measurementModel.SourceName);
-
-            if (mObj != null)
-            ***REMOVED***
-                    measurements.Remove(mObj);
- 
+            ***REMOVED***                
+                await this._repository.RemoveObjectAsync(station);
                 return Ok("Successfully deleted from collection!"); 
            ***REMOVED*** 
 
             return NotFound();
-       ***REMOVED***
+       ***REMOVED***      
    ***REMOVED***
 ***REMOVED***

@@ -19,11 +19,11 @@ namespace AirQi.Services
     public class WorkerService : IWorkerService
     ***REMOVED***
         private IMongoDataRepository<Station> _repository;
-        private IHubContext<StationHub> _hub;
+        private IHubContext<LiveStationHub> _hub;
         private IWorkerSettings _settings;
         private IMapper _mapper;
 
-        public WorkerService(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<StationHub> hub, IMapper mapper)
+        public WorkerService(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<LiveStationHub> hub, IMapper mapper)
         ***REMOVED***
             this.Hub = hub;
             this.Mapper = mapper;
@@ -34,7 +34,7 @@ namespace AirQi.Services
         public IWorkerSettings Settings ***REMOVED*** get => _settings; set => _settings = value;***REMOVED***
         public IMapper Mapper ***REMOVED*** get => _mapper; set => _mapper = value;***REMOVED***
         public IMongoDataRepository<Station> Repository ***REMOVED*** get => _repository; set => _repository = value;***REMOVED***
-        public IHubContext<StationHub> Hub ***REMOVED*** get => _hub; set => _hub = value;***REMOVED***
+        public IHubContext<LiveStationHub> Hub ***REMOVED*** get => _hub; set => _hub = value;***REMOVED***
 
 
         public virtual async Task PullDataAsync()

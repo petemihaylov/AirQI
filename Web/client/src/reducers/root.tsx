@@ -4,14 +4,15 @@ import message from "./message";
 import users from "./users";
 import notifications from "./notifications";
 import markers from "./markers";
-
+import profile from "./profile";
 
 const rootReducer = combineReducers(***REMOVED***
   auth,
   message,
   users,
   notifications,
-  markers
+  markers,
+  profile
 ***REMOVED***);
 
 export default rootReducer;

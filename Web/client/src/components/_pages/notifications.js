@@ -6,7 +6,7 @@ import ***REMOVED***
   faExclamationTriangle,
   faTrashAlt,
 ***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import authHeader from "../../services/auth.header";
+import LiveNotification from "./livenotification";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED***
   fetchNotifications,
@@ -18,43 +18,14 @@ const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
 const Notifications = (props) => ***REMOVED***
   // Stored notifications from the DB
   const [content, handleContent] = useState([]);
-  
 
   // Live notifications from the WebSocket
-  const [connection, setConnection] = useState(null);
   const [notifications, setNotification] = useState([]);
 
   const handleDelete = (id, index) => ***REMOVED***
     props.dispatch(deleteNotification(id, index));
     handleContent(props.items);
  ***REMOVED***;
-
-  /* Gets WebSocket notification */
-  useEffect(() => ***REMOVED***
-    const newConnection = new HubConnectionBuilder()
-      .withUrl(REACT_APP_API_URL + "/livenotification", ***REMOVED***
-        headers: authHeader(),
-     ***REMOVED***)
-      .withAutomaticReconnect()
-      .build();
-
-    setConnection(newConnection);
- ***REMOVED***, []);
-
-  useEffect(() => ***REMOVED***
-    if (connection) ***REMOVED***
-      connection
-        .start()
-        .then((result) => ***REMOVED***
-          console.log("Connected!");
-
-          connection.on("GetNewNotification", (Notification) => ***REMOVED***
-            setNotification([Notification]);
-         ***REMOVED***);
-       ***REMOVED***)
-        .catch((e) => console.log("Connection failed: ", e));
-   ***REMOVED***
- ***REMOVED***, [connection]);
 
   /* Gets notifications from DB */
   useEffect(() => ***REMOVED***
@@ -67,26 +38,11 @@ const Notifications = (props) => ***REMOVED***
 
   return (
     <Container>
-      <div
-        style=***REMOVED******REMOVED*** height: "7vh", marginTop: "5vh"***REMOVED******REMOVED***
-        className="d-flex flex-column align-items-center"
-      >
-        ***REMOVED***notifications &&
-          notifications.map((m, idx) => (
-            <Alert
-              key=***REMOVED***idx***REMOVED***
-              variant=***REMOVED***"danger"***REMOVED***
-              style=***REMOVED******REMOVED*** width: "50vw", height: "45px"***REMOVED******REMOVED***
-            >
-              <FontAwesomeIcon icon=***REMOVED***faExclamationTriangle***REMOVED*** /> ***REMOVED***m.title***REMOVED******REMOVED***" "***REMOVED***
-              ***REMOVED***m.description***REMOVED***
-            </Alert>
-          ))***REMOVED***
-      </div>
-      <div className="d-flex flex-column align-items-center">
-        <div style=***REMOVED******REMOVED*** width: "50vw"***REMOVED******REMOVED***>
+      <LiveNotification />
+      <div className="d-flex flex-column align-items-center mt-5">
+        <div style=***REMOVED******REMOVED*** width: "60vw"***REMOVED******REMOVED***>
           <small>Notifications </small>
-          <div className="border-bottom mb-4 mt-2" style=***REMOVED******REMOVED*** width: "50vw"***REMOVED******REMOVED***>
+          <div className="border-bottom mb-4 mt-2" style=***REMOVED******REMOVED*** width: "60vw"***REMOVED******REMOVED***>
             ***REMOVED***" "***REMOVED***
           </div>
         </div>
@@ -95,7 +51,12 @@ const Notifications = (props) => ***REMOVED***
             <Alert
               key=***REMOVED***idx***REMOVED***
               variant=***REMOVED***"secondary"***REMOVED***
-              style=***REMOVED******REMOVED*** width: "50vw", height: "45px"***REMOVED******REMOVED***
+              style=***REMOVED******REMOVED***
+                width: "60vw",
+                height: "45px",
+                background: "#ffff",
+                border: "dashed 2px #f89b1e",
+             ***REMOVED******REMOVED***
               className="d-flex align-items-center"
             >
               <div className="w-100 d-flex align-items-center justify-content-between">
@@ -103,8 +64,10 @@ const Notifications = (props) => ***REMOVED***
                   <FontAwesomeIcon
                     icon=***REMOVED***faExclamationTriangle***REMOVED***
                     className="mr-3"
+                    style=***REMOVED******REMOVED*** color: "#f89b3e"***REMOVED******REMOVED***
                   />
-                  ***REMOVED***item.title***REMOVED*** - ***REMOVED***item.description***REMOVED***
+                  <b>***REMOVED***new Date(Date.now()).toDateString()***REMOVED***</b>
+                  <span className="ml-5">***REMOVED***item.description***REMOVED***</span>
                 </div>
                 <div>
                   <button

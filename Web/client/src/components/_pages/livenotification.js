@@ -31,29 +31,36 @@ const LiveNotification = (props) => ***REMOVED***
       connection
         .start()
         .then((result) => ***REMOVED***
-          console.log("Connected!");
-
           connection.on("GetNewNotification", (Notification) => ***REMOVED***
+            console.log(Notification);
             setNotification([Notification]);
          ***REMOVED***);
        ***REMOVED***)
-        .catch((e) => console.log("Connection failed: ", e));
+        .catch((e) => 
+          console.log(***REMOVED***type: "livenotification", connection: "failed", error: e***REMOVED***));
    ***REMOVED***
  ***REMOVED***, [connection]);
 
 
   return (
-    <Container>
+    <Container
+      style=***REMOVED******REMOVED*** position: "absolute", top: "3vh", left: "15vw", zIndex: "2"***REMOVED******REMOVED***
+      onClick=***REMOVED***() => ***REMOVED***
+        setNotification([]);
+     ***REMOVED******REMOVED***
+    >
       ***REMOVED***notifications &&
         notifications.map((m, idx) => (
           <Alert
             key=***REMOVED***idx***REMOVED***
-            variant=***REMOVED***"danger"***REMOVED***
+            variant=***REMOVED***"default"***REMOVED***
             style=***REMOVED******REMOVED***
               width: "100%",
+              background: "#f89b3e",
               height: "40px",
               fontSize: "14px",
               display: "grid",
+              color: "white",
               alignItems: "center",
               padding: ".35rem 1.25rem",
            ***REMOVED******REMOVED***
@@ -62,10 +69,10 @@ const LiveNotification = (props) => ***REMOVED***
               <Col md=***REMOVED***"1"***REMOVED***>
                 <FontAwesomeIcon icon=***REMOVED***faExclamationTriangle***REMOVED*** />
               </Col>
-              <Col md=***REMOVED***"8"***REMOVED***>
-                ***REMOVED***m.title***REMOVED*** ***REMOVED***m.description***REMOVED***
+              <Col md=***REMOVED***"9"***REMOVED*** >
+                ***REMOVED***m.title***REMOVED***! <span className="mr-5">  </span> ***REMOVED***m.description***REMOVED***
               </Col>
-              <Col md=***REMOVED***"3"***REMOVED***>***REMOVED***m.createdAt***REMOVED***</Col>
+              <Col md=***REMOVED***"2"***REMOVED***>***REMOVED***m.createdAt***REMOVED***</Col>
             </Row>
           </Alert>
         ))***REMOVED***

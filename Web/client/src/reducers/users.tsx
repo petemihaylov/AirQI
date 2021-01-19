@@ -1,4 +1,4 @@
-import ***REMOVED*** FETCH_USERS, DELETE_USER, CREATE_USER***REMOVED*** from "../actions/types";
+import ***REMOVED*** FETCH_USERS, DELETE_USER, CREATE_USER, UPDATE_USER***REMOVED*** from "../actions/types";
 
 const initialState = ***REMOVED*** items: []***REMOVED***;
 
@@ -20,6 +20,11 @@ export default function (state = initialState, action: any) ***REMOVED***
       return ***REMOVED***
         ...state,
         items: [...state.items, payload]
+     ***REMOVED***;
+    case UPDATE_USER:
+      return ***REMOVED***
+        ...state,
+        user: payload.user,
      ***REMOVED***;
     default:
       return state;

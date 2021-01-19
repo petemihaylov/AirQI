@@ -14,6 +14,12 @@ class NotificationService ***REMOVED***
       headers: authHeader(),
    ***REMOVED***);
  ***REMOVED***;
+
+  createNotification = async (notification: Notification) => ***REMOVED***
+    return axios.post(REACT_APP_API_URL + "/api/notifications/", notification, ***REMOVED***
+      headers: authHeader(),
+   ***REMOVED***);
+ ***REMOVED***
 ***REMOVED***
 
 export default new NotificationService();

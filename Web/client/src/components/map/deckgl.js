@@ -3,9 +3,6 @@ import DeckGL, ***REMOVED*** ScatterplotLayer, TextLayer***REMOVED*** from "deck
 // ReactJS
 import useSwr from "swr";
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from 'react';
-// Markers
-import ReactMapGL, ***REMOVED*** Marker***REMOVED*** from 'react-map-gl';
-import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../assets/media/pin-icon.svg";
 // SignalR
 import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
 
@@ -14,14 +11,14 @@ import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr"
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 
-export default function Map() ***REMOVED***
+export default function DeckGLMap() ***REMOVED***
 
   // SignalR
   const [hubConnection, setHubConnection] = useState(null);
-  const [zoom, setZoom] = useState(null);
+  const [zoom, setZoom] = useState(0);
     
   // Load and prepare data
-  const ***REMOVED*** data, error***REMOVED*** = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
+  const ***REMOVED*** data, error***REMOVED*** = useSwr(process.env.REACT_APP_DATA_URL + "/api/stations", fetcher);
   const stations = (data && !error) ? data : [];
   
   useEffect(() => ***REMOVED***
@@ -29,7 +26,7 @@ export default function Map() ***REMOVED***
       const createHubConnection = async () => ***REMOVED***
 
           const hubConnect = new HubConnectionBuilder()
-          .withUrl(process.env.REACT_APP_API_URL + "livestations")
+          .withUrl(process.env.REACT_APP_DATA_URL + "/livestations")
           .withAutomaticReconnect()
           .build();
           
@@ -65,7 +62,6 @@ export default function Map() ***REMOVED***
 
  ***REMOVED***, [hubConnection]);
 
-  // Viewport settings
   const [viewport, setViewport] = useState(***REMOVED***
     latitude: 52.3676,
     longitude: 4.9041,
@@ -75,7 +71,8 @@ export default function Map() ***REMOVED***
     minZoom: 3,
  ***REMOVED***);
 
-  const changeColor = (aqi) => ***REMOVED***
+const changeColor = (aqi) => ***REMOVED***
+      
     if (aqi >= 0 && aqi <= 50) ***REMOVED***
       return [162, 219, 96, 20];      
    ***REMOVED***
@@ -105,7 +102,7 @@ export default function Map() ***REMOVED***
   const scatterplotlayer = [
     new ScatterplotLayer(***REMOVED***
         id: "scatterplot-layer",
-        data: data,
+        data: stations,
         getRadius: zoom * 100,
         radiusMaxPixels: 100,
         radiusMinPixels: 20,
@@ -129,17 +126,7 @@ export default function Map() ***REMOVED***
   ];
   
 
-  return (
-    <div>
-      <ReactMapGL
-        ***REMOVED***...viewport***REMOVED***
-        mapboxApiAccessToken=***REMOVED***process.env.REACT_APP_MAPBOX_TOKEN***REMOVED***
-        mapStyle="mapbox://styles/constantimi/ckisx2s921doh19sz2tyod230"
-        onViewportChange=***REMOVED***viewport => ***REMOVED***
-          setViewport(viewport);
-       ***REMOVED******REMOVED***
-      >
-        
+  return (       
         <DeckGL initialViewState=***REMOVED***viewport***REMOVED***
           height=***REMOVED***viewport.height***REMOVED***
           width=***REMOVED***viewport.width***REMOVED***
@@ -150,10 +137,6 @@ export default function Map() ***REMOVED***
             setZoom(viewState.zoom);
          ***REMOVED******REMOVED***
         />
-
-      </ReactMapGL>
-        
-    </div>
   );
 
 ***REMOVED***

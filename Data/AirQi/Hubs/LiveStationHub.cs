@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.SignalR;
 
 namespace AssetNXT.Hubs
 ***REMOVED***
-    public class StationHub : Hub
+    public class LiveStationHub : Hub
     ***REMOVED***
         public Task GetNewStationsAsync(List<Station> stations)
         ***REMOVED***

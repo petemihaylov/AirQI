@@ -5,7 +5,7 @@ import ***REMOVED*** Item***REMOVED*** from "./item";
 import "./global.css";
 
 import ***REMOVED***
-  faUsersCog,
+  faTools,
   faBell,
   faMapMarked,
   faChevronRight,
@@ -33,7 +33,7 @@ const Sidebar = (props: any) => ***REMOVED***
             <Item
               title=***REMOVED***"Profile"***REMOVED***
               reference=***REMOVED***"/profile"***REMOVED***
-              fontIcon=***REMOVED***faUsersCog***REMOVED***
+              fontIcon=***REMOVED***faTools***REMOVED***
               classes=***REMOVED***classes***REMOVED***
               animation=***REMOVED***""***REMOVED***
             />
@@ -64,7 +64,6 @@ const Sidebar = (props: any) => ***REMOVED***
   );
 ***REMOVED***;
 
-
 function mapStateToProps(state: any) ***REMOVED***
   const ***REMOVED*** user***REMOVED*** = state.auth;
   return ***REMOVED***
@@ -74,14 +73,13 @@ function mapStateToProps(state: any) ***REMOVED***
 
 export default connect(mapStateToProps)(Sidebar);
 
-
 /* Custom sidebar style */
 
 const useStyles = createUseStyles(***REMOVED***
   navbar: ***REMOVED***
     position: "fixed",
     zIndex: 2,
-    transition: "width 600ms ease",
+    transition: "width 100ms ease",
     backgroundColor: "var(--bg-primary)",
  ***REMOVED***,
   navList: ***REMOVED***
@@ -102,13 +100,13 @@ const useStyles = createUseStyles(***REMOVED***
     composes: ["$logoText", "$linkText"],
  ***REMOVED***,
   fontIcon: ***REMOVED***
-    fontSize: "1.2rem",
+    fontSize: "1.1rem",
     width: "40px",
     height: "40px",
     minWidth: "40px",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
  ***REMOVED***,
   logo: ***REMOVED***
     textTransform: "uppercase",
@@ -137,10 +135,9 @@ const useStyles = createUseStyles(***REMOVED***
     display: "flex",
     alignItems: "center",
     height: "5rem",
-    color: "white",
+    color: "var(--text-primary)",
     textDecoration: "none",
     filter: "grayscale(100%) opacity(0.7)",
-    transition: "600ms ease-in-out",
     "& $fontIcon": ***REMOVED***
       width: "40px",
       minWidth: "40px",
@@ -148,13 +145,13 @@ const useStyles = createUseStyles(***REMOVED***
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
-      transition: "600ms",
+      transition: "200ms",
    ***REMOVED***,
     "&:hover": ***REMOVED***
       textDecoration: "none",
       filter: "grayscale(0%) opacity(1)",
       color: "var(--text-secondary)",
-      background: "var(--bg-secondary)",
+      background: "var(--bg-hover)",
    ***REMOVED***,
  ***REMOVED***,
 
@@ -172,13 +169,12 @@ const useStyles = createUseStyles(***REMOVED***
         justifyContent: "center",
      ***REMOVED***,
       "&:hover $linkText": ***REMOVED***
-        transition: "700ms ease",
+        transition: "400ms ease",
         display: "inline",
      ***REMOVED***,
       "&:hover $logo $fontIcon": ***REMOVED***
         transform: "rotate(-180deg)",
         marginLeft: "11rem",
-        transition: "var(--transition-speed)",
      ***REMOVED***,
       "&:hover $logoText": ***REMOVED***
         left: "1.3rem",

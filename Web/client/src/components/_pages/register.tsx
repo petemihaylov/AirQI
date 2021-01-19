@@ -15,6 +15,8 @@ interface RegistrationFormData ***REMOVED***
   password: string;
   firstName: string;
   lastName: string;
+  lastActive: Date;
+  isActive: boolean;
 ***REMOVED***
 
 const Register = (props: any) => ***REMOVED***
@@ -26,12 +28,14 @@ const Register = (props: any) => ***REMOVED***
     handleChange(false);
 
     const ***REMOVED*** dispatch, history***REMOVED*** = props;
-    const ***REMOVED*** username, firstName, lastName, password***REMOVED*** = data;
-
+    const ***REMOVED*** username, firstName, lastName, password, lastActive, isActive***REMOVED*** = data;
+    
     let userObj = new User(
       username,
       firstName,
       lastName,
+      new Date(),
+      true,
       password,
       Roles.Moderator
     );

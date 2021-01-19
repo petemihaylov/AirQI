@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiBase.Migrations
 ***REMOVED***
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20201126084818_Markers")]
-    partial class Markers
+    [Migration("20210111095924_UpdateUsers")]
+    partial class UpdateUsers
     ***REMOVED***
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         ***REMOVED***
@@ -28,11 +28,11 @@ namespace ApiBase.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("latitude")
-                        .HasColumnType("int");
+                    b.Property<double>("latitude")
+                        .HasColumnType("float");
 
-                    b.Property<int>("longitude")
-                        .HasColumnType("int");
+                    b.Property<double>("longitude")
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -73,6 +73,12 @@ namespace ApiBase.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(250)")

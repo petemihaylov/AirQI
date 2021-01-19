@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AirQi.Models;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
@@ -14,7 +15,5 @@ namespace AirQi.Models.Core
         DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
 
         DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
-
-        Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

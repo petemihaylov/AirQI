@@ -126,7 +126,7 @@ namespace AirQi
             app.UseEndpoints(endpoints =>
             ***REMOVED***
                 endpoints.MapControllers();
-                endpoints.MapHub<StationHub>("/livestations");
+                endpoints.MapHub<LiveStationHub>("/livestations");
            ***REMOVED***);
 
             // Swagger config

@@ -35,11 +35,22 @@ class UserService ***REMOVED***
    ***REMOVED***);
  ***REMOVED***;
 
+  updateUser = async (user: User) =>***REMOVED***
+      return axios.put(REACT_APP_API_URL + `/api/users/$***REMOVED***user.id***REMOVED***`, user, ***REMOVED***
+        headers: authHeader(),
+     ***REMOVED***);
+ ***REMOVED***
   deleteUser = async (id: number) => ***REMOVED***
     return axios.delete(REACT_APP_API_URL + "/api/users/" + id, ***REMOVED***
       headers: authHeader(),
    ***REMOVED***);
  ***REMOVED***;
+
+  getUser = async (id: number) => ***REMOVED***
+    return axios.get(REACT_APP_API_URL + "/api/users/" + id, ***REMOVED***
+      headers: authHeader(),
+   ***REMOVED***);
+ ***REMOVED***
 ***REMOVED***
 
 export default new UserService();

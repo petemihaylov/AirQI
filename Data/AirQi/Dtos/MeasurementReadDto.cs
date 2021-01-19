@@ -5,8 +5,7 @@ using AirQi.Models.Core;
 namespace AirQi.Dtos
 ***REMOVED***
     public class MeasurementReadDto
-    ***REMOVED***
-        
+    ***REMOVED***        
         public string Parameter ***REMOVED*** get; set;***REMOVED***
 
         public double  Value ***REMOVED*** get; set;***REMOVED***
@@ -16,9 +15,5 @@ namespace AirQi.Dtos
         public string Unit ***REMOVED*** get; set;***REMOVED***
                 
         public string SourceName ***REMOVED*** get; set;***REMOVED***
-
-        public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
-
-        public Coordinates Coordinates ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

@@ -1,5 +1,6 @@
 export const FETCH_USERS = "FETCH_USERS";
 export const NEW_USER = "NEW_USER";
+export const UPDATE_USER = "UPDATE_USER";
 export const CREATE_USER = "CREATE_USER"
 export const DELETE_USER = "DELETE_USER";
 export const AUTH_USER = "DELETE_USER";
@@ -15,7 +16,11 @@ export const CLEAR_MESSAGE = "CLEAR_MESSAGE";
 
 export const FETCH_NOTIFICATIONS = "FETCH_NOTIFICATIONS";
 export const DELETE_NOTIFICATION = "DELETE_NOTIFICATION";
+export const CREATE_NOTIFICATION = "CREATE_NOTIFICATION";
 
 export const FETCH_MARKERS = "FETCH_MARKERS";
 export const CREATE_MARKER = "CREATE_MARKER";
+export const DELETE_MARKER = "DELETE_MARKER";
 
+export const ADD_PROFILE = "ADD_PROFILE";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";

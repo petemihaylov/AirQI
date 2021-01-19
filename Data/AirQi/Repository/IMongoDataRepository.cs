@@ -12,10 +12,6 @@ namespace AirQi.Repository
 
         Task<IEnumerable<TDocument>> GetAllAsync();
 
-        IEnumerable<TDocument> GetAllLatest();
-
-        Task<IEnumerable<TDocument>> GetAllLatestAsync();
-
         TDocument GetObjectById(string id);
 
         Task<TDocument> GetObjectByIdAsync(string id);

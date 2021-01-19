@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ApiBase.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20201126085536_MapMarkers")]
-    partial class MapMarkers
+    [Migration("20210111095924_UpdateUsers")]
+    partial class UpdateUsers
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -73,6 +73,12 @@ namespace ApiBase.Migrations
                     b.Property<string>("FirstName")
                         .HasColumnType("nvarchar(250)")
                         .HasMaxLength(250);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("LastName")
                         .HasColumnType("nvarchar(250)")

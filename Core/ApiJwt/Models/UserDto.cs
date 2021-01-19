@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System;
 
 namespace ApiJwt.Models
 {
@@ -9,6 +10,8 @@ namespace ApiJwt.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string UserRole { get; set; }
+        public bool IsActive {get; set; }
+        public DateTime LastActive {get; set;}
         public string accessToken {get; set;}
     }
 }

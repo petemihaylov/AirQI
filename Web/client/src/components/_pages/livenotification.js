@@ -31,29 +31,36 @@ const LiveNotification = (props) => {
       connection
         .start()
         .then((result) => {
-          console.log("Connected!");
-
           connection.on("GetNewNotification", (Notification) => {
+            console.log(Notification);
             setNotification([Notification]);
           });
         })
-        .catch((e) => console.log("Connection failed: ", e));
+        .catch((e) => 
+          console.log({type: "livenotification", connection: "failed", error: e}));
     }
   }, [connection]);
 
 
   return (
-    <Container>
+    <Container
+      style={{ position: "absolute", top: "3vh", left: "15vw", zIndex: "2" }}
+      onClick={() => {
+        setNotification([]);
+      }}
+    >
       {notifications &&
         notifications.map((m, idx) => (
           <Alert
             key={idx}
-            variant={"danger"}
+            variant={"default"}
             style={{
               width: "100%",
+              background: "#f89b3e",
               height: "40px",
               fontSize: "14px",
               display: "grid",
+              color: "white",
               alignItems: "center",
               padding: ".35rem 1.25rem",
             }}
@@ -62,10 +69,10 @@ const LiveNotification = (props) => {
               <Col md={"1"}>
                 <FontAwesomeIcon icon={faExclamationTriangle} />
               </Col>
-              <Col md={"8"}>
-                {m.title} {m.description}
+              <Col md={"9"} >
+                {m.title}! <span className="mr-5">  </span> {m.description}
               </Col>
-              <Col md={"3"}>{m.createdAt}</Col>
+              <Col md={"2"}>{m.createdAt}</Col>
             </Row>
           </Alert>
         ))}

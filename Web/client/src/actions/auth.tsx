@@ -13,11 +13,9 @@ import User from "../entities/User";
 export const register = (user: User) => (dispatch: any) => {
   return AuthService.register(user).then(
     (response) => {
-      console.log(response);
-
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: user
+        payload: user,
       });
 
       dispatch({

@@ -6,7 +6,7 @@ import {
   faExclamationTriangle,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
-import authHeader from "../../services/auth.header";
+import LiveNotification from "./livenotification";
 import { connect } from "react-redux";
 import {
   fetchNotifications,
@@ -18,43 +18,14 @@ const { REACT_APP_API_URL } = process.env;
 const Notifications = (props) => {
   // Stored notifications from the DB
   const [content, handleContent] = useState([]);
-  
 
   // Live notifications from the WebSocket
-  const [connection, setConnection] = useState(null);
   const [notifications, setNotification] = useState([]);
 
   const handleDelete = (id, index) => {
     props.dispatch(deleteNotification(id, index));
     handleContent(props.items);
   };
-
-  /* Gets WebSocket notification */
-  useEffect(() => {
-    const newConnection = new HubConnectionBuilder()
-      .withUrl(REACT_APP_API_URL + "/livenotification", {
-        headers: authHeader(),
-      })
-      .withAutomaticReconnect()
-      .build();
-
-    setConnection(newConnection);
-  }, []);
-
-  useEffect(() => {
-    if (connection) {
-      connection
-        .start()
-        .then((result) => {
-          console.log("Connected!");
-
-          connection.on("GetNewNotification", (Notification) => {
-            setNotification([Notification]);
-          });
-        })
-        .catch((e) => console.log("Connection failed: ", e));
-    }
-  }, [connection]);
 
   /* Gets notifications from DB */
   useEffect(() => {
@@ -67,26 +38,11 @@ const Notifications = (props) => {
 
   return (
     <Container>
-      <div
-        style={{ height: "7vh", marginTop: "5vh" }}
-        className="d-flex flex-column align-items-center"
-      >
-        {notifications &&
-          notifications.map((m, idx) => (
-            <Alert
-              key={idx}
-              variant={"danger"}
-              style={{ width: "50vw", height: "45px" }}
-            >
-              <FontAwesomeIcon icon={faExclamationTriangle} /> {m.title}{" "}
-              {m.description}
-            </Alert>
-          ))}
-      </div>
-      <div className="d-flex flex-column align-items-center">
-        <div style={{ width: "50vw" }}>
+      <LiveNotification />
+      <div className="d-flex flex-column align-items-center mt-5">
+        <div style={{ width: "60vw" }}>
           <small>Notifications </small>
-          <div className="border-bottom mb-4 mt-2" style={{ width: "50vw" }}>
+          <div className="border-bottom mb-4 mt-2" style={{ width: "60vw" }}>
             {" "}
           </div>
         </div>
@@ -95,7 +51,12 @@ const Notifications = (props) => {
             <Alert
               key={idx}
               variant={"secondary"}
-              style={{ width: "50vw", height: "45px" }}
+              style={{
+                width: "60vw",
+                height: "45px",
+                background: "#ffff",
+                border: "dashed 2px #f89b1e",
+              }}
               className="d-flex align-items-center"
             >
               <div className="w-100 d-flex align-items-center justify-content-between">
@@ -103,8 +64,10 @@ const Notifications = (props) => {
                   <FontAwesomeIcon
                     icon={faExclamationTriangle}
                     className="mr-3"
+                    style={{ color: "#f89b3e" }}
                   />
-                  {item.title} - {item.description}
+                  <b>{new Date(Date.now()).toDateString()}</b>
+                  <span className="ml-5">{item.description}</span>
                 </div>
                 <div>
                   <button

@@ -1,7 +1,9 @@
 
 
+using System;
 using System.Threading.Tasks;
 using ApiBase.Data;
+using ApiBase.DTOs;
 using ApiBase.Hubs;
 using ApiBase.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -48,12 +50,19 @@ namespace ApiBase.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNotification(Notification message)
         {
-            var notificationItem = await _repository.AddAsync(message);
+            var notifyItem = await _repository.AddAsync(message);
 
             // SignalR event
-            await _hubContext.Clients.All.SendAsync("GetNewNotification", notificationItem);
+            var signalNotification = new NotificationDto
+            {
+                Title = notifyItem.Title,
+                Description = notifyItem.Description,
+                Type = notifyItem.Type,
+                CreatedAt = DateTime.UtcNow.ToString()
+            };
+            await _hubContext.Clients.All.SendAsync("GetNewNotification", signalNotification);
 
-            return Ok();
+            return Ok(notifyItem);
             // return CreatedAtRoute(nameof(GetNotificationById), new { id = notificationItem.Id }, notificationItem);
         }
 

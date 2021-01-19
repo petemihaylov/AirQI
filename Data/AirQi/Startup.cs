@@ -146,7 +146,7 @@ namespace AirQi
             // RecurringJob.AddOrUpdate<WorkerService>("Websocket", service => service.PullDataAsync(), Cron.Hourly);
             
             // this job will fetch global data from OpenAqi every minute
-            RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Hourly);
+            // RecurringJob.AddOrUpdate<PullOpenAqi>("Open-Aqi", service => service.PullDataAsync() , Cron.Hourly);
 
             // this job will fetch world data from Aqicn once every day
             // RecurringJob.AddOrUpdate<PullAqicn>("Aqicn", service => service.PullDataAsync() , Cron.Daily);

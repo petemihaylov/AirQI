@@ -16,7 +16,9 @@ const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 export default function Map() {
 
+  // SignalR
   const [hubConnection, setHubConnection] = useState(null);
+  const [zoom, setZoom] = useState(null);
     
   // Load and prepare data
   const { data, error } = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
@@ -65,20 +67,49 @@ export default function Map() {
 
   // Viewport settings
   const [viewport, setViewport] = useState({
-    latitude: 50.8503,
-    longitude: 52.3517,
+    latitude: 52.3676,
+    longitude: 4.9041,
     width: "100vw",
     height: "100vh",
-    zoom: 12
+    zoom: 6,
+    minZoom: 3,
   });
 
+  const changeColor = (aqi) => {
+    if (aqi >= 0 && aqi <= 50) {
+      return [162, 219, 96, 20];      
+    }
+    
+    if (aqi >= 51 && aqi <= 100) {
+      return [250, 213, 80, 20];      
+    }
+
+    if (aqi >= 101 && aqi <= 150) {
+      return [253, 154, 87, 20];     
+    }
+
+    if (aqi >= 151 && aqi <= 200) {
+      return [254, 104, 109, 20];      
+    }
+
+    // Very Unhealthy
+    if (aqi >= 201 && aqi <= 300) {
+      return [155, 89, 117, 20];      
+    }
+
+    // Hazardous
+    return [152, 86, 114, 20];  
+  }
+
+  // DeckGl Layers
   const scatterplotlayer = [
     new ScatterplotLayer({
-      id: "scatterplot-layer",
+        id: "scatterplot-layer",
         data: data,
-        getRadius: 18 * 500,
-        radiusMaxPixels: 30,
-        getFillColor: [28, 218, 163, 110],
+        getRadius: zoom * 100,
+        radiusMaxPixels: 100,
+        radiusMinPixels: 20,
+        getFillColor: d => changeColor(d.aqi),
         autoHighlight: true,
       })
   ];
@@ -90,13 +121,14 @@ export default function Map() {
       pickable: true,
       getPosition: d => d.position,
       getText: d => `${d.aqi}`,
-      getSize: 18,
+      getSize: zoom + 8,
       getAngle: 0,
       getTextAnchor: 'middle',
       getAlignmentBaseline: 'center'
     })
   ];
   
+
   return (
     <div>
       <ReactMapGL
@@ -107,20 +139,16 @@ export default function Map() {
           setViewport(viewport);
         }}
       >
-
-        {stations.map(function (station, index) {
-            return (
-              <Marker key={index} latitude={station.position[1]} longitude={station.position[0]}>
-                <Pin />
-              </Marker>
-            );
-        })}
         
         <DeckGL initialViewState={viewport}
           height={viewport.height}
           width={viewport.width}
           controller={true}
           layers={[scatterplotlayer, textLayer]}
+          onViewStateChange={({ viewState }) => {
+            console.log(viewState);
+            setZoom(viewState.zoom);
+          }}
         />
 
       </ReactMapGL>

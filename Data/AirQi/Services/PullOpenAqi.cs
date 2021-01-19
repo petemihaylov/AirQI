@@ -77,10 +77,6 @@ namespace AirQi
                         measurement.Unit = Convert.ToString(m.unit);
                         measurement.SourceName = Convert.ToString(m.sourceName);
 
-                        measurement.Position = position;
-                        measurement.CreatedAt = DateTime.UtcNow;
-                        measurement.UpdatedAt = DateTime.UtcNow;
-
                         if(Convert.ToString(m.parameter) == "pm10")
                         {
                             station.Aqi = Convert.ToDouble(m.value);

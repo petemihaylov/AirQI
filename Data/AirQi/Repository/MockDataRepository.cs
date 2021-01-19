@@ -46,20 +46,16 @@ namespace AirQi.Data
                 Location = "Netherlands",
                 City = "",
                 Country = "Netherlands",
-                Measurements = Enumerable.Range(0, _random.Next(4, 5)).Select(m => MockMeasurement(position)).ToList()
+                Measurements = Enumerable.Range(0, _random.Next(4, 5)).Select(m => MockMeasurement()).ToList()
             };
 
             return station;
         }
 
-        private static Measurement MockMeasurement(double[] position)
+        private static Measurement MockMeasurement()
         {
             var measuerment = new Measurement
             {
-                Id = new ObjectId(NewSeeder().ToString().Substring(0, 8)),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
-                Position = position,
                 Parameter = "aqi",
                 Value = _random.Next(50, 150),
                 LastUpdated = DateTime.UtcNow.ToString(),

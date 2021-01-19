@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json.Linq;
 using AutoMapper;
 using AirQi.Dtos;
+using System.Linq;
 
 namespace AirQi.Services
 {
@@ -38,7 +39,8 @@ namespace AirQi.Services
 
         public virtual async Task PullDataAsync()
         {
-            var stations =  await _repository.GetAllLatestAsync();
+            var stations = await _repository.GetAllAsync();
+            stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new { doc.Position }, (key, group) => group.First());
 
             IEnumerable<StationReadDto> stationDtos = Mapper.Map<IEnumerable<StationReadDto>>(stations);
           

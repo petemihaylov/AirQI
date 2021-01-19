@@ -5,7 +5,7 @@ using MongoDB.Bson.Serialization.Attributes;
 namespace AirQi.Models.Core
 {
     [BsonIgnoreExtraElements]
-    public class Measurement : Document
+    public class Measurement
     {
 
         [BsonElement]

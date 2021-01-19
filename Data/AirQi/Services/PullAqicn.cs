@@ -116,9 +116,6 @@ namespace AirQi
 
                     measurement.Parameter = obj;
                     measurement.Value = Convert.ToDouble(measurements[obj].v);
-                    measurement.Position = position;
-                    measurement.CreatedAt = DateTime.UtcNow;
-                    measurement.UpdatedAt = DateTime.UtcNow;
                 
                     measurementsCollection.Add(measurement);
                 }

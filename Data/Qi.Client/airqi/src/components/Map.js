@@ -1,24 +1,68 @@
-/// app.js
-import useSwr from "swr";
+// DeckGl
 import DeckGL, ***REMOVED*** ScatterplotLayer, TextLayer***REMOVED*** from "deck.gl";
-// import ***REMOVED***LineLayer***REMOVED*** from '@deck.gl/layers';
-import React, ***REMOVED*** useState***REMOVED*** from 'react';
-import ReactMapGL from 'react-map-gl';
+// ReactJS
+import useSwr from "swr";
+import React, ***REMOVED*** useEffect, useState***REMOVED*** from 'react';
+// Markers
+import ReactMapGL, ***REMOVED*** Marker***REMOVED*** from 'react-map-gl';
+import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../assets/media/pin-icon.svg";
+// SignalR
+import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
+
 
 // Data fetching method
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
-// Viewport settings
-const INITIAL_VIEW_STATE = ***REMOVED***
-  longitude: 50.8503,
-  latitude: 52.3517,
-  zoom: 8,
-  pitch: 0,
-  bearing: 0
-***REMOVED***;
-
 
 export default function Map() ***REMOVED***
+
+  const [hubConnection, setHubConnection] = useState(null);
+    
+  // Load and prepare data
+  const ***REMOVED*** data, error***REMOVED*** = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
+  const stations = (data && !error) ? data : [];
+  
+  useEffect(() => ***REMOVED***
+      // Create Hub Connection.
+      const createHubConnection = async () => ***REMOVED***
+
+          const hubConnect = new HubConnectionBuilder()
+          .withUrl(process.env.REACT_APP_API_URL + "livestations")
+          .withAutomaticReconnect()
+          .build();
+          
+          // Set the initial SignalR Hub Connection.
+          setHubConnection(hubConnect);
+          
+     ***REMOVED***
+
+      createHubConnection();
+ ***REMOVED***, []);
+  
+  // Websocket
+  useEffect(() => ***REMOVED***
+
+      const startHubConnection = async () => ***REMOVED***
+          if (hubConnection) ***REMOVED***
+              await hubConnection
+                  .start()
+                  .then((result) => ***REMOVED***
+                      console.log("SignalR Connected!");
+
+                      hubConnection.on("GetNewStationsAsync", (stations) => ***REMOVED***
+                          console.log("New Updated Data");
+                          console.log(stations);
+                          this.stations = stations;
+                     ***REMOVED***);
+                 ***REMOVED***)
+                  .catch((e) => console.log("Connection failed: ", e));
+         ***REMOVED***
+     ***REMOVED***
+       
+      startHubConnection();
+
+ ***REMOVED***, [hubConnection]);
+
   // Viewport settings
   const [viewport, setViewport] = useState(***REMOVED***
     latitude: 50.8503,
@@ -28,20 +72,13 @@ export default function Map() ***REMOVED***
     zoom: 12
  ***REMOVED***);
 
-  // Load and prepare data
-  const ***REMOVED*** stations, error***REMOVED*** = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
-  const data = (stations && !error) ? stations : [];
-  console.log(stations);
-  console.log(data);
-
   const scatterplotlayer = [
     new ScatterplotLayer(***REMOVED***
-        id: "scatterplot-layer",
-        opacity: 0.6,
-        data: data.position,
-        getRadius: 20 * 500,
-        radiusMaxPixels: 18,
-        getFillColor: [28, 218, 163],
+      id: "scatterplot-layer",
+        data: data,
+        getRadius: 18 * 500,
+        radiusMaxPixels: 30,
+        getFillColor: [28, 218, 163, 110],
         autoHighlight: true,
      ***REMOVED***)
   ];
@@ -52,8 +89,8 @@ export default function Map() ***REMOVED***
       data,
       pickable: true,
       getPosition: d => d.position,
-      getText: d => "aqi",
-      getSize: 20,
+      getText: d => `$***REMOVED***d.aqi***REMOVED***`,
+      getSize: 18,
       getAngle: 0,
       getTextAnchor: 'middle',
       getAlignmentBaseline: 'center'
@@ -71,7 +108,20 @@ export default function Map() ***REMOVED***
        ***REMOVED******REMOVED***
       >
 
-        <DeckGL initialViewState=***REMOVED***INITIAL_VIEW_STATE***REMOVED*** controller=***REMOVED***true***REMOVED*** layers=***REMOVED***[scatterplotlayer, textLayer]***REMOVED*** getTooltip=***REMOVED***(***REMOVED***object***REMOVED***) => object && `$***REMOVED***object.name***REMOVED***\n$***REMOVED***object.address***REMOVED***`***REMOVED***/>
+        ***REMOVED***stations.map(function (station, index) ***REMOVED***
+            return (
+              <Marker key=***REMOVED***index***REMOVED*** latitude=***REMOVED***station.position[1]***REMOVED*** longitude=***REMOVED***station.position[0]***REMOVED***>
+                <Pin />
+              </Marker>
+            );
+       ***REMOVED***)***REMOVED***
+        
+        <DeckGL initialViewState=***REMOVED***viewport***REMOVED***
+          height=***REMOVED***viewport.height***REMOVED***
+          width=***REMOVED***viewport.width***REMOVED***
+          controller=***REMOVED***true***REMOVED***
+          layers=***REMOVED***[scatterplotlayer, textLayer]***REMOVED***
+        />
 
       </ReactMapGL>
         

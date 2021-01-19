@@ -16,6 +16,6 @@ namespace AirQi.Models.Core
 
         DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
 
-        double[,] Position ***REMOVED*** get; set;***REMOVED***
+        double[] Position ***REMOVED*** get; set;***REMOVED***
    ***REMOVED***
 ***REMOVED***

@@ -19,6 +19,6 @@ namespace AirQi.Dtos
 
         public DateTime CreatedAt { get; set; }
 
-        public Coordinates Coordinates { get; set; }
+        public double[,] Position { get; set; }
     }
 }

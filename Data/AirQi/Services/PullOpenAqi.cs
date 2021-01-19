@@ -55,10 +55,13 @@ namespace AirQi
                 station.City = s.city.ToString();
                 station.Country = s.country.ToString();
                 
-                Coordinates coordinates = new Coordinates();
-                coordinates.Latitude = Convert.ToDouble(s.coordinates.latitude);
-                coordinates.Longitude = Convert.ToDouble(s.coordinates.longitude);
-                station.Coordinates = coordinates;
+                
+                var latitude = Convert.ToDouble(s.coordinates.latitude);
+                var longitude = Convert.ToDouble(s.coordinates.longitude);
+                double[,] position = new double[,] {{ latitude, longitude}};
+
+                station.Position = position;
+                
                 station.CreatedAt = DateTime.UtcNow;
                 station.UpdatedAt = DateTime.UtcNow;
                 station.Aqi = 0;
@@ -74,7 +77,7 @@ namespace AirQi
                         measurement.Unit = Convert.ToString(m.unit);
                         measurement.SourceName = Convert.ToString(m.sourceName);
 
-                        measurement.Coordinates = coordinates;
+                        measurement.Position = position;
                         measurement.CreatedAt = DateTime.UtcNow;
                         measurement.UpdatedAt = DateTime.UtcNow;
 

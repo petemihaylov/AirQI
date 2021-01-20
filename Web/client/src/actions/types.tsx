@@ -24,3 +24,6 @@ export const DELETE_MARKER = "DELETE_MARKER";
 
 export const ADD_PROFILE = "ADD_PROFILE";
 export const UPDATE_PROFILE = "UPDATE_PROFILE";
+
+export const ADD_FEATURES = "ADD_FEATURES";
+export const ADD_SLAMARKER = "ADD_SLAMARKER";

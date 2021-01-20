@@ -15,6 +15,7 @@ using Microsoft.Extensions.Options;
 using AssetNXT.Hubs;
 using AirQi.Models.Core;
 using Hangfire.Server;
+using AirQi.Repository.Test;
 
 namespace AirQi
 {
@@ -40,7 +41,7 @@ namespace AirQi
             services.AddTransient<IWorkerService, WorkerService>();
 
             // AutoMapper
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(Startup));
 
             // Controllers Serialization
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -128,6 +129,7 @@ namespace AirQi
                 endpoints.MapControllers();
                 endpoints.MapHub<LiveStationHub>("/livestations");
             });
+
 
             // Swagger config
             app.UseSwagger();

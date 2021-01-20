@@ -10,7 +10,7 @@ namespace AirQi.Profiles
         {
             CreateMap<Station, StationReadDto>();
             CreateMap<StationCreateDto, Station>();
-            CreateMap<Station,StationCreateDto>();
+            CreateMap<Station, StationCreateDto>();
         }
     }
 }

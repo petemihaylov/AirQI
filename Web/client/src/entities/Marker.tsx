@@ -1,4 +1,4 @@
-import ***REMOVED*** IMarker***REMOVED*** from "./IMarker";
+import ***REMOVED*** IMarker***REMOVED*** from "./interfaces/IMarker";
 
 export default class MarkerEntity implements IMarker ***REMOVED***
   name: any;

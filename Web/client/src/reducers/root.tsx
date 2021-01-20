@@ -5,6 +5,8 @@ import users from "./users";
 import notifications from "./notifications";
 import markers from "./markers";
 import profile from "./profile";
+import features from "./features";
+import slamarker from "./slamarker";
 
 const rootReducer = combineReducers(***REMOVED***
   auth,
@@ -12,7 +14,9 @@ const rootReducer = combineReducers(***REMOVED***
   users,
   notifications,
   markers,
-  profile
+  profile,
+  slamarker,
+  features
 ***REMOVED***);
 
 export default rootReducer;

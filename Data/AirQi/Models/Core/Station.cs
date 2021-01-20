@@ -1,7 +1,7 @@
-using System;
+
+using AirQi.Models;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using AirQi.Repository;
+using AirQi.Repository.Core;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 

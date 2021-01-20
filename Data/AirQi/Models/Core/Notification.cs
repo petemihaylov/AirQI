@@ -1,4 +1,4 @@
-﻿using AirQi.Repository;
+﻿using AirQi.Repository.Core;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace AirQi.Models.Core

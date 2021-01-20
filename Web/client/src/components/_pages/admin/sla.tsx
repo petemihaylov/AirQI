@@ -1,10 +1,26 @@
-import React from "react";
+import React, ***REMOVED*** useEffect***REMOVED*** from "react";
 import ***REMOVED*** Card, Form, Row, Col, Button***REMOVED*** from "react-bootstrap";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import Polygon from "./polygon";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
-import ***REMOVED*** faShapes, faSignature, faSdCard***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import ***REMOVED*** faShapes***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
+
 export const Sla = (props: any) => ***REMOVED***
+  const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm();
+
+  const onSubmit = (data: any) => ***REMOVED***
+    console.log(data.name);
+    console.log(data.max);
+    console.log(JSON.stringify(props.items || " "));
+
+    const ***REMOVED*** dispatch, history***REMOVED*** = props;
+ ***REMOVED***;
+
+  useEffect(() => ***REMOVED***
+    console.log(props.items);
+ ***REMOVED***, [props.items]);
+
   return (
     <Card className="mb-3">
       <Card.Body>
@@ -14,15 +30,22 @@ export const Sla = (props: any) => ***REMOVED***
         <small className="ml-4 pl-2">Edit SLA</small>
 
         <Card.Text className="mt-5">
-          <Form>
+          <Polygon />
+          <Form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED*** className="mt-5">
             <Row>
               <Col>
                 <Form.Label>
                   <b>Title</b>
                   <small className="ml-2">( Enter the SLA' name)</small>
                 </Form.Label>
-                <Form.Control placeholder="Enter name" size="sm" />
+                <Form.Control
+                  placeholder="Enter name"
+                  size="sm"
+                  name="name"
+                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                />
               </Col>
+
               <Col>
                 <Form.Label>
                   <b className="mr-2">Markers</b>
@@ -36,31 +59,44 @@ export const Sla = (props: any) => ***REMOVED***
                   max="100"
                   size="sm"
                   placeholder="0"
+                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
                 />
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                ***REMOVED***errors.name && (
+                  <small className="text-danger"> This is required</small>
+                )***REMOVED***
+              </Col>
+              <Col>
+                ***REMOVED***" "***REMOVED***
+                ***REMOVED***errors.max && (
+                  <small className="text-danger"> This is required</small>
+                )***REMOVED***
               </Col>
             </Row>
             <Row className="mb-5">
               <Col>
                 <Form.Label></Form.Label>
-                <div>
-                  <Button variant="outline-dark" size="sm">
-                    <FontAwesomeIcon icon=***REMOVED***faSdCard***REMOVED*** className="mr-2" />
-                    Save the changes
-                  </Button>
-                </div>
+                <Button variant="dark" size="sm" type="submit">
+                  Save
+                </Button>
               </Col>
               <Col></Col>
             </Row>
           </Form>
-          <Polygon />
         </Card.Text>
       </Card.Body>
     </Card>
   );
 ***REMOVED***;
 
-const mapStateToProps = (state: any) => (***REMOVED******REMOVED***);
+function mapStateToProps(state: any) ***REMOVED***
+  const ***REMOVED*** items***REMOVED*** = state.features;
+  return ***REMOVED***
+    items,
+ ***REMOVED***;
+***REMOVED***
 
-const mapDispatchToProps = ***REMOVED******REMOVED***;
-
-export default connect(mapStateToProps, mapDispatchToProps)(Sla);
+export default connect(mapStateToProps)(Sla);

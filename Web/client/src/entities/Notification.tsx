@@ -1,4 +1,4 @@
-import ***REMOVED*** INotification***REMOVED*** from "./INotification";
+import ***REMOVED*** INotification***REMOVED*** from "./interfaces/INotification";
 
 export default class Notification implements INotification ***REMOVED***
   name: any;

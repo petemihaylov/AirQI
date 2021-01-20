@@ -1,5 +1,5 @@
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
-import ***REMOVED*** Button, Col, Container, Row, Table, Collapse, InputGroup***REMOVED*** from "react-bootstrap";
+import ***REMOVED*** Button, Col, Container, Row, Table, Collapse, InputGroup, Card***REMOVED*** from "react-bootstrap";
 import User from "../../../entities/User";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 import ***REMOVED***
@@ -38,7 +38,7 @@ const AdminBoard = (props: any) => ***REMOVED***
         </Col>
         <Col sm=***REMOVED***4***REMOVED***>
           <Button
-            variant="outline-dark"
+            variant="dark"
             size="sm"
             className="pl-3 pr-3"
             onClick=***REMOVED***() => setModalShow(true)***REMOVED***
@@ -52,54 +52,59 @@ const AdminBoard = (props: any) => ***REMOVED***
         props=***REMOVED***props***REMOVED***
         onHide=***REMOVED***() => setModalShow(false)***REMOVED***
       />
-      <Table responsive hover variant="light">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Date Created</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          ***REMOVED***content !== [] &&
-            content.map((item: User, index) => (
-              <tr key=***REMOVED***index***REMOVED***>
-                <td>***REMOVED***index + 1***REMOVED***</td>
-                <td>
-                  ***REMOVED***" "***REMOVED***
-                  ***REMOVED***item.firstName***REMOVED*** ***REMOVED***item.lastName***REMOVED***
-                </td>
-                <td>04/10/2013</td>
-                <td>***REMOVED***item.userRole***REMOVED***</td>
-                <td>
-                  <span className="status">&bull;</span> Active
-                </td>
-                <td>
-                  <button
-                    className="settings"
-                    title="Settings"
-                    data-toggle="tooltip"
-                  >
-                    <FontAwesomeIcon icon=***REMOVED***faCog***REMOVED*** />
-                  </button>
-                  <button
-                    className="delete"
-                    title="Delete"
-                    data-toggle="tooltip"
-                    onClick=***REMOVED***handleDelete.bind(this, item.id, index)***REMOVED***
-                  >
-                    <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
-                  </button>
-                </td>
+
+      <Card className="mb-5 mt-5">
+        <Card.Body>
+          <Table responsive hover variant="light">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Date Created</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th></th>
               </tr>
-            ))***REMOVED***
-        </tbody>
-      </Table>
-     
-      <Sla/>
+            </thead>
+            <tbody>
+              ***REMOVED***content !== [] &&
+                content.map((item: User, index) => (
+                  <tr key=***REMOVED***index***REMOVED***>
+                    <td>***REMOVED***index + 1***REMOVED***</td>
+                    <td>
+                      ***REMOVED***" "***REMOVED***
+                      ***REMOVED***item.firstName***REMOVED*** ***REMOVED***item.lastName***REMOVED***
+                    </td>
+                    <td>04/10/2013</td>
+                    <td>***REMOVED***item.userRole***REMOVED***</td>
+                    <td>
+                      <span className="status">&bull;</span> Active
+                    </td>
+                    <td>
+                      <button
+                        className="settings"
+                        title="Settings"
+                        data-toggle="tooltip"
+                      >
+                        <FontAwesomeIcon icon=***REMOVED***faCog***REMOVED*** />
+                      </button>
+                      <button
+                        className="delete"
+                        title="Delete"
+                        data-toggle="tooltip"
+                        onClick=***REMOVED***handleDelete.bind(this, item.id, index)***REMOVED***
+                      >
+                        <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
+                      </button>
+                    </td>
+                  </tr>
+                ))***REMOVED***
+            </tbody>
+          </Table>
+        </Card.Body>
+      </Card>
+
+      <Sla />
     </Container>
   );
 ***REMOVED***;

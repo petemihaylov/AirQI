@@ -86,33 +86,111 @@ Verify the deployment by navigating to your server address in your preferred bro
 ```
 ### Source Details
 
+/api/stations
+
 ```json
 ***REMOVED***
-  "_id": "5f7c732d7be30a600ae8433b",
-  "city": "New York",
-  "country": ***REMOVED***
-    "name": "United States",
-    "code": "US"
- ***REMOVED***,
-  "location": ***REMOVED***
-    "accuracy": 35.369,
-    "latitude": 55.8256671,
-    "longitude": 37.5962931
- ***REMOVED***,
+  "id": "60076a29bd691e98a8bee122",
+  "aqi": 28.0,
+  "location": "Southport",
+  "city": "Southport",
+  "country": "Australia",
   "measurements": [
     ***REMOVED***
-      "pm025": 15.32,
-      "pm100": 26.47,
-      "aqi": 67.67,
-      "p": 94015.89,
-      "h": 32.54,
-      "t": 24.53,
-      "o3": 16.63,
-      "no2": 6.21
+      "parameter": "h",
+      "value": 77.1,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "no2",
+      "value": 1.9,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "o3",
+      "value": 5.3,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "p",
+      "value": 1018.3,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "pm10",
+      "value": 19.0,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "pm25",
+      "value": 28.0,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "r",
+      "value": 0.3,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "t",
+      "value": 22.4,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "w",
+      "value": 1.4,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "wd",
+      "value": 169.0,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
+   ***REMOVED***,
+    ***REMOVED***
+      "parameter": "wg",
+      "value": 6.0,
+      "unit": "µg/m³",
+      "sourceName": "Air quality | Environment, land and water | Queensland Government"
    ***REMOVED***
   ],
-  "createdAt": "2020-05-09T22:00:00.000+00:00",
-  "updatedAt": "2020-05-09T22:00:00.000+00:00"
+  "position": [ 153.402, -27.9612 ],
+  "createdAt": "2021-01-19T23:24:25.687Z",
+  "updatedAt": "2021-01-19T23:24:25.687Z"
+***REMOVED***
+```
+
+/api/measurements
+```json
+***REMOVED***
+  "id": "60075c54bd691e98a8bedc0d",
+  "aqi": 110.0,
+  "measurements": [
+    ***REMOVED***
+      "parameter": "o3",
+      "value": 191.0,
+      "lastUpdated": "19/03/2019 07:00:00",
+      "unit": "µg/m³",
+      "sourceName": "ChinaAQIData"
+   ***REMOVED***,
+    ***REMOVED******REMOVED***,
+    ***REMOVED******REMOVED***,
+    ***REMOVED******REMOVED***,
+    ***REMOVED******REMOVED***,
+    ***REMOVED******REMOVED***
+  ],
+  "position": [ 117.1837, 39.2133 ],
+  "createdAt": "2021-01-19T22:25:24.552Z",
+  "updatedAt": "2021-01-19T22:25:24.553Z"
 ***REMOVED***
 ```
 
@@ -121,8 +199,6 @@ AirQi repo typically uses either the [MIT](LICENSE.TXT) or
 [Apache 2](https://www.apache.org/licenses/LICENSE-2.0) licenses for code.
 Some projects license documentation and other forms of content under
 [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-
 
 
    [.NetCore]: <https://dotnet.microsoft.com/download/dotnet-core>

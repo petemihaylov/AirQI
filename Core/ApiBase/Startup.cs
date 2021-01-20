@@ -47,6 +47,7 @@ namespace ApiBase
 
             services.AddScoped<IEFRepository, SqlRepository>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ISlaMarkerService, SlaMarkerService>();
 
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

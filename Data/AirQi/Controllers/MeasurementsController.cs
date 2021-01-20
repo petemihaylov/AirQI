@@ -1,13 +1,12 @@
 using AirQi.Dtos;
 using AutoMapper;
 using AirQi.Models.Core;
-using AirQi.Repository;
+using AirQi.Repository.Core;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using MongoDB.Bson;
-using System.Linq;
 
 namespace AirQi.Controllers
 {

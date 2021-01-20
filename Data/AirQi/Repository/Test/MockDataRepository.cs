@@ -4,24 +4,20 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Collections.Concurrent;
-using System.Linq.Expressions;
 
-using AutoMapper;
 using AirQi.Models.Core;
 using MongoDB.Bson;
 using MongoDB.Driver;
 
-namespace Test.Repository
+namespace AirQi.Repository.Test
 {
     public class MockDataRepository : IMockDataRepository<Station>
     {
         private static readonly Random _random = new Random(Seed: 0);
         private  readonly ConcurrentDictionary<double[], List<Station>> _collections;
-        private readonly IMapper _mapper;
 
-        public MockDataRepository(IMapper mapper)
+        public MockDataRepository()
         {
-            this._mapper = mapper;
             this._collections = new ConcurrentDictionary<double[], List<Station>>(concurrencyLevel: 2, capacity: 128);
         }
 

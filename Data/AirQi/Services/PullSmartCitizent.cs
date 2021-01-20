@@ -5,7 +5,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using AirQi.Dtos;
 using AirQi.Models.Core;
-using AirQi.Repository;
+using AirQi.Repository.Core;
 using AirQi.Services;
 using AirQi.Settings;
 using AssetNXT.Hubs;

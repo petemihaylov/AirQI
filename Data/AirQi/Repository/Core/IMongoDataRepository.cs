@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace AirQi.Repository
+namespace AirQi.Repository.Core
 {
     public interface IMongoDataRepository<TDocument> where TDocument : IDocument
     {

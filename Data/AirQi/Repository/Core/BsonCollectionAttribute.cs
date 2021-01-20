@@ -1,6 +1,6 @@
 using System;
 
-namespace AirQi.Repository
+namespace AirQi.Repository.Core
 {
     [AttributeUsage(AttributeTargets.Class, Inherited = false)]
     public class BsonCollectionAttribute : Attribute

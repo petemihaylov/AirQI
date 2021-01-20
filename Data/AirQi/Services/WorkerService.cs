@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using AirQi.Models.Core;
-using AirQi.Repository;
+using AirQi.Repository.Core;
 using AirQi.Settings;
 using Microsoft.AspNetCore.SignalR;
 using AssetNXT.Hubs;

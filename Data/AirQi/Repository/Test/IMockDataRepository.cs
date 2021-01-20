@@ -1,12 +1,9 @@
-using System;
-using AirQi.Models.Core;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Test.Repository
+namespace AirQi.Repository.Test
 {
-    public interface IMockDataRepository<TDocument> 
+    public interface IMockDataRepository<TDocument>
     {
 
         IEnumerable<TDocument> GetAll();

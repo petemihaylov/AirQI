@@ -1,6 +1,7 @@
 using AirQi.Controllers;
 using AirQi.Models.Core;
-using AirQi.Repository;
+using AirQi.Repository.Core;
+using AirQi.Repository.Test;
 using AssetNXT.Hubs;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -15,12 +16,13 @@ namespace Qi.Tests
         private readonly Mock<IMongoDataRepository<Station>> _repository;
         private readonly Mock<IHubContext<LiveStationHub>> _hub;
         private readonly Mock<IMapper> _mapper;
-
         private readonly StationsController _controller;
+        private readonly MockDataRepository _mock;
 
         public StationsControllerTests()
         {
             this._repository = new Mock<IMongoDataRepository<Station>>();
+            this._mock = new MockDataRepository();
             this._mapper = new Mock<IMapper>();
             this._hub = new Mock<IHubContext<LiveStationHub>>();
             this._controller = new StationsController(Repository.Object, Hub.Object, Mapper.Object);
@@ -35,13 +37,25 @@ namespace Qi.Tests
         public void Test_GetAllStations_OkResult()
         {
             // Act
-            var okResult = _controller.GetAllStations();
+            var okResult = this._controller.GetAllStations();
 
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result);
         }
 
-        
+        [Fact]
+        public void Test_CreateStationMethod()
+        {
+            // Prepare
+            this._mock.GenerateMockStations();
+            
+            
+            // Act
+            var okResult = this._controller.GetAllStations();
+
+            // Assert
+            Assert.IsType<OkObjectResult>(okResult.Result);
+        }
 
         
 

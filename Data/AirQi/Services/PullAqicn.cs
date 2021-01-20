@@ -10,7 +10,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using AirQi.Models.Core;
-using AirQi.Repository;
+using AirQi.Repository.Core;
 using AirQi.Services;
 using AirQi.Settings;
 using Microsoft.CSharp.RuntimeBinder;

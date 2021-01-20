@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 using System;
 using MongoDB.Bson;
 
-namespace AirQi.Repository
+namespace AirQi.Repository.Core
 ***REMOVED***
     public class MongoDataRepository<TDocument> : IMongoDataRepository<TDocument> where TDocument : IDocument
     ***REMOVED***

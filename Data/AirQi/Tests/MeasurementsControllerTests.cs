@@ -1,6 +1,6 @@
 using AirQi.Controllers;
 using AirQi.Models.Core;
-using AirQi.Repository;
+using AirQi.Repository.Core;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Moq;

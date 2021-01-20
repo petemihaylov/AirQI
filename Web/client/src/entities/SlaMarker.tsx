@@ -1,4 +1,4 @@
-import { ISlaMarker } from "./ISlaMarker";
+import { ISlaMarker } from "./interfaces/ISlaMarker";
 
 export default class SlaMarker implements ISlaMarker {
   id: number | undefined;

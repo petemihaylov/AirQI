@@ -16,7 +16,6 @@ const Login = (props: any) => ***REMOVED***
     handleChange(true);
 
     const ***REMOVED*** dispatch, history***REMOVED*** = props;
-
     dispatch(login(data.username, data.password))
       .then(() => ***REMOVED***
         history.push("/dashboard");

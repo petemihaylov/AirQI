@@ -5,8 +5,8 @@ const ***REMOVED*** REACT_APP_JWT_URL, REACT_APP_API_URL***REMOVED*** = process.
 
 export default class AuthService ***REMOVED***
   static login = async (username: string, password: string) => ***REMOVED***
-    return axios
-      .post(REACT_APP_JWT_URL + "/api/token/" || "", ***REMOVED***
+    console.log(username + " " + password); 
+    return axios.post(REACT_APP_JWT_URL + "/api/token" || "", ***REMOVED***
         username,
         password,
      ***REMOVED***)
@@ -14,7 +14,6 @@ export default class AuthService ***REMOVED***
         if (response.data.accessToken) ***REMOVED***
           localStorage.setItem("user", JSON.stringify(response.data));
        ***REMOVED***
-
         return response.data;
      ***REMOVED***);
  ***REMOVED***;

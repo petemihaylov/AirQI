@@ -1,4 +1,4 @@
-import ***REMOVED*** IUser***REMOVED*** from "./IUser";
+import ***REMOVED*** IUser***REMOVED*** from "./interfaces/IUser";
 
 export default class User implements IUser ***REMOVED***
   id: number | undefined;

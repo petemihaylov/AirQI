@@ -85,6 +85,30 @@ export const data = [
 
   ***REMOVED***
     id: 12,
+    position: [5.4711, 51.441],
+ ***REMOVED***,
+  ***REMOVED***
+    id: 13,
     position: [5.4899, 51.43],
+ ***REMOVED***,
+  ***REMOVED***
+    id: 14,
+    position: [5.4751, 51.451],
+ ***REMOVED***,
+  ***REMOVED***
+    id: 15,
+    position: [5.46, 51.45],
+ ***REMOVED***,
+  ***REMOVED***
+    id: 16,
+    position: [5.4898, 51.432],
+ ***REMOVED***,
+  ***REMOVED***
+    id: 17,
+    position: [5.479, 51.452],
+ ***REMOVED***,
+  ***REMOVED***
+    id: 18,
+    position: [5.462, 51.454],
  ***REMOVED***,
 ];

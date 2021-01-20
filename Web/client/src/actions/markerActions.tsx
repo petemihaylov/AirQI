@@ -1,4 +1,4 @@
-import ***REMOVED*** IMarker***REMOVED*** from "../entities/IMarker";
+import ***REMOVED*** IMarker***REMOVED*** from "../entities/interfaces/IMarker";
 import MarkerService from "../services/marker.service";
 import ***REMOVED*** CREATE_MARKER, DELETE_MARKER, FETCH_MARKERS***REMOVED*** from "./types";
 

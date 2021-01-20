@@ -9,6 +9,7 @@ namespace ApiBase.Data
 
 
         public DbSet<User> Users { get; set; }
+        public DbSet<SlaMarker> SlaMarkers {get; set;}
         public DbSet<Notification> Notifications { get; set; }
         public DbSet<Marker> Markers { get; set; }
 

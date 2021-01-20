@@ -10,8 +10,7 @@ const Navigation = (props: any) => {
   const [moderatorBoard, showModeratorBoard] = useState(false);
   const [adminBoard, showAdminBoard] = useState(false);
 
-  useEffect(() => {
-    
+  useEffect(() => {    
     showModeratorBoard(user && user.userRole === "Moderator");
     showAdminBoard(user && user.userRole === "Admin");
   }, []);

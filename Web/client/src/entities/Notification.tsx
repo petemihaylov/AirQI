@@ -1,4 +1,4 @@
-import { INotification } from "./INotification";
+import { INotification } from "./interfaces/INotification";
 
 export default class Notification implements INotification {
   name: any;

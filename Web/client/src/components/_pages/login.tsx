@@ -16,7 +16,6 @@ const Login = (props: any) => {
     handleChange(true);
 
     const { dispatch, history } = props;
-
     dispatch(login(data.username, data.password))
       .then(() => {
         history.push("/dashboard");

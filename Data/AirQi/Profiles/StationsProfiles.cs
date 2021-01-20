@@ -10,7 +10,7 @@ namespace AirQi.Profiles
         ***REMOVED***
             CreateMap<Station, StationReadDto>();
             CreateMap<StationCreateDto, Station>();
-            CreateMap<Station,StationCreateDto>();
+            CreateMap<Station, StationCreateDto>();
        ***REMOVED***
    ***REMOVED***
 ***REMOVED***

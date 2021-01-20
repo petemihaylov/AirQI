@@ -49,7 +49,7 @@ namespace AirQi.Controllers
 
             if(station != null)
             ***REMOVED***
-                return Ok(_mapper.Map<StationReadDto>(station));    
+                return Ok(this._mapper.Map<StationReadDto>(station));    
            ***REMOVED***
 
             return NotFound();
@@ -62,16 +62,14 @@ namespace AirQi.Controllers
 
             if (station != null)
             ***REMOVED***
+                station.Id = ObjectId.GenerateNewId();
                 station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;
                 await this._repository.CreateObjectAsync(station);
 
                 // SignalR event
-                await this._hub.Clients.All.SendAsync("GetNewStationsAsync", station);
+                // await this._hub.Clients.All.SendAsync("GetNewStationsAsync", station);
 
-                var stationReadDto = this._mapper.Map<StationReadDto>(station);
-
-                // https://docs.microsoft.com/en-us/dotnet/api/system.web.http.apicontroller.createdatroute?view=aspnetcore-2.2
-                return CreatedAtRoute(nameof(GetStationById), new ***REMOVED*** Id = stationReadDto.Id***REMOVED***, stationReadDto);
+                return Ok(this._mapper.Map<StationReadDto>(station));
            ***REMOVED***
 
             return NotFound();

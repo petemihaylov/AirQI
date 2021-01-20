@@ -1,5 +1,5 @@
 import axios from "axios";
-import ***REMOVED*** IMarker***REMOVED*** from "../entities/IMarker";
+import ***REMOVED*** IMarker***REMOVED*** from "../entities/interfaces/IMarker";
 import authHeader from "./auth.header";
 const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
 

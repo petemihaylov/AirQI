@@ -1,4 +1,4 @@
-import ***REMOVED*** ISlaMarker***REMOVED*** from "./ISlaMarker";
+import ***REMOVED*** ISlaMarker***REMOVED*** from "./interfaces/ISlaMarker";
 
 export default class SlaMarker implements ISlaMarker ***REMOVED***
   id: number | undefined;

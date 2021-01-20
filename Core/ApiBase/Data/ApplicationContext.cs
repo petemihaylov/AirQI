@@ -9,6 +9,7 @@ namespace ApiBase.Data
 
 
         public DbSet<User> Users ***REMOVED*** get; set;***REMOVED***
+        public DbSet<SlaMarker> SlaMarkers ***REMOVED***get; set;***REMOVED***
         public DbSet<Notification> Notifications ***REMOVED*** get; set;***REMOVED***
         public DbSet<Marker> Markers ***REMOVED*** get; set;***REMOVED***
 

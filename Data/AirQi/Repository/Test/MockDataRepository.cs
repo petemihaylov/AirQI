@@ -14,43 +14,43 @@ namespace AirQi.Repository.Test
     public class MockDataRepository : IMockDataRepository<Station>
     ***REMOVED***
         private static readonly Random _random = new Random(Seed: 0);
-        private  readonly ConcurrentDictionary<double[], List<Station>> _collections;
+        private ConcurrentDictionary<double[], List<Station>> _collections;
+        private List<double[]> _positions;
+
 
         public MockDataRepository()
         ***REMOVED***
             this._collections = new ConcurrentDictionary<double[], List<Station>>(concurrencyLevel: 2, capacity: 128);
+            this._positions = new List<double[]>();
        ***REMOVED***
 
-        public async void GenerateMockStations()
-        ***REMOVED***
-            double[,] positions = new double[4,2] ***REMOVED*** ***REMOVED*** 51.31, 4.97***REMOVED***, ***REMOVED*** 50.82, 51.52***REMOVED***, ***REMOVED*** 45.22, 31.53***REMOVED***, ***REMOVED*** 21.31, 4.37***REMOVED******REMOVED***;
-            var stationStateCount = _random.Next(2, 10);
 
-            for (int j = 0; j < 4; j++)
+        public ConcurrentDictionary<double[], List<Station>> Collections => _collections;
+        public List<double[]> Positions => _positions; 
+        
+        
+        public double GetRandomNumber(double minimum, double maximum)
+        ***REMOVED*** 
+            return _random.NextDouble() * (maximum - minimum) + minimum;
+       ***REMOVED***
+
+        public void GenerateMockStations()
+        ***REMOVED***           
+            for (int j = 0; j < _random.Next(2, 8); j++)
             ***REMOVED***
-                double[] position = new double[] ***REMOVED*** positions[j, 0], positions[j, 1]***REMOVED***;
-
-                for (int i = 0; i < stationStateCount; i++)
-                ***REMOVED***
-                    var station = MockStation(position);
-                    await this.CreateObjectAsync(station);
-               ***REMOVED***
+                double[] position = new double[] ***REMOVED*** GetRandomNumber(30.2, 50.3), GetRandomNumber(1.5, 30.6)***REMOVED***;
+                
+                this._positions.Add(position);
+                var station = MockStation(position);
+                this.CreateObject(station);
            ***REMOVED***
        ***REMOVED***
 
-        private static Station MockStation(double[] position)
+        public Station MockStation(double[] position)
         ***REMOVED***
-
-            var latitude = (_random.NextDouble() * (53.2193835 - 51.1913202)) + 51.1913202;
-            var longitude = (_random.NextDouble() * (6.8936619 - 4.4777325)) + 4.4777325;
-
-
+                
             var station = new Station
             ***REMOVED***
-
-                Id = new ObjectId(NewSeeder().ToString().Substring(0, 8)),
-                CreatedAt = DateTime.UtcNow,
-                UpdatedAt = DateTime.UtcNow,
                 Position = position,
                 Aqi = _random.NextDouble(),
                 // https://github.com/vivet/GoogleApi
@@ -63,7 +63,7 @@ namespace AirQi.Repository.Test
             return station;
        ***REMOVED***
 
-        private static Measurement MockMeasurement()
+        private Measurement MockMeasurement()
         ***REMOVED***
             var measuerment = new Measurement
             ***REMOVED***
@@ -118,11 +118,11 @@ namespace AirQi.Repository.Test
         // Returns an object by the position of the record.
         public Station GetObjectByPosition(double[] position)
         ***REMOVED***
-            foreach (var (Position, stations) in this._collections)
+            foreach (var (Position, stations) in this.Collections)
             ***REMOVED***
                 foreach (var station in stations)
                 ***REMOVED***
-                    if (station.Position == position)
+                    if (station.Position.SequenceEqual(position))
                     ***REMOVED***
                         return station;
                    ***REMOVED***

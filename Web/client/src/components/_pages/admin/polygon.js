@@ -1,11 +1,21 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
 import { Container } from "react-bootstrap";
+import { addPolygon } from "../../../actions/slamarker";
 import MapGL, { NavigationControl } from "react-map-gl";
 import { Editor, DrawPolygonMode, EditingMode } from "react-map-gl-draw";
-import { faDrawPolygon, faSlidersH } from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import { customFeatureStyle, customHandleStyle } from "./polygon-style";
+
+import {
+  faDrawPolygon,
+  faSlidersH,
+  faTrashAlt,
+  faSave,
+} from "@fortawesome/free-solid-svg-icons";
+import Geometry from "../../../entities/Geometry";
+import Feature from "../../../entities/Feature";
+
 const DEFAULT_VIEWPORT = {
   latitude: 52.3676,
   longitude: 4.9041,
@@ -21,15 +31,32 @@ const Polygon = (props) => {
   const [viewport, setViewport] = useState(DEFAULT_VIEWPORT);
   const [modeHandler, setMode] = useState(null);
   const [features, setFeatures] = useState([]);
+  const [deletePolygon, setDelete] = useState(false);
 
   const handleUpdate = (val) => {
+    console.log(val.data);
     setFeatures(val.data);
   };
 
-
   const hanldeSelect = (val) => {
-      console.log(val);
-  }
+    var arr = features;
+    if (deletePolygon) {
+      for (var i = 0; i < arr.length; i++) {
+        if (i === val.selectedFeatureIndex) {
+          arr.splice(i, 1);
+        }
+      }
+      setFeatures(arr);
+    }
+
+    setDelete(false);
+  };
+
+  const handleSave = () => {
+    const { dispatch } = props;
+    dispatch(addPolygon(features));
+  };
+
   const handleViewportChange = useCallback(
     (newViewport) => setViewport(newViewport),
     []
@@ -60,6 +87,34 @@ const Polygon = (props) => {
             <FontAwesomeIcon
               icon={faSlidersH}
               onClick={() => setMode(new EditingMode())}
+            />
+          </button>
+        </div>
+        <div
+          className="mapboxgl-ctrl-group mapboxgl-ctrl"
+          style={{ position: "absolute", left: 10, top: 90 }}
+        >
+          <button>
+            <FontAwesomeIcon
+              icon={faTrashAlt}
+              onClick={() => {
+                setMode(new EditingMode());
+                setDelete(true);
+              }}
+            />
+          </button>
+        </div>
+        <div
+          className="mapboxgl-ctrl-group mapboxgl-ctrl"
+          style={{ position: "absolute", left: 10, top: 130 }}
+        >
+          <button>
+            <FontAwesomeIcon
+              icon={faSave}
+              onClick={() => {
+                setMode(null);
+                handleSave();
+              }}
             />
           </button>
         </div>
@@ -100,4 +155,11 @@ const Polygon = (props) => {
   );
 };
 
-export default Polygon;
+function mapStateToProps(state) {
+  const { features } = state.features;
+  return {
+    features,
+  };
+}
+
+export default connect(mapStateToProps)(Polygon);

@@ -1,4 +1,5 @@
 using ApiJwt.Data;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,6 +24,9 @@ namespace ApiJwt
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(
+                    CertificateAuthenticationDefaults.AuthenticationScheme)
+                .AddCertificate();
 
             services.AddCors(options =>
             {
@@ -58,6 +62,7 @@ namespace ApiJwt
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

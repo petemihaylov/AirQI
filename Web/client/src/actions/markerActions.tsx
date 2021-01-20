@@ -1,4 +1,4 @@
-import { IMarker } from "../entities/IMarker";
+import { IMarker } from "../entities/interfaces/IMarker";
 import MarkerService from "../services/marker.service";
 import { CREATE_MARKER, DELETE_MARKER, FETCH_MARKERS } from "./types";
 

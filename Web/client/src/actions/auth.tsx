@@ -50,6 +50,7 @@ export const register = (user: User) => (dispatch: any) => {
 export const login = (username: string, password: string) => (
   dispatch: any
 ) => {
+  console.log(username); 
   return AuthService.login(username, password).then(
     (response) => {
       dispatch({

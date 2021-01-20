@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { createUseStyles } from "react-jss";
 import { connect } from "react-redux";
 import { Item } from "./item";
@@ -8,6 +8,7 @@ import {
   faTools,
   faBell,
   faMapMarked,
+  faUserShield,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,6 +16,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Sidebar = (props: any) => {
   const classes = useStyles();
   const { user } = props;
+  const [adminBoard, showAdminBoard] = useState(false);
+
+
+  useEffect(() => {
+    showAdminBoard(user && user.userRole === "Admin");
+  }, []);
 
   return (
     <div>
@@ -53,7 +60,15 @@ const Sidebar = (props: any) => {
               classes={classes}
               animation={""}
             />
-
+            {adminBoard && (
+              <Item
+                title={"Admin"}
+                reference={"/admin"}
+                fontIcon={faUserShield}
+                classes={classes}
+                animation={""}
+              />
+            )}
             <li className={classes.navItem}></li>
           </ul>
         </nav>

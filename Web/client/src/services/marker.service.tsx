@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IMarker } from "../entities/IMarker";
+import { IMarker } from "../entities/interfaces/IMarker";
 import authHeader from "./auth.header";
 const { REACT_APP_API_URL } = process.env;
 

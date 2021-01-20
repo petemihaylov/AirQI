@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row, Table } from "react-bootstrap";
+import { Button, Col, Container, Row, Table, Collapse, InputGroup, Card } from "react-bootstrap";
 import User from "../../../entities/User";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +12,7 @@ import { deleteUser, fetchUsers } from "../../../actions/userActions";
 import "./css/style.css";
 import Searchbar from "./searchbar";
 import CreateModal from "./create-modal";
-import Polygon from "./polygon";
+import { Sla } from "./sla";
 
 const AdminBoard = (props: any) => {
   const [content, handleContent] = useState([]);
@@ -38,7 +38,7 @@ const AdminBoard = (props: any) => {
         </Col>
         <Col sm={4}>
           <Button
-            variant="outline-dark"
+            variant="dark"
             size="sm"
             className="pl-3 pr-3"
             onClick={() => setModalShow(true)}
@@ -53,53 +53,58 @@ const AdminBoard = (props: any) => {
         onHide={() => setModalShow(false)}
       />
 
-      <Table responsive hover variant="light">
-        <thead>
-          <tr>
-            <th></th>
-            <th>Name</th>
-            <th>Date Created</th>
-            <th>Role</th>
-            <th>Status</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {content !== [] &&
-            content.map((item: User, index) => (
-              <tr key={index}>
-                <td>{index + 1}</td>
-                <td>
-                  {" "}
-                  {item.firstName} {item.lastName}
-                </td>
-                <td>04/10/2013</td>
-                <td>{item.userRole}</td>
-                <td>
-                  <span className="status">&bull;</span> Active
-                </td>
-                <td>
-                  <button
-                    className="settings"
-                    title="Settings"
-                    data-toggle="tooltip"
-                  >
-                    <FontAwesomeIcon icon={faCog} />
-                  </button>
-                  <button
-                    className="delete"
-                    title="Delete"
-                    data-toggle="tooltip"
-                    onClick={handleDelete.bind(this, item.id, index)}
-                  >
-                    <FontAwesomeIcon icon={faTrashAlt} />
-                  </button>
-                </td>
+      <Card className="mb-5 mt-5">
+        <Card.Body>
+          <Table responsive hover variant="light">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Date Created</th>
+                <th>Role</th>
+                <th>Status</th>
+                <th></th>
               </tr>
-            ))}
-        </tbody>
-      </Table>
-      <Polygon/>
+            </thead>
+            <tbody>
+              {content !== [] &&
+                content.map((item: User, index) => (
+                  <tr key={index}>
+                    <td>{index + 1}</td>
+                    <td>
+                      {" "}
+                      {item.firstName} {item.lastName}
+                    </td>
+                    <td>04/10/2013</td>
+                    <td>{item.userRole}</td>
+                    <td>
+                      <span className="status">&bull;</span> Active
+                    </td>
+                    <td>
+                      <button
+                        className="settings"
+                        title="Settings"
+                        data-toggle="tooltip"
+                      >
+                        <FontAwesomeIcon icon={faCog} />
+                      </button>
+                      <button
+                        className="delete"
+                        title="Delete"
+                        data-toggle="tooltip"
+                        onClick={handleDelete.bind(this, item.id, index)}
+                      >
+                        <FontAwesomeIcon icon={faTrashAlt} />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+        </Card.Body>
+      </Card>
+
+      <Sla />
     </Container>
   );
 };

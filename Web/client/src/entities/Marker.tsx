@@ -1,4 +1,4 @@
-import { IMarker } from "./IMarker";
+import { IMarker } from "./interfaces/IMarker";
 
 export default class MarkerEntity implements IMarker {
   name: any;

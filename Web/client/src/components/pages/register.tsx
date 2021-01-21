@@ -66,9 +66,9 @@ const Register = (props: any) => ***REMOVED***
                   name="username"
                 />
                 ***REMOVED***errors.username && (
-                  <p>
+                  <div>
                     <small className="text-danger"> This is required</small>
-                  </p>
+                  </div>
                 )***REMOVED***
               </div>
 
@@ -81,9 +81,9 @@ const Register = (props: any) => ***REMOVED***
                   name="firstName"
                 />
                 ***REMOVED***errors.firstName && (
-                  <p>
+                  <div>
                     <small className="text-danger"> This is required</small>
-                  </p>
+                  </div>
                 )***REMOVED***
               </div>
 
@@ -96,9 +96,9 @@ const Register = (props: any) => ***REMOVED***
                   name="lastName"
                 />
                 ***REMOVED***errors.lastName && (
-                  <p>
+                  <div>
                     <small className="text-danger"> This is required</small>
-                  </p>
+                  </div>
                 )***REMOVED***
               </div>
 
@@ -119,9 +119,9 @@ const Register = (props: any) => ***REMOVED***
                 )***REMOVED***
 
                 ***REMOVED***errors.password?.type === "required" && (
-                  <p>
+                  <div>
                     <small className="text-danger"> This is required</small>
-                  </p>
+                  </div>
                 )***REMOVED***
               </div>
 

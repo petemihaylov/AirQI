@@ -78,6 +78,20 @@ namespace AirQi.Repository.Test
             return measuerment;
        ***REMOVED***
 
+        public Agreement MockAgreement(List<Station> stations)
+        ***REMOVED***
+            var agreement = new Agreement
+            ***REMOVED***
+                Stations = stations,
+                Name = "name",
+                Description = "description",
+                AqiMin = _random.Next(0, 50),
+                AqiMax = _random.Next(50, 100)
+           ***REMOVED***;
+
+            return agreement;
+       ***REMOVED***
+
         public Notification MockNotification(double[] position)
         ***REMOVED***
                 

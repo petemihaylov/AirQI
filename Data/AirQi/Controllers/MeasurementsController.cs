@@ -24,9 +24,9 @@ namespace AirQi.Controllers
        ***REMOVED***
 
         [HttpGet]
-        public ActionResult <IEnumerable<MeasurementReadDto>> GetAllMeasurements()
+        public async Task<ActionResult> GetAllMeasurements()
         ***REMOVED***
-            var stationModelItems =  this._repository.GetAll();
+            var stationModelItems =  await this._repository.GetAllAsync();
             
             if(stationModelItems != null)***REMOVED***
                 return Ok(_mapper.Map<IEnumerable<StationMeasurementReadDto>>(stationModelItems));

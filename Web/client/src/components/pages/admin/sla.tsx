@@ -1,25 +1,22 @@
 import React, { useEffect } from "react";
 import { Card, Form, Row, Col, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import Polygon from "./polygon";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShapes } from "@fortawesome/free-solid-svg-icons";
 import { useForm } from "react-hook-form";
+import Polygon from "./polygon";
+import { createSlaMarker } from "../../../actions/slamarker";
+import { faShapes } from "@fortawesome/free-solid-svg-icons";
 
-export const Sla = (props: any) => {
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import SlaMarker from "../../../entities/SlaMarker";
+
+const Sla = (props: any) => {
   const { register, handleSubmit, errors } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log(data.name);
-    console.log(data.max);
-    console.log(JSON.stringify(props.items || " "));
-
-    const { dispatch, history } = props;
+    props.dispatch(
+      createSlaMarker(new SlaMarker(data.name, 0, parseInt(data.max), JSON.stringify(props.items)))
+    );
   };
-
-  useEffect(() => {
-    console.log(props.items);
-  }, [props.items]);
 
   return (
     <Card className="mb-3">
@@ -28,9 +25,8 @@ export const Sla = (props: any) => {
           <FontAwesomeIcon icon={faShapes} className="mr-2" /> Edit
         </Card.Title>
         <small className="ml-4 pl-2">Edit SLA</small>
-
+        <Polygon />
         <Card.Text className="mt-5">
-          <Polygon />
           <Form onSubmit={handleSubmit(onSubmit)} className="mt-5">
             <Row>
               <Col>

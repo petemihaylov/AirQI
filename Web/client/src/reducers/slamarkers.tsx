@@ -1,4 +1,4 @@
-import { ADD_SLAMARKER } from "../actions/types";
+import { ADD_SLAMARKER, FETCH_SLAMARKERS } from "../actions/types";
 
 const initialState = { items: [] };
 
@@ -10,6 +10,11 @@ export default function (state = initialState, action: any) {
       return {
         ...state,
         items: [...state.items, payload],
+      };
+    case FETCH_SLAMARKERS:
+      return {
+        ...state,
+        items: payload,
       };
     default:
       return state;

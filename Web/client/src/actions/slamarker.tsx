@@ -1,33 +1,37 @@
-import { ADD_SLAMARKER, SET_MESSAGE, ADD_FEATURES } from "./types";
+import { ADD_SLAMARKER, ADD_FEATURES, FETCH_SLAMARKERS } from "./types";
 import SlaMarkerService from "../services/slamarker.service";
 import SlaMarker from "../entities/SlaMarker";
 
 export const createSlaMarker = (sla: SlaMarker) => (dispatch: any) => {
   return SlaMarkerService.createSlaMarker(sla).then((response) => {
+    console.log(response.data);
     dispatch({
       type: ADD_SLAMARKER,
       payload: response.data,
     });
-
-    dispatch({
-      type: SET_MESSAGE,
-      payload: "The Sla was created successfully.",
-    });
-
     return Promise.resolve();
   });
 };
 
-export const addPolygon = (features: any) => (dispatch: any) => {
+export const fetchSlaMarkers = () => (dispatch: any) => {
+  SlaMarkerService.getSlaMarkers().then(
+    (response) => {
+      dispatch({
+        type: FETCH_SLAMARKERS,
+        payload: response.data,
+      });
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+};
 
+
+
+export const addPolygon = (features: any) => (dispatch: any) => {
   dispatch({
     type: ADD_FEATURES,
     payload: features
   });
-
-  dispatch({
-    type: SET_MESSAGE,
-    payload: "The polygon features were added.",
-  });
-
 }

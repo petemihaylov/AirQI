@@ -71,9 +71,9 @@ const Profile = (props: any) => {
                 />
               </div>
               {errors.firstName?.type === "required" && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )}
             </Col>
             <Col>
@@ -89,9 +89,9 @@ const Profile = (props: any) => {
                 />
               </div>
               {errors.lastName?.type === "required" && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )}
             </Col>{" "}
           </Row>
@@ -110,9 +110,9 @@ const Profile = (props: any) => {
                 />
               </div>
               {errors.username?.type === "required" && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )}
             </Col>
           </Row>

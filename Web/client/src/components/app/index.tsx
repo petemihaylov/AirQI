@@ -1,8 +1,8 @@
 import "./css/style.css";
 import React from "react";
-import Main from "../_layout/main";
-import Navigation from "../_layout/navbar";
-import Sidebar from "../_layout/sidebar/index";
+import Main from "../layout/main";
+import Navigation from "../layout/navbar";
+import Sidebar from "../layout/sidebar/index";
 import { BrowserRouter as Router } from "react-router-dom";
 
 /* Layout :: Components */

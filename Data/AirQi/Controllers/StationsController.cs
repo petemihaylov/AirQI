@@ -33,9 +33,10 @@ namespace AirQi.Controllers
         public async Task<IActionResult> GetAllStations()
         ***REMOVED***
             var stations = await this._repository.GetAllAsync();
-            stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new ***REMOVED*** doc.Position***REMOVED***, (key, group) => group.First());
 
-            if(stations != null)***REMOVED***
+            if (stations != null)
+            ***REMOVED***
+                stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new ***REMOVED*** doc.Position***REMOVED***, (key, group) => group.First());
                 return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stations));
            ***REMOVED***
 
@@ -78,14 +79,15 @@ namespace AirQi.Controllers
         [HttpPut("***REMOVED***id***REMOVED***")]
         public async Task<IActionResult> UpdateStation(string id, StationCreateDto stationCreateDto)
         ***REMOVED***
-            var stationModel =this._mapper.Map<Station>(stationCreateDto);
+            var stationModel = this._mapper.Map<Station>(stationCreateDto);
             var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
             ***REMOVED***
                 stationModel.UpdatedAt = DateTime.UtcNow;
                 stationModel.Id = new ObjectId(id);
-               this._repository.UpdateObject(id, stationModel);
+                this._repository.UpdateObject(id, stationModel);
+                
                 return Ok(_mapper.Map<StationReadDto>(stationModel));    
            ***REMOVED***
 
@@ -95,7 +97,7 @@ namespace AirQi.Controllers
         [HttpDelete("***REMOVED***id***REMOVED***")]
         public  async Task<ActionResult> DeleteStation(string id)
         ***REMOVED***
-            var station= await this._repository.GetObjectByIdAsync(id);
+            var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
             ***REMOVED***                

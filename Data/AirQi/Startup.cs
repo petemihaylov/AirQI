@@ -1,9 +1,5 @@
-using System;
 using Hangfire;
 using AutoMapper;
-using AirQi.Settings;
-using AirQi.Services;
-using AirQi.Repository;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,9 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Options;
-using AssetNXT.Hubs;
-using AirQi.Models.Core;
-using Hangfire.Server;
+using AirQi.Settings;
+using AirQi.Services.RecurringJobs;
+using AirQi.Services.RecurringJobs.Core;
+using AirQi.Repository.Core;
+using AirQi.Hubs;
 
 namespace AirQi
 {
@@ -40,7 +38,7 @@ namespace AirQi
             services.AddTransient<IWorkerService, WorkerService>();
 
             // AutoMapper
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services.AddAutoMapper(typeof(Startup));
 
             // Controllers Serialization
             services.AddControllers().AddNewtonsoftJson(options =>
@@ -51,6 +49,7 @@ namespace AirQi
             // SignalR
             ConfigureCrossOriginResourceSharing(services);
             services.AddSignalR();
+
         }
 
         // MongoDB Configurations
@@ -71,6 +70,7 @@ namespace AirQi
                     Version = "v1"
                 });
             });
+            
         }
 
         // SignalR Configurations
@@ -127,6 +127,7 @@ namespace AirQi
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<LiveStationHub>("/livestations");
+                endpoints.MapHub<LiveNotificationHub>("/livenotifications");
             });
 
             // Swagger config

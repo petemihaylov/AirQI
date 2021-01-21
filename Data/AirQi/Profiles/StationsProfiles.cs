@@ -1,5 +1,5 @@
 using AutoMapper;
-using AirQi.Dtos;
+using AirQi.Dtos.Core;
 using AirQi.Models.Core;
 
 namespace AirQi.Profiles
@@ -10,7 +10,7 @@ namespace AirQi.Profiles
         {
             CreateMap<Station, StationReadDto>();
             CreateMap<StationCreateDto, Station>();
-            CreateMap<Station,StationCreateDto>();
+            CreateMap<Station, StationCreateDto>();
         }
     }
 }

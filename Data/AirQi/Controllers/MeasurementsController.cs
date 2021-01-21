@@ -1,13 +1,12 @@
-using AirQi.Dtos;
+using AirQi.Dtos.Core;
 using AutoMapper;
 using AirQi.Models.Core;
-using AirQi.Repository;
+using AirQi.Repository.Core;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System;
 using MongoDB.Bson;
-using System.Linq;
 
 namespace AirQi.Controllers
 {
@@ -25,9 +24,9 @@ namespace AirQi.Controllers
         }
 
         [HttpGet]
-        public ActionResult <IEnumerable<MeasurementReadDto>> GetAllMeasurements()
+        public async Task<ActionResult> GetAllMeasurements()
         {
-            var stationModelItems =  this._repository.GetAll();
+            var stationModelItems =  await this._repository.GetAllAsync();
             
             if(stationModelItems != null){
                 return Ok(_mapper.Map<IEnumerable<StationMeasurementReadDto>>(stationModelItems));
@@ -51,7 +50,7 @@ namespace AirQi.Controllers
 
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateStation(string id, StationMeasurementCreateDto stationCreateDto)
+        public async Task<IActionResult> UpdateMeasurements(string id, StationMeasurementCreateDto stationCreateDto)
         {
             var stationModel =this._mapper.Map<Station>(stationCreateDto);
             var station = await this._repository.GetObjectByIdAsync(id);

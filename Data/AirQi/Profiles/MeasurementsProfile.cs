@@ -1,5 +1,5 @@
 using AutoMapper;
-using AirQi.Dtos;
+using AirQi.Dtos.Core;
 using AirQi.Models.Core;
 
 namespace AirQi.Profiles

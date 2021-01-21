@@ -33,9 +33,10 @@ namespace AirQi.Controllers
         public async Task<IActionResult> GetAllStations()
         {
             var stations = await this._repository.GetAllAsync();
-            stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new { doc.Position }, (key, group) => group.First());
 
-            if(stations != null){
+            if (stations != null)
+            {
+                stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new { doc.Position }, (key, group) => group.First());
                 return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stations));
             }
 
@@ -78,14 +79,15 @@ namespace AirQi.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateStation(string id, StationCreateDto stationCreateDto)
         {
-            var stationModel =this._mapper.Map<Station>(stationCreateDto);
+            var stationModel = this._mapper.Map<Station>(stationCreateDto);
             var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
             {
                 stationModel.UpdatedAt = DateTime.UtcNow;
                 stationModel.Id = new ObjectId(id);
-               this._repository.UpdateObject(id, stationModel);
+                this._repository.UpdateObject(id, stationModel);
+                
                 return Ok(_mapper.Map<StationReadDto>(stationModel));    
             }
 
@@ -95,7 +97,7 @@ namespace AirQi.Controllers
         [HttpDelete("{id}")]
         public  async Task<ActionResult> DeleteStation(string id)
         {
-            var station= await this._repository.GetObjectByIdAsync(id);
+            var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
             {                

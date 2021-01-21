@@ -1,31 +1,28 @@
-
-using AirQi.Models;
+using AirQi.Models.Core;
 using System.Collections.Generic;
-using AirQi.Repository.Core;
-using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
 
-namespace AirQi.Models.Core
+namespace AirQi.Dtos.Core
 ***REMOVED***
-    [BsonCollection("stations")]
-    public class Station : Document
+    public class StationCreateDto
     ***REMOVED***
-        [BsonElement]
+        [Required]
         public double  Aqi ***REMOVED*** get; set;***REMOVED***
-                    
-        [BsonElement]
+
+        [Required]
         public string Location ***REMOVED*** get; set;***REMOVED***
 
-        [BsonElement]
+        [Required]
         public string City ***REMOVED*** get; set;***REMOVED***
 
-        [BsonElement]
+        [Required]
         public string Country ***REMOVED*** get; set;***REMOVED***
 
-        [BsonElement]
-        public double [] Position ***REMOVED*** get; set;***REMOVED***
-
-        [BsonElement]
+        [Required]
         public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
+
+        [Required]
+        public double[] Position ***REMOVED*** get; set;***REMOVED***
+
    ***REMOVED***
 ***REMOVED***

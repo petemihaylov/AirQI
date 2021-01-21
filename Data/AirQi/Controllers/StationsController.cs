@@ -1,7 +1,7 @@
-using AirQi.Dtos;
+using AirQi.Dtos.Core;
 using AutoMapper;
 using AirQi.Models.Core;
-using AirQi.Repository;
+using AirQi.Repository.Core;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ using System;
 using MongoDB.Bson;
 using System.Linq;
 using Microsoft.AspNetCore.SignalR;
-using AssetNXT.Hubs;
+using AirQi.Hubs;
 
 namespace AirQi.Controllers
 ***REMOVED***
@@ -33,9 +33,10 @@ namespace AirQi.Controllers
         public async Task<IActionResult> GetAllStations()
         ***REMOVED***
             var stations = await this._repository.GetAllAsync();
-            stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new ***REMOVED*** doc.Position***REMOVED***, (key, group) => group.First());
 
-            if(stations != null)***REMOVED***
+            if (stations != null)
+            ***REMOVED***
+                stations = stations.OrderByDescending(doc => doc.UpdatedAt).GroupBy(doc => new ***REMOVED*** doc.Position***REMOVED***, (key, group) => group.First());
                 return Ok(_mapper.Map<IEnumerable<StationReadDto>>(stations));
            ***REMOVED***
 
@@ -49,7 +50,7 @@ namespace AirQi.Controllers
 
             if(station != null)
             ***REMOVED***
-                return Ok(_mapper.Map<StationReadDto>(station));    
+                return Ok(this._mapper.Map<StationReadDto>(station));    
            ***REMOVED***
 
             return NotFound();
@@ -62,16 +63,14 @@ namespace AirQi.Controllers
 
             if (station != null)
             ***REMOVED***
+                station.Id = ObjectId.GenerateNewId();
                 station.CreatedAt = station.UpdatedAt = DateTime.UtcNow;
                 await this._repository.CreateObjectAsync(station);
 
                 // SignalR event
-                await this._hub.Clients.All.SendAsync("GetNewStationsAsync", station);
+                // await this._hub.Clients.All.SendAsync("GetNewStationsAsync", station);
 
-                var stationReadDto = this._mapper.Map<StationReadDto>(station);
-
-                // https://docs.microsoft.com/en-us/dotnet/api/system.web.http.apicontroller.createdatroute?view=aspnetcore-2.2
-                return CreatedAtRoute(nameof(GetStationById), new ***REMOVED*** Id = stationReadDto.Id***REMOVED***, stationReadDto);
+                return Ok(this._mapper.Map<StationReadDto>(station));
            ***REMOVED***
 
             return NotFound();
@@ -80,14 +79,15 @@ namespace AirQi.Controllers
         [HttpPut("***REMOVED***id***REMOVED***")]
         public async Task<IActionResult> UpdateStation(string id, StationCreateDto stationCreateDto)
         ***REMOVED***
-            var stationModel =this._mapper.Map<Station>(stationCreateDto);
+            var stationModel = this._mapper.Map<Station>(stationCreateDto);
             var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
             ***REMOVED***
                 stationModel.UpdatedAt = DateTime.UtcNow;
                 stationModel.Id = new ObjectId(id);
-               this._repository.UpdateObject(id, stationModel);
+                this._repository.UpdateObject(id, stationModel);
+                
                 return Ok(_mapper.Map<StationReadDto>(stationModel));    
            ***REMOVED***
 
@@ -97,7 +97,7 @@ namespace AirQi.Controllers
         [HttpDelete("***REMOVED***id***REMOVED***")]
         public  async Task<ActionResult> DeleteStation(string id)
         ***REMOVED***
-            var station= await this._repository.GetObjectByIdAsync(id);
+            var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
             ***REMOVED***                

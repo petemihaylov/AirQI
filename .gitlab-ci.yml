@@ -6,27 +6,21 @@ stages:
   - publish
   - deploy
 
+before_script:
+  - "cd Data/AirQi/"
+  - "dotnet restore"
+
 build:
   stage: build
 
   script:
-    - cd Data/AirQi
-    - dotnet build 
-    # - cd ../Core/ApiBase"
-    # - dotnet build
-  # only:
-  #   - master
+      - "dotnet build AirQi.sln"
     
 test:
   stage: test
 
   script:
-    - cd Data/AirQi/Tests
-    - dotnet test
-    # - cd ../Core
-    # - dotnet test
-  # only:
-  #   - master
+    - "dotnet test AirQi.sln"
 
 publish:
   stage: publish

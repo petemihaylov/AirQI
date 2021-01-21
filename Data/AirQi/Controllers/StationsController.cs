@@ -43,7 +43,7 @@ namespace AirQi.Controllers
             return NotFound();
        ***REMOVED***
 
-        [HttpGet("***REMOVED***id:string***REMOVED***", Name="GetStationById")]
+        [HttpGet("***REMOVED***id***REMOVED***", Name="GetStationById")]
         public async Task<IActionResult> GetStationById(string id)
         ***REMOVED***
             var station = await this._repository.GetObjectByIdAsync(id);
@@ -76,7 +76,7 @@ namespace AirQi.Controllers
             return NotFound();
        ***REMOVED***
 
-        [HttpPut("***REMOVED***id:string***REMOVED***")]
+        [HttpPut("***REMOVED***id***REMOVED***")]
         public async Task<IActionResult> UpdateStation(string id, StationCreateDto stationCreateDto)
         ***REMOVED***
             var stationModel = this._mapper.Map<Station>(stationCreateDto);
@@ -94,7 +94,7 @@ namespace AirQi.Controllers
             return NotFound();
        ***REMOVED***
 
-        [HttpDelete("***REMOVED***id:string***REMOVED***")]
+        [HttpDelete("***REMOVED***id***REMOVED***")]
         public  async Task<ActionResult> DeleteStation(string id)
         ***REMOVED***
             var station = await this._repository.GetObjectByIdAsync(id);

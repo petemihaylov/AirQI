@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using AirQi.Models.Core;
 
-namespace AssetNXT.Dtos.Core
+namespace AirQi.Dtos.Core
 {
     public class AgreementCreateDto
     {

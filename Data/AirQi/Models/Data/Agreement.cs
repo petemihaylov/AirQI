@@ -1,12 +1,10 @@
 using System.Collections.Generic;
-using AirQi.Models;
 using AirQi.Models.Core;
-using AirQi.Models.Data;
 using AirQi.Repository.Core;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace AssetNXT.Models.Core.ServiceAgreement
+namespace AirQi.Models.Data
 {
     [BsonCollection("agreements")]
     public class Agreement : Document

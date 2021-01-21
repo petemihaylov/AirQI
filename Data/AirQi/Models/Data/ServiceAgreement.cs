@@ -4,7 +4,7 @@ using AirQi.Repository.Core;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace AssetNXT.Models.Core.ServiceAgreement
+namespace AirQi.Models.Data
 {
     [BsonCollection("service_agreement_results")]
     public class ServiceAgreement : Document
@@ -16,6 +16,6 @@ namespace AssetNXT.Models.Core.ServiceAgreement
         public bool IsAqiAgreementValid { get; set; }
 
         [BsonElement]
-        public DateTime CreateDate { get; set; }
+        public DateTime StationLastUpdate { get; set; }
     }
 }

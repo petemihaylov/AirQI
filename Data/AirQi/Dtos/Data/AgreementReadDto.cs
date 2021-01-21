@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using AirQi.Models.Core;
 
-namespace AssetNXT.Dtos.Core
+namespace AirQi.Dtos.Core
 ***REMOVED***
     public class AgreementReadDto
     ***REMOVED***

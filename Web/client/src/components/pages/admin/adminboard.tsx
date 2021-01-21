@@ -12,7 +12,8 @@ import ***REMOVED*** deleteUser, fetchUsers***REMOVED*** from "../../../actions/
 import "./css/style.css";
 import Searchbar from "./searchbar";
 import CreateModal from "./create-modal";
-import ***REMOVED*** Sla***REMOVED*** from "./sla";
+import Sla  from "./sla";
+import SlaList from "./slalist";
 
 const AdminBoard = (props: any) => ***REMOVED***
   const [content, handleContent] = useState([]);
@@ -32,6 +33,7 @@ const AdminBoard = (props: any) => ***REMOVED***
 
   return (
     <Container>
+
       <Row className="d-flex align-items-center">
         <Col sm=***REMOVED***8***REMOVED***>
           <Searchbar />
@@ -105,6 +107,7 @@ const AdminBoard = (props: any) => ***REMOVED***
       </Card>
 
       <Sla />
+      <SlaList/>
     </Container>
   );
 ***REMOVED***;

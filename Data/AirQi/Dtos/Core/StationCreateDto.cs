@@ -1,9 +1,8 @@
 using AirQi.Models.Core;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace AirQi.Dtos
+namespace AirQi.Dtos.Core
 {
     public class StationCreateDto
     {

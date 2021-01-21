@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace AirQi.Dtos
+namespace AirQi.Dtos.Data
 {
     public class NotificationCreateDto
     {

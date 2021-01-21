@@ -1,11 +1,7 @@
-using AirQi.Models.Core;
 using System;
-using MongoDB.Bson;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using MongoDB.Bson.Serialization.Attributes;
 
-namespace AirQi.Dtos
+namespace AirQi.Dtos.Core
 {
     public class StationReadDto 
     {

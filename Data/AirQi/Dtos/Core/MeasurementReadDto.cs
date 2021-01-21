@@ -1,14 +1,12 @@
-using System;
-using AirQi.Models;
-using AirQi.Models.Core;
-
-namespace AirQi.Dtos
+namespace AirQi.Dtos.Core
 {
-    public class MeasurementStationReadDto
+    public class MeasurementReadDto
     {        
         public string Parameter { get; set; }
 
         public double  Value { get; set; }
+
+        public string LastUpdated { get; set; }
 
         public string Unit { get; set; }
                 

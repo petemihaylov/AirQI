@@ -1,10 +1,8 @@
-﻿using System;
-using AirQi.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using AirQi.Models.Core;
 
-namespace AirQi.Dtos
+namespace AirQi.Dtos.Core
 {
     public class StationMeasurementCreateDto
     {

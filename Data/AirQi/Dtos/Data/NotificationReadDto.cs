@@ -1,6 +1,6 @@
 using System;
 
-namespace AirQi.Dtos
+namespace AirQi.Dtos.Data
 {
     public class NotificationReadDto
     {

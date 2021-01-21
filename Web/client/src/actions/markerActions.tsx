@@ -17,12 +17,21 @@ export const fetchMarkers = () => (dispatch: any) => {
 };
 
 export const createMarker = (marker: IMarker) => (dispatch: any) => {
-  return MarkerService.createMarker(marker).then((response) => {
-    dispatch({
-      type: CREATE_MARKER,
-      payload: response.data
+  return MarkerService.createMarker(marker)
+    .then(
+      (response) => {
+        dispatch({
+          type: CREATE_MARKER,
+          payload: response.data,
+        });
+      },
+      (error) => {
+        return Promise.reject();
+      }
+    )
+    .catch(() => {
+      return Promise.reject();
     });
-  });
 };
 
 export const deleteMarker = (id: number, index: number) => (dispatch: any) => {
@@ -33,7 +42,7 @@ export const deleteMarker = (id: number, index: number) => (dispatch: any) => {
         payload: index,
       });
     },
-    (error) => {  
+    (error) => {
       console.log(error);
     }
   );

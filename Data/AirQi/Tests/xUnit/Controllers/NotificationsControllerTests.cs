@@ -1,5 +1,5 @@
 using AirQi.Controllers;
-using AirQi.Dtos;
+using AirQi.Dtos.Data;
 using AirQi.Profiles;
 using AirQi.Models.Data;
 using AirQi.Repository.Core;

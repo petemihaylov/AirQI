@@ -1,9 +1,5 @@
-using System;
 using Hangfire;
 using AutoMapper;
-using AirQi.Settings;
-using AirQi.Services;
-using AirQi.Repository.Core;
 using Hangfire.MemoryStorage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -12,10 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Options;
-using AssetNXT.Hubs;
-using AirQi.Models.Core;
-using Hangfire.Server;
-using AirQi.Repository.Test;
+using AirQi.Settings;
+using AirQi.Services.RecurringJobs;
+using AirQi.Services.RecurringJobs.Core;
+using AirQi.Repository.Core;
+using AirQi.Hubs;
 
 namespace AirQi
 {

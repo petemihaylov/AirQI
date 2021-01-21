@@ -9,7 +9,7 @@ using System;
 using MongoDB.Bson;
 using System.Linq;
 using Microsoft.AspNetCore.SignalR;
-using AssetNXT.Hubs;
+using AirQi.Hubs;
 
 namespace AirQi.Controllers
 {

@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AirQi.Models.Core;
 using Microsoft.AspNetCore.SignalR;
 
-namespace AssetNXT.Hubs
+namespace AirQi.Hubs
 {
     public class LiveStationHub : Hub
     {

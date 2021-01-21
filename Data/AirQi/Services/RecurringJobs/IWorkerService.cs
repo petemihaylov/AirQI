@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace AirQi.Services
+namespace AirQi.Services.RecurringJobs
 {
     public interface IWorkerService
     {

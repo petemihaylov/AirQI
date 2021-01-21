@@ -1,27 +1,21 @@
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 using AirQi.Models.Core;
 using AirQi.Repository.Core;
-using AirQi.Services;
 using AirQi.Settings;
 using Microsoft.CSharp.RuntimeBinder;
-using AssetNXT.Hubs;
+using AirQi.Hubs;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using AutoMapper;
-using AirQi.Dtos;
 
-namespace AirQi
+namespace AirQi.Services.RecurringJobs.Core
 {
     public class PullAqicn : WorkerService
     {

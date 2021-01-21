@@ -15,7 +15,7 @@ using System;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 
-namespace Qi.Tests
+namespace Qi.Tests.xUnit.Controllers
 {
     public class StationsControllerTests
     {

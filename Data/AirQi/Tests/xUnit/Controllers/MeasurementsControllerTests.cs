@@ -15,7 +15,7 @@ using MongoDB.Bson;
 using Moq;
 using Xunit;
 
-namespace Qi.Tests
+namespace Qi.Tests.xUnit.Controllers
 {
     public class MeasurementsControllerTests
     {

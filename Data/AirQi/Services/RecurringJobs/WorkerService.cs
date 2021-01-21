@@ -1,20 +1,16 @@
 using System;
 using System.Collections.Generic;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using AirQi.Models.Core;
 using AirQi.Repository.Core;
 using AirQi.Settings;
 using Microsoft.AspNetCore.SignalR;
-using AssetNXT.Hubs;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Linq;
+using AirQi.Hubs;
 using AutoMapper;
 using AirQi.Dtos;
 using System.Linq;
 
-namespace AirQi.Services
+namespace AirQi.Services.RecurringJobs
 {
     public class WorkerService : IWorkerService
     {

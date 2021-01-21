@@ -3,18 +3,16 @@ using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using AirQi.Dtos;
 using AirQi.Models.Core;
 using AirQi.Repository.Core;
-using AirQi.Services;
 using AirQi.Settings;
-using AssetNXT.Hubs;
+using AirQi.Hubs;
 using AutoMapper;
 using Microsoft.AspNetCore.SignalR;
 using Newtonsoft.Json;
 
 
-namespace AirQi
+namespace AirQi.Services.RecurringJobs.Core
 {
     public class PullOpenAqi : WorkerService
     {

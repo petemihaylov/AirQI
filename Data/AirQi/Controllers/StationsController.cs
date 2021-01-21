@@ -1,4 +1,4 @@
-using AirQi.Dtos;
+using AirQi.Dtos.Core;
 using AutoMapper;
 using AirQi.Models.Core;
 using AirQi.Repository.Core;

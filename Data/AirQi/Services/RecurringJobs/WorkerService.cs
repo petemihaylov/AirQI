@@ -7,7 +7,7 @@ using AirQi.Settings;
 using Microsoft.AspNetCore.SignalR;
 using AirQi.Hubs;
 using AutoMapper;
-using AirQi.Dtos;
+using AirQi.Dtos.Core;
 using System.Linq;
 
 namespace AirQi.Services.RecurringJobs

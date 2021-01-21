@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AirQi.Controllers;
-using AirQi.Dtos;
+using AirQi.Dtos.Core;
 using AirQi.Models.Core;
 using AirQi.Profiles;
 using AirQi.Repository.Core;

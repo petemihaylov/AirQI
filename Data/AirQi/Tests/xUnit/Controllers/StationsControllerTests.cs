@@ -4,7 +4,7 @@ using AirQi.Profiles;
 using AirQi.Models.Core;
 using AirQi.Repository.Core;
 using AirQi.Repository.Test;
-using AssetNXT.Hubs;
+using AirQi.Hubs;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;

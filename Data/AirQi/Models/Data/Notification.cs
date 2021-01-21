@@ -1,7 +1,7 @@
 ﻿using AirQi.Repository.Core;
 using MongoDB.Bson.Serialization.Attributes;
 
-namespace AirQi.Models.Core
+namespace AirQi.Models.Data
 {
     [BsonCollection("notifications")]
     public class Notification : Document
@@ -11,5 +11,8 @@ namespace AirQi.Models.Core
 
         [BsonElement]
         public string Description { get; set; }
+
+        [BsonElement]
+        public double [] Position { get; set; }
     }
 }

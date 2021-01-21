@@ -1,8 +1,7 @@
-using AirQi.Repository;
 using System.Linq;
 using AirQi.Settings;
 using MongoDB.Driver;
-using AirQi.Models.Core;
+using AirQi.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq.Expressions;

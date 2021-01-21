@@ -1,25 +1,22 @@
 import React, ***REMOVED*** useEffect***REMOVED*** from "react";
 import ***REMOVED*** Card, Form, Row, Col, Button***REMOVED*** from "react-bootstrap";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import Polygon from "./polygon";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
-import ***REMOVED*** faShapes***REMOVED*** from "@fortawesome/free-solid-svg-icons";
 import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
+import Polygon from "./polygon";
+import ***REMOVED*** createSlaMarker***REMOVED*** from "../../../actions/slamarker";
+import ***REMOVED*** faShapes***REMOVED*** from "@fortawesome/free-solid-svg-icons";
 
-export const Sla = (props: any) => ***REMOVED***
+import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
+import SlaMarker from "../../../entities/SlaMarker";
+
+const Sla = (props: any) => ***REMOVED***
   const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm();
 
   const onSubmit = (data: any) => ***REMOVED***
-    console.log(data.name);
-    console.log(data.max);
-    console.log(JSON.stringify(props.items || " "));
-
-    const ***REMOVED*** dispatch, history***REMOVED*** = props;
+    props.dispatch(
+      createSlaMarker(new SlaMarker(data.name, 0, parseInt(data.max), JSON.stringify(props.items)))
+    );
  ***REMOVED***;
-
-  useEffect(() => ***REMOVED***
-    console.log(props.items);
- ***REMOVED***, [props.items]);
 
   return (
     <Card className="mb-3">
@@ -28,9 +25,8 @@ export const Sla = (props: any) => ***REMOVED***
           <FontAwesomeIcon icon=***REMOVED***faShapes***REMOVED*** className="mr-2" /> Edit
         </Card.Title>
         <small className="ml-4 pl-2">Edit SLA</small>
-
+        <Polygon />
         <Card.Text className="mt-5">
-          <Polygon />
           <Form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED*** className="mt-5">
             <Row>
               <Col>

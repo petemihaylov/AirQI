@@ -4,21 +4,17 @@ import MapGL, ***REMOVED*** Marker, FullscreenControl, GeolocateControl***REMOVE
 import Geocoder from "react-map-gl-geocoder";
 import ***REMOVED*** FlyToInterpolator, NavigationControl, Popup***REMOVED*** from "react-map-gl";
 import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
-import DeckGLMap from "./deckgl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED***
-  fetchMarkers,
-  createMarker,
-  deleteMarker,
-***REMOVED*** from "../../actions/markerActions";
-import ***REMOVED***
-  createNotification,
-***REMOVED*** from "../../actions/notificationActions";
+import ***REMOVED*** createNotification***REMOVED*** from "../../actions/notificationActions";
 import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
 import Notification from "../../entities/Notification";
+import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
+import DeckGL, ***REMOVED*** ScatterplotLayer, TextLayer***REMOVED*** from "deck.gl";
+import useSwr from "swr";
+
 import ***REMOVED***
   faMapPin,
   faFire,
@@ -26,18 +22,19 @@ import ***REMOVED***
   faTrashAlt,
   faCloudRain,
 ***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 
-import DeckGL, ***REMOVED*** ScatterplotLayer, TextLayer***REMOVED*** from "deck.gl";
-import useSwr from "swr";
+import ***REMOVED***
+  fetchMarkers,
+  createMarker,
+  deleteMarker,
+***REMOVED*** from "../../actions/markerActions";
 
 
 // Data fetching method
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
-const ***REMOVED*** REACT_APP_TOKEN***REMOVED*** = process.env;
-const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
-const ***REMOVED***REACT_APP_DATA_URL***REMOVED*** = process.env;
+const ***REMOVED*** REACT_APP_TOKEN, REACT_APP_API_URL, REACT_APP_DATA_URL***REMOVED*** = process.env;
+
 
 const Map = (props) => ***REMOVED***
   // Viewport settings
@@ -152,11 +149,13 @@ const Map = (props) => ***REMOVED***
    ***REMOVED***
  ***REMOVED***, [connection]);
 
+
   /* Markers */
   const [markers, setMarkers] = useState([]);
   useEffect(() => ***REMOVED***
     setMarkers(props.items);
  ***REMOVED***, [props.items]);
+
 
   const handleController = () => ***REMOVED***
     setController(true);
@@ -191,6 +190,7 @@ const Map = (props) => ***REMOVED***
     enableAddMarker(false);
     setController(false);
  ***REMOVED***;
+
 
   /* Popup */
   const [popups, setPopups] = useState([]);
@@ -421,7 +421,6 @@ const Map = (props) => ***REMOVED***
     </Container>
   );
 ***REMOVED***;
-
 
 
 function mapStateToProps(state) ***REMOVED***

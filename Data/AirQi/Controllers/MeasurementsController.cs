@@ -50,7 +50,7 @@ namespace AirQi.Controllers
 
 
         [HttpPut("***REMOVED***id***REMOVED***")]
-        public async Task<IActionResult> UpdateStation(string id, StationMeasurementCreateDto stationCreateDto)
+        public async Task<IActionResult> UpdateMeasurements(string id, StationMeasurementCreateDto stationCreateDto)
         ***REMOVED***
             var stationModel =this._mapper.Map<Station>(stationCreateDto);
             var station = await this._repository.GetObjectByIdAsync(id);

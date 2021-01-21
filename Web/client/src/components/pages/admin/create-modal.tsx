@@ -64,9 +64,9 @@ const CreateModal = (props: any) => {
                 name="username"
               />
               {errors.username && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )}
             </div>
 
@@ -79,9 +79,9 @@ const CreateModal = (props: any) => {
                 name="firstName"
               />
               {errors.firstName && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )}
             </div>
 
@@ -94,9 +94,9 @@ const CreateModal = (props: any) => {
                 name="lastName"
               />
               {errors.lastName && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )}
             </div>
 
@@ -115,9 +115,9 @@ const CreateModal = (props: any) => {
               )}
 
               {errors.password?.type === "required" && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )}
             </div>
 
@@ -133,9 +133,9 @@ const CreateModal = (props: any) => {
                 <option value="User">User</option>
               </select>
               {errors.role?.type === "required" && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )}
             </div>
             <div className="form-group d-flex justify-content-center">

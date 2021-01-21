@@ -6,7 +6,7 @@ import notifications from "./notifications";
 import markers from "./markers";
 import profile from "./profile";
 import features from "./features";
-import slamarker from "./slamarker";
+import slamarkers from "./slamarkers";
 
 const rootReducer = combineReducers({
   auth,
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
   notifications,
   markers,
   profile,
-  slamarker,
+  slamarkers,
   features
 });
 

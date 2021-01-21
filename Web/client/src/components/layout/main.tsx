@@ -5,13 +5,13 @@ import { Switch, Route } from "react-router-dom";
 import { createUseStyles } from "react-jss";
 /* Components */
 import Map from "../map/map";
-import Register from "../_pages/register";
-import Login from "../_pages/login";
-import Profile from "../_pages/profile";
-import Dashboard from "../_pages/dashboard";
-import AdminBoard from "../_pages/admin/adminboard";
-import Notifications from "../_pages/notifications";
-import { WelcomePage } from "../_pages/welcome";
+import Register from "../pages/register";
+import Login from "../pages/login";
+import Profile from "../pages/profile";
+import Dashboard from "../pages/dashboard";
+import AdminBoard from "../pages/admin/adminboard";
+import Notifications from "../pages/notifications";
+import { WelcomePage } from "../pages/welcome";
 
 const Main = () => {
   const classes = useStyles();

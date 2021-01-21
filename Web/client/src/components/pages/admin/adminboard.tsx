@@ -12,7 +12,8 @@ import { deleteUser, fetchUsers } from "../../../actions/userActions";
 import "./css/style.css";
 import Searchbar from "./searchbar";
 import CreateModal from "./create-modal";
-import { Sla } from "./sla";
+import Sla  from "./sla";
+import SlaList from "./slalist";
 
 const AdminBoard = (props: any) => {
   const [content, handleContent] = useState([]);
@@ -32,6 +33,7 @@ const AdminBoard = (props: any) => {
 
   return (
     <Container>
+
       <Row className="d-flex align-items-center">
         <Col sm={8}>
           <Searchbar />
@@ -105,6 +107,7 @@ const AdminBoard = (props: any) => {
       </Card>
 
       <Sla />
+      <SlaList/>
     </Container>
   );
 };

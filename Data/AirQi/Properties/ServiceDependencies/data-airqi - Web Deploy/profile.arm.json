@@ -1,0 +1,119 @@
+***REMOVED***
+  "$schema": "https://schema.management.azure.com/schemas/2018-05-01/subscriptionDeploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "metadata": ***REMOVED***
+    "_dependencyType": "appService.linux"
+ ***REMOVED***,
+  "parameters": ***REMOVED***
+    "resourceGroupName": ***REMOVED***
+      "type": "string",
+      "defaultValue": "airqi",
+      "metadata": ***REMOVED***
+        "description": "Name of the resource group for the resource. It is recommended to put resources under same resource group for better tracking."
+     ***REMOVED***
+   ***REMOVED***,
+    "resourceGroupLocation": ***REMOVED***
+      "type": "string",
+      "defaultValue": "westeurope",
+      "metadata": ***REMOVED***
+        "description": "Location of the resource group. Resource groups could have different location than resources, however by default we use API versions from latest hybrid profile which support all locations for resource types we support."
+     ***REMOVED***
+   ***REMOVED***,
+    "resourceName": ***REMOVED***
+      "type": "string",
+      "defaultValue": "data-airqi",
+      "metadata": ***REMOVED***
+        "description": "Name of the main resource to be created by this template."
+     ***REMOVED***
+   ***REMOVED***,
+    "resourceLocation": ***REMOVED***
+      "type": "string",
+      "defaultValue": "[parameters('resourceGroupLocation')]",
+      "metadata": ***REMOVED***
+        "description": "Location of the resource. By default use resource group's location, unless the resource provider is not supported there."
+     ***REMOVED***
+   ***REMOVED***
+ ***REMOVED***,
+  "variables": ***REMOVED***
+    "appServicePlan_name": "[concat('Plan', uniqueString(concat(parameters('resourceName'), subscription().subscriptionId)))]",
+    "appServicePlan_ResourceId": "[concat('/subscriptions/', subscription().subscriptionId, '/resourceGroups/', parameters('resourceGroupName'), '/providers/Microsoft.Web/serverFarms/', variables('appServicePlan_name'))]"
+ ***REMOVED***,
+  "resources": [
+    ***REMOVED***
+      "type": "Microsoft.Resources/resourceGroups",
+      "name": "[parameters('resourceGroupName')]",
+      "location": "[parameters('resourceGroupLocation')]",
+      "apiVersion": "2019-10-01"
+   ***REMOVED***,
+    ***REMOVED***
+      "type": "Microsoft.Resources/deployments",
+      "name": "[concat(parameters('resourceGroupName'), 'Deployment', uniqueString(concat(parameters('resourceName'), subscription().subscriptionId)))]",
+      "resourceGroup": "[parameters('resourceGroupName')]",
+      "apiVersion": "2019-10-01",
+      "dependsOn": [
+        "[parameters('resourceGroupName')]"
+      ],
+      "properties": ***REMOVED***
+        "mode": "Incremental",
+        "template": ***REMOVED***
+          "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "resources": [
+            ***REMOVED***
+              "location": "[parameters('resourceLocation')]",
+              "name": "[parameters('resourceName')]",
+              "type": "Microsoft.Web/sites",
+              "apiVersion": "2015-08-01",
+              "tags": ***REMOVED***
+                "[concat('hidden-related:', variables('appServicePlan_ResourceId'))]": "empty"
+             ***REMOVED***,
+              "dependsOn": [
+                "[variables('appServicePlan_ResourceId')]"
+              ],
+              "kind": "app",
+              "properties": ***REMOVED***
+                "name": "[parameters('resourceName')]",
+                "kind": "app",
+                "httpsOnly": true,
+                "reserved": false,
+                "serverFarmId": "[variables('appServicePlan_ResourceId')]",
+                "siteConfig": ***REMOVED***
+                  "linuxFxVersion": "DOTNETCORE|2.1"
+               ***REMOVED***
+             ***REMOVED***,
+              "identity": ***REMOVED***
+                "type": "SystemAssigned"
+             ***REMOVED***,
+              "resources": [
+                ***REMOVED***
+                  "name": "appsettings",
+                  "type": "config",
+                  "apiVersion": "2015-08-01",
+                  "dependsOn": [
+                    "[concat('Microsoft.Web/Sites/', parameters('resourceName'))]"
+                  ],
+                  "properties": ***REMOVED***
+                    "WEBSITE_WEBDEPLOY_USE_SCM": "false"
+                 ***REMOVED***
+               ***REMOVED***
+              ]
+           ***REMOVED***,
+            ***REMOVED***
+              "location": "[parameters('resourceLocation')]",
+              "name": "[variables('appServicePlan_name')]",
+              "type": "Microsoft.Web/serverFarms",
+              "apiVersion": "2015-02-01",
+              "kind": "linux",
+              "properties": ***REMOVED***
+                "name": "[variables('appServicePlan_name')]",
+                "sku": "Standard",
+                "workerSizeId": "0",
+                "reserved": true
+             ***REMOVED***
+           ***REMOVED***
+          ]
+       ***REMOVED***
+     ***REMOVED***
+   ***REMOVED***
+  ]
+***REMOVED***

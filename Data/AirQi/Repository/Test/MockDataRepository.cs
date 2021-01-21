@@ -8,6 +8,7 @@ using System.Collections.Concurrent;
 using AirQi.Models.Core;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using AirQi.Models.Data;
 
 namespace AirQi.Repository.Test
 ***REMOVED***
@@ -63,7 +64,7 @@ namespace AirQi.Repository.Test
             return station;
        ***REMOVED***
 
-        private Measurement MockMeasurement()
+        public Measurement MockMeasurement()
         ***REMOVED***
             var measuerment = new Measurement
             ***REMOVED***
@@ -75,6 +76,19 @@ namespace AirQi.Repository.Test
            ***REMOVED***;
 
             return measuerment;
+       ***REMOVED***
+
+        public Notification MockNotification(double[] position)
+        ***REMOVED***
+                
+            var notification = new Notification
+            ***REMOVED***
+                Position = position,
+                Title = "title",
+                Description = "description"
+           ***REMOVED***;
+
+            return notification;
        ***REMOVED***
 
         private static Guid NewSeeder()

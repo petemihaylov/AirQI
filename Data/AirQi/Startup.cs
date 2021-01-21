@@ -8,13 +8,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Options;
-using AspNetCore.RouteAnalyzer;
 using AirQi.Settings;
 using AirQi.Services.RecurringJobs;
 using AirQi.Services.RecurringJobs.Core;
 using AirQi.Repository.Core;
 using AirQi.Hubs;
-using System.Linq;
 
 namespace AirQi
 {
@@ -52,8 +50,6 @@ namespace AirQi
             ConfigureCrossOriginResourceSharing(services);
             services.AddSignalR();
 
-            // RouteAnalyzer
-            services.AddRouteAnalyzer();
         }
 
         // MongoDB Configurations
@@ -131,14 +127,8 @@ namespace AirQi
             {
                 endpoints.MapControllers();
                 endpoints.MapHub<LiveStationHub>("/livestations");
+                endpoints.MapHub<LiveNotificationHub>("/livenotifications");
             });
-
-            // RouteAnalyzer
-            app.UseMvc(routes =>
-            {
-                routes.MapRouteAnalyzer("/"); 
-            });
-
 
             // Swagger config
             app.UseSwagger();

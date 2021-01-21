@@ -77,6 +77,23 @@ namespace Qi.Tests
         }
 
         [Fact]
+        public void Test_GetAllStations_ReturnsRightItems()
+        {
+            // Arrange
+            var mockRepo = new Mock<IMongoDataRepository<Station>>();
+            var mockHub = new Mock<IHubContext<LiveStationHub>>();
+            var controller = new StationsController(mockRepo.Object, mockHub.Object, Mapper);
+            
+            // Act
+            var okResult = controller.GetAllStations();
+
+            // Assert
+            Assert.IsType<OkObjectResult>(okResult.Result);
+            Assert.IsType<List<StationReadDto>>((okResult.Result as OkObjectResult).Value); 
+            
+        }
+
+        [Fact]
         public void Test_GetStationById_ReturnsRightItem()
         {
             // Arrange
@@ -151,7 +168,6 @@ namespace Qi.Tests
 
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-      
         }
 
         [Fact]

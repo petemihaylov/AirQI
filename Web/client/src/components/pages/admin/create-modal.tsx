@@ -64,9 +64,9 @@ const CreateModal = (props: any) => ***REMOVED***
                 name="username"
               />
               ***REMOVED***errors.username && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )***REMOVED***
             </div>
 
@@ -79,9 +79,9 @@ const CreateModal = (props: any) => ***REMOVED***
                 name="firstName"
               />
               ***REMOVED***errors.firstName && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )***REMOVED***
             </div>
 
@@ -94,9 +94,9 @@ const CreateModal = (props: any) => ***REMOVED***
                 name="lastName"
               />
               ***REMOVED***errors.lastName && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )***REMOVED***
             </div>
 
@@ -115,9 +115,9 @@ const CreateModal = (props: any) => ***REMOVED***
               )***REMOVED***
 
               ***REMOVED***errors.password?.type === "required" && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )***REMOVED***
             </div>
 
@@ -133,9 +133,9 @@ const CreateModal = (props: any) => ***REMOVED***
                 <option value="User">User</option>
               </select>
               ***REMOVED***errors.role?.type === "required" && (
-                <p>
+                <div>
                   <small className="text-danger"> This is required</small>
-                </p>
+                </div>
               )***REMOVED***
             </div>
             <div className="form-group d-flex justify-content-center">

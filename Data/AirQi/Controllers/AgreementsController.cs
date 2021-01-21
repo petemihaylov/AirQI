@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using MongoDB.Bson;
 
-namespace AssetNXT.Controllers
+namespace AirQi.Controllers
 {
     [Produces("application/json")]
     [Route("api/agreements")]

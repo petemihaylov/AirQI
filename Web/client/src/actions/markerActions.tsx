@@ -17,12 +17,21 @@ export const fetchMarkers = () => (dispatch: any) => ***REMOVED***
 ***REMOVED***;
 
 export const createMarker = (marker: IMarker) => (dispatch: any) => ***REMOVED***
-  return MarkerService.createMarker(marker).then((response) => ***REMOVED***
-    dispatch(***REMOVED***
-      type: CREATE_MARKER,
-      payload: response.data
+  return MarkerService.createMarker(marker)
+    .then(
+      (response) => ***REMOVED***
+        dispatch(***REMOVED***
+          type: CREATE_MARKER,
+          payload: response.data,
+       ***REMOVED***);
+     ***REMOVED***,
+      (error) => ***REMOVED***
+        return Promise.reject();
+     ***REMOVED***
+    )
+    .catch(() => ***REMOVED***
+      return Promise.reject();
    ***REMOVED***);
- ***REMOVED***);
 ***REMOVED***;
 
 export const deleteMarker = (id: number, index: number) => (dispatch: any) => ***REMOVED***
@@ -33,7 +42,7 @@ export const deleteMarker = (id: number, index: number) => (dispatch: any) => **
         payload: index,
      ***REMOVED***);
    ***REMOVED***,
-    (error) => ***REMOVED***  
+    (error) => ***REMOVED***
       console.log(error);
    ***REMOVED***
   );

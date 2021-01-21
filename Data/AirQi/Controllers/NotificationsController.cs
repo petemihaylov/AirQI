@@ -44,7 +44,7 @@ namespace AirQi.Controllers
             return NotFound();
         }
 
-        [HttpGet("{id:string}", Name = "GetNotificationById")]
+        [HttpGet("{id}", Name = "GetNotificationById")]
         public async Task<IActionResult> GetNotificationById(string id)
         {
             var notification = await this._repository.GetObjectByIdAsync(id);
@@ -78,7 +78,7 @@ namespace AirQi.Controllers
             return NotFound();
         }
 
-        [HttpPut("{id:string}")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateNotification(string id, NotificationCreateDto notificationCreateDto)
         {
             var notificationModel = this._mapper.Map<Notification>(notificationCreateDto);
@@ -96,7 +96,7 @@ namespace AirQi.Controllers
             return NotFound();
         }
 
-        [HttpDelete("{id:string}")]
+        [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteNotification(string id)
         {
             var notification = await this._repository.GetObjectByIdAsync(id);

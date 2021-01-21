@@ -37,6 +37,7 @@ const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 const { REACT_APP_TOKEN } = process.env;
 const { REACT_APP_API_URL } = process.env;
+const {REACT_APP_DATA_URL} = process.env;
 
 const Map = (props) => {
   // Viewport settings
@@ -60,7 +61,7 @@ const Map = (props) => {
    const [zoom, setZoom] = useState(null);
      
    /* Load and prepare data */
-   const { data, error } = useSwr(process.env.REACT_APP_DATA_URL + "/api/stations", fetcher);
+   const { data, error } = useSwr(REACT_APP_DATA_URL + "/api/stations", fetcher);
    const stations = (data && !error) ? data : [];
    
    useEffect(() => {
@@ -68,7 +69,7 @@ const Map = (props) => {
        const createHubConnection = async () => {
  
            const hubConnect = new HubConnectionBuilder()
-           .withUrl(process.env.REACT_APP_DATA_URL + "/livestations")
+           .withUrl(REACT_APP_DATA_URL + "/livestations")
            .withAutomaticReconnect()
            .build();
            
@@ -108,9 +109,8 @@ const Map = (props) => {
     (newViewport) => {
       const geocoderDefaultOverrides = {
         transitionDuration: 2000,
-        pitch: 67,
+        pitch: 80,
         bearing: 0.7,
-        zoom: 4,
         transitionInterpolator: new FlyToInterpolator(),
       };
 

@@ -10,11 +10,8 @@ import ***REMOVED*** customFeatureStyle, customHandleStyle***REMOVED*** from "./
 import ***REMOVED***
   faDrawPolygon,
   faSlidersH,
-  faTrashAlt,
-  faSave,
+  faTrashAlt
 ***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import Geometry from "../../../entities/Geometry";
-import Feature from "../../../entities/Feature";
 
 const DEFAULT_VIEWPORT = ***REMOVED***
   latitude: 52.3676,
@@ -34,9 +31,12 @@ const Polygon = (props) => ***REMOVED***
   const [deletePolygon, setDelete] = useState(false);
 
   const handleUpdate = (val) => ***REMOVED***
-    console.log(val.data);
     setFeatures(val.data);
  ***REMOVED***;
+
+  useEffect(() => ***REMOVED***
+    props.dispatch(addPolygon(features));
+ ***REMOVED***, [features]);
 
   const hanldeSelect = (val) => ***REMOVED***
     var arr = features;
@@ -50,11 +50,6 @@ const Polygon = (props) => ***REMOVED***
    ***REMOVED***
 
     setDelete(false);
- ***REMOVED***;
-
-  const handleSave = () => ***REMOVED***
-    const ***REMOVED*** dispatch***REMOVED*** = props;
-    dispatch(addPolygon(features));
  ***REMOVED***;
 
   const handleViewportChange = useCallback(
@@ -100,20 +95,6 @@ const Polygon = (props) => ***REMOVED***
               onClick=***REMOVED***() => ***REMOVED***
                 setMode(new EditingMode());
                 setDelete(true);
-             ***REMOVED******REMOVED***
-            />
-          </button>
-        </div>
-        <div
-          className="mapboxgl-ctrl-group mapboxgl-ctrl"
-          style=***REMOVED******REMOVED*** position: "absolute", left: 10, top: 130***REMOVED******REMOVED***
-        >
-          <button>
-            <FontAwesomeIcon
-              icon=***REMOVED***faSave***REMOVED***
-              onClick=***REMOVED***() => ***REMOVED***
-                setMode(null);
-                handleSave();
              ***REMOVED******REMOVED***
             />
           </button>

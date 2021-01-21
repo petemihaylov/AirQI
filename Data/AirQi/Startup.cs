@@ -8,11 +8,13 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json.Serialization;
 using Microsoft.Extensions.Options;
+using AspNetCore.RouteAnalyzer;
 using AirQi.Settings;
 using AirQi.Services.RecurringJobs;
 using AirQi.Services.RecurringJobs.Core;
 using AirQi.Repository.Core;
 using AirQi.Hubs;
+using System.Linq;
 
 namespace AirQi
 ***REMOVED***
@@ -49,6 +51,9 @@ namespace AirQi
             // SignalR
             ConfigureCrossOriginResourceSharing(services);
             services.AddSignalR();
+
+            // RouteAnalyzer
+            services.AddRouteAnalyzer();
        ***REMOVED***
 
         // MongoDB Configurations
@@ -69,6 +74,7 @@ namespace AirQi
                     Version = "v1"
                ***REMOVED***);
            ***REMOVED***);
+            
        ***REMOVED***
 
         // SignalR Configurations
@@ -125,6 +131,12 @@ namespace AirQi
             ***REMOVED***
                 endpoints.MapControllers();
                 endpoints.MapHub<LiveStationHub>("/livestations");
+           ***REMOVED***);
+
+            // RouteAnalyzer
+            app.UseMvc(routes =>
+            ***REMOVED***
+                routes.MapRouteAnalyzer("/"); 
            ***REMOVED***);
 
 

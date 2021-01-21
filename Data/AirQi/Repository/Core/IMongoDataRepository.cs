@@ -1,5 +1,5 @@
 using System;
-using AirQi.Models.Core;
+using AirQi.Models;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;

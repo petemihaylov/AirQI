@@ -48,9 +48,9 @@ const Login = (props: any) => {
                   name="username"
                 />
                 {errors.username && (
-                  <p>
+                  <div>
                     <small className="text-danger"> This is required</small>
-                  </p>
+                  </div>
                 )}
               </div>
 
@@ -65,9 +65,9 @@ const Login = (props: any) => {
                 />
 
                 {errors.password && (
-                  <p>
+                  <div>
                     <small className="text-danger"> This is required</small>
-                  </p>
+                  </div>
                 )}
               </div>
 

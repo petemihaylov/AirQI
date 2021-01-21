@@ -4,21 +4,17 @@ import MapGL, { Marker, FullscreenControl, GeolocateControl } from "react-map-gl
 import Geocoder from "react-map-gl-geocoder";
 import { FlyToInterpolator, NavigationControl, Popup } from "react-map-gl";
 import { Container } from "react-bootstrap";
-import DeckGLMap from "./deckgl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { connect } from "react-redux";
-import {
-  fetchMarkers,
-  createMarker,
-  deleteMarker,
-} from "../../actions/markerActions";
-import {
-  createNotification,
-} from "../../actions/notificationActions";
+import { createNotification } from "../../actions/notificationActions";
 import { HubConnectionBuilder } from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
 import Notification from "../../entities/Notification";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DeckGL, { ScatterplotLayer, TextLayer } from "deck.gl";
+import useSwr from "swr";
+
 import {
   faMapPin,
   faFire,
@@ -26,17 +22,19 @@ import {
   faTrashAlt,
   faCloudRain,
 } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import DeckGL, { ScatterplotLayer, TextLayer } from "deck.gl";
-import useSwr from "swr";
+import {
+  fetchMarkers,
+  createMarker,
+  deleteMarker,
+} from "../../actions/markerActions";
 
 
 // Data fetching method
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
-const { REACT_APP_TOKEN } = process.env;
-const { REACT_APP_API_URL } = process.env;
+const { REACT_APP_TOKEN, REACT_APP_API_URL, REACT_APP_DATA_URL } = process.env;
+
 
 const Map = (props) => {
   // Viewport settings
@@ -60,7 +58,7 @@ const Map = (props) => {
    const [zoom, setZoom] = useState(null);
      
    /* Load and prepare data */
-   const { data, error } = useSwr(process.env.REACT_APP_DATA_URL + "/api/stations", fetcher);
+   const { data, error } = useSwr(REACT_APP_DATA_URL + "/api/stations", fetcher);
    const stations = (data && !error) ? data : [];
    
    useEffect(() => {
@@ -68,7 +66,7 @@ const Map = (props) => {
        const createHubConnection = async () => {
  
            const hubConnect = new HubConnectionBuilder()
-           .withUrl(process.env.REACT_APP_DATA_URL + "/livestations")
+           .withUrl(REACT_APP_DATA_URL + "/livestations")
            .withAutomaticReconnect()
            .build();
            
@@ -108,9 +106,8 @@ const Map = (props) => {
     (newViewport) => {
       const geocoderDefaultOverrides = {
         transitionDuration: 2000,
-        pitch: 67,
+        pitch: 80,
         bearing: 0.7,
-        zoom: 4,
         transitionInterpolator: new FlyToInterpolator(),
       };
 
@@ -152,11 +149,13 @@ const Map = (props) => {
     }
   }, [connection]);
 
+
   /* Markers */
   const [markers, setMarkers] = useState([]);
   useEffect(() => {
     setMarkers(props.items);
   }, [props.items]);
+
 
   const handleController = () => {
     setController(true);
@@ -191,6 +190,7 @@ const Map = (props) => {
     enableAddMarker(false);
     setController(false);
   };
+
 
   /* Popup */
   const [popups, setPopups] = useState([]);
@@ -421,7 +421,6 @@ const Map = (props) => {
     </Container>
   );
 };
-
 
 
 function mapStateToProps(state) {

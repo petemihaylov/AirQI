@@ -10,11 +10,8 @@ import { customFeatureStyle, customHandleStyle } from "./polygon-style";
 import {
   faDrawPolygon,
   faSlidersH,
-  faTrashAlt,
-  faSave,
+  faTrashAlt
 } from "@fortawesome/free-solid-svg-icons";
-import Geometry from "../../../entities/Geometry";
-import Feature from "../../../entities/Feature";
 
 const DEFAULT_VIEWPORT = {
   latitude: 52.3676,
@@ -34,9 +31,12 @@ const Polygon = (props) => {
   const [deletePolygon, setDelete] = useState(false);
 
   const handleUpdate = (val) => {
-    console.log(val.data);
     setFeatures(val.data);
   };
+
+  useEffect(() => {
+    props.dispatch(addPolygon(features));
+  }, [features]);
 
   const hanldeSelect = (val) => {
     var arr = features;
@@ -50,11 +50,6 @@ const Polygon = (props) => {
     }
 
     setDelete(false);
-  };
-
-  const handleSave = () => {
-    const { dispatch } = props;
-    dispatch(addPolygon(features));
   };
 
   const handleViewportChange = useCallback(
@@ -100,20 +95,6 @@ const Polygon = (props) => {
               onClick={() => {
                 setMode(new EditingMode());
                 setDelete(true);
-              }}
-            />
-          </button>
-        </div>
-        <div
-          className="mapboxgl-ctrl-group mapboxgl-ctrl"
-          style={{ position: "absolute", left: 10, top: 130 }}
-        >
-          <button>
-            <FontAwesomeIcon
-              icon={faSave}
-              onClick={() => {
-                setMode(null);
-                handleSave();
               }}
             />
           </button>

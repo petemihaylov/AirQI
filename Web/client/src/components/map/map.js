@@ -28,6 +28,7 @@ import {
   createMarker,
   deleteMarker,
 } from "../../actions/markerActions";
+import { Legend } from "../../assets/js/legend/legend";
 
 
 // Data fetching method
@@ -270,6 +271,7 @@ const Map = (props) => {
     );
   };
 
+
   const _renderPopup = () => {
     return (
       showPopup &&
@@ -331,7 +333,11 @@ const Map = (props) => {
 
   const _changeColor = (aqi) => {
       
-    if (aqi >= 0 && aqi <= 50) {
+    if (aqi >= 0 && aqi <= 25) {
+      return [69, 173, 218, 40];
+    }
+
+    if (aqi >= 26 && aqi <= 50) {
       return [162, 219, 96, 40];      
     }
     
@@ -373,7 +379,7 @@ const Map = (props) => {
       data,
       pickable: true,
       getPosition: d => d.position,
-      getText: d => `${d.aqi}`,
+      getText: d => `.`,
       getSize: zoom + 8,
       getAngle: 0,
       getTextAnchor: 'middle',
@@ -416,7 +422,10 @@ const Map = (props) => {
         {_renderMarkers()}
         {_renderMarkerTools()}
         {_renderMapTools()}
-        {_renderPopup() }
+        {_renderPopup()}
+
+        <Legend />
+
       </MapGL>
     </Container>
   );

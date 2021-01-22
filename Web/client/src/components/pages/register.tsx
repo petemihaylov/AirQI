@@ -49,105 +49,102 @@ const Register = (props: any) => ***REMOVED***
 
   return (
     <div
-      className="container d-flex justify-content-center align-items-center"
-      style=***REMOVED******REMOVED*** height: "80vh"***REMOVED******REMOVED***
+      className="container d-flex-column justify-content-center align-items-center pt-3"
+      style=***REMOVED******REMOVED*** width: "22vw"***REMOVED******REMOVED***
     >
-      <Card style=***REMOVED******REMOVED*** width: "20rem", height: "30rem"***REMOVED******REMOVED***>
-        <Card.Title className="w-100 text-center pt-4">Register</Card.Title>
-        <div className="d-flex align-items-center h-100">
-          <Card.Body>
-            <form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED***>
-              <div className="form-group">
-                <label>Username: </label>
-                <input
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
-                  type="text"
-                  className="form-control input-sm"
-                  name="username"
-                />
-                ***REMOVED***errors.username && (
-                  <div>
-                    <small className="text-danger"> This is required</small>
-                  </div>
-                )***REMOVED***
-              </div>
-
-              <div className="form-group">
-                <label>First name: </label>
-                <input
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
-                  type="text"
-                  className="form-control input-sm"
-                  name="firstName"
-                />
-                ***REMOVED***errors.firstName && (
-                  <div>
-                    <small className="text-danger"> This is required</small>
-                  </div>
-                )***REMOVED***
-              </div>
-
-              <div className="form-group">
-                <label>Last name: </label>
-                <input
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
-                  type="text"
-                  className="form-control input-sm"
-                  name="lastName"
-                />
-                ***REMOVED***errors.lastName && (
-                  <div>
-                    <small className="text-danger"> This is required</small>
-                  </div>
-                )***REMOVED***
-              </div>
-
-              <div className="form-group">
-                <label>Password: </label>
-                <input
-                  ref=***REMOVED***register(***REMOVED*** required: true, minLength: 5***REMOVED***)***REMOVED***
-                  type="password"
-                  className="form-control input-sm"
-                  name="password"
-                  autoComplete="password"
-                />
-
-                ***REMOVED***errors.password?.type === "minLength" && (
-                  <small className="text-danger">
-                    Your password is too weak
-                  </small>
-                )***REMOVED***
-
-                ***REMOVED***errors.password?.type === "required" && (
-                  <div>
-                    <small className="text-danger"> This is required</small>
-                  </div>
-                )***REMOVED***
-              </div>
-
-              <div
-                className="form-group"
-                style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***
-              >
-                <BubbleButton name=***REMOVED***"SignUp"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
-                  ***REMOVED***loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )***REMOVED***
-                  ***REMOVED***!loading && <span>SignUp</span>***REMOVED***
-                </BubbleButton>
-              </div>
-
-              ***REMOVED***message && (
-                <div className="form-group">
-                  <div className="alert alert-secondary" role="alert">
-                    <FontAwesomeIcon icon=***REMOVED***faExclamationTriangle***REMOVED*** /> ***REMOVED***message***REMOVED***
-                  </div>
+      <Card style=***REMOVED******REMOVED*** width: "22vw", height: "33rem"***REMOVED******REMOVED*** className="mt-5">
+        <Card.Title className="w-100 text-center pt-4 mb-5">
+          Register
+        </Card.Title>
+        <Card.Body className="d-flex align-items-center h-100 mt-5">
+          <form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED***>
+            <div className="form-group">
+              <label>Username: </label>
+              <input
+                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                type="text"
+                className="form-control input-sm"
+                name="username"
+              />
+              ***REMOVED***errors.username && (
+                <div>
+                  <small className="text-danger"> This is required</small>
                 </div>
               )***REMOVED***
-            </form>
-          </Card.Body>
-        </div>
+            </div>
+
+            <div className="form-group">
+              <label>First name: </label>
+              <input
+                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                type="text"
+                className="form-control input-sm"
+                name="firstName"
+              />
+              ***REMOVED***errors.firstName && (
+                <div>
+                  <small className="text-danger"> This is required</small>
+                </div>
+              )***REMOVED***
+            </div>
+
+            <div className="form-group">
+              <label>Last name: </label>
+              <input
+                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                type="text"
+                className="form-control input-sm"
+                name="lastName"
+              />
+              ***REMOVED***errors.lastName && (
+                <div>
+                  <small className="text-danger"> This is required</small>
+                </div>
+              )***REMOVED***
+            </div>
+
+            <div className="form-group">
+              <label>Password: </label>
+              <input
+                ref=***REMOVED***register(***REMOVED*** required: true, minLength: 5***REMOVED***)***REMOVED***
+                type="password"
+                className="form-control input-sm"
+                name="password"
+                autoComplete="password"
+              />
+
+              ***REMOVED***errors.password?.type === "minLength" && (
+                <small className="text-danger">Your password is too weak</small>
+              )***REMOVED***
+
+              ***REMOVED***errors.password?.type === "required" && (
+                <div>
+                  <small className="text-danger"> This is required</small>
+                </div>
+              )***REMOVED***
+            </div>
+
+            <div
+              className="form-group"
+              style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***
+            >
+              <BubbleButton name=***REMOVED***"SignUp"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
+                ***REMOVED***loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )***REMOVED***
+                ***REMOVED***!loading && <span>SignUp</span>***REMOVED***
+              </BubbleButton>
+            </div>
+          </form>
+        </Card.Body>
       </Card>
+      ***REMOVED***message && (
+        <div className="form-group mt-4 d-flex justify-content-center">
+          <div className="alert alert-secondary" role="alert">
+            <FontAwesomeIcon icon=***REMOVED***faExclamationTriangle***REMOVED*** /> ***REMOVED***message***REMOVED***
+          </div>
+        </div>
+      )***REMOVED***
     </div>
   );
 ***REMOVED***;

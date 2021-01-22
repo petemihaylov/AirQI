@@ -3,6 +3,7 @@ import ***REMOVED***
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  UPDATE_AUTH,
   LOGOUT,
 ***REMOVED*** from "../actions/types";
 
@@ -45,7 +46,11 @@ export default function (state = initialState, action: any) ***REMOVED***
         isLoggedIn: false,
         user: null,
      ***REMOVED***;
-      
+    case UPDATE_AUTH:
+      return ***REMOVED***
+        ...state,
+        user: payload
+     ***REMOVED***
     default:
       return state;
  ***REMOVED***

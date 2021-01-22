@@ -5,12 +5,17 @@ import ***REMOVED*** Container, Row, Col***REMOVED*** from "react-bootstrap";
 import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
 import ProfileImage from "./image";
 import "./css/style.css";
+import ***REMOVED*** updateUser***REMOVED*** from "../../../actions/userActions";
+import ***REMOVED*** update***REMOVED*** from "../../../actions/auth";
+import User from "../../../entities/User";
+import Auth from "../../../entities/Auth";
 
 interface CreateFormData ***REMOVED***
   username: string;
   password: string;
   firstName: string;
   lastName: string;
+  userRole: string;
 ***REMOVED***
 
 const Profile = (props: any) => ***REMOVED***
@@ -18,8 +23,33 @@ const Profile = (props: any) => ***REMOVED***
   const ***REMOVED*** user***REMOVED*** = props;
 
   const onSubmit = useCallback((data: CreateFormData) => ***REMOVED***
-    const ***REMOVED*** dispatch***REMOVED*** = props;
-    const ***REMOVED*** username, firstName, lastName***REMOVED*** = data;
+    const ***REMOVED*** username, firstName, lastName, password, userRole***REMOVED*** = data;
+    var newUser = new User(
+      username,
+      firstName,
+      lastName,
+      new Date(),
+      true,
+      password,
+      userRole
+    );
+    newUser.id = props.user.id;
+
+    var newAuth = new Auth(
+      props.user.id,
+      username,
+      firstName,
+      lastName,
+      new Date(),
+      true,
+      password,
+      userRole,
+      props.user.accessToken
+    );
+    props.dispatch(updateUser(newUser));
+    props.dispatch(update(newAuth));
+
+    console.log(password);
  ***REMOVED***, []);
 
   if (!user) ***REMOVED***
@@ -118,7 +148,24 @@ const Profile = (props: any) => ***REMOVED***
           </Row>
 
           <Row>
-            <Col></Col>
+            <Col>
+              <small>New password</small>
+              <div className="input-group-sm">
+                <input
+                  type="password"
+                  name="password"
+                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                  className="form-control"
+                  defaultValue="password123"
+                  aria-describedby="Password"
+                />
+              </div>
+              ***REMOVED***errors.password?.type === "required" && (
+                <div>
+                  <small className="text-danger"> This is required</small>
+                </div>
+              )***REMOVED***
+            </Col>
             <Col>
               <small>Authorities</small>
               <div className="input-group-sm">
@@ -126,6 +173,8 @@ const Profile = (props: any) => ***REMOVED***
                   type="text"
                   className="form-control"
                   aria-describedby="Roles"
+                  name="userRole"
+                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
                   defaultValue=***REMOVED***user.userRole***REMOVED***
                 />
               </div>

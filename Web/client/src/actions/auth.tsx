@@ -5,10 +5,12 @@ import ***REMOVED***
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
+  UPDATE_AUTH
 ***REMOVED*** from "./types";
 
 import AuthService from "../services/auth.service";
 import User from "../entities/User";
+import Auth from "../entities/Auth";
 
 export const register = (user: User) => (dispatch: any) => ***REMOVED***
   return AuthService.register(user).then(
@@ -88,3 +90,11 @@ export const logout = () => (dispatch: any) => ***REMOVED***
  ***REMOVED***);
   AuthService.logout();
 ***REMOVED***;
+
+export const update = (user: Auth) => (dispatch: any) => ***REMOVED***
+  dispatch(***REMOVED***
+    type: UPDATE_AUTH,
+    payload: user,
+ ***REMOVED***);
+  localStorage.setItem("user", JSON.stringify(user));
+***REMOVED***

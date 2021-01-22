@@ -1,10 +1,14 @@
 
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ApiBase.Data;
 using ApiBase.DTOs;
 using ApiBase.Hubs;
 using ApiBase.Models;
+using ApiBase.Services;
+using ApiBase.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 
@@ -18,14 +22,16 @@ namespace ApiBase.Controllers
 
         private readonly IEFRepository _repository;
         private readonly IHubContext<LiveMarkerHub> _hubContext;
-
         private readonly IHubContext<LiveNotificationHub> _hubNotificationContext;
+        private readonly ISlaMarkerService _slaMarkerService;
 
-        public MarkersController(IEFRepository repository, IHubContext<LiveMarkerHub> hubContext, IHubContext<LiveNotificationHub> hubNotificationContext)
+        public MarkersController(IEFRepository repository, IHubContext<LiveMarkerHub> hubContext, IHubContext<LiveNotificationHub> hubNotificationContext, ISlaMarkerService slaService)
         {
             this._repository = repository;
             this._hubContext = hubContext;
             this._hubNotificationContext = hubNotificationContext;
+            this._slaMarkerService = slaService;
+
         }
 
         // GET: api/markers
@@ -53,11 +59,30 @@ namespace ApiBase.Controllers
         [HttpPost]
         public async Task<IActionResult> AddMarker(Marker marker)
         {
+            
+
+            var list = _slaMarkerService.GetSlaMarkers().ToList();
+            var polygon = PolygonCheckerService.IsInPolygon(list, marker.latitude, marker.longitude);
+            if (polygon == true)
+            {
+                // SignalR event
+                var signalNotification = new NotificationDto
+                {
+                    Title = "Too many markers!",
+                    Description = "You can not create a marker here",
+                    Type = "Notify",
+                    CreatedAt = DateTime.UtcNow.ToString()
+                };
+                await _hubNotificationContext.Clients.All.SendAsync("GetNewNotification", signalNotification);
+
+                return Conflict();
+
+            }
+
             var markerItem = await _repository.AddAsync(marker);
 
             // SignalR event
             await _hubContext.Clients.All.SendAsync("GetNewMarker", markerItem);
-
 
             return Ok(markerItem);
         }

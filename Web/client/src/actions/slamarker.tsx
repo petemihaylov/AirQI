@@ -1,4 +1,4 @@
-import { ADD_SLAMARKER, ADD_FEATURES, FETCH_SLAMARKERS } from "./types";
+import { ADD_SLAMARKER, ADD_FEATURES, FETCH_SLAMARKERS, DELETE_SLAMARKER } from "./types";
 import SlaMarkerService from "../services/slamarker.service";
 import SlaMarker from "../entities/SlaMarker";
 
@@ -26,6 +26,22 @@ export const fetchSlaMarkers = () => (dispatch: any) => {
     }
   );
 };
+
+
+export const deleteSlaMarker = (id: number, index: number) => (dispatch: any) => {
+  SlaMarkerService.deleteSlaMarker(id).then(
+    (response) => {
+      dispatch({
+        type: DELETE_SLAMARKER,
+        payload: index,
+      });
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+};
+
 
 
 

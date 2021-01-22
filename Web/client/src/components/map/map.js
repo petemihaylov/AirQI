@@ -183,10 +183,17 @@ const Map = (props) => {
 
   const handleCreate = (longitude, latitude, ico, message) => {
     const m = new MarkerEntity(longitude, latitude, "marker", JSON.stringify(ico));
-    props.dispatch(createMarker(m));
+    props.dispatch(createMarker(m)).then(() =>{
+      console.log("sends a message");
+      const n = new Notification(
+        message.title,
+        message.description,
+        "Marker",
+        Date.now
+      );
+      props.dispatch(createNotification(n));
+    });
 
-    const n = new Notification(message.title, message.description, "Marker", Date.now);
-    props.dispatch(createNotification(n));
     setShowPopup(false);
     enableAddMarker(false);
     setController(false);

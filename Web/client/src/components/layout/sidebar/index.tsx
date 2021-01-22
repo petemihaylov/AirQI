@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { createUseStyles } from "react-jss";
 import { connect } from "react-redux";
 import { Item } from "./item";
@@ -11,6 +11,7 @@ import {
   faUserShield,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { fetchNotifications } from "../../../actions/notificationActions";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Sidebar = (props: any) => {
@@ -18,6 +19,10 @@ const Sidebar = (props: any) => {
   const { user } = props;
   const [adminBoard, showAdminBoard] = useState(false);
 
+  /* Gets notifications from DB */
+  useEffect(() => {
+    props.dispatch(fetchNotifications());
+  }, []);
 
   useEffect(() => {
     showAdminBoard(user && user.userRole === "Admin");
@@ -45,13 +50,23 @@ const Sidebar = (props: any) => {
               animation={""}
             />
 
-            <Item
-              title={"Notifications"}
-              reference={"/notifications"}
-              fontIcon={faBell}
-              classes={classes}
-              animation={"blob"}
-            />
+            <li className={classes.navItem}>
+              <a href={"/notifications"} className={classes.navLink}>
+                {props.items.length != 0 ? (
+                  <div className={classes.fontIcon + " " + "blob"}>
+                    <FontAwesomeIcon className={""} icon={faBell} />
+                    <span className={classes.notificationItem}>
+                      {props.items.length}
+                    </span>
+                  </div>
+                ) : (
+                  <div className={classes.fontIcon }>
+                    <FontAwesomeIcon className={""} icon={faBell} />
+                  </div>
+                )}
+                <span className={classes.linkText}>{"Notifications"}</span>
+              </a>
+            </li>
 
             <Item
               title={"Dashboard"}
@@ -81,8 +96,10 @@ const Sidebar = (props: any) => {
 
 function mapStateToProps(state: any) {
   const { user } = state.auth;
+  const { items } = state.notifications;
   return {
     user,
+    items,
   };
 }
 
@@ -139,6 +156,21 @@ const useStyles = createUseStyles({
     display: "inline",
     position: "absolute",
     left: "-400px",
+  },
+  notificationItem: {
+    position: "absolute",
+    borderRadius: "50%",
+    display: "flex",
+    padding: "1px",
+    textAlign: "center",
+    top: "-2px",
+    right: "-3px",
+    fontSize: "13px",
+    justifyContent: "center",
+    color: "white",
+    width: "20px",
+    height: "20px",
+    background: "#f46f",
   },
   navItem: {
     width: "100%",

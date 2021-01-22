@@ -28,6 +28,7 @@ import ***REMOVED***
   createMarker,
   deleteMarker,
 ***REMOVED*** from "../../actions/markerActions";
+import ***REMOVED*** Legend***REMOVED*** from "../../assets/js/legend/legend";
 
 
 // Data fetching method
@@ -270,6 +271,7 @@ const Map = (props) => ***REMOVED***
     );
  ***REMOVED***;
 
+
   const _renderPopup = () => ***REMOVED***
     return (
       showPopup &&
@@ -331,7 +333,11 @@ const Map = (props) => ***REMOVED***
 
   const _changeColor = (aqi) => ***REMOVED***
       
-    if (aqi >= 0 && aqi <= 50) ***REMOVED***
+    if (aqi >= 0 && aqi <= 25) ***REMOVED***
+      return [69, 173, 218, 40];
+   ***REMOVED***
+
+    if (aqi >= 26 && aqi <= 50) ***REMOVED***
       return [162, 219, 96, 40];      
    ***REMOVED***
     
@@ -373,7 +379,7 @@ const Map = (props) => ***REMOVED***
       data,
       pickable: true,
       getPosition: d => d.position,
-      getText: d => `$***REMOVED***d.aqi***REMOVED***`,
+      getText: d => `.`,
       getSize: zoom + 8,
       getAngle: 0,
       getTextAnchor: 'middle',
@@ -417,6 +423,9 @@ const Map = (props) => ***REMOVED***
         ***REMOVED***_renderMarkerTools()***REMOVED***
         ***REMOVED***_renderMapTools()***REMOVED***
         ***REMOVED***_renderPopup()***REMOVED***
+
+        <Legend />
+
       </MapGL>
     </Container>
   );

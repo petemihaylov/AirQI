@@ -1,5 +1,14 @@
 import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
-import ***REMOVED*** Button, Col, Container, Row, Table, Collapse, InputGroup, Card***REMOVED*** from "react-bootstrap";
+import ***REMOVED***
+  Button,
+  Col,
+  Container,
+  Row,
+  Table,
+  Collapse,
+  InputGroup,
+  Card,
+***REMOVED*** from "react-bootstrap";
 import User from "../../../entities/User";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 import ***REMOVED***
@@ -12,7 +21,7 @@ import ***REMOVED*** deleteUser, fetchUsers***REMOVED*** from "../../../actions/
 import "./css/style.css";
 import Searchbar from "./searchbar";
 import CreateModal from "./create-modal";
-import Sla  from "./sla";
+import Sla from "./sla";
 import SlaList from "./slalist";
 
 const AdminBoard = (props: any) => ***REMOVED***
@@ -25,6 +34,7 @@ const AdminBoard = (props: any) => ***REMOVED***
 
   useEffect(() => ***REMOVED***
     handleContent(props.items);
+    console.log(props.items);
  ***REMOVED***, [props.items]);
 
   const handleDelete = (id: any, index: number) => ***REMOVED***
@@ -33,7 +43,6 @@ const AdminBoard = (props: any) => ***REMOVED***
 
   return (
     <Container>
-
       <Row className="d-flex align-items-center">
         <Col sm=***REMOVED***8***REMOVED***>
           <Searchbar />
@@ -62,7 +71,7 @@ const AdminBoard = (props: any) => ***REMOVED***
               <tr>
                 <th></th>
                 <th>Name</th>
-                <th>Date Created</th>
+                <th>Last Active</th>
                 <th>Role</th>
                 <th>Status</th>
                 <th></th>
@@ -77,10 +86,11 @@ const AdminBoard = (props: any) => ***REMOVED***
                       ***REMOVED***" "***REMOVED***
                       ***REMOVED***item.firstName***REMOVED*** ***REMOVED***item.lastName***REMOVED***
                     </td>
-                    <td>04/10/2013</td>
+                    <td>***REMOVED***item.lastActive***REMOVED***</td>
                     <td>***REMOVED***item.userRole***REMOVED***</td>
                     <td>
-                      <span className="status">&bull;</span> Active
+                      <span className="status">&bull;</span>***REMOVED***" "***REMOVED***
+                      ***REMOVED***item.isActive ? "Active" : "Inactive"***REMOVED***
                     </td>
                     <td>
                       <button
@@ -107,7 +117,7 @@ const AdminBoard = (props: any) => ***REMOVED***
       </Card>
 
       <Sla />
-      <SlaList/>
+      <SlaList />
     </Container>
   );
 ***REMOVED***;

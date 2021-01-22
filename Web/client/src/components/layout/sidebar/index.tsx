@@ -1,4 +1,4 @@
-import React, ***REMOVED***useState, useEffect***REMOVED*** from "react";
+import React, ***REMOVED*** useState, useEffect***REMOVED*** from "react";
 import ***REMOVED*** createUseStyles***REMOVED*** from "react-jss";
 import ***REMOVED*** connect***REMOVED*** from "react-redux";
 import ***REMOVED*** Item***REMOVED*** from "./item";
@@ -11,6 +11,7 @@ import ***REMOVED***
   faUserShield,
   faChevronRight,
 ***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import ***REMOVED*** fetchNotifications***REMOVED*** from "../../../actions/notificationActions";
 import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
 
 const Sidebar = (props: any) => ***REMOVED***
@@ -18,6 +19,10 @@ const Sidebar = (props: any) => ***REMOVED***
   const ***REMOVED*** user***REMOVED*** = props;
   const [adminBoard, showAdminBoard] = useState(false);
 
+  /* Gets notifications from DB */
+  useEffect(() => ***REMOVED***
+    props.dispatch(fetchNotifications());
+ ***REMOVED***, []);
 
   useEffect(() => ***REMOVED***
     showAdminBoard(user && user.userRole === "Admin");
@@ -45,13 +50,23 @@ const Sidebar = (props: any) => ***REMOVED***
               animation=***REMOVED***""***REMOVED***
             />
 
-            <Item
-              title=***REMOVED***"Notifications"***REMOVED***
-              reference=***REMOVED***"/notifications"***REMOVED***
-              fontIcon=***REMOVED***faBell***REMOVED***
-              classes=***REMOVED***classes***REMOVED***
-              animation=***REMOVED***"blob"***REMOVED***
-            />
+            <li className=***REMOVED***classes.navItem***REMOVED***>
+              <a href=***REMOVED***"/notifications"***REMOVED*** className=***REMOVED***classes.navLink***REMOVED***>
+                ***REMOVED***props.items.length != 0 ? (
+                  <div className=***REMOVED***classes.fontIcon + " " + "blob"***REMOVED***>
+                    <FontAwesomeIcon className=***REMOVED***""***REMOVED*** icon=***REMOVED***faBell***REMOVED*** />
+                    <span className=***REMOVED***classes.notificationItem***REMOVED***>
+                      ***REMOVED***props.items.length***REMOVED***
+                    </span>
+                  </div>
+                ) : (
+                  <div className=***REMOVED***classes.fontIcon***REMOVED***>
+                    <FontAwesomeIcon className=***REMOVED***""***REMOVED*** icon=***REMOVED***faBell***REMOVED*** />
+                  </div>
+                )***REMOVED***
+                <span className=***REMOVED***classes.linkText***REMOVED***>***REMOVED***"Notifications"***REMOVED***</span>
+              </a>
+            </li>
 
             <Item
               title=***REMOVED***"Dashboard"***REMOVED***
@@ -81,8 +96,10 @@ const Sidebar = (props: any) => ***REMOVED***
 
 function mapStateToProps(state: any) ***REMOVED***
   const ***REMOVED*** user***REMOVED*** = state.auth;
+  const ***REMOVED*** items***REMOVED*** = state.notifications;
   return ***REMOVED***
     user,
+    items,
  ***REMOVED***;
 ***REMOVED***
 
@@ -139,6 +156,21 @@ const useStyles = createUseStyles(***REMOVED***
     display: "inline",
     position: "absolute",
     left: "-400px",
+ ***REMOVED***,
+  notificationItem: ***REMOVED***
+    position: "absolute",
+    borderRadius: "50%",
+    display: "flex",
+    padding: "1px",
+    textAlign: "center",
+    top: "-2px",
+    right: "-3px",
+    fontSize: "13px",
+    justifyContent: "center",
+    color: "white",
+    width: "20px",
+    height: "20px",
+    background: "#f46f",
  ***REMOVED***,
   navItem: ***REMOVED***
     width: "100%",

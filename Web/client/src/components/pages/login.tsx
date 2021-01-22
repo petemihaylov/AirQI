@@ -31,71 +31,66 @@ const Login = (props: any) => ***REMOVED***
 
   return (
     <div
-      className="container d-flex justify-content-center align-items-center"
-      style=***REMOVED******REMOVED*** height: "80vh"***REMOVED******REMOVED***
+      className="container d-flex-column justify-content-center align-items-center pt-5"
+      style=***REMOVED******REMOVED*** width: "23vw"***REMOVED******REMOVED***
     >
-      <Card style=***REMOVED******REMOVED*** width: "20rem", height: "20rem"***REMOVED******REMOVED***>
+      <Card style=***REMOVED******REMOVED*** width: "20rem", height: "25rem"***REMOVED******REMOVED*** className="mt-5 mb-3">
         <Card.Title className="w-100 text-center pt-4">Login</Card.Title>
-        <div className="d-flex align-items-center h-100">
-          <Card.Body>
-            <form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED***>
-              <div className="form-group">
-                <label>Username: </label>
-                <input
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
-                  type="text"
-                  className="form-control input-sm"
-                  name="username"
-                />
-                ***REMOVED***errors.username && (
-                  <div>
-                    <small className="text-danger"> This is required</small>
-                  </div>
-                )***REMOVED***
-              </div>
-
-              <div className="form-group">
-                <label>Password: </label>
-                <input
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
-                  type="password"
-                  className="form-control input-sm"
-                  name="password"
-                  autoComplete="password"
-                />
-
-                ***REMOVED***errors.password && (
-                  <div>
-                    <small className="text-danger"> This is required</small>
-                  </div>
-                )***REMOVED***
-              </div>
-
-              <div
-                className="form-group"
-                style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***
-              >
-                <BubbleButton name=***REMOVED***"Login"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
-                  ***REMOVED***loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )***REMOVED***
-                  ***REMOVED***!loading && <span>Login</span>***REMOVED***
-                </BubbleButton>
-              </div>
-
-            </form>
-          </Card.Body>
-        </div>
-            ***REMOVED***message && (
-                <div className="form-group">
-                  <div className="alert alert-secondary" role="alert">
-                    ***REMOVED***message***REMOVED***
-                  </div>
+        <Card.Body className="d-flex align-items-center h-100">
+          <form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED***>
+            <div className="form-group">
+              <label>Username: </label>
+              <input
+                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                type="text"
+                className="form-control input-sm"
+                name="username"
+              />
+              ***REMOVED***errors.username && (
+                <div>
+                  <small className="text-danger"> This is required</small>
                 </div>
               )***REMOVED***
-          
+            </div>
+
+            <div className="form-group">
+              <label>Password: </label>
+              <input
+                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                type="password"
+                className="form-control input-sm"
+                name="password"
+                autoComplete="password"
+              />
+
+              ***REMOVED***errors.password && (
+                <div>
+                  <small className="text-danger"> This is required</small>
+                </div>
+              )***REMOVED***
+            </div>
+
+            <div
+              className="form-group"
+              style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***
+            >
+              <BubbleButton name=***REMOVED***"Login"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
+                ***REMOVED***loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )***REMOVED***
+                ***REMOVED***!loading && <span>Login</span>***REMOVED***
+              </BubbleButton>
+            </div>
+          </form>
+        </Card.Body>
       </Card>
-      
+      ***REMOVED***message && (
+        <div className="form-group">
+          <div className="alert alert-secondary text-center" role="alert">
+             ***REMOVED***message***REMOVED***
+          </div>
+        </div>
+      )***REMOVED***
     </div>
   );
 ***REMOVED***;

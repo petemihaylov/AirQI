@@ -1,63 +1,72 @@
 #gradient-bar ***REMOVED***
-	height: 200px;
-	width: 16%;
-	border-radius: 10px;
-	background: linear-gradient(#985672, #da4545, #ff7e0f, #ffe218, #7cdf50, #4591da);
+  height: 200px;
+  width: 16%;
+  border-radius: 10px;
+  background: linear-gradient(
+    #985672,
+    #da4545,
+    #ff7e0f,
+    #ffe218,
+    #7cdf50,
+    #4591da
+  );
 ***REMOVED***
 
-.card ***REMOVED***
-	width: 145px;
-	color: black;
-	border-radius: 25px;
+.card-legend ***REMOVED***
+  width: 160px;
+  margin-right: 20px;
+  color: black;
 ***REMOVED***
 
 #legend ***REMOVED***
-	position: relative;
+  position: relative;
+  border-radius: 2px;
 ***REMOVED***
 
 .indicator ***REMOVED***
-	position: absolute;
-	top: 0;
-    left: 24px;
-    font-size: 14px;
+  position: absolute;
+  top: 0;
+  left: 33px;
+  font-size: 14px;
 ***REMOVED***
 
 .indicator::before ***REMOVED***
-	content: "";
-	position: absolute;
-	bottom: 0.6em;
-	left: -12px;
-	right: 0px;
-	width: 0.5em;
-	border-top: 1.5px solid black;
+  content: "";
+  position: absolute;
+  bottom: 0.6em;
+  left: -12px;
+  right: 0px;
+  width: 0.5em;
+  border-top: 1.5px solid black;
 ***REMOVED***
 .scale ***REMOVED***
-	position: relative;
+  position: relative;
 ***REMOVED***
 
-.card-body ***REMOVED***
-	background-color: white;
-	border-radius: 25px;
-	border: 0.5px solid whitesmoke;
+.card-body-legend ***REMOVED***
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  border: 0.5px solid whitesmoke;
 ***REMOVED***
 
 .advice .icon ***REMOVED***
-	fill: white;
-	margin: 0;
+  fill: white;
+  margin: 0;
 ***REMOVED***
 
 .sign ***REMOVED***
-	display: inline-block;
-	padding: 8px;
-	border-radius: 50px;
+  display: inline-block;
+  padding: 8px;
+  border-radius: 50px;
 ***REMOVED***
 .warning ***REMOVED***
-	background-color: #da4545;
+  background-color: #da4545;
 ***REMOVED***
 .success ***REMOVED***
-	background-color: #6dc446;
+  background-color: #6dc446;
 ***REMOVED***
 .advice-text ***REMOVED***
-	display: inline-block;
-	margin-left: 5px;
+  display: inline-block;
+  margin-left: 5px;
 ***REMOVED***

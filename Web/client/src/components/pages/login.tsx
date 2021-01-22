@@ -31,71 +31,66 @@ const Login = (props: any) => {
 
   return (
     <div
-      className="container d-flex justify-content-center align-items-center"
-      style={{ height: "80vh" }}
+      className="container d-flex-column justify-content-center align-items-center pt-5"
+      style={{ width: "23vw" }}
     >
-      <Card style={{ width: "20rem", height: "20rem" }}>
+      <Card style={{ width: "20rem", height: "25rem" }} className="mt-5 mb-3">
         <Card.Title className="w-100 text-center pt-4">Login</Card.Title>
-        <div className="d-flex align-items-center h-100">
-          <Card.Body>
-            <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="form-group">
-                <label>Username: </label>
-                <input
-                  ref={register({ required: true })}
-                  type="text"
-                  className="form-control input-sm"
-                  name="username"
-                />
-                {errors.username && (
-                  <div>
-                    <small className="text-danger"> This is required</small>
-                  </div>
-                )}
-              </div>
-
-              <div className="form-group">
-                <label>Password: </label>
-                <input
-                  ref={register({ required: true })}
-                  type="password"
-                  className="form-control input-sm"
-                  name="password"
-                  autoComplete="password"
-                />
-
-                {errors.password && (
-                  <div>
-                    <small className="text-danger"> This is required</small>
-                  </div>
-                )}
-              </div>
-
-              <div
-                className="form-group"
-                style={{ marginTop: "35px", marginBottom: "100px" }}
-              >
-                <BubbleButton name={"Login"} disabled={loading}>
-                  {loading && (
-                    <span className="spinner-border spinner-border-sm"></span>
-                  )}
-                  {!loading && <span>Login</span>}
-                </BubbleButton>
-              </div>
-
-            </form>
-          </Card.Body>
-        </div>
-            {message && (
-                <div className="form-group">
-                  <div className="alert alert-secondary" role="alert">
-                    {message}
-                  </div>
+        <Card.Body className="d-flex align-items-center h-100">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div className="form-group">
+              <label>Username: </label>
+              <input
+                ref={register({ required: true })}
+                type="text"
+                className="form-control input-sm"
+                name="username"
+              />
+              {errors.username && (
+                <div>
+                  <small className="text-danger"> This is required</small>
                 </div>
               )}
-          
+            </div>
+
+            <div className="form-group">
+              <label>Password: </label>
+              <input
+                ref={register({ required: true })}
+                type="password"
+                className="form-control input-sm"
+                name="password"
+                autoComplete="password"
+              />
+
+              {errors.password && (
+                <div>
+                  <small className="text-danger"> This is required</small>
+                </div>
+              )}
+            </div>
+
+            <div
+              className="form-group"
+              style={{ marginTop: "35px", marginBottom: "100px" }}
+            >
+              <BubbleButton name={"Login"} disabled={loading}>
+                {loading && (
+                  <span className="spinner-border spinner-border-sm"></span>
+                )}
+                {!loading && <span>Login</span>}
+              </BubbleButton>
+            </div>
+          </form>
+        </Card.Body>
       </Card>
-      
+      {message && (
+        <div className="form-group">
+          <div className="alert alert-secondary text-center" role="alert">
+             {message}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

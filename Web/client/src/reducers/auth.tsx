@@ -3,6 +3,7 @@ import {
   REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
+  UPDATE_AUTH,
   LOGOUT,
 } from "../actions/types";
 
@@ -45,7 +46,11 @@ export default function (state = initialState, action: any) {
         isLoggedIn: false,
         user: null,
       };
-      
+    case UPDATE_AUTH:
+      return {
+        ...state,
+        user: payload
+      }
     default:
       return state;
   }

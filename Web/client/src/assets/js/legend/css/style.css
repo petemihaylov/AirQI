@@ -1,63 +1,72 @@
 #gradient-bar {
-	height: 200px;
-	width: 16%;
-	border-radius: 10px;
-	background: linear-gradient(#985672, #da4545, #ff7e0f, #ffe218, #7cdf50, #4591da);
+  height: 200px;
+  width: 16%;
+  border-radius: 10px;
+  background: linear-gradient(
+    #985672,
+    #da4545,
+    #ff7e0f,
+    #ffe218,
+    #7cdf50,
+    #4591da
+  );
 }
 
-.card {
-	width: 145px;
-	color: black;
-	border-radius: 25px;
+.card-legend {
+  width: 160px;
+  margin-right: 20px;
+  color: black;
 }
 
 #legend {
-	position: relative;
+  position: relative;
+  border-radius: 2px;
 }
 
 .indicator {
-	position: absolute;
-	top: 0;
-    left: 24px;
-    font-size: 14px;
+  position: absolute;
+  top: 0;
+  left: 33px;
+  font-size: 14px;
 }
 
 .indicator::before {
-	content: "";
-	position: absolute;
-	bottom: 0.6em;
-	left: -12px;
-	right: 0px;
-	width: 0.5em;
-	border-top: 1.5px solid black;
+  content: "";
+  position: absolute;
+  bottom: 0.6em;
+  left: -12px;
+  right: 0px;
+  width: 0.5em;
+  border-top: 1.5px solid black;
 }
 .scale {
-	position: relative;
+  position: relative;
 }
 
-.card-body {
-	background-color: white;
-	border-radius: 25px;
-	border: 0.5px solid whitesmoke;
+.card-body-legend {
+  background-color: white;
+  border-radius: 5px;
+  padding: 20px;
+  border: 0.5px solid whitesmoke;
 }
 
 .advice .icon {
-	fill: white;
-	margin: 0;
+  fill: white;
+  margin: 0;
 }
 
 .sign {
-	display: inline-block;
-	padding: 8px;
-	border-radius: 50px;
+  display: inline-block;
+  padding: 8px;
+  border-radius: 50px;
 }
 .warning {
-	background-color: #da4545;
+  background-color: #da4545;
 }
 .success {
-	background-color: #6dc446;
+  background-color: #6dc446;
 }
 .advice-text {
-	display: inline-block;
-	margin-left: 5px;
+  display: inline-block;
+  margin-left: 5px;
 }

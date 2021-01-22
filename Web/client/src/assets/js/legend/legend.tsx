@@ -11,8 +11,8 @@ export const Legend = (props: any) => {
   return (
     <div className="mr-4 fixed-bottom">
         <div className="row flex-row-reverse">
-          <div className="card align-self-center">
-            <div className="card-body">
+          <div className="card-legend align-self-center">
+            <div className="card-body-legend">
               <div id="legend">
                 <h5 className="card-title text-center">Health Risk</h5>
                 <div className="scale">

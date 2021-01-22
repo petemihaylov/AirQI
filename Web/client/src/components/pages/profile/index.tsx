@@ -5,12 +5,17 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import ProfileImage from "./image";
 import "./css/style.css";
+import { updateUser } from "../../../actions/userActions";
+import { update } from "../../../actions/auth";
+import User from "../../../entities/User";
+import Auth from "../../../entities/Auth";
 
 interface CreateFormData {
   username: string;
   password: string;
   firstName: string;
   lastName: string;
+  userRole: string;
 }
 
 const Profile = (props: any) => {
@@ -18,8 +23,33 @@ const Profile = (props: any) => {
   const { user } = props;
 
   const onSubmit = useCallback((data: CreateFormData) => {
-    const { dispatch } = props;
-    const { username, firstName, lastName } = data;
+    const { username, firstName, lastName, password, userRole } = data;
+    var newUser = new User(
+      username,
+      firstName,
+      lastName,
+      new Date(),
+      true,
+      password,
+      userRole
+    );
+    newUser.id = props.user.id;
+
+    var newAuth = new Auth(
+      props.user.id,
+      username,
+      firstName,
+      lastName,
+      new Date(),
+      true,
+      password,
+      userRole,
+      props.user.accessToken
+    );
+    props.dispatch(updateUser(newUser));
+    props.dispatch(update(newAuth));
+
+    console.log(password);
   }, []);
 
   if (!user) {
@@ -118,7 +148,24 @@ const Profile = (props: any) => {
           </Row>
 
           <Row>
-            <Col></Col>
+            <Col>
+              <small>New password</small>
+              <div className="input-group-sm">
+                <input
+                  type="password"
+                  name="password"
+                  ref={register({ required: true })}
+                  className="form-control"
+                  defaultValue="password123"
+                  aria-describedby="Password"
+                />
+              </div>
+              {errors.password?.type === "required" && (
+                <div>
+                  <small className="text-danger"> This is required</small>
+                </div>
+              )}
+            </Col>
             <Col>
               <small>Authorities</small>
               <div className="input-group-sm">
@@ -126,6 +173,8 @@ const Profile = (props: any) => {
                   type="text"
                   className="form-control"
                   aria-describedby="Roles"
+                  name="userRole"
+                  ref={register({ required: true })}
                   defaultValue={user.userRole}
                 />
               </div>

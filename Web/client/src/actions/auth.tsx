@@ -5,10 +5,12 @@ import {
   LOGIN_FAIL,
   LOGOUT,
   SET_MESSAGE,
+  UPDATE_AUTH
 } from "./types";
 
 import AuthService from "../services/auth.service";
 import User from "../entities/User";
+import Auth from "../entities/Auth";
 
 export const register = (user: User) => (dispatch: any) => {
   return AuthService.register(user).then(
@@ -88,3 +90,11 @@ export const logout = () => (dispatch: any) => {
   });
   AuthService.logout();
 };
+
+export const update = (user: Auth) => (dispatch: any) => {
+  dispatch({
+    type: UPDATE_AUTH,
+    payload: user,
+  });
+  localStorage.setItem("user", JSON.stringify(user));
+}

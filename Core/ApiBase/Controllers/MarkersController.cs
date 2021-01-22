@@ -62,28 +62,29 @@ namespace ApiBase.Controllers
             
 
             var list = _slaMarkerService.GetSlaMarkers().ToList();
-            var isIn = PolygonCheckerService.IsInPolygon(list, marker.latitude, marker.longitude);
-            if (isIn == false)
+            var polygon = PolygonCheckerService.IsInPolygon(list, marker.latitude, marker.longitude);
+            if (polygon == true)
             {
-                var markerItem = await _repository.AddAsync(marker);
-
                 // SignalR event
-                await _hubContext.Clients.All.SendAsync("GetNewMarker", markerItem);
-                
-                return Ok(markerItem);
+                var signalNotification = new NotificationDto
+                {
+                    Title = "Too many markers!",
+                    Description = "You can not create a marker here",
+                    Type = "Notify",
+                    CreatedAt = DateTime.UtcNow.ToString()
+                };
+                await _hubNotificationContext.Clients.All.SendAsync("GetNewNotification", signalNotification);
+
+                return Conflict();
+
             }
 
-            // SignalR event
-            var signalNotification = new NotificationDto
-            {
-                Title = "Too many markers!",
-                Description = "You can not create a marker here",
-                Type = "Notify",
-                CreatedAt = DateTime.UtcNow.ToString()
-            };
-            await _hubNotificationContext.Clients.All.SendAsync("GetNewNotification", signalNotification);
+            var markerItem = await _repository.AddAsync(marker);
 
-            return Conflict();
+            // SignalR event
+            await _hubContext.Clients.All.SendAsync("GetNewMarker", markerItem);
+
+            return Ok(markerItem);
         }
 
         // Delete: api/markers/{id}

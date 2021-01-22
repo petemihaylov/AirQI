@@ -1,5 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Button, Col, Container, Row, Table, Collapse, InputGroup, Card } from "react-bootstrap";
+import {
+  Button,
+  Col,
+  Container,
+  Row,
+  Table,
+  Collapse,
+  InputGroup,
+  Card,
+} from "react-bootstrap";
 import User from "../../../entities/User";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -12,7 +21,7 @@ import { deleteUser, fetchUsers } from "../../../actions/userActions";
 import "./css/style.css";
 import Searchbar from "./searchbar";
 import CreateModal from "./create-modal";
-import Sla  from "./sla";
+import Sla from "./sla";
 import SlaList from "./slalist";
 
 const AdminBoard = (props: any) => {
@@ -25,6 +34,7 @@ const AdminBoard = (props: any) => {
 
   useEffect(() => {
     handleContent(props.items);
+    console.log(props.items);
   }, [props.items]);
 
   const handleDelete = (id: any, index: number) => {
@@ -33,7 +43,6 @@ const AdminBoard = (props: any) => {
 
   return (
     <Container>
-
       <Row className="d-flex align-items-center">
         <Col sm={8}>
           <Searchbar />
@@ -62,7 +71,7 @@ const AdminBoard = (props: any) => {
               <tr>
                 <th></th>
                 <th>Name</th>
-                <th>Date Created</th>
+                <th>Last Active</th>
                 <th>Role</th>
                 <th>Status</th>
                 <th></th>
@@ -77,10 +86,11 @@ const AdminBoard = (props: any) => {
                       {" "}
                       {item.firstName} {item.lastName}
                     </td>
-                    <td>04/10/2013</td>
+                    <td>{item.lastActive}</td>
                     <td>{item.userRole}</td>
                     <td>
-                      <span className="status">&bull;</span> Active
+                      <span className="status">&bull;</span>{" "}
+                      {item.isActive ? "Active" : "Inactive"}
                     </td>
                     <td>
                       <button
@@ -107,7 +117,7 @@ const AdminBoard = (props: any) => {
       </Card>
 
       <Sla />
-      <SlaList/>
+      <SlaList />
     </Container>
   );
 };

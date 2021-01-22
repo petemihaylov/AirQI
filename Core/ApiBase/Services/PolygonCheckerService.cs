@@ -18,22 +18,28 @@ namespace ApiBase.Services
 
         public static bool IsInPolygon(List<SlaMarker> collection, double Y, double X)
         {
-            List<Point> points = new List<Point>();
-
-            collection.ForEach(sla =>
+            for (int c = 0; c < collection.Count; c++)
             {
-                List<Feature> features = JsonConvert.DeserializeObject<List<Feature>>(sla.LocationBoundaries);
+             
+                List<Feature> features = JsonConvert.DeserializeObject<List<Feature>>(collection[c].LocationBoundaries);
 
-                features.ForEach(f =>
+                for (int f = 0; f < features.Count; f++)
                 {
-                    f.geometry.Coordinates[0].ForEach(p =>
+                 
+                    List<Point> points = new List<Point>();
+                    features[f].geometry.Coordinates[0].ForEach(p =>
                     {
                         points.Add(new Point(){X = p[0],Y = p[1]});
                     });
-                });
-            });
+                    if (PointInPolygon((float) X, (float) Y, points.ToArray()) == true)
+                    {
+                        return true;
+                    }
 
-            return PointInPolygon((float) X, (float) Y, points.ToArray());
+                }
+            }
+
+            return false;
         }
 
 

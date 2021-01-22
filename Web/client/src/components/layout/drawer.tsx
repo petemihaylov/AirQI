@@ -54,8 +54,7 @@ const NavDrawer = (props: any) => {
         className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
         })}
-      >
-      </AppBar>
+      ></AppBar>
 
       {user ? (
         <Drawer
@@ -91,8 +90,7 @@ const NavDrawer = (props: any) => {
                 <ListItemIcon>
                   <Person />
                 </ListItemIcon>
-                <ListItemText primary={"Account settings"} /> 
-                
+                <ListItemText primary={"Account settings"} />
               </ListItem>
             </Link>
 

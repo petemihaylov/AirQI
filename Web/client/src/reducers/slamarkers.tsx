@@ -1,4 +1,8 @@
-import { ADD_SLAMARKER, FETCH_SLAMARKERS } from "../actions/types";
+import {
+  ADD_SLAMARKER,
+  FETCH_SLAMARKERS,
+  DELETE_SLAMARKER,
+} from "../actions/types";
 
 const initialState = { items: [] };
 
@@ -15,6 +19,11 @@ export default function (state = initialState, action: any) {
       return {
         ...state,
         items: payload,
+      };
+    case DELETE_SLAMARKER:
+      return {
+        ...state,
+        items: state.items.filter((item, index) => index !== action.payload),
       };
     default:
       return state;

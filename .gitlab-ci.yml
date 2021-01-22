@@ -12,10 +12,10 @@ build:
   stage: build
 
   script:
-      - "cd Data/AirQi"
-      - "dotnet build"
+    - "cd Data/AirQi"
+    - "dotnet build"
 core:
- stage: core
+  stage: core
 
   script:
     - "cd Core/ApiBase"
@@ -32,8 +32,8 @@ unit:
   stage: unit
 
   script:
-      - "cd Core"
-      - "dotnet test"
+    - "cd Core"
+    - "dotnet test"
 
 publish:
   stage: publish
@@ -47,9 +47,9 @@ publish:
 
 deploy:
   stage: deploy
-  
+
   when: manual
-  
+
   script:
     - echo "Deploy to production"
   # only:

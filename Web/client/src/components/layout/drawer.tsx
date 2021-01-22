@@ -54,8 +54,7 @@ const NavDrawer = (props: any) => ***REMOVED***
         className=***REMOVED***clsx(classes.appBar, ***REMOVED***
           [classes.appBarShift]: open,
        ***REMOVED***)***REMOVED***
-      >
-      </AppBar>
+      ></AppBar>
 
       ***REMOVED***user ? (
         <Drawer
@@ -91,8 +90,7 @@ const NavDrawer = (props: any) => ***REMOVED***
                 <ListItemIcon>
                   <Person />
                 </ListItemIcon>
-                <ListItemText primary=***REMOVED***"Account settings"***REMOVED*** /> 
-                
+                <ListItemText primary=***REMOVED***"Account settings"***REMOVED*** />
               </ListItem>
             </Link>
 

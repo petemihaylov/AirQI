@@ -18,17 +18,12 @@ export const fetchMarkers = () => (dispatch: any) => ***REMOVED***
 
 export const createMarker = (marker: IMarker) => (dispatch: any) => ***REMOVED***
   return MarkerService.createMarker(marker)
-    .then(
-      (response) => ***REMOVED***
-        dispatch(***REMOVED***
-          type: CREATE_MARKER,
-          payload: response.data,
-       ***REMOVED***);
-     ***REMOVED***,
-      (error) => ***REMOVED***
-        return Promise.reject();
-     ***REMOVED***
-    )
+    .then((response) => ***REMOVED***
+      dispatch(***REMOVED***
+        type: CREATE_MARKER,
+        payload: response.data,
+     ***REMOVED***);
+   ***REMOVED***)
     .catch(() => ***REMOVED***
       return Promise.reject();
    ***REMOVED***);

@@ -22,12 +22,12 @@ namespace ApiBase.Services
 
         public void DeleteSlaMarker(SlaMarker slaMarker)
         ***REMOVED***
-            throw new System.NotImplementedException();
+            _repository.DeleteAsync<SlaMarker>(slaMarker);
        ***REMOVED***
 
         public SlaMarker GetSlaMarkerById(int id)
         ***REMOVED***
-            throw new System.NotImplementedException();
+            return _repository.GetByIdAsync<SlaMarker>(id).Result;
        ***REMOVED***
 
         public IEnumerable<SlaMarker> GetSlaMarkers()

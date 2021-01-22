@@ -75,7 +75,13 @@ const Sla = (props: any) => ***REMOVED***
             <Row className="mb-5">
               <Col>
                 <Form.Label></Form.Label>
-                <Button variant="dark" size="sm" type="submit">
+                <Button
+                  variant="light"
+                  size="sm"
+                  type="submit"
+                  className="pr-5 pl-5"
+                  style=***REMOVED******REMOVED*** border: "1px solid #f7f7f7"***REMOVED******REMOVED***
+                >
                   Save
                 </Button>
               </Col>

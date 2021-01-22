@@ -1,26 +1,39 @@
-image: microsoft/dotnet:latest
+image: mcr.microsoft.com/dotnet/core/sdk:3.1
 
 stages:
   - build
+  - core
   - test
+  - unit
   - publish
   - deploy
-
-before_script:
-  - "cd Data/AirQi/"
-  - "dotnet restore"
 
 build:
   stage: build
 
   script:
-      - "dotnet build AirQi.sln"
-    
+      - "cd Data/AirQi"
+      - "dotnet build"
+core:
+ stage: core
+
+  script:
+    - "cd Core/ApiBase"
+    - "dotnet build"
+
 test:
   stage: test
 
   script:
-    - "dotnet test AirQi.sln"
+    - "cd Data/AirQi"
+    - "dotnet test"
+
+unit:
+  stage: unit
+
+  script:
+      - "cd Core"
+      - "dotnet test"
 
 publish:
   stage: publish

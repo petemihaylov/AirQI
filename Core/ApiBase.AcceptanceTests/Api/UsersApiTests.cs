@@ -6,23 +6,23 @@ using Tynamix.ObjectFiller;
 using Xunit;
 
 namespace ApiBase.AcceptanceTests.Api
-***REMOVED***
+{
     [Collection(nameof(ApiTestCollection))]
     public class UsersApiTests
-    ***REMOVED***
+    {
         private readonly ApiBaseBroker broker;
 
         public UsersApiTests(ApiBaseBroker apiBaseBroker)
-        ***REMOVED***
+        {
             this.broker = apiBaseBroker;
-       ***REMOVED***
+        }
 
         private UserDto CreateRandomUser() => new Filler<UserDto>().Create();
 
 
         [Fact]
         public async Task ShouldCreateUserAsync()
-        ***REMOVED***
+        {
             // Arrange
             var testUser = CreateRandomUser();
 
@@ -37,6 +37,6 @@ namespace ApiBase.AcceptanceTests.Api
 
             // Assert
             actualUser.Should().BeEquivalentTo(testUser);
-       ***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        }
+    }
+}

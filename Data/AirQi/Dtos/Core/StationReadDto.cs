@@ -2,25 +2,25 @@ using System;
 using System.Collections.Generic;
 
 namespace AirQi.Dtos.Core
-***REMOVED***
+{
     public class StationReadDto 
-    ***REMOVED***
-        public string Id ***REMOVED*** get; set;***REMOVED***
+    {
+        public string Id { get; set; }
 
-        public double  Aqi ***REMOVED*** get; set;***REMOVED***
+        public double  Aqi { get; set; }
         
-        public string Location ***REMOVED*** get; set;***REMOVED***
+        public string Location { get; set; }
 
-        public string City ***REMOVED*** get; set;***REMOVED***
+        public string City { get; set; }
 
-        public string Country ***REMOVED*** get; set;***REMOVED***
+        public string Country { get; set; }
 
-        public IEnumerable<MeasurementStationReadDto> Measurements ***REMOVED*** get; set;***REMOVED***
+        public IEnumerable<MeasurementStationReadDto> Measurements { get; set; }
 
-        public double[] Position ***REMOVED*** get; set;***REMOVED***
+        public double[] Position { get; set; }
 
-        public DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
+        public DateTime CreatedAt { get; set; }
 
-        public DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        public DateTime UpdatedAt { get; set; }
+    }
+}

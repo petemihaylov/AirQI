@@ -3,29 +3,29 @@ using ApiBase.Models;
 using System;
 
 namespace ApiBase.DTOs
-***REMOVED***
+{
     public class UserDto
-    ***REMOVED***
+    {
         
-        public int Id ***REMOVED*** get; set;***REMOVED***
+        public int Id { get; set; }
 
         [Required]
-        public string Username ***REMOVED*** get; set;***REMOVED***
+        public string Username { get; set; }
 
         [Required]
-        public string Password ***REMOVED*** get; set;***REMOVED***
+        public string Password { get; set; }
 
         [MaxLength(250)]
-        public string FirstName ***REMOVED*** get; set;***REMOVED***
+        public string FirstName { get; set; }
         
         [MaxLength(250)]
-        public string LastName ***REMOVED*** get; set;***REMOVED***
+        public string LastName { get; set; }
         
-        public string UserRole ***REMOVED*** get; set;***REMOVED***
+        public string UserRole { get; set; }
 
-        public bool IsActive ***REMOVED***get; set;***REMOVED***
+        public bool IsActive {get; set; }
 
-        public DateTime LastActive ***REMOVED***get; set;***REMOVED***
-   ***REMOVED***
+        public DateTime LastActive {get; set;}
+    }
     
-***REMOVED***
+}

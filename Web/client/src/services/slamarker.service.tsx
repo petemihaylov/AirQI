@@ -2,26 +2,26 @@ import axios from "axios";
 import SlaMarker from "../entities/SlaMarker";
 import authHeader from "./auth.header";
 
-const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
+const { REACT_APP_API_URL } = process.env;
 
-class SlaMarkerService ***REMOVED***
-  createSlaMarker = async (sla: SlaMarker) => ***REMOVED***
-    return axios.post(REACT_APP_API_URL + "/api/slamarkers/", sla, ***REMOVED***
+class SlaMarkerService {
+  createSlaMarker = async (sla: SlaMarker) => {
+    return axios.post(REACT_APP_API_URL + "/api/slamarkers/", sla, {
       headers: authHeader(),
-   ***REMOVED***);
- ***REMOVED***;
+    });
+  };
 
-  getSlaMarkers = async () => ***REMOVED***
-    return axios.get(REACT_APP_API_URL + "/api/slamarkers/", ***REMOVED***
+  getSlaMarkers = async () => {
+    return axios.get(REACT_APP_API_URL + "/api/slamarkers/", {
       headers: authHeader(),
-   ***REMOVED***);
- ***REMOVED***;
-  deleteSlaMarker = async (id: number) => ***REMOVED***
-    return axios.delete(REACT_APP_API_URL + "/api/slamarkers/" + id, ***REMOVED***
+    });
+  };
+  deleteSlaMarker = async (id: number) => {
+    return axios.delete(REACT_APP_API_URL + "/api/slamarkers/" + id, {
       headers: authHeader(),
-   ***REMOVED***);
- ***REMOVED***;
-***REMOVED***
+    });
+  };
+}
 
 
 

@@ -7,12 +7,12 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ApiBase.Migrations
-***REMOVED***
+{
     [DbContext(typeof(ApplicationContext))]
     partial class ApplicationContextModelSnapshot : ModelSnapshot
-    ***REMOVED***
+    {
         protected override void BuildModel(ModelBuilder modelBuilder)
-        ***REMOVED***
+        {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
@@ -20,7 +20,7 @@ namespace ApiBase.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ApiBase.Models.Marker", b =>
-                ***REMOVED***
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -42,10 +42,10 @@ namespace ApiBase.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Markers");
-               ***REMOVED***);
+                });
 
             modelBuilder.Entity("ApiBase.Models.Notification", b =>
-                ***REMOVED***
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -66,10 +66,10 @@ namespace ApiBase.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Notifications");
-               ***REMOVED***);
+                });
 
             modelBuilder.Entity("ApiBase.Models.SlaMarker", b =>
-                ***REMOVED***
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -91,10 +91,10 @@ namespace ApiBase.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("SlaMarkers");
-               ***REMOVED***);
+                });
 
             modelBuilder.Entity("ApiBase.Models.User", b =>
-                ***REMOVED***
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -131,8 +131,8 @@ namespace ApiBase.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-               ***REMOVED***);
+                });
 #pragma warning restore 612, 618
-       ***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        }
+    }
+}

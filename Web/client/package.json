@@ -1,11 +1,11 @@
-***REMOVED***
+{
     "name": "client",
     "version": "0.1.0",
-    "jest": ***REMOVED***
+    "jest": {
         "verbose": true
-   ***REMOVED***,
+    },
     "private": true,
-    "dependencies": ***REMOVED***
+    "dependencies": {
         "@fortawesome/fontawesome-svg-core": "^1.2.32",
         "@fortawesome/free-solid-svg-icons": "^5.15.1",
         "@fortawesome/react-fontawesome": "^0.1.12",
@@ -47,21 +47,21 @@
         "swr": "^0.4.0",
         "ts-jest": "^26.4.4",
         "typescript": "^4.0.3"
-   ***REMOVED***,
-    "scripts": ***REMOVED***
+    },
+    "scripts": {
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "jest",
         "test:watch": "jest --watch",
         "eject": "react-scripts eject"
-   ***REMOVED***,
-    "eslintConfig": ***REMOVED***
+    },
+    "eslintConfig": {
         "extends": [
             "react-app",
             "react-app/jest"
         ]
-   ***REMOVED***,
-    "browserslist": ***REMOVED***
+    },
+    "browserslist": {
         "production": [
             ">0.2%",
             "not dead",
@@ -72,13 +72,13 @@
             "last 1 firefox version",
             "last 1 safari version"
         ]
-   ***REMOVED***,
-    "devDependencies": ***REMOVED***
+    },
+    "devDependencies": {
         "@babel/preset-react": "^7.12.7",
         "@testing-library/react": "^11.2.2",
         "@types/react-redux": "^7.1.11",
         "@types/react-router-dom": "^5.1.6",
         "jest": "^26.6.0",
         "redux-devtools-extension": "^2.13.8"
-   ***REMOVED***
-***REMOVED***
+    }
+}

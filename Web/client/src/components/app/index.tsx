@@ -3,11 +3,11 @@ import React from "react";
 import Main from "../layout/main";
 import Navigation from "../layout/navbar";
 import Sidebar from "../layout/sidebar/index";
-import ***REMOVED*** BrowserRouter as Router***REMOVED*** from "react-router-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 
 /* Layout :: Components */
 
-function App() ***REMOVED***
+function App() {
   return (
     <Router>
       <Navigation />
@@ -15,6 +15,6 @@ function App() ***REMOVED***
       <Sidebar/>
     </Router>
   );
-***REMOVED***
+}
 
 export default App;

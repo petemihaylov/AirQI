@@ -1,25 +1,25 @@
-import ***REMOVED***
+import {
     ADD_PROFILE,
     UPDATE_PROFILE,
-***REMOVED*** from "../actions/types";
+} from "../actions/types";
 
-const initialState = ***REMOVED*** user: null***REMOVED***;
+const initialState = { user: null};
 
-export default function (state = initialState, action: any) ***REMOVED***
-  const ***REMOVED*** type, payload***REMOVED*** = action;
+export default function (state = initialState, action: any) {
+  const { type, payload } = action;
 
-  switch (type) ***REMOVED***
+  switch (type) {
     case ADD_PROFILE:
-      return ***REMOVED***
+      return {
         ...state,
         user: payload.user,
-     ***REMOVED***;
+      };
     case UPDATE_PROFILE:
-      return ***REMOVED***
+      return {
         ...state,
         user: payload.user,
-     ***REMOVED***;
+      };
     default:
       return state;
- ***REMOVED***
-***REMOVED***
+  }
+}

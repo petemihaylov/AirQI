@@ -5,31 +5,31 @@ $secondary-color: #333ba7;
 $button-color: #4947a3;
 $background-color: whitesmoke;
 
-body ***REMOVED***
+body {
   background: $background-color;
-***REMOVED***
+}
 
-body::-webkit-scrollbar ***REMOVED***
+body::-webkit-scrollbar {
   width: 0.35rem;
-***REMOVED***
+}
 
-body::-webkit-scrollbar-track ***REMOVED***
+body::-webkit-scrollbar-track {
   background: rgb(255,0,0);
 background: linear-gradient(0, rgba(255,0,0,1) 0%, rgba(255,132,31,1) 27%, rgba(0,212,255,1) 100%);
-***REMOVED***
-#root ***REMOVED***
+}
+#root {
   background-color: $background-color;
   min-height: 100vh;
-  .navbar ***REMOVED***
+  .navbar {
     background: $background-color;
     color: $text-color;
- ***REMOVED***
-***REMOVED***
-.card ***REMOVED***
+  }
+}
+.card {
   -webkit-box-shadow: 2px 5px 17px -1px #8d8d8da4;
   box-shadow: 2px 5px 17px -1px #8d8d8da1;
-***REMOVED***
-.btn-custom ***REMOVED***
+}
+.btn-custom {
   background: $button-color;
   color: #fff;
   display: inline-block;
@@ -45,12 +45,12 @@ background: linear-gradient(0, rgba(255,0,0,1) 0%, rgba(255,132,31,1) 27%, rgba(
   border-radius: 0.24rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
     border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-***REMOVED***
-.btn-custom:hover ***REMOVED***
+}
+.btn-custom:hover {
   color: #fff;
   background-color: $secondary-color;
-***REMOVED***
-footer ***REMOVED***
+}
+footer {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -58,36 +58,36 @@ footer ***REMOVED***
   width: 100vw;
   background-color: $background-color;
   opacity: 0.2;
-  .footer-copyright a ***REMOVED***
+  .footer-copyright a {
     text-decoration: none;
     color: $text-color;
- ***REMOVED***
-***REMOVED***
+  }
+}
 
 /* pulse animation */
-.blob ***REMOVED***
+.blob {
   border-radius: 50%;
 
 	box-shadow: 0 0 0 0 rgba(0, 0, 0, 1);
 	transform: scale(1);
 	animation: pulse 2s infinite;
-***REMOVED***
-@keyframes pulse ***REMOVED***
-	0% ***REMOVED***
+}
+@keyframes pulse {
+	0% {
     transform: scale(0.95);
     color: rgb(44, 44, 44);
     background-color: rgba(0, 0, 0, 0.3);
 		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
-	***REMOVED***
+	}
 
-	70% ***REMOVED***
+	70% {
     transform: scale(1);
     background-color: rgba(0, 0, 0, 0);
 		box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
-	***REMOVED***
+	}
 
-	100% ***REMOVED***
+	100% {
 		transform: scale(0.95);
 		box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-	***REMOVED***
-***REMOVED***
+	}
+}

@@ -1,28 +1,28 @@
-import ***REMOVED*** DELETE_NOTIFICATION, FETCH_NOTIFICATIONS, CREATE_NOTIFICATION***REMOVED*** from "../actions/types";
+import { DELETE_NOTIFICATION, FETCH_NOTIFICATIONS, CREATE_NOTIFICATION } from "../actions/types";
 
-const initialState = ***REMOVED*** items: []***REMOVED***;
+const initialState = { items: [] };
 
-export default function (state = initialState, action: any) ***REMOVED***
-  const ***REMOVED*** type, payload***REMOVED*** = action;
+export default function (state = initialState, action: any) {
+  const { type, payload } = action;
 
-  switch (type) ***REMOVED***
+  switch (type) {
     case FETCH_NOTIFICATIONS:
-      return ***REMOVED***
+      return {
         ...state,
         items: payload,
-     ***REMOVED***;
+      };
 
     case DELETE_NOTIFICATION:
-        return ***REMOVED***
+        return {
           ...state,
           items: state.items.filter((item, index) => index !== action.payload),
-       ***REMOVED***;
+        };
     case CREATE_NOTIFICATION:
-      return ***REMOVED***
+      return {
         ...state,
         items: [...state.items, payload],
-     ***REMOVED***;
+      };
     default:
       return state;
- ***REMOVED***
-***REMOVED***
+  }
+}

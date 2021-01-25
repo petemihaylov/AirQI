@@ -9,75 +9,75 @@ using System;
 using MongoDB.Bson;
 
 namespace AirQi.Controllers
-***REMOVED***
+{
     [Produces("application/json")]
     [Route("api/measurements/")]
     [ApiController]
     public class MeasurementsController : ControllerBase
-    ***REMOVED***
+    {
         private readonly IMongoDataRepository<Station> _repository;
         private readonly IMapper _mapper;
         public MeasurementsController(IMongoDataRepository<Station> repository, IMapper mapper)
-        ***REMOVED***
+        {
             this._repository = repository;
             this._mapper = mapper;
-       ***REMOVED***
+        }
 
         [HttpGet]
         public async Task<ActionResult> GetAllMeasurements()
-        ***REMOVED***
+        {
             var stationModelItems =  await this._repository.GetAllAsync();
             
-            if(stationModelItems != null)***REMOVED***
+            if(stationModelItems != null){
                 return Ok(_mapper.Map<IEnumerable<StationMeasurementReadDto>>(stationModelItems));
-           ***REMOVED***
+            }
 
             return NotFound();
-       ***REMOVED***
+        }
 
-        [HttpGet("***REMOVED***id***REMOVED***", Name="GetMeasurementsByStationId")]
+        [HttpGet("{id}", Name="GetMeasurementsByStationId")]
         public async Task<IActionResult> GetMeasurementsByStationId(string id)
-        ***REMOVED***
+        {
             var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
-            ***REMOVED***
+            {
                 return Ok(_mapper.Map<StationMeasurementReadDto>(station));    
-           ***REMOVED***
+            }
 
             return NotFound();
-       ***REMOVED***
+        }
 
 
-        [HttpPut("***REMOVED***id***REMOVED***")]
+        [HttpPut("{id}")]
         public async Task<IActionResult> UpdateMeasurements(string id, StationMeasurementCreateDto stationCreateDto)
-        ***REMOVED***
+        {
             var stationModel =this._mapper.Map<Station>(stationCreateDto);
             var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
-            ***REMOVED***
+            {
                 stationModel.UpdatedAt = DateTime.UtcNow;
                 stationModel.Id = new ObjectId(id);
                 this._repository.UpdateObject(id, stationModel);
                 return Ok(_mapper.Map<StationReadDto>(stationModel));    
-           ***REMOVED***
+            }
 
             return NotFound();
-       ***REMOVED***
+        }
 
-        [HttpDelete("***REMOVED***id***REMOVED***")]
+        [HttpDelete("{id}")]
         public  async Task<ActionResult> DeleteStation(string id)
-        ***REMOVED***
+        {
             var station = await this._repository.GetObjectByIdAsync(id);
 
             if(station != null)
-            ***REMOVED***                
+            {                
                 await this._repository.RemoveObjectAsync(station);
                 return Ok("Successfully deleted from collection!"); 
-           ***REMOVED*** 
+            } 
 
             return NotFound();
-       ***REMOVED***      
-   ***REMOVED***
-***REMOVED***
+        }      
+    }
+}

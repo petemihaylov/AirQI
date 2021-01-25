@@ -1,32 +1,32 @@
 // DeckGl
-import DeckGL, ***REMOVED*** ScatterplotLayer, TextLayer***REMOVED*** from "deck.gl";
+import DeckGL, { ScatterplotLayer, TextLayer } from "deck.gl";
 // ReactJS
 import useSwr from "swr";
-import React, ***REMOVED*** useEffect, useState***REMOVED*** from 'react';
+import React, { useEffect, useState } from 'react';
 // Markers
-import ReactMapGL, ***REMOVED*** Marker***REMOVED*** from 'react-map-gl';
-import ***REMOVED*** ReactComponent as Pin***REMOVED*** from "../assets/media/pin-icon.svg";
+import ReactMapGL, { Marker } from 'react-map-gl';
+import { ReactComponent as Pin } from "../assets/media/pin-icon.svg";
 // SignalR
-import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 
 
 // Data fetching method
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
 
-export default function Map() ***REMOVED***
+export default function Map() {
 
   // SignalR
   const [hubConnection, setHubConnection] = useState(null);
   const [zoom, setZoom] = useState(null);
     
   // Load and prepare data
-  const ***REMOVED*** data, error***REMOVED*** = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
+  const { data, error } = useSwr(process.env.REACT_APP_API_URL + "api/stations", fetcher);
   const stations = (data && !error) ? data : [];
   
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
       // Create Hub Connection.
-      const createHubConnection = async () => ***REMOVED***
+      const createHubConnection = async () => {
 
           const hubConnect = new HubConnectionBuilder()
           .withUrl(process.env.REACT_APP_API_URL + "livestations")
@@ -36,74 +36,74 @@ export default function Map() ***REMOVED***
           // Set the initial SignalR Hub Connection.
           setHubConnection(hubConnect);
           
-     ***REMOVED***
+      }
 
       createHubConnection();
- ***REMOVED***, []);
+  }, []);
   
   // Websocket
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
 
-      const startHubConnection = async () => ***REMOVED***
-          if (hubConnection) ***REMOVED***
+      const startHubConnection = async () => {
+          if (hubConnection) {
               await hubConnection
                   .start()
-                  .then((result) => ***REMOVED***
+                  .then((result) => {
                       console.log("SignalR Connected!");
 
-                      hubConnection.on("GetNewStationsAsync", (stations) => ***REMOVED***
+                      hubConnection.on("GetNewStationsAsync", (stations) => {
                           console.log("New Updated Data");
                           console.log(stations);
                           this.stations = stations;
-                     ***REMOVED***);
-                 ***REMOVED***)
+                      });
+                  })
                   .catch((e) => console.log("Connection failed: ", e));
-         ***REMOVED***
-     ***REMOVED***
+          }
+      }
        
       startHubConnection();
 
- ***REMOVED***, [hubConnection]);
+  }, [hubConnection]);
 
   // Viewport settings
-  const [viewport, setViewport] = useState(***REMOVED***
+  const [viewport, setViewport] = useState({
     latitude: 52.3676,
     longitude: 4.9041,
     width: "100vw",
     height: "100vh",
     zoom: 6,
     minZoom: 3,
- ***REMOVED***);
+  });
 
-  const changeColor = (aqi) => ***REMOVED***
-    if (aqi >= 0 && aqi <= 50) ***REMOVED***
+  const changeColor = (aqi) => {
+    if (aqi >= 0 && aqi <= 50) {
       return [162, 219, 96, 20];      
-   ***REMOVED***
+    }
     
-    if (aqi >= 51 && aqi <= 100) ***REMOVED***
+    if (aqi >= 51 && aqi <= 100) {
       return [250, 213, 80, 20];      
-   ***REMOVED***
+    }
 
-    if (aqi >= 101 && aqi <= 150) ***REMOVED***
+    if (aqi >= 101 && aqi <= 150) {
       return [253, 154, 87, 20];     
-   ***REMOVED***
+    }
 
-    if (aqi >= 151 && aqi <= 200) ***REMOVED***
+    if (aqi >= 151 && aqi <= 200) {
       return [254, 104, 109, 20];      
-   ***REMOVED***
+    }
 
     // Very Unhealthy
-    if (aqi >= 201 && aqi <= 300) ***REMOVED***
+    if (aqi >= 201 && aqi <= 300) {
       return [155, 89, 117, 20];      
-   ***REMOVED***
+    }
 
     // Hazardous
     return [152, 86, 114, 20];  
- ***REMOVED***
+  }
 
   // DeckGl Layers
   const scatterplotlayer = [
-    new ScatterplotLayer(***REMOVED***
+    new ScatterplotLayer({
         id: "scatterplot-layer",
         data: data,
         getRadius: zoom * 100,
@@ -111,44 +111,44 @@ export default function Map() ***REMOVED***
         radiusMinPixels: 20,
         getFillColor: d => changeColor(d.aqi),
         autoHighlight: true,
-     ***REMOVED***)
+      })
   ];
   
   const textLayer = [
-    new TextLayer(***REMOVED***
+    new TextLayer({
       id: 'text-layer',
       data,
       pickable: true,
       getPosition: d => d.position,
-      getText: d => `$***REMOVED***d.aqi***REMOVED***`,
+      getText: d => `${d.aqi}`,
       getSize: zoom + 8,
       getAngle: 0,
       getTextAnchor: 'middle',
       getAlignmentBaseline: 'center'
-   ***REMOVED***)
+    })
   ];
   
 
   return (
     <div>
       <ReactMapGL
-        ***REMOVED***...viewport***REMOVED***
-        mapboxApiAccessToken=***REMOVED***process.env.REACT_APP_MAPBOX_TOKEN***REMOVED***
+        {...viewport}
+        mapboxApiAccessToken={process.env.REACT_APP_MAPBOX_TOKEN}
         mapStyle="mapbox://styles/constantimi/ckisx2s921doh19sz2tyod230"
-        onViewportChange=***REMOVED***viewport => ***REMOVED***
+        onViewportChange={viewport => {
           setViewport(viewport);
-       ***REMOVED******REMOVED***
+        }}
       >
         
-        <DeckGL initialViewState=***REMOVED***viewport***REMOVED***
-          height=***REMOVED***viewport.height***REMOVED***
-          width=***REMOVED***viewport.width***REMOVED***
-          controller=***REMOVED***true***REMOVED***
-          layers=***REMOVED***[scatterplotlayer, textLayer]***REMOVED***
-          onViewStateChange=***REMOVED***(***REMOVED*** viewState***REMOVED***) => ***REMOVED***
+        <DeckGL initialViewState={viewport}
+          height={viewport.height}
+          width={viewport.width}
+          controller={true}
+          layers={[scatterplotlayer, textLayer]}
+          onViewStateChange={({ viewState }) => {
             console.log(viewState);
             setZoom(viewState.zoom);
-         ***REMOVED******REMOVED***
+          }}
         />
 
       </ReactMapGL>
@@ -156,4 +156,4 @@ export default function Map() ***REMOVED***
     </div>
   );
 
-***REMOVED***
+}

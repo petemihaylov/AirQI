@@ -69,14 +69,14 @@ By default, the Docker will expose port 8080, so change this within the Dockerfi
 
 ```sh
 cd Web/client
-docker build -t ***REMOVED***youruser***REMOVED***/airqi:$***REMOVED***package.json.version***REMOVED*** .
+docker build -t {youruser}/airqi:${package.json.version} .
 ```
-This will create the image and pull in the necessary dependencies. Be sure to swap out `$***REMOVED***package.json.version***REMOVED***` with the actual version of AirQi.
+This will create the image and pull in the necessary dependencies. Be sure to swap out `${package.json.version}` with the actual version of AirQi.
 
 Once done, run the Docker image and map the port to whatever you wish on your host. In this example, we simply map port 8000 of the host to port 8080 of the Docker (or whatever port was exposed in the Dockerfile):
 
 ```sh
-docker run -d -p 8000:8080 --restart="always" <youruser>/dillinger:$***REMOVED***package.json.version***REMOVED***
+docker run -d -p 8000:8080 --restart="always" <youruser>/dillinger:${package.json.version}
 ```
 
 Verify the deployment by navigating to your server address in your preferred browser.
@@ -89,109 +89,109 @@ Verify the deployment by navigating to your server address in your preferred bro
 /api/stations
 
 ```json
-***REMOVED***
+{
   "id": "60076a29bd691e98a8bee122",
   "aqi": 28.0,
   "location": "Southport",
   "city": "Southport",
   "country": "Australia",
   "measurements": [
-    ***REMOVED***
+    {
       "parameter": "h",
       "value": 77.1,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "no2",
       "value": 1.9,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "o3",
       "value": 5.3,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "p",
       "value": 1018.3,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "pm10",
       "value": 19.0,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "pm25",
       "value": 28.0,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "r",
       "value": 0.3,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "t",
       "value": 22.4,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "w",
       "value": 1.4,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "wd",
       "value": 169.0,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***,
-    ***REMOVED***
+    },
+    {
       "parameter": "wg",
       "value": 6.0,
       "unit": "µg/m³",
       "sourceName": "Air quality | Environment, land and water | Queensland Government"
-   ***REMOVED***
+    }
   ],
   "position": [ 153.402, -27.9612 ],
   "createdAt": "2021-01-19T23:24:25.687Z",
   "updatedAt": "2021-01-19T23:24:25.687Z"
-***REMOVED***
+}
 ```
 
 /api/measurements
 ```json
-***REMOVED***
+{
   "id": "60075c54bd691e98a8bedc0d",
   "aqi": 110.0,
   "measurements": [
-    ***REMOVED***
+    {
       "parameter": "o3",
       "value": 191.0,
       "lastUpdated": "19/03/2019 07:00:00",
       "unit": "µg/m³",
       "sourceName": "ChinaAQIData"
-   ***REMOVED***,
-    ***REMOVED******REMOVED***,
-    ***REMOVED******REMOVED***,
-    ***REMOVED******REMOVED***,
-    ***REMOVED******REMOVED***,
-    ***REMOVED******REMOVED***
+    },
+    {},
+    {},
+    {},
+    {},
+    {}
   ],
   "position": [ 117.1837, 39.2133 ],
   "createdAt": "2021-01-19T22:25:24.552Z",
   "updatedAt": "2021-01-19T22:25:24.553Z"
-***REMOVED***
+}
 ```
 
 ## Licenses

@@ -3,15 +3,15 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace AirQi.Models
-***REMOVED***
+{
     public interface IDocument
-    ***REMOVED***
+    {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        ObjectId Id ***REMOVED*** get; set;***REMOVED***
+        ObjectId Id { get; set; }
 
-        DateTime CreatedAt ***REMOVED*** get; set;***REMOVED***
+        DateTime CreatedAt { get; set; }
 
-        DateTime UpdatedAt ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        DateTime UpdatedAt { get; set; }
+    }
+}

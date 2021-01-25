@@ -1,6 +1,6 @@
-import ***REMOVED*** IMarker***REMOVED*** from "./interfaces/IMarker";
+import { IMarker } from "./interfaces/IMarker";
 
-export default class MarkerEntity implements IMarker ***REMOVED***
+export default class MarkerEntity implements IMarker {
   name: any;
 
   id: number | undefined;
@@ -21,10 +21,10 @@ export default class MarkerEntity implements IMarker ***REMOVED***
     _latitude?: number,
     _type?: string,
     _ico?: string
-  ) ***REMOVED***
+  ) {
     this.longitude = _longitude;
     this.latitude = _latitude;
     this.type = _type;
     this.ico = _ico;
- ***REMOVED***
-***REMOVED***
+  }
+}

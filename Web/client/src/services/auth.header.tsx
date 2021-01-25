@@ -1,10 +1,10 @@
-export default function authHeader() ***REMOVED*** 
+export default function authHeader() { 
   
-  const user = JSON.parse(localStorage.getItem("user") || '***REMOVED******REMOVED***');
+  const user = JSON.parse(localStorage.getItem("user") || '{}');
 
-  if (user && user.accessToken) ***REMOVED***
-    return ***REMOVED*** Authorization: "Bearer " + user.accessToken***REMOVED***;
- ***REMOVED*** else ***REMOVED***
-    return ***REMOVED******REMOVED***;
- ***REMOVED***
-***REMOVED***
+  if (user && user.accessToken) {
+    return { Authorization: "Bearer " + user.accessToken };
+  } else {
+    return {};
+  }
+}

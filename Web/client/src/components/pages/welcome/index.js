@@ -1,11 +1,11 @@
 import "./css/style.css";
 import React from "react";
-import ***REMOVED*** Container, Row, Col***REMOVED*** from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Fade from "react-reveal/Fade";
-import ***REMOVED*** ReactComponent as Svg***REMOVED*** from "../../../assets/media/svg/mind-map.svg";
-import ***REMOVED*** BubbleButton***REMOVED*** from "../../../assets/js/button/bubble";
+import { ReactComponent as Svg } from "../../../assets/media/svg/mind-map.svg";
+import { BubbleButton} from "../../../assets/js/button/bubble";
 
-export const WelcomePage = () => ***REMOVED***
+export const WelcomePage = () => {
   return (
     <Container className="welcome">
       <Row>
@@ -21,14 +21,14 @@ export const WelcomePage = () => ***REMOVED***
           </Fade>
           <div className="btn">
             <a href="/login">
-              <BubbleButton name=***REMOVED***"Find even more"***REMOVED*** />
+              <BubbleButton name={"Find even more"} />
             </a>
           </div>
         </Col>
         <Col>
-          <Svg style=***REMOVED******REMOVED*** width: "40vw", paddingLeft: "10vw"***REMOVED******REMOVED*** />
+          <Svg style={{ width: "40vw", paddingLeft: "10vw" }} />
         </Col>
       </Row>
     </Container>
   );
-***REMOVED***;
+};

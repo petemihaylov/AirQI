@@ -2,25 +2,25 @@ using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace ApiJwt.Models
-***REMOVED***
+{
     public class User : BaseEntity
-    ***REMOVED***
+    {
 
 
         [MaxLength(250)]
-        public string FirstName ***REMOVED*** get; set;***REMOVED***
+        public string FirstName { get; set; }
         
         [MaxLength(250)]
-        public string LastName ***REMOVED*** get; set;***REMOVED***
+        public string LastName { get; set; }
 
         [Required]
-        public RoleEnum UserRole ***REMOVED*** get; set;***REMOVED***
+        public RoleEnum UserRole { get; set; }
         
-        public bool IsActive ***REMOVED***get; set;***REMOVED***
+        public bool IsActive {get; set; }
         
-        public DateTime LastActive ***REMOVED***get; set;***REMOVED***
-   ***REMOVED***
+        public DateTime LastActive {get; set;}
+    }
 
-    public enum RoleEnum ***REMOVED*** Admin, Moderator, User***REMOVED*** 
+    public enum RoleEnum { Admin, Moderator, User } 
     
-***REMOVED***
+}

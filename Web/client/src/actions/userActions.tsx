@@ -3,51 +3,51 @@ import User from "../entities/User";
 
 import AuthService from "../services/auth.service";
 
-import ***REMOVED*** FETCH_USERS, DELETE_USER, SET_MESSAGE, CREATE_USER, UPDATE_USER***REMOVED*** from "./types";
+import { FETCH_USERS, DELETE_USER, SET_MESSAGE, CREATE_USER, UPDATE_USER } from "./types";
 
-export const fetchUsers = () => (dispatch: any) => ***REMOVED***
+export const fetchUsers = () => (dispatch: any) => {
   UserService.getModeratorBoard().then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: FETCH_USERS,
         payload: response.data,
-     ***REMOVED***);
-   ***REMOVED***,
-    (error) => ***REMOVED***
+      });
+    },
+    (error) => {
       console.log(error);
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};
 
 
-export const deleteUser = (id: number, index: number) => (dispatch: any) => ***REMOVED***
+export const deleteUser = (id: number, index: number) => (dispatch: any) => {
   UserService.deleteUser(id).then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: DELETE_USER,
         payload: index,
-     ***REMOVED***);
-   ***REMOVED***,
-    (error) => ***REMOVED***
+      });
+    },
+    (error) => {
       console.log(error);
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};
 
 
-export const updateUser = (user: User) => (dispatch: any) => ***REMOVED***
+export const updateUser = (user: User) => (dispatch: any) => {
   return UserService.updateUser(user).then(
-    (response) => ***REMOVED***
+    (response) => {
       console.log(response);
 
-      dispatch(***REMOVED***
+      dispatch({
         type: UPDATE_USER,
         payload: user,
-     ***REMOVED***);
+      });
       
       return Promise.resolve();
-   ***REMOVED***,
-    (error) => ***REMOVED***
+    },
+    (error) => {
       const message =
         (error.response &&
           error.response.data &&
@@ -55,28 +55,28 @@ export const updateUser = (user: User) => (dispatch: any) => ***REMOVED***
         error.message ||
         error.toString();
       return Promise.reject();
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};
 
-export const createUser = (user: User) => (dispatch: any) => ***REMOVED***
+export const createUser = (user: User) => (dispatch: any) => {
   return AuthService.register(user).then(
-    (response) => ***REMOVED***
+    (response) => {
       console.log(response);
 
-      dispatch(***REMOVED***
+      dispatch({
         type: CREATE_USER,
         payload: user,
-     ***REMOVED***);
+      });
 
-      dispatch(***REMOVED***
+      dispatch({
         type: SET_MESSAGE,
         payload: response.data.message,
-     ***REMOVED***);
+      });
 
       return Promise.resolve();
-   ***REMOVED***,
-    (error) => ***REMOVED***
+    },
+    (error) => {
       const message =
         (error.response &&
           error.response.data &&
@@ -84,13 +84,13 @@ export const createUser = (user: User) => (dispatch: any) => ***REMOVED***
         error.message ||
         error.toString();
 
-      dispatch(***REMOVED***
+      dispatch({
         type: SET_MESSAGE,
         payload: message,
-     ***REMOVED***);
+      });
 
       return Promise.reject();
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};
 

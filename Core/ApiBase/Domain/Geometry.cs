@@ -3,12 +3,12 @@ using System;
 using System.Collections.Generic;
 
 namespace ApiBase.Models
-***REMOVED***
+{
     public class Geometry
-    ***REMOVED***
-        public string Type ***REMOVED*** get; set;***REMOVED***
-        public List<List<List<float>>> Coordinates ***REMOVED*** get; set;***REMOVED***
+    {
+        public string Type { get; set; }
+        public List<List<List<float>>> Coordinates { get; set; }
 
-   ***REMOVED***
+    }
 
-***REMOVED***
+}

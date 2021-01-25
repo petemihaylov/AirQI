@@ -1,69 +1,69 @@
-import React, ***REMOVED*** useState***REMOVED*** from "react";
+import React, { useState } from "react";
 import Navbar from "react-bootstrap/esm/Navbar";
 import Nav from "react-bootstrap/esm/Nav";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** logout***REMOVED*** from "../../actions/auth";
-import ***REMOVED*** useEffect***REMOVED*** from "react";
+import { connect } from "react-redux";
+import { logout } from "../../actions/auth";
+import { useEffect } from "react";
 
-const Navigation = (props: any) => ***REMOVED***
-  const ***REMOVED*** user***REMOVED*** = props;
+const Navigation = (props: any) => {
+  const { user } = props;
   const [moderatorBoard, showModeratorBoard] = useState(false);
   const [adminBoard, showAdminBoard] = useState(false);
 
-  useEffect(() => ***REMOVED***    
+  useEffect(() => {    
     showModeratorBoard(user && user.userRole === "Moderator");
     showAdminBoard(user && user.userRole === "Admin");
- ***REMOVED***, []);
+  }, []);
 
-  function logOut() ***REMOVED***
+  function logOut() {
     props.dispatch(logout());
- ***REMOVED***
+  }
 
   return (
     <Navbar>
-      <Navbar.Brand href=***REMOVED***"/welcome"***REMOVED*** className="ml-4">
+      <Navbar.Brand href={"/welcome"} className="ml-4">
         <img src="./logo192.png" width="18px" height="18px" />
       </Navbar.Brand>
       <Nav className="mr-auto">
-        ***REMOVED***/*  Moderator :: Board */***REMOVED***
-        ***REMOVED***moderatorBoard && (
-          <Nav.Link href=***REMOVED***"/mod"***REMOVED*** className="nav-link ml-5">
+        {/*  Moderator :: Board */}
+        {moderatorBoard && (
+          <Nav.Link href={"/mod"} className="nav-link ml-5">
             Moderator
           </Nav.Link>
-        )***REMOVED***
+        )}
 
-        ***REMOVED***/* Administrator :: Board */***REMOVED***
-        ***REMOVED***adminBoard && (
-          <Nav.Link href=***REMOVED***"/admin"***REMOVED*** className="nav-link ml-5">
+        {/* Administrator :: Board */}
+        {adminBoard && (
+          <Nav.Link href={"/admin"} className="nav-link ml-5">
             Admin
           </Nav.Link>
-        )***REMOVED***
+        )}
       </Nav>
 
-      ***REMOVED***user ? (
+      {user ? (
         <Nav>
-          <Nav.Link href=***REMOVED***"/profile"***REMOVED*** className="nav-link">
-            ***REMOVED***user.username***REMOVED***
+          <Nav.Link href={"/profile"} className="nav-link">
+            {user.username}
           </Nav.Link>
-          <Nav.Link href="/logout" onClick=***REMOVED***logOut***REMOVED*** className="nav-link">
+          <Nav.Link href="/logout" onClick={logOut} className="nav-link">
             LogOut
           </Nav.Link>
         </Nav>
       ) : (
         <Nav>
-          <Nav.Link href=***REMOVED***"/login"***REMOVED***>Login</Nav.Link>
-          <Nav.Link href=***REMOVED***"/register"***REMOVED***>Sign Up</Nav.Link>
+          <Nav.Link href={"/login"}>Login</Nav.Link>
+          <Nav.Link href={"/register"}>Sign Up</Nav.Link>
         </Nav>
-      )***REMOVED***
+      )}
     </Navbar>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** user***REMOVED*** = state.auth;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { user } = state.auth;
+  return {
     user,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(Navigation);

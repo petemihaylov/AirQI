@@ -1,45 +1,45 @@
-* ***REMOVED***
+* {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: "Montserrat", sans-serif;
-***REMOVED***
+}
 
-button:focus ***REMOVED***
+button:focus {
   outline: none;
-***REMOVED***
+}
 
-body ***REMOVED***
+body {
   background: whitesmoke;
-***REMOVED***
+}
 
-body::-webkit-scrollbar ***REMOVED***
+body::-webkit-scrollbar {
   width: 0.35rem;
-***REMOVED***
+}
 
-body::-webkit-scrollbar-track ***REMOVED***
+body::-webkit-scrollbar-track {
   background: red;
   background: -webkit-gradient(linear, left top, left bottom, from(0), color-stop(0%, red), color-stop(27%, #ff841f), to(#00d4ff));
   background: linear-gradient(0, red 0%, #ff841f 27%, #00d4ff 100%);
-***REMOVED***
+}
 
-#root ***REMOVED***
+#root {
   background-color: whitesmoke;
   min-height: 100vh;
-***REMOVED***
+}
 
-#root .navbar ***REMOVED***
+#root .navbar {
   background: whitesmoke;
   color: #222525;
-***REMOVED***
+}
 
-.card ***REMOVED***
+.card {
   -webkit-box-shadow: 2px 5px 17px -1px #8d8d8da4;
   box-shadow: 2px 5px 17px -1px #8d8d8da1;
-***REMOVED***
+}
 
-.btn-custom ***REMOVED***
+.btn-custom {
   background: #4947a3;
   color: #fff;
   display: inline-block;
@@ -63,14 +63,14 @@ body::-webkit-scrollbar-track ***REMOVED***
  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
  border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
-***REMOVED***
+}
 
-.btn-custom:hover ***REMOVED***
+.btn-custom:hover {
   color: #fff;
   background-color: #333ba7;
-***REMOVED***
+}
 
-footer ***REMOVED***
+footer {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -78,15 +78,15 @@ footer ***REMOVED***
   width: 100vw;
   background-color: whitesmoke;
   opacity: 0.2;
-***REMOVED***
+}
 
-footer .footer-copyright a ***REMOVED***
+footer .footer-copyright a {
   text-decoration: none;
   color: #222525;
-***REMOVED***
+}
 
 /* pulse animation */
-.blob ***REMOVED***
+.blob {
   border-radius: 50%;
   -webkit-box-shadow: 0 0 0 0 black;
           box-shadow: 0 0 0 0 black;
@@ -94,53 +94,53 @@ footer .footer-copyright a ***REMOVED***
           transform: scale(1);
   -webkit-animation: pulse 2s infinite;
           animation: pulse 2s infinite;
-***REMOVED***
+}
 
-@-webkit-keyframes pulse ***REMOVED***
-  0% ***REMOVED***
+@-webkit-keyframes pulse {
+  0% {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
     color: #2c2c2c;
     background-color: rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
             box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
- ***REMOVED***
-  70% ***REMOVED***
+  }
+  70% {
     -webkit-transform: scale(1);
             transform: scale(1);
     background-color: rgba(0, 0, 0, 0);
     -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
             box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
- ***REMOVED***
-  100% ***REMOVED***
+  }
+  100% {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
     -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
             box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
- ***REMOVED***
-***REMOVED***
+  }
+}
 
-@keyframes pulse ***REMOVED***
-  0% ***REMOVED***
+@keyframes pulse {
+  0% {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
     color: #2c2c2c;
     background-color: rgba(0, 0, 0, 0.3);
     -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
             box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.3);
- ***REMOVED***
-  70% ***REMOVED***
+  }
+  70% {
     -webkit-transform: scale(1);
             transform: scale(1);
     background-color: rgba(0, 0, 0, 0);
     -webkit-box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
             box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
- ***REMOVED***
-  100% ***REMOVED***
+  }
+  100% {
     -webkit-transform: scale(0.95);
             transform: scale(0.95);
     -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
             box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
- ***REMOVED***
-***REMOVED***
+  }
+}
 /*# sourceMappingURL=style.css.map */

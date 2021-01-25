@@ -1,120 +1,120 @@
-import React, ***REMOVED*** useState, useEffect***REMOVED*** from "react";
-import ***REMOVED*** createUseStyles***REMOVED*** from "react-jss";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** Item***REMOVED*** from "./item";
+import React, { useState, useEffect } from "react";
+import { createUseStyles } from "react-jss";
+import { connect } from "react-redux";
+import { Item } from "./item";
 import "./global.css";
 
-import ***REMOVED***
+import {
   faTools,
   faBell,
   faMapMarked,
   faUserShield,
   faChevronRight,
-***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import ***REMOVED*** fetchNotifications***REMOVED*** from "../../../actions/notificationActions";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
+} from "@fortawesome/free-solid-svg-icons";
+import { fetchNotifications } from "../../../actions/notificationActions";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Sidebar = (props: any) => ***REMOVED***
+const Sidebar = (props: any) => {
   const classes = useStyles();
-  const ***REMOVED*** user***REMOVED*** = props;
+  const { user } = props;
   const [adminBoard, showAdminBoard] = useState(false);
 
   /* Gets notifications from DB */
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     props.dispatch(fetchNotifications());
- ***REMOVED***, []);
+  }, []);
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     showAdminBoard(user && user.userRole === "Admin");
- ***REMOVED***, []);
+  }, []);
 
   return (
     <div>
-      ***REMOVED***user ? (
-        <nav className=***REMOVED***classes.navbar***REMOVED***>
-          <ul className=***REMOVED***classes.navList***REMOVED***>
-            <li className=***REMOVED***classes.logo***REMOVED***>
-              <a href="#" className=***REMOVED***classes.navLink***REMOVED***>
-                <span className=***REMOVED***classes.brand***REMOVED***>AirQI</span>
-                <div className=***REMOVED***classes.fontIcon***REMOVED***>
-                  <FontAwesomeIcon icon=***REMOVED***faChevronRight***REMOVED*** />
+      {user ? (
+        <nav className={classes.navbar}>
+          <ul className={classes.navList}>
+            <li className={classes.logo}>
+              <a href="#" className={classes.navLink}>
+                <span className={classes.brand}>AirQI</span>
+                <div className={classes.fontIcon}>
+                  <FontAwesomeIcon icon={faChevronRight} />
                 </div>
               </a>
             </li>
 
             <Item
-              title=***REMOVED***"Profile"***REMOVED***
-              reference=***REMOVED***"/profile"***REMOVED***
-              fontIcon=***REMOVED***faTools***REMOVED***
-              classes=***REMOVED***classes***REMOVED***
-              animation=***REMOVED***""***REMOVED***
+              title={"Profile"}
+              reference={"/profile"}
+              fontIcon={faTools}
+              classes={classes}
+              animation={""}
             />
 
-            <li className=***REMOVED***classes.navItem***REMOVED***>
-              <a href=***REMOVED***"/notifications"***REMOVED*** className=***REMOVED***classes.navLink***REMOVED***>
-                ***REMOVED***props.items.length != 0 ? (
-                  <div className=***REMOVED***classes.fontIcon + " " + "blob"***REMOVED***>
-                    <FontAwesomeIcon className=***REMOVED***""***REMOVED*** icon=***REMOVED***faBell***REMOVED*** />
-                    <span className=***REMOVED***classes.notificationItem***REMOVED***>
-                      ***REMOVED***props.items.length***REMOVED***
+            <li className={classes.navItem}>
+              <a href={"/notifications"} className={classes.navLink}>
+                {props.items.length != 0 ? (
+                  <div className={classes.fontIcon + " " + "blob"}>
+                    <FontAwesomeIcon className={""} icon={faBell} />
+                    <span className={classes.notificationItem}>
+                      {props.items.length}
                     </span>
                   </div>
                 ) : (
-                  <div className=***REMOVED***classes.fontIcon***REMOVED***>
-                    <FontAwesomeIcon className=***REMOVED***""***REMOVED*** icon=***REMOVED***faBell***REMOVED*** />
+                  <div className={classes.fontIcon }>
+                    <FontAwesomeIcon className={""} icon={faBell} />
                   </div>
-                )***REMOVED***
-                <span className=***REMOVED***classes.linkText***REMOVED***>***REMOVED***"Notifications"***REMOVED***</span>
+                )}
+                <span className={classes.linkText}>{"Notifications"}</span>
               </a>
             </li>
 
             <Item
-              title=***REMOVED***"Dashboard"***REMOVED***
-              reference=***REMOVED***"/dashboard"***REMOVED***
-              fontIcon=***REMOVED***faMapMarked***REMOVED***
-              classes=***REMOVED***classes***REMOVED***
-              animation=***REMOVED***""***REMOVED***
+              title={"Dashboard"}
+              reference={"/dashboard"}
+              fontIcon={faMapMarked}
+              classes={classes}
+              animation={""}
             />
-            ***REMOVED***adminBoard && (
+            {adminBoard && (
               <Item
-                title=***REMOVED***"Admin"***REMOVED***
-                reference=***REMOVED***"/admin"***REMOVED***
-                fontIcon=***REMOVED***faUserShield***REMOVED***
-                classes=***REMOVED***classes***REMOVED***
-                animation=***REMOVED***""***REMOVED***
+                title={"Admin"}
+                reference={"/admin"}
+                fontIcon={faUserShield}
+                classes={classes}
+                animation={""}
               />
-            )***REMOVED***
-            <li className=***REMOVED***classes.navItem***REMOVED***></li>
+            )}
+            <li className={classes.navItem}></li>
           </ul>
         </nav>
       ) : (
         " "
-      )***REMOVED***
+      )}
     </div>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** user***REMOVED*** = state.auth;
-  const ***REMOVED*** items***REMOVED*** = state.notifications;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { user } = state.auth;
+  const { items } = state.notifications;
+  return {
     user,
     items,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(Sidebar);
 
 /* Custom sidebar style */
 
-const useStyles = createUseStyles(***REMOVED***
-  navbar: ***REMOVED***
+const useStyles = createUseStyles({
+  navbar: {
     position: "fixed",
     zIndex: 2,
     transition: "width 100ms ease",
     backgroundColor: "var(--bg-primary)",
- ***REMOVED***,
-  navList: ***REMOVED***
+  },
+  navList: {
     listStyle: "none",
     padding: 0,
     margin: 0,
@@ -122,16 +122,16 @@ const useStyles = createUseStyles(***REMOVED***
     flexDirection: "column",
     alignItems: "center",
     height: "100%",
- ***REMOVED***,
-  linkText: ***REMOVED***
+  },
+  linkText: {
     display: "none",
     width: "300px",
     marginLeft: "1rem",
- ***REMOVED***,
-  brand: ***REMOVED***
+  },
+  brand: {
     composes: ["$logoText", "$linkText"],
- ***REMOVED***,
-  fontIcon: ***REMOVED***
+  },
+  fontIcon: {
     fontSize: "1.1rem",
     width: "40px",
     height: "40px",
@@ -139,8 +139,8 @@ const useStyles = createUseStyles(***REMOVED***
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
- ***REMOVED***,
-  logo: ***REMOVED***
+  },
+  logo: {
     textTransform: "uppercase",
     marginBottom: "1rem",
     color: "var(--text-secondary)",
@@ -148,16 +148,16 @@ const useStyles = createUseStyles(***REMOVED***
     fontSize: "1.2rem",
     letterSpacing: "0.3ch",
     width: "100%",
-    "& $fontIcon": ***REMOVED***
+    "& $fontIcon": {
       transform: "rotate(0deg)",
-   ***REMOVED***,
- ***REMOVED***,
-  logoText: ***REMOVED***
+    },
+  },
+  logoText: {
     display: "inline",
     position: "absolute",
     left: "-400px",
- ***REMOVED***,
-  notificationItem: ***REMOVED***
+  },
+  notificationItem: {
     position: "absolute",
     borderRadius: "50%",
     display: "flex",
@@ -171,21 +171,21 @@ const useStyles = createUseStyles(***REMOVED***
     width: "20px",
     height: "20px",
     background: "#f46f",
- ***REMOVED***,
-  navItem: ***REMOVED***
+  },
+  navItem: {
     width: "100%",
-    "&:last-child": ***REMOVED***
+    "&:last-child": {
       marginTop: "auto",
-   ***REMOVED***,
- ***REMOVED***,
-  navLink: ***REMOVED***
+    },
+  },
+  navLink: {
     display: "flex",
     alignItems: "center",
     height: "5rem",
     color: "var(--text-primary)",
     textDecoration: "none",
     filter: "grayscale(100%) opacity(0.7)",
-    "& $fontIcon": ***REMOVED***
+    "& $fontIcon": {
       width: "40px",
       minWidth: "40px",
       margin: "1.2rem",
@@ -193,39 +193,39 @@ const useStyles = createUseStyles(***REMOVED***
       alignItems: "center",
       justifyContent: "center",
       transition: "200ms",
-   ***REMOVED***,
-    "&:hover": ***REMOVED***
+    },
+    "&:hover": {
       textDecoration: "none",
       filter: "grayscale(0%) opacity(1)",
       color: "var(--text-secondary)",
       background: "var(--bg-hover)",
-   ***REMOVED***,
- ***REMOVED***,
+    },
+  },
 
-  [`@media only screen and (min-width: 600px)`]: ***REMOVED***
-    navbar: ***REMOVED***
+  [`@media only screen and (min-width: 600px)`]: {
+    navbar: {
       top: 0,
       width: "5rem",
       height: "100vh",
-      "&:hover": ***REMOVED***
+      "&:hover": {
         width: "16rem",
-     ***REMOVED***,
-      "&:hover $fontIcon": ***REMOVED***
+      },
+      "&:hover $fontIcon": {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-     ***REMOVED***,
-      "&:hover $linkText": ***REMOVED***
+      },
+      "&:hover $linkText": {
         transition: "400ms ease",
         display: "inline",
-     ***REMOVED***,
-      "&:hover $logo $fontIcon": ***REMOVED***
+      },
+      "&:hover $logo $fontIcon": {
         transform: "rotate(-180deg)",
         marginLeft: "11rem",
-     ***REMOVED***,
-      "&:hover $logoText": ***REMOVED***
+      },
+      "&:hover $logoText": {
         left: "1.3rem",
-     ***REMOVED***,
-   ***REMOVED***,
- ***REMOVED***,
-***REMOVED***);
+      },
+    },
+  },
+});

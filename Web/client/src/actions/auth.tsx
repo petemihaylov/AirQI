@@ -1,4 +1,4 @@
-import ***REMOVED***
+import {
   REGISTER_SUCCESS,
   REGISTER_FAIL,
   LOGIN_SUCCESS,
@@ -6,28 +6,28 @@ import ***REMOVED***
   LOGOUT,
   SET_MESSAGE,
   UPDATE_AUTH
-***REMOVED*** from "./types";
+} from "./types";
 
 import AuthService from "../services/auth.service";
 import User from "../entities/User";
 import Auth from "../entities/Auth";
 
-export const register = (user: User) => (dispatch: any) => ***REMOVED***
+export const register = (user: User) => (dispatch: any) => {
   return AuthService.register(user).then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: REGISTER_SUCCESS,
         payload: user,
-     ***REMOVED***);
+      });
 
-      dispatch(***REMOVED***
+      dispatch({
         type: SET_MESSAGE,
         payload: response.data.message,
-     ***REMOVED***);
+      });
 
       return Promise.resolve();
-   ***REMOVED***,
-    (error) => ***REMOVED***
+    },
+    (error) => {
       const message =
         (error.response &&
           error.response.data &&
@@ -35,34 +35,34 @@ export const register = (user: User) => (dispatch: any) => ***REMOVED***
         error.message ||
         error.toString();
 
-      dispatch(***REMOVED***
+      dispatch({
         type: REGISTER_FAIL,
-     ***REMOVED***);
+      });
 
-      dispatch(***REMOVED***
+      dispatch({
         type: SET_MESSAGE,
         payload: message,
-     ***REMOVED***);
+      });
 
       return Promise.reject();
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};
 
 export const login = (username: string, password: string) => (
   dispatch: any
-) => ***REMOVED***
+) => {
   console.log(username); 
   return AuthService.login(username, password).then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: LOGIN_SUCCESS,
-        payload: ***REMOVED*** user: response***REMOVED***,
-     ***REMOVED***);
+        payload: { user: response },
+      });
 
       return Promise.resolve();
-   ***REMOVED***,
-    (error) => ***REMOVED***
+    },
+    (error) => {
       const message =
         (error.response &&
           error.response.data &&
@@ -70,31 +70,31 @@ export const login = (username: string, password: string) => (
         error.message ||
         error.toString();
 
-      dispatch(***REMOVED***
+      dispatch({
         type: LOGIN_FAIL,
-     ***REMOVED***);
+      });
 
-      dispatch(***REMOVED***
+      dispatch({
         type: SET_MESSAGE,
         payload: message,
-     ***REMOVED***);
+      });
 
       return Promise.reject();
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};
 
-export const logout = () => (dispatch: any) => ***REMOVED***
-  dispatch(***REMOVED***
+export const logout = () => (dispatch: any) => {
+  dispatch({
     type: LOGOUT,
- ***REMOVED***);
+  });
   AuthService.logout();
-***REMOVED***;
+};
 
-export const update = (user: Auth) => (dispatch: any) => ***REMOVED***
-  dispatch(***REMOVED***
+export const update = (user: Auth) => (dispatch: any) => {
+  dispatch({
     type: UPDATE_AUTH,
     payload: user,
- ***REMOVED***);
+  });
   localStorage.setItem("user", JSON.stringify(user));
-***REMOVED***
+}

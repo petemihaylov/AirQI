@@ -17,34 +17,34 @@ using System.Collections.Generic;
 using System.Linq;
 
 namespace Qi.Tests.xUnit.Controllers
-***REMOVED***
+{
     public class NotificationsControllerTests
-    ***REMOVED***
+    {
         private readonly IMapper _mapper;
         private readonly MockDataRepository _mock;
 
         public NotificationsControllerTests()
-        ***REMOVED***
+        {
             this._mock = new MockDataRepository();
 
             if (this._mapper == null)
-            ***REMOVED***
+            {
                 var mappingConfig = new MapperConfiguration(mc =>
-                ***REMOVED***
+                {
                     mc.AddProfile(new NotificationsProfile());
-               ***REMOVED***);
+                });
                 IMapper mapper = mappingConfig.CreateMapper();
                 _mapper = mapper;
-           ***REMOVED***
+            }
 
-       ***REMOVED***
+        }
 
         public IMapper Mapper => _mapper;
         public MockDataRepository Mock => _mock;
 
         [Fact]
         public void Test_GetAllNotifications_ReturnsOkResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
             var mockHub = new Mock<IHubContext<LiveNotificationHub>>();
@@ -55,11 +55,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_GetAllNotifications_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
 
@@ -74,11 +74,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_GetAllNotifications_ReturnsRightItems()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
             var mockHub = new Mock<IHubContext<LiveNotificationHub>>();
@@ -91,15 +91,15 @@ namespace Qi.Tests.xUnit.Controllers
             Assert.IsType<OkObjectResult>(okResult.Result);
             Assert.IsType<List<NotificationReadDto>>((okResult.Result as OkObjectResult).Value); 
             
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_GetNotificationById_ReturnsRightItem()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
 
-            double[] position = new double[] ***REMOVED*** 30.2, 50.3***REMOVED***;
+            double[] position = new double[] { 30.2, 50.3 };
             Notification notification = this.Mock.MockNotification(position);
             notification.Id = ObjectId.GenerateNewId();
             notification.CreatedAt = notification.UpdatedAt = DateTime.UtcNow;
@@ -116,11 +116,11 @@ namespace Qi.Tests.xUnit.Controllers
             // Assert
             Assert.IsType<NotificationReadDto>(okResult.Value);
             Assert.Equal(notification.Id.ToString(), (okResult.Value as NotificationReadDto).Id);           
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_GetNotificationById_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
             var mockHub = new Mock<IHubContext<LiveNotificationHub>>();
@@ -131,17 +131,17 @@ namespace Qi.Tests.xUnit.Controllers
         
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_CreateNotification_ReturnsOkResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
             var mockHub = new Mock<IHubContext<LiveNotificationHub>>();
             var controller = new NotificationsController(mockRepo.Object, mockHub.Object, Mapper);
             
-            double[] position = new double[] ***REMOVED*** 30.2, 50.3***REMOVED***;
+            double[] position = new double[] { 30.2, 50.3 };
             Notification notification = this.Mock.MockNotification(position);
             notification.Id = ObjectId.GenerateNewId();
             notification.CreatedAt = notification.UpdatedAt = DateTime.UtcNow;
@@ -151,11 +151,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_CreateNotification_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
             var mockHub = new Mock<IHubContext<LiveNotificationHub>>();
@@ -166,18 +166,18 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_CreateNotification_ReturnsRightItem()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
             var mockHub = new Mock<IHubContext<LiveNotificationHub>>();
             var controller = new NotificationsController(mockRepo.Object, mockHub.Object, Mapper);
             this.Mock.GenerateMockStations();
 
-            double[] position = new double[] ***REMOVED*** 30.2, 50.3***REMOVED***;
+            double[] position = new double[] { 30.2, 50.3 };
             Notification notification = this.Mock.MockNotification(position);
             notification.Id = ObjectId.GenerateNewId();
             notification.CreatedAt = notification.UpdatedAt = DateTime.UtcNow;
@@ -189,15 +189,15 @@ namespace Qi.Tests.xUnit.Controllers
             Assert.IsType<NotificationReadDto>(okResult.Value);
             Assert.True(notification.Position.SequenceEqual((okResult.Value as NotificationReadDto).Position));
             
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_UpdateNotification_ReturnsOkResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
 
-            double[] position = new double[] ***REMOVED*** 30.2, 50.3***REMOVED***;
+            double[] position = new double[] { 30.2, 50.3 };
             Notification notification = this.Mock.MockNotification(position);
             notification.Id = ObjectId.GenerateNewId();
             notification.CreatedAt = notification.UpdatedAt = DateTime.UtcNow;
@@ -214,11 +214,11 @@ namespace Qi.Tests.xUnit.Controllers
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result); 
             Assert.IsType<NotificationReadDto>((okResult.Result as OkObjectResult).Value);           
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_UpdateNotification_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
             var mockHub = new Mock<IHubContext<LiveNotificationHub>>();
@@ -229,15 +229,15 @@ namespace Qi.Tests.xUnit.Controllers
         
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_DeleteNotification_ReturnsOkResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
 
-            double[] position = new double[] ***REMOVED*** 30.2, 50.3***REMOVED***;
+            double[] position = new double[] { 30.2, 50.3 };
             Notification notification = this.Mock.MockNotification(position);
             notification.Id = ObjectId.GenerateNewId();
             notification.CreatedAt = notification.UpdatedAt = DateTime.UtcNow;
@@ -253,11 +253,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result);           
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_DeleteNotification_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Notification>>();
             var mockHub = new Mock<IHubContext<LiveNotificationHub>>();
@@ -268,7 +268,7 @@ namespace Qi.Tests.xUnit.Controllers
         
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
-   ***REMOVED***
-***REMOVED***
+    }
+}

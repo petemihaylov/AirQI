@@ -1,44 +1,44 @@
 import NotificationService from "../services/notification.service";
-import ***REMOVED*** CREATE_NOTIFICATION, DELETE_NOTIFICATION, FETCH_NOTIFICATIONS***REMOVED*** from "./types";
+import { CREATE_NOTIFICATION, DELETE_NOTIFICATION, FETCH_NOTIFICATIONS } from "./types";
 
-export const fetchNotifications = () => (dispatch: any) => ***REMOVED***
+export const fetchNotifications = () => (dispatch: any) => {
   NotificationService.getAllNotifications().then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: FETCH_NOTIFICATIONS,
         payload: response.data,
-     ***REMOVED***);
-   ***REMOVED***,
-    (error) => ***REMOVED***
+      });
+    },
+    (error) => {
       console.log(error);
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};
 
-export const createNotification = (notification: Notification) => (dispatch: any) => ***REMOVED***
+export const createNotification = (notification: Notification) => (dispatch: any) => {
   NotificationService.createNotification(notification).then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: CREATE_NOTIFICATION,
         payload:  response.data,
-     ***REMOVED***);
-   ***REMOVED***,
-    (error) => ***REMOVED***
+      });
+    },
+    (error) => {
       console.log(error);
-   ***REMOVED***
+    }
   );
-***REMOVED***
+}
 
-export const deleteNotification = (id: number, index: number) => (dispatch: any) => ***REMOVED***
+export const deleteNotification = (id: number, index: number) => (dispatch: any) => {
   NotificationService.deleteNotification(id).then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: DELETE_NOTIFICATION,
         payload: index,
-     ***REMOVED***);
-   ***REMOVED***,
-    (error) => ***REMOVED***
+      });
+    },
+    (error) => {
       console.log(error);
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};

@@ -1,7 +1,7 @@
 $dark-blue: #222;
 $action-color: #222;
 
-.button ***REMOVED***
+.button {
   -webkit-font-smoothing: antialiased;
   background-color: $dark-blue;
   border: none;
@@ -19,43 +19,43 @@ $action-color: #222;
   text-transform: uppercase;
   transition: all 0.1s ease-out;
 
-  &:hover ***REMOVED***
+  &:hover {
     background-color: $action-color;
     color: #fff;
- ***REMOVED***
+  }
 
-  &:active ***REMOVED***
+  &:active {
     transform: scale(0.95);
- ***REMOVED***
+  }
 
-  &--bubble ***REMOVED***
+  &--bubble {
     position: relative;
     z-index: 2;
     color: white;
     background: none;
 
-    &:hover ***REMOVED***
+    &:hover {
       background: none;
       text-decoration: none;
-   ***REMOVED***
+    }
 
-    &:hover + .button--bubble__effect-container .circle ***REMOVED***
+    &:hover + .button--bubble__effect-container .circle {
       background: darken($action-color, 15%);
-   ***REMOVED***
+    }
 
-    &:hover + .button--bubble__effect-container .button ***REMOVED***
+    &:hover + .button--bubble__effect-container .button {
       background: darken($action-color, 15%);
-   ***REMOVED***
+    }
 
-    &:active + .button--bubble__effect-container ***REMOVED***
+    &:active + .button--bubble__effect-container {
       transform: scale(0.95);
-   ***REMOVED***
+    }
 
-    &__container ***REMOVED***
+    &__container {
       position: relative;
       display: inline-block;
 
-      .effect-button ***REMOVED***
+      .effect-button {
         position: absolute;
         width: 50%;
         height: 25%;
@@ -65,12 +65,12 @@ $action-color: #222;
         transform: translateY(-50%);
         background: $dark-blue;
         transition: background 0.1s ease-out;
-     ***REMOVED***
-   ***REMOVED***
- ***REMOVED***
-***REMOVED***
+      }
+    }
+  }
+}
 
-.button--bubble__effect-container ***REMOVED***
+.button--bubble__effect-container {
   position: absolute;
   display: block;
   width: 200%;
@@ -82,7 +82,7 @@ $action-color: #222;
   transition: all 0.1s ease-out;
   pointer-events: none;
 
-  .circle ***REMOVED***
+  .circle {
     position: absolute;
     width: 25px;
     height: 25px;
@@ -90,41 +90,41 @@ $action-color: #222;
     background: $dark-blue;
     transition: background 0.1s ease-out;
 
-    &.top-left ***REMOVED***
+    &.top-left {
       top: 40%;
       left: 27%;
-   ***REMOVED***
+    }
 
-    &.bottom-right ***REMOVED***
+    &.bottom-right {
       bottom: 40%;
       right: 27%;
-   ***REMOVED***
- ***REMOVED***
-***REMOVED***
+    }
+  }
+}
 
-.goo ***REMOVED***
+.goo {
   position: absolute;
   visibility: hidden;
   width: 1px;
   height: 1px;
-***REMOVED***
+}
 
-.button--bubble__container ***REMOVED***
+.button--bubble__container {
   top: 50%;
   margin-top: -25px;
-***REMOVED***
+}
 
-@keyframes hue-rotate ***REMOVED***
-  from ***REMOVED***
+@keyframes hue-rotate {
+  from {
     -webkit-filter: hue-rotate(0);
     -moz-filter: hue-rotate(0);
     -ms-filter: hue-rotate(0);
     filter: hue-rotate(0);
- ***REMOVED***
-  to ***REMOVED***
+  }
+  to {
     -webkit-filter: hue-rotate(360deg);
     -moz-filter: hue-rotate(360deg);
     -ms-filter: hue-rotate(360deg);
     filter: hue-rotate(360deg);
- ***REMOVED***
-***REMOVED***
+  }
+}

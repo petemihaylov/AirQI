@@ -1,32 +1,32 @@
-import ***REMOVED*** FETCH_USERS, DELETE_USER, CREATE_USER, UPDATE_USER***REMOVED*** from "../actions/types";
+import { FETCH_USERS, DELETE_USER, CREATE_USER, UPDATE_USER } from "../actions/types";
 
-const initialState = ***REMOVED*** items: []***REMOVED***;
+const initialState = { items: [] };
 
-export default function (state = initialState, action: any) ***REMOVED***
-  const ***REMOVED*** type, payload***REMOVED*** = action;
+export default function (state = initialState, action: any) {
+  const { type, payload } = action;
 
-  switch (type) ***REMOVED***
+  switch (type) {
     case FETCH_USERS:
-      return ***REMOVED***
+      return {
         ...state,
         items: payload,
-     ***REMOVED***;
+      };
     case DELETE_USER:
-      return ***REMOVED***
+      return {
         ...state,
         items: state.items.filter((item, index) => index !== action.payload)
-     ***REMOVED***;
+      };
     case CREATE_USER:
-      return ***REMOVED***
+      return {
         ...state,
         items: [...state.items, payload]
-     ***REMOVED***;
+      };
     case UPDATE_USER:
-      return ***REMOVED***
+      return {
         ...state,
         user: payload.user,
-     ***REMOVED***;
+      };
     default:
       return state;
- ***REMOVED***
-***REMOVED***
+  }
+}

@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace AirQi.Repository.Core
-***REMOVED***
+{
     public interface IMongoDataRepository<TDocument> where TDocument : IDocument
-    ***REMOVED***
+    {
         IEnumerable<TDocument> GetAll();
 
         Task<IEnumerable<TDocument>> GetAllAsync();
@@ -39,5 +39,5 @@ namespace AirQi.Repository.Core
         TDocument FindOne(Expression<Func<TDocument, bool>> filterExpression);
 
         Task<TDocument> FindOneAsync(Expression<Func<TDocument, bool>> filterExpression);
-   ***REMOVED***
-***REMOVED***
+    }
+}

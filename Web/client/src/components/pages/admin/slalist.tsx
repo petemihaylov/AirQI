@@ -1,30 +1,30 @@
-import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** Card, Table***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** fetchSlaMarkers, deleteSlaMarker***REMOVED*** from "../../../actions/slamarker";
-import ***REMOVED*** faTrashAlt, faList***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { Card, Table } from "react-bootstrap";
+import { fetchSlaMarkers, deleteSlaMarker } from "../../../actions/slamarker";
+import { faTrashAlt, faList } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const SlaList = (props: any) => ***REMOVED***
+const SlaList = (props: any) => {
   const [content, handleContent] = useState([]);
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     handleContent(props.items);
- ***REMOVED***, [props.items]);
+  }, [props.items]);
 
   /* Fetches SlaMarkers from DB */
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     props.dispatch(fetchSlaMarkers());
- ***REMOVED***, []);
+  }, []);
 
-  const handleDelete = (id: any, index: number) => ***REMOVED***
+  const handleDelete = (id: any, index: number) => {
     props.dispatch(deleteSlaMarker(id, index));
- ***REMOVED***;
+  };
 
   return (
     <Card className="mb-5 mt-5 p-2">
       <Card.Title>
-        <FontAwesomeIcon icon=***REMOVED***faList***REMOVED*** className="mr-2 mt-2 ml-2" /> Slas
+        <FontAwesomeIcon icon={faList} className="mr-2 mt-2 ml-2" /> Slas
       </Card.Title>
       <Card.Body className="mt-0">
         <Table responsive hover variant="light">
@@ -37,37 +37,37 @@ const SlaList = (props: any) => ***REMOVED***
             </tr>
           </thead>
           <tbody>
-            ***REMOVED***content !== [] &&
+            {content !== [] &&
               content.map((item: any, index: number) => (
-                <tr key=***REMOVED***index***REMOVED***>
+                <tr key={index}>
                   <td></td>
-                  <td> ***REMOVED***item.name***REMOVED***</td>
-                  <td>***REMOVED***item.maxValue***REMOVED***</td>
+                  <td> {item.name}</td>
+                  <td>{item.maxValue}</td>
                   <td>
-                    ***REMOVED***" "***REMOVED***
+                    {" "}
                     <button
                       className="delete"
                       title="Delete"
                       data-toggle="tooltip"
-                      onClick=***REMOVED***handleDelete.bind(this, item.id, index)***REMOVED***
+                      onClick={handleDelete.bind(this, item.id, index)}
                     >
-                      <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
+                      <FontAwesomeIcon icon={faTrashAlt} />
                     </button>
                   </td>
                 </tr>
-              ))***REMOVED***
+              ))}
           </tbody>
         </Table>
       </Card.Body>
     </Card>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** items***REMOVED*** = state.slamarkers;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { items } = state.slamarkers;
+  return {
     items,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(SlaList);

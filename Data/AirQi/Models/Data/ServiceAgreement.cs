@@ -5,17 +5,17 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace AirQi.Models.Data
-***REMOVED***
+{
     [BsonCollection("service_agreement_results")]
     public class ServiceAgreement : Document
-    ***REMOVED***
+    {
         [BsonElement]
-        public double[] Position ***REMOVED*** get; set;***REMOVED***
+        public double[] Position { get; set; }
 
         [BsonElement]
-        public bool IsAqiAgreementValid ***REMOVED*** get; set;***REMOVED***
+        public bool IsAqiAgreementValid { get; set; }
 
         [BsonElement]
-        public DateTime StationLastUpdate ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        public DateTime StationLastUpdate { get; set; }
+    }
+}

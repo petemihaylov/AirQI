@@ -1,6 +1,6 @@
-import ***REMOVED*** ISlaMarker***REMOVED*** from "./interfaces/ISlaMarker";
+import { ISlaMarker } from "./interfaces/ISlaMarker";
 
-export default class SlaMarker implements ISlaMarker ***REMOVED***
+export default class SlaMarker implements ISlaMarker {
   id: number | undefined;
   name: string | undefined;
   count: number | undefined;
@@ -19,10 +19,10 @@ export default class SlaMarker implements ISlaMarker ***REMOVED***
     _count?: number,
     _maxValue?: number,
     _locationBoundaries?: string
-  ) ***REMOVED***
+  ) {
     this.name = _name;
     this.count = _count;
     this.maxValue = _maxValue;
     this.locationBoundaries = _locationBoundaries;
- ***REMOVED***
-***REMOVED***
+  }
+}

@@ -1,9 +1,9 @@
 namespace AirQi.Settings
-***REMOVED***
+{
     public class WorkerSettings : IWorkerSettings
-    ***REMOVED***
-        public string OcpApimSubscriptionKey ***REMOVED*** get; set;***REMOVED***
+    {
+        public string OcpApimSubscriptionKey { get; set; }
 
-        public string AqicnSubscriptionKey ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        public string AqicnSubscriptionKey { get; set; }
+    }
+}

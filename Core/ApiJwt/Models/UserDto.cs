@@ -2,16 +2,16 @@ using System.ComponentModel.DataAnnotations;
 using System;
 
 namespace ApiJwt.Models
-***REMOVED***
+{
     public class UserDto 
-    ***REMOVED***
-        public int Id ***REMOVED*** get; set;***REMOVED***
-        public string Username ***REMOVED*** get; set;***REMOVED***
-        public string FirstName ***REMOVED*** get; set;***REMOVED***
-        public string LastName ***REMOVED*** get; set;***REMOVED***
-        public string UserRole ***REMOVED*** get; set;***REMOVED***
-        public bool IsActive ***REMOVED***get; set;***REMOVED***
-        public DateTime LastActive ***REMOVED***get; set;***REMOVED***
-        public string accessToken ***REMOVED***get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+    {
+        public int Id { get; set; }
+        public string Username { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserRole { get; set; }
+        public bool IsActive {get; set; }
+        public DateTime LastActive {get; set;}
+        public string accessToken {get; set;}
+    }
+}

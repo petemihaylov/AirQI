@@ -16,18 +16,18 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ApiJwt.Controllers
-***REMOVED***
+{
     [ApiController]
     [Route("/")]
     public class AppController : ControllerBase
-    ***REMOVED***
-        public AppController()***REMOVED******REMOVED***
+    {
+        public AppController(){}
 
         [HttpGet]
         public string Index()
-        ***REMOVED***
+        {
             return "Welcome to Jwt API!";
-       ***REMOVED***
+        }
 
-   ***REMOVED***
-***REMOVED***
+    }
+}

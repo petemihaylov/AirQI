@@ -8,13 +8,13 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ApiBase.Migrations
-***REMOVED***
+{
     [DbContext(typeof(ApplicationContext))]
     [Migration("20210111095924_UpdateUsers")]
     partial class UpdateUsers
-    ***REMOVED***
+    {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
-        ***REMOVED***
+        {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "3.1.8")
@@ -22,7 +22,7 @@ namespace ApiBase.Migrations
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("ApiBase.Models.Marker", b =>
-                ***REMOVED***
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -37,10 +37,10 @@ namespace ApiBase.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Markers");
-               ***REMOVED***);
+                });
 
             modelBuilder.Entity("ApiBase.Models.Notification", b =>
-                ***REMOVED***
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -61,10 +61,10 @@ namespace ApiBase.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Notifications");
-               ***REMOVED***);
+                });
 
             modelBuilder.Entity("ApiBase.Models.User", b =>
-                ***REMOVED***
+                {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
@@ -101,8 +101,8 @@ namespace ApiBase.Migrations
                         .IsUnique();
 
                     b.ToTable("Users");
-               ***REMOVED***);
+                });
 #pragma warning restore 612, 618
-       ***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        }
+    }
+}

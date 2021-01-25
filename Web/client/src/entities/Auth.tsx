@@ -1,4 +1,4 @@
-export default class Auth ***REMOVED***
+export default class Auth {
   id: number | undefined;
   username: string | undefined;
   firstName: string | undefined;
@@ -31,7 +31,7 @@ export default class Auth ***REMOVED***
     _password?: string,
     _userRole?: string,
     _accessToken?: string
-  ) ***REMOVED***
+  ) {
     this.id = _id;
     this.username = _username;
     this.firstName = _firstName;
@@ -41,5 +41,5 @@ export default class Auth ***REMOVED***
     this.password = _password;
     this.userRole = _userRole;
     this.accessToken = _accessToken;
- ***REMOVED***
-***REMOVED***
+  }
+}

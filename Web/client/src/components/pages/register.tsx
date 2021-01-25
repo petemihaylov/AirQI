@@ -1,34 +1,34 @@
-import React, ***REMOVED*** useCallback, useState***REMOVED*** from "react";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
-import ***REMOVED*** Card***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** register as registerAction***REMOVED*** from "../../actions/auth";
+import React, { useCallback, useState } from "react";
+import { connect } from "react-redux";
+import { useForm } from "react-hook-form";
+import { Card } from "react-bootstrap";
+import { register as registerAction } from "../../actions/auth";
 
 import User from "../../entities/User";
 import Roles from "../../entities/Roles";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
-import ***REMOVED*** faExclamationTriangle***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import ***REMOVED*** BubbleButton***REMOVED*** from "../../assets/js/button/bubble";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
+import { BubbleButton } from "../../assets/js/button/bubble";
 
-interface RegistrationFormData ***REMOVED***
+interface RegistrationFormData {
   username: string;
   password: string;
   firstName: string;
   lastName: string;
   lastActive: Date;
   isActive: boolean;
-***REMOVED***
+}
 
-const Register = (props: any) => ***REMOVED***
-  const ***REMOVED*** message***REMOVED*** = props;
+const Register = (props: any) => {
+  const { message } = props;
   const [loading, handleChange] = useState(false);
-  const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm<RegistrationFormData>();
+  const { register, handleSubmit, errors } = useForm<RegistrationFormData>();
 
-  const onSubmit = useCallback((data: RegistrationFormData) => ***REMOVED***
+  const onSubmit = useCallback((data: RegistrationFormData) => {
     handleChange(false);
 
-    const ***REMOVED*** dispatch, history***REMOVED*** = props;
-    const ***REMOVED*** username, firstName, lastName, password, lastActive, isActive***REMOVED*** = data;
+    const { dispatch, history } = props;
+    const { username, firstName, lastName, password, lastActive, isActive } = data;
     
     let userObj = new User(
       username,
@@ -40,120 +40,120 @@ const Register = (props: any) => ***REMOVED***
       Roles.Moderator
     );
 
-    dispatch(registerAction(userObj)).then(() => ***REMOVED***
+    dispatch(registerAction(userObj)).then(() => {
       handleChange(true);
       history.push("/login");
       window.location.reload();
-   ***REMOVED***);
- ***REMOVED***, []);
+    });
+  }, []);
 
   return (
     <div
       className="container d-flex-column justify-content-center align-items-center pt-3"
-      style=***REMOVED******REMOVED*** width: "22vw"***REMOVED******REMOVED***
+      style={{ width: "22vw" }}
     >
-      <Card style=***REMOVED******REMOVED*** width: "22vw", height: "33rem"***REMOVED******REMOVED*** className="mt-5">
+      <Card style={{ width: "22vw", height: "33rem" }} className="mt-5">
         <Card.Title className="w-100 text-center pt-4 mb-5">
           Register
         </Card.Title>
         <Card.Body className="d-flex align-items-center h-100 mt-5">
-          <form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED***>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <label>Username: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
                 type="text"
                 className="form-control input-sm"
                 name="username"
               />
-              ***REMOVED***errors.username && (
+              {errors.username && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div className="form-group">
               <label>First name: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
                 type="text"
                 className="form-control input-sm"
                 name="firstName"
               />
-              ***REMOVED***errors.firstName && (
+              {errors.firstName && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div className="form-group">
               <label>Last name: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
                 type="text"
                 className="form-control input-sm"
                 name="lastName"
               />
-              ***REMOVED***errors.lastName && (
+              {errors.lastName && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div className="form-group">
               <label>Password: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true, minLength: 5***REMOVED***)***REMOVED***
+                ref={register({ required: true, minLength: 5 })}
                 type="password"
                 className="form-control input-sm"
                 name="password"
                 autoComplete="password"
               />
 
-              ***REMOVED***errors.password?.type === "minLength" && (
+              {errors.password?.type === "minLength" && (
                 <small className="text-danger">Your password is too weak</small>
-              )***REMOVED***
+              )}
 
-              ***REMOVED***errors.password?.type === "required" && (
+              {errors.password?.type === "required" && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div
               className="form-group"
-              style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***
+              style={{ marginTop: "35px", marginBottom: "100px" }}
             >
-              <BubbleButton name=***REMOVED***"SignUp"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
-                ***REMOVED***loading && (
+              <BubbleButton name={"SignUp"} disabled={loading}>
+                {loading && (
                   <span className="spinner-border spinner-border-sm"></span>
-                )***REMOVED***
-                ***REMOVED***!loading && <span>SignUp</span>***REMOVED***
+                )}
+                {!loading && <span>SignUp</span>}
               </BubbleButton>
             </div>
           </form>
         </Card.Body>
       </Card>
-      ***REMOVED***message && (
+      {message && (
         <div className="form-group mt-4 d-flex justify-content-center">
           <div className="alert alert-secondary" role="alert">
-            <FontAwesomeIcon icon=***REMOVED***faExclamationTriangle***REMOVED*** /> ***REMOVED***message***REMOVED***
+            <FontAwesomeIcon icon={faExclamationTriangle} /> {message}
           </div>
         </div>
-      )***REMOVED***
+      )}
     </div>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** message***REMOVED*** = state.message;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { message } = state.message;
+  return {
     message,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(Register);

@@ -1,21 +1,21 @@
-import ***REMOVED*** SET_MESSAGE, CLEAR_MESSAGE***REMOVED*** from "../actions/types";
+import { SET_MESSAGE, CLEAR_MESSAGE } from "../actions/types";
 
-const initialState = ***REMOVED***message: null***REMOVED***;
+const initialState = {message: null};
 
-export default function (state = initialState, action: any) ***REMOVED***
-  const ***REMOVED*** type, payload***REMOVED*** = action;
+export default function (state = initialState, action: any) {
+  const { type, payload } = action;
 
-  switch (type) ***REMOVED***
+  switch (type) {
     case SET_MESSAGE:
-      return ***REMOVED***
+      return {
         ...state,
         message: payload,
-     ***REMOVED***;
+      };
 
     case CLEAR_MESSAGE:
-      return ***REMOVED*** message: ""***REMOVED***;
+      return { message: "" };
 
     default:
       return state;
- ***REMOVED***
-***REMOVED***
+  }
+}

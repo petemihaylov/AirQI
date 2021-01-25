@@ -1,45 +1,45 @@
 import "react-map-gl-geocoder/dist/mapbox-gl-geocoder.css";
-import React, ***REMOVED*** useEffect, useState, useRef, useCallback***REMOVED*** from "react";
-import MapGL, ***REMOVED*** Marker, FullscreenControl, GeolocateControl***REMOVED*** from "react-map-gl";
+import React, { useEffect, useState, useRef, useCallback } from "react";
+import MapGL, { Marker, FullscreenControl, GeolocateControl } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
-import ***REMOVED*** FlyToInterpolator, NavigationControl, Popup***REMOVED*** from "react-map-gl";
-import ***REMOVED*** Container***REMOVED*** from "react-bootstrap";
+import { FlyToInterpolator, NavigationControl, Popup } from "react-map-gl";
+import { Container } from "react-bootstrap";
 import "mapbox-gl/dist/mapbox-gl.css";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** createNotification***REMOVED*** from "../../actions/notificationActions";
-import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
+import { connect } from "react-redux";
+import { createNotification } from "../../actions/notificationActions";
+import { HubConnectionBuilder } from "@microsoft/signalr";
 import authHeader from "../../services/auth.header";
 import MarkerEntity from "../../entities/Marker";
 import Notification from "../../entities/Notification";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
-import DeckGL, ***REMOVED*** ScatterplotLayer, TextLayer***REMOVED*** from "deck.gl";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import DeckGL, { ScatterplotLayer, TextLayer } from "deck.gl";
 import useSwr from "swr";
 
-import ***REMOVED***
+import {
   faMapPin,
   faFire,
   faSmog,
   faTrashAlt,
   faCloudRain,
-***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons";
 
-import ***REMOVED***
+import {
   fetchMarkers,
   createMarker,
   deleteMarker,
-***REMOVED*** from "../../actions/markerActions";
-import ***REMOVED*** Legend***REMOVED*** from "../../assets/js/legend/legend";
+} from "../../actions/markerActions";
+import { Legend } from "../../assets/js/legend/legend";
 
 
 // Data fetching method
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
-const ***REMOVED*** REACT_APP_TOKEN, REACT_APP_API_URL, REACT_APP_DATA_URL***REMOVED*** = process.env;
+const { REACT_APP_TOKEN, REACT_APP_API_URL, REACT_APP_DATA_URL } = process.env;
 
 
-const Map = (props) => ***REMOVED***
+const Map = (props) => {
   // Viewport settings
-  const [viewport, setViewport] = useState(***REMOVED***
+  const [viewport, setViewport] = useState({
     latitude: 52.3676,
     longitude: 4.9041,
     width: "100vw",
@@ -48,7 +48,7 @@ const Map = (props) => ***REMOVED***
     bearing: 0.7,
     zoom: 6,
     minZoom: 3
- ***REMOVED***);
+  });
 
   const mapRef = useRef();
 
@@ -59,12 +59,12 @@ const Map = (props) => ***REMOVED***
    const [zoom, setZoom] = useState(null);
      
    /* Load and prepare data */
-   const ***REMOVED*** data, error***REMOVED*** = useSwr(REACT_APP_DATA_URL + "/api/stations", fetcher);
+   const { data, error } = useSwr(REACT_APP_DATA_URL + "/api/stations", fetcher);
    const stations = (data && !error) ? data : [];
    
-   useEffect(() => ***REMOVED***
+   useEffect(() => {
        /* Create Hub Connection. */
-       const createHubConnection = async () => ***REMOVED***
+       const createHubConnection = async () => {
  
            const hubConnect = new HubConnectionBuilder()
            .withUrl(REACT_APP_DATA_URL + "/livestations")
@@ -74,116 +74,116 @@ const Map = (props) => ***REMOVED***
            /* Set the initial SignalR Hub Connection. */
            setHubConnection(hubConnect);
            
-      ***REMOVED***
+       }
  
        createHubConnection();
-  ***REMOVED***, []);
+   }, []);
    
    /* Websocket */
-   useEffect(() => ***REMOVED***
+   useEffect(() => {
  
       
-           if (hubConnection) ***REMOVED***
+           if (hubConnection) {
                 hubConnection
                    .start()
-                   .then((result) => ***REMOVED***
+                   .then((result) => {
                        console.log("SignalR Connected!");
  
-                       hubConnection.on("GetNewStationsAsync", (stations) => ***REMOVED***
+                       hubConnection.on("GetNewStationsAsync", (stations) => {
                            console.log("New Updated Data");
                            console.log(stations);
                            this.stations = stations;
-                      ***REMOVED***);
-                  ***REMOVED***)
+                       });
+                   })
                    .catch((e) => console.log("Connection failed: ", e));
-          ***REMOVED***
+           }
        
         
  
-  ***REMOVED***, [hubConnection]);
+   }, [hubConnection]);
 
   /* Custom settings for ViewportChange */
   const handleGeocoderViewportChange = useCallback(
-    (newViewport) => ***REMOVED***
-      const geocoderDefaultOverrides = ***REMOVED***
+    (newViewport) => {
+      const geocoderDefaultOverrides = {
         transitionDuration: 2000,
         pitch: 80,
         bearing: 0.7,
         transitionInterpolator: new FlyToInterpolator(),
-     ***REMOVED***;
+      };
 
-      return handleViewportChange(***REMOVED***...newViewport, ...geocoderDefaultOverrides***REMOVED***);
-   ***REMOVED***,
+      return handleViewportChange({...newViewport, ...geocoderDefaultOverrides});
+    },
     [handleViewportChange]
   );
 
   /* Live markers from the WebSocket */
   const [connection, setConnection] = useState(null);
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
 
     /* Gets markers from DB */
     props.dispatch(fetchMarkers());
 
     /* Gets WebSocket marker */
     const newConnection = new HubConnectionBuilder()
-      .withUrl(REACT_APP_API_URL + "/livemarker", ***REMOVED***
+      .withUrl(REACT_APP_API_URL + "/livemarker", {
         headers: authHeader(),
-     ***REMOVED***)
+      })
       .withAutomaticReconnect()
       .build();
 
     setConnection(newConnection);
- ***REMOVED***, []);
+  }, []);
 
   /* WebSocket connection */
-  useEffect(() => ***REMOVED***
-    if (connection) ***REMOVED***
+  useEffect(() => {
+    if (connection) {
       connection
         .start()
-        .then((result) => ***REMOVED***
-          connection.on("GetNewMarker", (Marker) => ***REMOVED***
+        .then((result) => {
+          connection.on("GetNewMarker", (Marker) => {
             setMarkers((markers) => [...markers, Marker]);
-         ***REMOVED***);
-       ***REMOVED***)
+          });
+        })
         .catch((e) => console.log("Connection failed: ", e));
-   ***REMOVED***
- ***REMOVED***, [connection]);
+    }
+  }, [connection]);
 
 
   /* Markers */
   const [markers, setMarkers] = useState([]);
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     setMarkers(props.items);
- ***REMOVED***, [props.items]);
+  }, [props.items]);
 
 
-  const handleController = () => ***REMOVED***
+  const handleController = () => {
     setController(true);
     setShowPopup(false);
     enableAddMarker(false);
- ***REMOVED***;
+  };
 
-  const handleClick = (***REMOVED*** lngLat: [longitude, latitude]***REMOVED***) => ***REMOVED***
-    if (controllerSelect) ***REMOVED***
-      if (addMarker) ***REMOVED***
+  const handleClick = ({ lngLat: [longitude, latitude] }) => {
+    if (controllerSelect) {
+      if (addMarker) {
         setShowPopup(true);
-        setPopups([***REMOVED*** longitude, latitude***REMOVED***]);
-     ***REMOVED***
+        setPopups([{ longitude, latitude }]);
+      }
       enableAddMarker(true);
-   ***REMOVED***
- ***REMOVED***;
+    }
+  };
 
-  const handleDelete = (obj) => () => ***REMOVED***
-    if (eraseMarker) ***REMOVED***
+  const handleDelete = (obj) => () => {
+    if (eraseMarker) {
       props.dispatch(deleteMarker(obj.marker.id, obj.index));
       enableEraseMarker(false);
-   ***REMOVED***
- ***REMOVED***;
+    }
+  };
 
-  const handleCreate = (longitude, latitude, ico, message) => ***REMOVED***
+  const handleCreate = (longitude, latitude, ico, message) => {
     const m = new MarkerEntity(longitude, latitude, "marker", JSON.stringify(ico));
-    props.dispatch(createMarker(m)).then(() =>***REMOVED***
+    props.dispatch(createMarker(m)).then(() =>{
       console.log("sends a message");
       const n = new Notification(
         message.title,
@@ -192,12 +192,12 @@ const Map = (props) => ***REMOVED***
         Date.now
       );
       props.dispatch(createNotification(n));
-   ***REMOVED***);
+    });
 
     setShowPopup(false);
     enableAddMarker(false);
     setController(false);
- ***REMOVED***;
+  };
 
 
   /* Popup */
@@ -207,169 +207,169 @@ const Map = (props) => ***REMOVED***
   const [addMarker, enableAddMarker] = useState(false);
   const [eraseMarker, enableEraseMarker] = useState(false);
 
-  const _renderMarkerTools = () => ***REMOVED***
+  const _renderMarkerTools = () => {
     return (
       <div
         className="mapboxgl-ctrl-top-right"
-        style=***REMOVED******REMOVED*** position: "absolute", top: 140***REMOVED******REMOVED***
+        style={{ position: "absolute", top: 140 }}
       >
         <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
-          <button className="" title="Add marker" onClick=***REMOVED***handleController***REMOVED***>
-            <FontAwesomeIcon icon=***REMOVED***faMapPin***REMOVED*** />
+          <button className="" title="Add marker" onClick={handleController}>
+            <FontAwesomeIcon icon={faMapPin} />
           </button>
         </div>
         <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
           <button
             className=""
             title="Delete marker"
-            onClick=***REMOVED***() => ***REMOVED***
+            onClick={() => {
               enableEraseMarker(true);
               setShowPopup(false);
               setController(false);
-           ***REMOVED******REMOVED***
+            }}
           >
-            <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
+            <FontAwesomeIcon icon={faTrashAlt} />
           </button>
         </div>
       </div>
     );
- ***REMOVED***;
+  };
 
-  const _renderMarkers = () => ***REMOVED***
+  const _renderMarkers = () => {
     
     return markers.map((m, i) => (
-      <Marker ***REMOVED***...m***REMOVED*** key=***REMOVED***i***REMOVED*** offsetLeft=***REMOVED***-20***REMOVED*** offsetTop=***REMOVED***-30***REMOVED***>
+      <Marker {...m} key={i} offsetLeft={-20} offsetTop={-30}>
         <FontAwesomeIcon
-          icon=***REMOVED***JSON.parse(m.ico)***REMOVED***
-          onClick=***REMOVED***handleDelete(***REMOVED*** marker: m, index: i***REMOVED***)***REMOVED***
-          style=***REMOVED******REMOVED*** fontSize: "20px", color: "#3a3a3a", cursor: "pointer"***REMOVED******REMOVED***
-        />***REMOVED***" "***REMOVED***
+          icon={JSON.parse(m.ico)}
+          onClick={handleDelete({ marker: m, index: i })}
+          style={{ fontSize: "20px", color: "#3a3a3a", cursor: "pointer" }}
+        />{" "}
       </Marker>
     ));
- ***REMOVED***;
+  };
 
-  const _renderMapTools = () => ***REMOVED***
+  const _renderMapTools = () => {
     return (
       <div>
-        <div style=***REMOVED******REMOVED*** position: "absolute", right: 10, top: 10***REMOVED******REMOVED***>
+        <div style={{ position: "absolute", right: 10, top: 10 }}>
           <NavigationControl />
         </div>
-        <div style=***REMOVED******REMOVED*** position: "absolute", right: 10, top: 110***REMOVED******REMOVED***>
+        <div style={{ position: "absolute", right: 10, top: 110 }}>
           <FullscreenControl />
         </div>
 
         <Geocoder
-          mapRef=***REMOVED***mapRef***REMOVED***
-          onViewportChange=***REMOVED***handleGeocoderViewportChange***REMOVED***
-          mapboxApiAccessToken=***REMOVED***REACT_APP_TOKEN***REMOVED***
+          mapRef={mapRef}
+          onViewportChange={handleGeocoderViewportChange}
+          mapboxApiAccessToken={REACT_APP_TOKEN}
           position="top-left"
         />
         <GeolocateControl
-          style=***REMOVED******REMOVED***
+          style={{
             position: "absolute",
             right: 10,
             top: "29vh"
-         ***REMOVED******REMOVED***
-          positionOptions=***REMOVED******REMOVED*** enableHighAccuracy: true***REMOVED******REMOVED***
-          trackUserLocation=***REMOVED***true***REMOVED***
+          }}
+          positionOptions={{ enableHighAccuracy: true }}
+          trackUserLocation={true}
           auto
         />
       </div>
     );
- ***REMOVED***;
+  };
 
 
-  const _renderPopup = () => ***REMOVED***
+  const _renderPopup = () => {
     return (
       showPopup &&
       popups.map((p, i) => (
         <Popup
-          latitude=***REMOVED***p.latitude***REMOVED***
-          longitude=***REMOVED***p.longitude***REMOVED***
-          closeButton=***REMOVED***false***REMOVED***
-          closeOnClick=***REMOVED***true***REMOVED***
+          latitude={p.latitude}
+          longitude={p.longitude}
+          closeButton={false}
+          closeOnClick={true}
           anchor="bottom"
-          key=***REMOVED***i***REMOVED***
+          key={i}
         >
           <div className="p-2 ">
             <small>Pin and notify the others</small>
             <div className="d-flex justify-content-around mt-2 mb3">
               <button
                 className="btn btn-info btn-sm mt-2 mr-2"
-                onClick=***REMOVED***() =>
-                  handleCreate(p.longitude, p.latitude, faSmog, ***REMOVED***
+                onClick={() =>
+                  handleCreate(p.longitude, p.latitude, faSmog, {
                     title: "Smog",
                     description:
                       "Danger for people with emphysema, bronchitis, and asthma.",
-                 ***REMOVED***)
-               ***REMOVED***
+                  })
+                }
               >
-                <FontAwesomeIcon icon=***REMOVED***faSmog***REMOVED*** />
+                <FontAwesomeIcon icon={faSmog} />
               </button>
 
               <button
                 className="btn btn-dark btn-sm mt-2 mr-2"
-                onClick=***REMOVED***() =>
-                  handleCreate(p.longitude, p.latitude, faCloudRain, ***REMOVED***
+                onClick={() =>
+                  handleCreate(p.longitude, p.latitude, faCloudRain, {
                     title: "Heavy rainfall",
                     description:
                       "There is a risk of flooding and damaged infrastructure.",
-                 ***REMOVED***)
-               ***REMOVED***
+                  })
+                }
               >
-                <FontAwesomeIcon icon=***REMOVED***faCloudRain***REMOVED*** />
+                <FontAwesomeIcon icon={faCloudRain} />
               </button>
               <button
                 className="btn btn-danger btn-sm mt-2"
-                onClick=***REMOVED***() =>
-                  handleCreate(p.longitude, p.latitude, faFire, ***REMOVED***
+                onClick={() =>
+                  handleCreate(p.longitude, p.latitude, faFire, {
                     title: "Danger of Fire",
                     description:
                       "It might have toxic gases, thick black smoke, and lack of oxygen.",
-                 ***REMOVED***)
-               ***REMOVED***
+                  })
+                }
               >
-                <FontAwesomeIcon icon=***REMOVED***faFire***REMOVED*** />
+                <FontAwesomeIcon icon={faFire} />
               </button>
             </div>
           </div>
         </Popup>
       ))
     );
- ***REMOVED***;
+  };
 
-  const _changeColor = (aqi) => ***REMOVED***
+  const _changeColor = (aqi) => {
       
-    if (aqi >= 0 && aqi <= 25) ***REMOVED***
+    if (aqi >= 0 && aqi <= 25) {
       return [69, 173, 218, 40];
-   ***REMOVED***
+    }
 
-    if (aqi >= 26 && aqi <= 50) ***REMOVED***
+    if (aqi >= 26 && aqi <= 50) {
       return [162, 219, 96, 40];      
-   ***REMOVED***
+    }
     
-    if (aqi >= 51 && aqi <= 100) ***REMOVED***
+    if (aqi >= 51 && aqi <= 100) {
       return [250, 213, 80, 40];      
-   ***REMOVED***
+    }
 
-    if (aqi >= 101 && aqi <= 150) ***REMOVED***
+    if (aqi >= 101 && aqi <= 150) {
       return [253, 154, 87, 40];     
-   ***REMOVED***
+    }
 
-    if (aqi >= 151 && aqi <= 200) ***REMOVED***
+    if (aqi >= 151 && aqi <= 200) {
       return [254, 104, 109, 40];      
-   ***REMOVED***
+    }
 
-    if (aqi >= 201 && aqi <= 300) ***REMOVED***
+    if (aqi >= 201 && aqi <= 300) {
       return [155, 89, 117, 40];      
-   ***REMOVED***
+    }
 
     return [152, 86, 114, 40];  
- ***REMOVED***
+  }
 
   // DeckGl Layers
   const scatterplotlayer = [
-    new ScatterplotLayer(***REMOVED***
+    new ScatterplotLayer({
         id: "scatterplot-layer",
         data: stations,
         getRadius: zoom * 100,
@@ -377,11 +377,11 @@ const Map = (props) => ***REMOVED***
         radiusMinPixels: 20,
         getFillColor: d => _changeColor(d.aqi),
         autoHighlight: true,
-     ***REMOVED***)
+      })
   ];
   
   const textLayer = [
-    new TextLayer(***REMOVED***
+    new TextLayer({
       id: 'text-layer',
       data,
       pickable: true,
@@ -391,59 +391,59 @@ const Map = (props) => ***REMOVED***
       getAngle: 0,
       getTextAnchor: 'middle',
       getAlignmentBaseline: 'center'
-   ***REMOVED***)
+    })
   ];
 
   return (
     <Container
       fluid
-      style=***REMOVED******REMOVED***
+      style={{
         height: "85vh",
         width: "90vw",
         marginLeft: "7.5vw",
         marginTop: "3vh",
-     ***REMOVED******REMOVED***
+      }}
     >
       <MapGL
-        ref=***REMOVED***mapRef***REMOVED***
-        ***REMOVED***...viewport***REMOVED***
+        ref={mapRef}
+        {...viewport}
         width="100%"
         height="100%"
-        onViewportChange=***REMOVED***handleViewportChange***REMOVED***
+        onViewportChange={handleViewportChange}
         mapStyle="mapbox://styles/constantimi/ckisx2s921doh19sz2tyod230"
-        mapboxApiAccessToken=***REMOVED***REACT_APP_TOKEN***REMOVED***
-        onClick=***REMOVED***handleClick***REMOVED***
+        mapboxApiAccessToken={REACT_APP_TOKEN}
+        onClick={handleClick}
       >
         
-        <DeckGL initialViewState=***REMOVED***viewport***REMOVED***
-          height=***REMOVED***viewport.height***REMOVED***
-          width=***REMOVED***viewport.width***REMOVED***
-          controller=***REMOVED***true***REMOVED***
-          layers=***REMOVED***[scatterplotlayer, textLayer]***REMOVED***
-          onViewStateChange=***REMOVED***(***REMOVED*** viewState***REMOVED***) => ***REMOVED***
-            console.log(`state: $***REMOVED***viewState.zoom***REMOVED***`);
+        <DeckGL initialViewState={viewport}
+          height={viewport.height}
+          width={viewport.width}
+          controller={true}
+          layers={[scatterplotlayer, textLayer]}
+          onViewStateChange={({ viewState }) => {
+            console.log(`state: ${viewState.zoom}`);
             setZoom(viewState.zoom);
-         ***REMOVED******REMOVED***
+          }}
         />
 
-        ***REMOVED***_renderMarkers()***REMOVED***
-        ***REMOVED***_renderMarkerTools()***REMOVED***
-        ***REMOVED***_renderMapTools()***REMOVED***
-        ***REMOVED***_renderPopup()***REMOVED***
+        {_renderMarkers()}
+        {_renderMarkerTools()}
+        {_renderMapTools()}
+        {_renderPopup()}
 
         <Legend />
 
       </MapGL>
     </Container>
   );
-***REMOVED***;
+};
 
 
-function mapStateToProps(state) ***REMOVED***
-  const ***REMOVED*** items***REMOVED*** = state.markers;
-  return ***REMOVED***
+function mapStateToProps(state) {
+  const { items } = state.markers;
+  return {
     items,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(Map);

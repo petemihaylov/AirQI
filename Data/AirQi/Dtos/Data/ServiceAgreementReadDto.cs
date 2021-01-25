@@ -1,16 +1,16 @@
 using System;
 
 namespace AirQi.Dtos.Data
-***REMOVED***
+{
     public class ServiceAgreementReadDto
-    ***REMOVED***
+    {
 
-        public double[] Position ***REMOVED*** get; set;***REMOVED***
+        public double[] Position { get; set; }
 
-        public bool IsAqiAgreementValid ***REMOVED*** get; set;***REMOVED***
+        public bool IsAqiAgreementValid { get; set; }
 
-        public DateTime CreateDate ***REMOVED*** get; set;***REMOVED***
+        public DateTime CreateDate { get; set; }
 
-        public DateTime UpdateAt ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        public DateTime UpdateAt { get; set; }
+    }
+}

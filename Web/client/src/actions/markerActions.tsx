@@ -1,44 +1,44 @@
-import ***REMOVED*** IMarker***REMOVED*** from "../entities/interfaces/IMarker";
+import { IMarker } from "../entities/interfaces/IMarker";
 import MarkerService from "../services/marker.service";
-import ***REMOVED*** CREATE_MARKER, DELETE_MARKER, FETCH_MARKERS***REMOVED*** from "./types";
+import { CREATE_MARKER, DELETE_MARKER, FETCH_MARKERS } from "./types";
 
-export const fetchMarkers = () => (dispatch: any) => ***REMOVED***
+export const fetchMarkers = () => (dispatch: any) => {
   MarkerService.getAllMarkers().then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: FETCH_MARKERS,
         payload: response.data,
-     ***REMOVED***);
-   ***REMOVED***,
-    (error) => ***REMOVED***
+      });
+    },
+    (error) => {
       console.log(error);
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};
 
-export const createMarker = (marker: IMarker) => (dispatch: any) => ***REMOVED***
+export const createMarker = (marker: IMarker) => (dispatch: any) => {
   return MarkerService.createMarker(marker)
-    .then((response) => ***REMOVED***
-      dispatch(***REMOVED***
+    .then((response) => {
+      dispatch({
         type: CREATE_MARKER,
         payload: response.data,
-     ***REMOVED***);
-   ***REMOVED***)
-    .catch(() => ***REMOVED***
+      });
+    })
+    .catch(() => {
       return Promise.reject();
-   ***REMOVED***);
-***REMOVED***;
+    });
+};
 
-export const deleteMarker = (id: number, index: number) => (dispatch: any) => ***REMOVED***
+export const deleteMarker = (id: number, index: number) => (dispatch: any) => {
   MarkerService.deleteMarker(id).then(
-    (response) => ***REMOVED***
-      dispatch(***REMOVED***
+    (response) => {
+      dispatch({
         type: DELETE_MARKER,
         payload: index,
-     ***REMOVED***);
-   ***REMOVED***,
-    (error) => ***REMOVED***
+      });
+    },
+    (error) => {
       console.log(error);
-   ***REMOVED***
+    }
   );
-***REMOVED***;
+};

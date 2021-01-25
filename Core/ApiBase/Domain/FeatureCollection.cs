@@ -3,13 +3,13 @@ using System;
 using System.Collections.Generic;
 
 namespace ApiBase.Models
-***REMOVED***
+{
     public class FeatureCollection
-    ***REMOVED***
-        public string Type ***REMOVED*** get; set;***REMOVED***
+    {
+        public string Type { get; set; }
 
-        public List<Feature> Features ***REMOVED*** get; set;***REMOVED***
+        public List<Feature> Features { get; set; }
 
-   ***REMOVED***
+    }
 
-***REMOVED***
+}

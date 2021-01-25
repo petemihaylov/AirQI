@@ -1,6 +1,6 @@
-import ***REMOVED*** IUser***REMOVED*** from "./interfaces/IUser";
+import { IUser } from "./interfaces/IUser";
 
-export default class User implements IUser ***REMOVED***
+export default class User implements IUser {
   id: number | undefined;
   username: string | undefined;
   firstName: string | undefined;
@@ -28,7 +28,7 @@ export default class User implements IUser ***REMOVED***
     _isActive?: boolean,
     _password?: string,
     _userRole?: string
-  ) ***REMOVED***
+  ) {
     this.username = _username;
     this.firstName = _firstName;
     this.lastName = _lastName;
@@ -36,5 +36,5 @@ export default class User implements IUser ***REMOVED***
     this.isActive = _isActive;
     this.password = _password;
     this.userRole = _userRole;
- ***REMOVED***
-***REMOVED***
+  }
+}

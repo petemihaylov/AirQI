@@ -1,4 +1,4 @@
-export interface IUser ***REMOVED***
+export interface IUser {
 
   id: number | undefined;
   username: string | undefined;
@@ -7,4 +7,4 @@ export interface IUser ***REMOVED***
   userRole: string | undefined;
   lastActive: Date | undefined;
   isActive: boolean | undefined;
-***REMOVED***
+}

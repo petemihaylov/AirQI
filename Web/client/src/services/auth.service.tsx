@@ -1,32 +1,32 @@
 import axios from "axios";
 import User from "../entities/User";
 
-const ***REMOVED*** REACT_APP_JWT_URL, REACT_APP_API_URL***REMOVED*** = process.env;
+const { REACT_APP_JWT_URL, REACT_APP_API_URL } = process.env;
 
-export default class AuthService ***REMOVED***
-  static login = async (username: string, password: string) => ***REMOVED***
+export default class AuthService {
+  static login = async (username: string, password: string) => {
     console.log(username + " " + password); 
-    return axios.post(REACT_APP_JWT_URL + "/api/token" || "", ***REMOVED***
+    return axios.post(REACT_APP_JWT_URL + "/api/token" || "", {
         username,
         password,
-     ***REMOVED***)
-      .then((response) => ***REMOVED***
-        if (response.data.accessToken) ***REMOVED***
+      })
+      .then((response) => {
+        if (response.data.accessToken) {
           localStorage.setItem("user", JSON.stringify(response.data));
-       ***REMOVED***
+        }
         return response.data;
-     ***REMOVED***);
- ***REMOVED***;
+      });
+  };
 
-  static logout() ***REMOVED***
+  static logout() {
     localStorage.removeItem("user");
- ***REMOVED***
+  }
 
-  static register = async (user: User) => ***REMOVED***
+  static register = async (user: User) => {
     return await axios.post(REACT_APP_API_URL + "/api/users/", user);
- ***REMOVED***;
+  };
 
-  static getCurrentUser(): User ***REMOVED***
-    return JSON.parse(localStorage.getItem("user") || "***REMOVED******REMOVED***");
- ***REMOVED***
-***REMOVED***
+  static getCurrentUser(): User {
+    return JSON.parse(localStorage.getItem("user") || "{}");
+  }
+}

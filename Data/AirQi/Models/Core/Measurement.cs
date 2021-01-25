@@ -3,25 +3,25 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace AirQi.Models.Core
-***REMOVED***
+{
     [BsonIgnoreExtraElements]
     public class Measurement
-    ***REMOVED***
+    {
 
         [BsonElement]
-        public string Parameter ***REMOVED*** get; set;***REMOVED***
+        public string Parameter { get; set; }
 
         [BsonElement]
-        public double  Value ***REMOVED*** get; set;***REMOVED***
+        public double  Value { get; set; }
 
         [BsonElement]
-        public string LastUpdated ***REMOVED*** get; set;***REMOVED***
+        public string LastUpdated { get; set; }
 
         [BsonElement]
-        public string Unit ***REMOVED*** get; set;***REMOVED***
+        public string Unit { get; set; }
                 
         [BsonElement]
-        public string SourceName ***REMOVED*** get; set;***REMOVED***
+        public string SourceName { get; set; }
 
-   ***REMOVED***
-***REMOVED***
+    }
+}

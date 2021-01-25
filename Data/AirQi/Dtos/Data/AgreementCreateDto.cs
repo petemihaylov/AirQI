@@ -3,24 +3,24 @@ using System.ComponentModel.DataAnnotations;
 using AirQi.Models.Core;
 
 namespace AirQi.Dtos.Core
-***REMOVED***
+{
     public class AgreementCreateDto
-    ***REMOVED***
+    {
         [MaxLength(250)]
         [Required]
-        public List<Station> Stations ***REMOVED*** get; set;***REMOVED***
+        public List<Station> Stations { get; set; }
 
         [MaxLength(250)]
         [Required]
-        public string Name ***REMOVED*** get; set;***REMOVED***
+        public string Name { get; set; }
 
         [Required(AllowEmptyStrings = true)]
-        public string Description ***REMOVED*** get; set;***REMOVED***
+        public string Description { get; set; }
 
         [Required]
-        public double AqiMin ***REMOVED*** get; set;***REMOVED***
+        public double AqiMin { get; set; }
 
         [Required]
-        public double AqiMax ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        public double AqiMax { get; set; }
+    }
+}

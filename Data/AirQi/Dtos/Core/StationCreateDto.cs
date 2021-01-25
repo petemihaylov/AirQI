@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace AirQi.Dtos.Core
-***REMOVED***
+{
     public class StationCreateDto
-    ***REMOVED***
+    {
         [Required]
-        public double  Aqi ***REMOVED*** get; set;***REMOVED***
+        public double  Aqi { get; set; }
 
         [Required]
-        public string Location ***REMOVED*** get; set;***REMOVED***
+        public string Location { get; set; }
 
         [Required]
-        public string City ***REMOVED*** get; set;***REMOVED***
+        public string City { get; set; }
 
         [Required]
-        public string Country ***REMOVED*** get; set;***REMOVED***
+        public string Country { get; set; }
 
         [Required]
-        public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
+        public IEnumerable<Measurement> Measurements { get; set; }
 
         [Required]
-        public double[] Position ***REMOVED*** get; set;***REMOVED***
+        public double[] Position { get; set; }
 
-   ***REMOVED***
-***REMOVED***
+    }
+}

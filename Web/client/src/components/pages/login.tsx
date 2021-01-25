@@ -1,30 +1,30 @@
-import React, ***REMOVED*** useState***REMOVED*** from "react";
-import ***REMOVED*** Redirect***REMOVED*** from "react-router-dom";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** login***REMOVED*** from "../../actions/auth";
-import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
-import ***REMOVED*** Card***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** BubbleButton***REMOVED*** from "../../assets/js/button/bubble";
+import React, { useState } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../../actions/auth";
+import { useForm } from "react-hook-form";
+import { Card } from "react-bootstrap";
+import { BubbleButton } from "../../assets/js/button/bubble";
 
-const Login = (props: any) => ***REMOVED***
-  const ***REMOVED*** isLoggedIn, message***REMOVED*** = props;
+const Login = (props: any) => {
+  const { isLoggedIn, message } = props;
 
-  const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm();
+  const { register, handleSubmit, errors } = useForm();
   const [loading, handleChange] = useState(false);
 
-  const onSubmit = (data: any) => ***REMOVED***
+  const onSubmit = (data: any) => {
     handleChange(true);
 
-    const ***REMOVED*** dispatch, history***REMOVED*** = props;
+    const { dispatch, history } = props;
     dispatch(login(data.username, data.password))
-      .then(() => ***REMOVED***
+      .then(() => {
         history.push("/dashboard");
         window.location.reload();
-     ***REMOVED***)
-      .catch(() => ***REMOVED***
+      })
+      .catch(() => {
         handleChange(false);
-     ***REMOVED***);
- ***REMOVED***;
+      });
+  };
 
   // Checking if user is logged in
   if (isLoggedIn) return <Redirect to="/profile" />;
@@ -32,76 +32,76 @@ const Login = (props: any) => ***REMOVED***
   return (
     <div
       className="container d-flex-column justify-content-center align-items-center pt-5"
-      style=***REMOVED******REMOVED*** width: "23vw"***REMOVED******REMOVED***
+      style={{ width: "23vw" }}
     >
-      <Card style=***REMOVED******REMOVED*** width: "20rem", height: "25rem"***REMOVED******REMOVED*** className="mt-5 mb-3">
+      <Card style={{ width: "20rem", height: "25rem" }} className="mt-5 mb-3">
         <Card.Title className="w-100 text-center pt-4">Login</Card.Title>
         <Card.Body className="d-flex align-items-center h-100">
-          <form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED***>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <label>Username: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
                 type="text"
                 className="form-control input-sm"
                 name="username"
               />
-              ***REMOVED***errors.username && (
+              {errors.username && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div className="form-group">
               <label>Password: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
                 type="password"
                 className="form-control input-sm"
                 name="password"
                 autoComplete="password"
               />
 
-              ***REMOVED***errors.password && (
+              {errors.password && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div
               className="form-group"
-              style=***REMOVED******REMOVED*** marginTop: "35px", marginBottom: "100px"***REMOVED******REMOVED***
+              style={{ marginTop: "35px", marginBottom: "100px" }}
             >
-              <BubbleButton name=***REMOVED***"Login"***REMOVED*** disabled=***REMOVED***loading***REMOVED***>
-                ***REMOVED***loading && (
+              <BubbleButton name={"Login"} disabled={loading}>
+                {loading && (
                   <span className="spinner-border spinner-border-sm"></span>
-                )***REMOVED***
-                ***REMOVED***!loading && <span>Login</span>***REMOVED***
+                )}
+                {!loading && <span>Login</span>}
               </BubbleButton>
             </div>
           </form>
         </Card.Body>
       </Card>
-      ***REMOVED***message && (
+      {message && (
         <div className="form-group">
           <div className="alert alert-secondary text-center" role="alert">
-             ***REMOVED***message***REMOVED***
+             {message}
           </div>
         </div>
-      )***REMOVED***
+      )}
     </div>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** isLoggedIn***REMOVED*** = state.auth;
-  const ***REMOVED*** message***REMOVED*** = state.message;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { isLoggedIn } = state.auth;
+  const { message } = state.message;
+  return {
     isLoggedIn,
     message,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(Login);

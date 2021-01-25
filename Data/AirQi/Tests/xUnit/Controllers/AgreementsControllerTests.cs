@@ -16,34 +16,34 @@ using AirQi.Models.Core;
 using AirQi.Dtos.Core;
 
 namespace Qi.Tests.xUnit.Controllers
-***REMOVED***
+{
     public class AgreementsControllerTests
-    ***REMOVED***
+    {
         private readonly IMapper _mapper;
         private readonly MockDataRepository _mock;
 
         public AgreementsControllerTests()
-        ***REMOVED***
+        {
             this._mock = new MockDataRepository();
 
             if (this._mapper == null)
-            ***REMOVED***
+            {
                 var mappingConfig = new MapperConfiguration(mc =>
-                ***REMOVED***
+                {
                     mc.AddProfile(new AgreementsProfile());
-               ***REMOVED***);
+                });
                 IMapper mapper = mappingConfig.CreateMapper();
                 _mapper = mapper;
-           ***REMOVED***
+            }
 
-       ***REMOVED***
+        }
 
         public IMapper Mapper => _mapper;
         public MockDataRepository Mock => _mock;
 
         [Fact]
         public void Test_GetAllAgreements_ReturnsOkResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
             var mockRepoStation = new Mock<IMongoDataRepository<Station>>();
@@ -54,11 +54,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_GetAllAgreements_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
             mockRepo.Setup(repo => repo.GetAllAsync())
@@ -73,11 +73,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_GetAllAgreements_ReturnsRightItems()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
             var mockRepoStation = new Mock<IMongoDataRepository<Station>>();
@@ -90,11 +90,11 @@ namespace Qi.Tests.xUnit.Controllers
             Assert.IsType<OkObjectResult>(okResult.Result);
             Assert.IsType<List<AgreementReadDto>>((okResult.Result as OkObjectResult).Value); 
             
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_GetAgreementById_ReturnsRightItem()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
 
@@ -117,11 +117,11 @@ namespace Qi.Tests.xUnit.Controllers
             // Assert
             Assert.IsType<AgreementReadDto>(okResult.Value);
             Assert.Equal(agreement.Id.ToString(), (okResult.Value as AgreementReadDto).Id);           
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_GetAgreementById_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
             var mockRepoStation = new Mock<IMongoDataRepository<Station>>();
@@ -132,11 +132,11 @@ namespace Qi.Tests.xUnit.Controllers
         
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_CreateAgreement_ReturnsOkResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
 
@@ -158,11 +158,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_CreateAgreement_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
             var mockRepoStation = new Mock<IMongoDataRepository<Station>>();
@@ -173,11 +173,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_CreateAgreement_ReturnsRightItem()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
 
@@ -202,11 +202,11 @@ namespace Qi.Tests.xUnit.Controllers
             Assert.IsType<AgreementReadDto>((okResult.Result as OkObjectResult).Value);
             Assert.True(agreement.Id.ToString() == ((okResult.Result as OkObjectResult).Value as AgreementReadDto).Id);
             
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_UpdateAgreement_ReturnsOkResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
 
@@ -229,11 +229,11 @@ namespace Qi.Tests.xUnit.Controllers
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result); 
             Assert.IsType<AgreementReadDto>((okResult.Result as OkObjectResult).Value);           
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_UpdateAgreement_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
             var mockRepoStation = new Mock<IMongoDataRepository<Station>>();
@@ -244,11 +244,11 @@ namespace Qi.Tests.xUnit.Controllers
         
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_DeleteAgreement_ReturnsOkResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
             this.Mock.GenerateMockStations();
@@ -269,11 +269,11 @@ namespace Qi.Tests.xUnit.Controllers
 
             // Assert
             Assert.IsType<OkObjectResult>(okResult.Result);           
-       ***REMOVED***
+        }
 
         [Fact]
         public void Test_DeleteAgreement_ReturnsNotFoundResult()
-        ***REMOVED***
+        {
             // Arrange
             var mockRepo = new Mock<IMongoDataRepository<Agreement>>();
             var mockRepoStation = new Mock<IMongoDataRepository<Station>>();
@@ -284,7 +284,7 @@ namespace Qi.Tests.xUnit.Controllers
         
             // Assert
             Assert.IsType<NotFoundResult>(notFoundResult.Result);
-       ***REMOVED***
+        }
 
-   ***REMOVED***
-***REMOVED***
+    }
+}

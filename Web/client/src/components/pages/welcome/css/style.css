@@ -1,4 +1,4 @@
-.welcome ***REMOVED***
+.welcome {
   min-height: 80vh;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -9,9 +9,9 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-***REMOVED***
+}
 
-.welcome .row ***REMOVED***
+.welcome .row {
   width: 90vw;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -22,22 +22,22 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-***REMOVED***
+}
 
-.welcome .row .col .title ***REMOVED***
+.welcome .row .col .title {
   font-weight: bold;
   color: #4947a3;
   opacity: 0.6;
   font-size: 3rem;
-***REMOVED***
+}
 
-.welcome .row .col .sub ***REMOVED***
+.welcome .row .col .sub {
   margin-top: 3vh;
   font-size: 1rem;
-***REMOVED***
+}
 
-.welcome .row .col .btn ***REMOVED***
+.welcome .row .col .btn {
   margin-top: 5vh;
   padding: 0;
-***REMOVED***
+}
 /*# sourceMappingURL=style.css.map */

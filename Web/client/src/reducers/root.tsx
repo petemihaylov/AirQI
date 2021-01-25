@@ -1,4 +1,4 @@
-import ***REMOVED*** combineReducers***REMOVED*** from "redux";
+import { combineReducers } from "redux";
 import auth from "./auth";
 import message from "./message";
 import users from "./users";
@@ -8,7 +8,7 @@ import profile from "./profile";
 import features from "./features";
 import slamarkers from "./slamarkers";
 
-const rootReducer = combineReducers(***REMOVED***
+const rootReducer = combineReducers({
   auth,
   message,
   users,
@@ -17,6 +17,6 @@ const rootReducer = combineReducers(***REMOVED***
   profile,
   slamarkers,
   features
-***REMOVED***);
+});
 
 export default rootReducer;

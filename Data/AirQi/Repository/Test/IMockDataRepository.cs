@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace AirQi.Repository.Test
-***REMOVED***
+{
     public interface IMockDataRepository<TDocument>
-    ***REMOVED***
+    {
 
         IEnumerable<TDocument> GetAll();
 
@@ -34,5 +34,5 @@ namespace AirQi.Repository.Test
 
         Task RemoveObjectByPositionAsync(double[] position);
 
-   ***REMOVED***
-***REMOVED***
+    }
+}

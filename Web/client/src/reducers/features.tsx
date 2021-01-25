@@ -1,17 +1,17 @@
-import ***REMOVED*** ADD_FEATURES***REMOVED*** from "../actions/types";
+import { ADD_FEATURES } from "../actions/types";
 
-const initialState = ***REMOVED*** items: null***REMOVED***;
+const initialState = { items: null };
 
-export default function (state = initialState, action: any) ***REMOVED***
-  const ***REMOVED*** type, payload***REMOVED*** = action;
+export default function (state = initialState, action: any) {
+  const { type, payload } = action;
 
-  switch (type) ***REMOVED***
+  switch (type) {
     case ADD_FEATURES:
-      return ***REMOVED***
+      return {
         ...state,
         items: payload,
-     ***REMOVED***;
+      };
     default:
       return state;
- ***REMOVED***
-***REMOVED***
+  }
+}

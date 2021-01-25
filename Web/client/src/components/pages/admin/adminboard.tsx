@@ -1,5 +1,5 @@
-import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
-import ***REMOVED***
+import React, { useEffect, useState } from "react";
+import {
   Button,
   Col,
   Container,
@@ -8,60 +8,60 @@ import ***REMOVED***
   Collapse,
   InputGroup,
   Card,
-***REMOVED*** from "react-bootstrap";
+} from "react-bootstrap";
 import User from "../../../entities/User";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
-import ***REMOVED***
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
   faCog,
   faTrashAlt,
   faUserPlus,
-***REMOVED*** from "@fortawesome/free-solid-svg-icons";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** deleteUser, fetchUsers***REMOVED*** from "../../../actions/userActions";
+} from "@fortawesome/free-solid-svg-icons";
+import { connect } from "react-redux";
+import { deleteUser, fetchUsers } from "../../../actions/userActions";
 import "./css/style.css";
 import Searchbar from "./searchbar";
 import CreateModal from "./create-modal";
 import Sla from "./sla";
 import SlaList from "./slalist";
 
-const AdminBoard = (props: any) => ***REMOVED***
+const AdminBoard = (props: any) => {
   const [content, handleContent] = useState([]);
   const [modalShow, setModalShow] = React.useState(false);
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     props.dispatch(fetchUsers());
- ***REMOVED***, []);
+  }, []);
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     handleContent(props.items);
     console.log(props.items);
- ***REMOVED***, [props.items]);
+  }, [props.items]);
 
-  const handleDelete = (id: any, index: number) => ***REMOVED***
+  const handleDelete = (id: any, index: number) => {
     props.dispatch(deleteUser(id, index));
- ***REMOVED***;
+  };
 
   return (
     <Container>
       <Row className="d-flex align-items-center">
-        <Col sm=***REMOVED***8***REMOVED***>
+        <Col sm={8}>
           <Searchbar />
         </Col>
-        <Col sm=***REMOVED***4***REMOVED***>
+        <Col sm={4}>
           <Button
             variant="dark"
             size="sm"
             className="pl-3 pr-3"
-            onClick=***REMOVED***() => setModalShow(true)***REMOVED***
+            onClick={() => setModalShow(true)}
           >
-            <FontAwesomeIcon icon=***REMOVED***faUserPlus***REMOVED*** />
+            <FontAwesomeIcon icon={faUserPlus} />
           </Button>
         </Col>
       </Row>
       <CreateModal
-        show=***REMOVED***modalShow***REMOVED***
-        props=***REMOVED***props***REMOVED***
-        onHide=***REMOVED***() => setModalShow(false)***REMOVED***
+        show={modalShow}
+        props={props}
+        onHide={() => setModalShow(false)}
       />
 
       <Card className="mb-5 mt-5">
@@ -78,19 +78,19 @@ const AdminBoard = (props: any) => ***REMOVED***
               </tr>
             </thead>
             <tbody>
-              ***REMOVED***content !== [] &&
+              {content !== [] &&
                 content.map((item: User, index) => (
-                  <tr key=***REMOVED***index***REMOVED***>
-                    <td>***REMOVED***index + 1***REMOVED***</td>
+                  <tr key={index}>
+                    <td>{index + 1}</td>
                     <td>
-                      ***REMOVED***" "***REMOVED***
-                      ***REMOVED***item.firstName***REMOVED*** ***REMOVED***item.lastName***REMOVED***
+                      {" "}
+                      {item.firstName} {item.lastName}
                     </td>
-                    <td>***REMOVED***item.lastActive***REMOVED***</td>
-                    <td>***REMOVED***item.userRole***REMOVED***</td>
+                    <td>{item.lastActive}</td>
+                    <td>{item.userRole}</td>
                     <td>
-                      <span className="status">&bull;</span>***REMOVED***" "***REMOVED***
-                      ***REMOVED***item.isActive ? "Active" : "Inactive"***REMOVED***
+                      <span className="status">&bull;</span>{" "}
+                      {item.isActive ? "Active" : "Inactive"}
                     </td>
                     <td>
                       <button
@@ -98,19 +98,19 @@ const AdminBoard = (props: any) => ***REMOVED***
                         title="Settings"
                         data-toggle="tooltip"
                       >
-                        <FontAwesomeIcon icon=***REMOVED***faCog***REMOVED*** />
+                        <FontAwesomeIcon icon={faCog} />
                       </button>
                       <button
                         className="delete"
                         title="Delete"
                         data-toggle="tooltip"
-                        onClick=***REMOVED***handleDelete.bind(this, item.id, index)***REMOVED***
+                        onClick={handleDelete.bind(this, item.id, index)}
                       >
-                        <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
+                        <FontAwesomeIcon icon={faTrashAlt} />
                       </button>
                     </td>
                   </tr>
-                ))***REMOVED***
+                ))}
             </tbody>
           </Table>
         </Card.Body>
@@ -120,13 +120,13 @@ const AdminBoard = (props: any) => ***REMOVED***
       <SlaList />
     </Container>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** items***REMOVED*** = state.users;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { items } = state.users;
+  return {
     items,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(AdminBoard);

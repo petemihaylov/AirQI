@@ -14,32 +14,32 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 
 namespace ApiJwt.Controllers
-***REMOVED***
+{
 
     [ApiController]
     [Route("api/[controller]")]
     public class TokenController : ControllerBase
-    ***REMOVED***
+    {
         public IConfiguration _configuration;
         private readonly IEFRepository _repository;
 
         public TokenController(IConfiguration configuration, IEFRepository repository)
-        ***REMOVED***
+        {
             this._configuration = configuration;
             this._repository = repository;
-       ***REMOVED***
+        }
 
         [HttpPost]
         public IActionResult Post(User _user)
-        ***REMOVED***
+        {
             if (_user != null && _user.Username != null && _user.Password != null)
-            ***REMOVED***
+            {
                 User user = _repository.GetByUserAsync<User>(_user.Username, _user.Password).Result;
 
                 if (user != null)
-                ***REMOVED***
+                {
                     //create claims details based on the user information
-                    var claims = new[] ***REMOVED***
+                    var claims = new[] {
                     new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                     new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
@@ -50,7 +50,7 @@ namespace ApiJwt.Controllers
                     new Claim("LastActive", user.LastActive.ToString()),
                     new Claim("IsActive", user.IsActive.ToString()),
                     new Claim("UserRole", user.UserRole.ToString())
-                  ***REMOVED***;
+                   };
 
 
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
@@ -61,7 +61,7 @@ namespace ApiJwt.Controllers
                     var jwt = new JwtSecurityTokenHandler().WriteToken(token);
                     
                     var responseObj = new UserDto
-                    ***REMOVED***
+                    {
                         Id = user.Id,
                         Username = user.Username,
                         FirstName = user.FirstName,
@@ -70,20 +70,20 @@ namespace ApiJwt.Controllers
                         IsActive = user.IsActive,
                         UserRole = user.UserRole.ToString(),
                         accessToken = jwt
-                   ***REMOVED***;
+                    };
 
                     return Ok(responseObj);
-               ***REMOVED***
+                }
                 else
-                ***REMOVED***
-                    return BadRequest(new ***REMOVED*** message = "Invalid credentials"***REMOVED***);
-               ***REMOVED***
-           ***REMOVED***
+                {
+                    return BadRequest(new { message = "Invalid credentials" });
+                }
+            }
             else
-            ***REMOVED***
-                return BadRequest(new ***REMOVED*** message = "Username or password is incorrect"***REMOVED***);
-           ***REMOVED***
-       ***REMOVED***
+            {
+                return BadRequest(new { message = "Username or password is incorrect" });
+            }
+        }
 
-   ***REMOVED***
-***REMOVED***
+    }
+}

@@ -1,15 +1,15 @@
-import ***REMOVED*** Container, Modal***REMOVED*** from "react-bootstrap";
-import React, ***REMOVED*** useCallback, useState***REMOVED*** from "react";
-import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** createUser***REMOVED*** from "../../../actions/userActions";
+import { Container, Modal } from "react-bootstrap";
+import React, { useCallback, useState } from "react";
+import { useForm } from "react-hook-form";
+import { connect } from "react-redux";
+import { createUser } from "../../../actions/userActions";
 
 import User from "../../../entities/User";
 import Roles from "../../../entities/Roles";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
-import ***REMOVED*** faExclamationTriangle***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 
-interface CreateFormData ***REMOVED***
+interface CreateFormData {
   username: string;
   password: string;
   firstName: string;
@@ -17,15 +17,15 @@ interface CreateFormData ***REMOVED***
   lastActive: Date;
   isActive: boolean;
   role: string;
-***REMOVED***
+}
 
-const CreateModal = (props: any) => ***REMOVED***
-  const ***REMOVED*** message***REMOVED*** = props;
-  const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm<CreateFormData>();
+const CreateModal = (props: any) => {
+  const { message } = props;
+  const { register, handleSubmit, errors } = useForm<CreateFormData>();
 
-  const onSubmit = useCallback((data: CreateFormData) => ***REMOVED***
-    const ***REMOVED*** dispatch***REMOVED*** = props.props;
-    const ***REMOVED***
+  const onSubmit = useCallback((data: CreateFormData) => {
+    const { dispatch } = props.props;
+    const {
       username,
       firstName,
       lastName,
@@ -33,7 +33,7 @@ const CreateModal = (props: any) => ***REMOVED***
       role,
       lastActive,
       isActive,
-   ***REMOVED*** = data;
+    } = data;
 
     let userObj = new User(
       username,
@@ -44,81 +44,81 @@ const CreateModal = (props: any) => ***REMOVED***
       password,
       role
     );
-    dispatch(createUser(userObj)).then(() => ***REMOVED***
+    dispatch(createUser(userObj)).then(() => {
       props.onHide();
-   ***REMOVED***);
- ***REMOVED***, []);
+    });
+  }, []);
 
   return (
-    <Modal ***REMOVED***...props***REMOVED*** aria-labelledby="contained-modal-title-vcenter" centered>
+    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" centered>
       <Modal.Header closeButton></Modal.Header>
       <Modal.Body>
         <Container className="d-flex pl-5 pr-5">
-          <form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED*** className="w-100">
+          <form onSubmit={handleSubmit(onSubmit)} className="w-100">
             <div className="form-group">
               <label>Username: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
                 type="text"
                 className="form-control input-sm"
                 name="username"
               />
-              ***REMOVED***errors.username && (
+              {errors.username && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div className="form-group">
               <label>First name: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
                 type="text"
                 className="form-control input-sm"
                 name="firstName"
               />
-              ***REMOVED***errors.firstName && (
+              {errors.firstName && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div className="form-group">
               <label>Last name: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
                 type="text"
                 className="form-control input-sm"
                 name="lastName"
               />
-              ***REMOVED***errors.lastName && (
+              {errors.lastName && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div className="form-group">
               <label>Password: </label>
               <input
-                ref=***REMOVED***register(***REMOVED*** required: true, minLength: 5***REMOVED***)***REMOVED***
+                ref={register({ required: true, minLength: 5 })}
                 type="password"
                 className="form-control input-sm"
                 name="password"
                 autoComplete="password"
               />
 
-              ***REMOVED***errors.password?.type === "minLength" && (
+              {errors.password?.type === "minLength" && (
                 <small className="text-danger">Your password is too weak</small>
-              )***REMOVED***
+              )}
 
-              ***REMOVED***errors.password?.type === "required" && (
+              {errors.password?.type === "required" && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
 
             <div className="form-group">
@@ -126,43 +126,43 @@ const CreateModal = (props: any) => ***REMOVED***
               <select
                 className="custom-select"
                 name="role"
-                ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                ref={register({ required: true })}
               >
                 <option value="Moderator">Moderator</option>
                 <option value="Admin">Admin</option>
                 <option value="User">User</option>
               </select>
-              ***REMOVED***errors.role?.type === "required" && (
+              {errors.role?.type === "required" && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </div>
             <div className="form-group d-flex justify-content-center">
               <button className="btn btn-dark btn-block w-75">Create</button>
             </div>
 
-            ***REMOVED***message && (
+            {message && (
               <div className="form-group">
                 <div className="alert alert-secondary" role="alert">
-                  <FontAwesomeIcon icon=***REMOVED***faExclamationTriangle***REMOVED*** /> ***REMOVED***message***REMOVED***
+                  <FontAwesomeIcon icon={faExclamationTriangle} /> {message}
                 </div>
               </div>
-            )***REMOVED***
+            )}
           </form>
         </Container>
       </Modal.Body>
     </Modal>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** message***REMOVED*** = state.message;
-  const ***REMOVED*** users***REMOVED*** = state.users;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { message } = state.message;
+  const { users } = state.users;
+  return {
     message,
     users,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(CreateModal);

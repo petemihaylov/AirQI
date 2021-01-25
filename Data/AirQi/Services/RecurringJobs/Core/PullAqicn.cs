@@ -16,23 +16,23 @@ using Newtonsoft.Json.Linq;
 using AutoMapper;
 
 namespace AirQi.Services.RecurringJobs.Core
-***REMOVED***
+{
     public class PullAqicn : WorkerService
-    ***REMOVED***
+    {
         private HttpClient _client;
         public PullAqicn(IMongoDataRepository<Station> repository, IWorkerSettings settings, IHubContext<LiveStationHub> hub, IMapper mapper) : base(repository, settings, hub, mapper)
-        ***REMOVED***
+        {
             this.Hub = base.Hub;
             this.Mapper = mapper;
             this.Repository = repository;
             this.Settings = settings;
             this.Client = new HttpClient();
-       ***REMOVED***
+        }
 
-        public HttpClient Client ***REMOVED*** get => _client; set => _client = value;***REMOVED***
+        public HttpClient Client { get => _client; set => _client = value; }
 
         public override async Task PullDataAsync()
-        ***REMOVED***
+        {
             // Gets headers which should be sent in each request.
             Client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -46,20 +46,20 @@ namespace AirQi.Services.RecurringJobs.Core
             JObject countries = JObject.Parse(result);
 
             foreach(JObject country in countries.SelectToken("data"))
-            ***REMOVED***
+            {
                 foreach (string city in country.SelectToken("cities"))
-                ***REMOVED***
+                {
                     await SetStation(city.ToLower(), country.SelectToken("country").Value<string>());
-               ***REMOVED***
-           ***REMOVED***
+                }
+            }
 
            
            
-       ***REMOVED***
+        }
 
         public async Task SetStation(string city, string country)
-        ***REMOVED***
-            HttpResponseMessage response = await Client.GetAsync($"https://api.waqi.info/feed/***REMOVED***city***REMOVED***/?token=***REMOVED***this.Settings.AqicnSubscriptionKey***REMOVED***");
+        {
+            HttpResponseMessage response = await Client.GetAsync($"https://api.waqi.info/feed/{city}/?token={this.Settings.AqicnSubscriptionKey}");
 
             // Throws an Exception if the HttpResponseMessage.IsSuccessStatusCode property for HTTP response is 'false'. 
             response.EnsureSuccessStatusCode();
@@ -69,7 +69,7 @@ namespace AirQi.Services.RecurringJobs.Core
             dynamic json = JsonConvert.DeserializeObject(result);
 
             if (json.status.ToString() == "ok")
-            ***REMOVED***
+            {
                 var data = json.data;
                 
                 // Station
@@ -87,7 +87,7 @@ namespace AirQi.Services.RecurringJobs.Core
                 
                 var latitude = Convert.ToDouble(data.city.geo[0], provider);
                 var longitude = Convert.ToDouble(data.city.geo[1], provider);
-                double[] position = new double[] ***REMOVED*** longitude, latitude***REMOVED***;
+                double[] position = new double[] { longitude, latitude };
 
                 station.Position = position;
                 station.CreatedAt = DateTime.UtcNow;
@@ -99,7 +99,7 @@ namespace AirQi.Services.RecurringJobs.Core
                 var measurements = data.iaqi;
 
                 foreach (var m in measurements)
-                ***REMOVED***
+                {
                     Measurement measurement = new Measurement();
                     measurement.LastUpdated = Convert.ToString(data.time.iso);
                     measurement.Unit = "µg/m³";
@@ -112,38 +112,38 @@ namespace AirQi.Services.RecurringJobs.Core
                     measurement.Value = Convert.ToDouble(measurements[obj].v);
                 
                     measurementsCollection.Add(measurement);
-               ***REMOVED***
+                }
 
                 station.Measurements = measurementsCollection;
 
                 // Save the new Station in the repository only when there is a location
-                System.Console.WriteLine($"Aqicn saved ***REMOVED***station.Location***REMOVED*** station in ***REMOVED***station.City***REMOVED***, ***REMOVED***station.Country***REMOVED***");
+                System.Console.WriteLine($"Aqicn saved {station.Location} station in {station.City}, {station.Country}");
                 await Repository.CreateObjectAsync(station);
-           ***REMOVED***
-       ***REMOVED***
+            }
+        }
 
         private static bool HasProperty(dynamic obj, string name)
-        ***REMOVED***
+        {
             try
-            ***REMOVED***
+            {
                 var value = obj[name];
                 return true;
-           ***REMOVED***
+            }
             catch (RuntimeBinderException)
-            ***REMOVED***
+            {
                 return false;
-           ***REMOVED***
-       ***REMOVED***
+            }
+        }
 
         private static string GetType(Object obj)
-        ***REMOVED***
+        {
             Type myType = obj.GetType();
             IList<PropertyInfo> prop = new List<PropertyInfo>(myType.GetProperties());
                    
             return prop[0].GetValue(obj, null).ToString();
-       ***REMOVED***
+        }
 
 
-   ***REMOVED***
+    }
     
-***REMOVED***
+}

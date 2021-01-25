@@ -1,12 +1,12 @@
 ﻿namespace ApiBase.AcceptanceTests.Models
-***REMOVED***
+{
     public class UserDto
-    ***REMOVED***
-        public string Username ***REMOVED*** get; set;***REMOVED***
-        public string Password ***REMOVED*** get; set;***REMOVED***
-        public string FirstName ***REMOVED*** get; set;***REMOVED***
-        public string LastName ***REMOVED*** get; set;***REMOVED***
-        public string UserRole ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
+    {
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string UserRole { get; set; }
+    }
 
-***REMOVED***
+}

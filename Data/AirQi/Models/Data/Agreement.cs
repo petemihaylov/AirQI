@@ -5,23 +5,23 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace AirQi.Models.Data
-***REMOVED***
+{
     [BsonCollection("agreements")]
     public class Agreement : Document
-    ***REMOVED***
+    {
         [BsonElement]
-        public List<Station> Stations ***REMOVED*** get; set;***REMOVED***
+        public List<Station> Stations { get; set; }
 
         [BsonElement]
-        public string Name ***REMOVED*** get; set;***REMOVED***
+        public string Name { get; set; }
 
         [BsonElement]
-        public string Description ***REMOVED*** get; set;***REMOVED***
+        public string Description { get; set; }
 
         [BsonElement]
-        public double AqiMin ***REMOVED*** get; set;***REMOVED***
+        public double AqiMin { get; set; }
 
         [BsonElement]
-        public double AqiMax ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        public double AqiMax { get; set; }
+    }
+}

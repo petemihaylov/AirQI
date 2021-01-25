@@ -1,15 +1,15 @@
 namespace AirQi.Dtos.Core
-***REMOVED***
+{
     public class MeasurementReadDto
-    ***REMOVED***        
-        public string Parameter ***REMOVED*** get; set;***REMOVED***
+    {        
+        public string Parameter { get; set; }
 
-        public double  Value ***REMOVED*** get; set;***REMOVED***
+        public double  Value { get; set; }
 
-        public string LastUpdated ***REMOVED*** get; set;***REMOVED***
+        public string LastUpdated { get; set; }
 
-        public string Unit ***REMOVED*** get; set;***REMOVED***
+        public string Unit { get; set; }
                 
-        public string SourceName ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        public string SourceName { get; set; }
+    }
+}

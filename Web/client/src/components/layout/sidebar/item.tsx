@@ -1,26 +1,26 @@
 import React from "react";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-interface IProps ***REMOVED***
+interface IProps {
   classes: any;
   fontIcon: any;
   title: string;
   reference: string;
   animation: string;
-***REMOVED***
+}
 
-export const Item = (***REMOVED*** title, reference, fontIcon, classes, animation***REMOVED***: IProps) => ***REMOVED***
+export const Item = ({ title, reference, fontIcon, classes, animation }: IProps) => {
   return (
-    <li className=***REMOVED***classes.navItem***REMOVED***>
-      <a href=***REMOVED***reference***REMOVED*** className=***REMOVED***classes.navLink***REMOVED***>
-        <div className=***REMOVED***classes.fontIcon + " " + animation***REMOVED***>
+    <li className={classes.navItem}>
+      <a href={reference} className={classes.navLink}>
+        <div className={classes.fontIcon + " " + animation}>
           <FontAwesomeIcon
-            className=***REMOVED***""***REMOVED***
-            icon=***REMOVED***fontIcon***REMOVED***
+            className={""}
+            icon={fontIcon}
           />
         </div>
-        <span className=***REMOVED***classes.linkText***REMOVED***>***REMOVED***title***REMOVED***</span>
+        <span className={classes.linkText}>{title}</span>
       </a>
     </li>
   );
-***REMOVED***;
+};

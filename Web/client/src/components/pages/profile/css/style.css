@@ -1,13 +1,13 @@
-.centered ***REMOVED***
+.centered {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-***REMOVED***
+}
 
-.wrapper ***REMOVED***
+.wrapper {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -15,14 +15,14 @@
       -ms-flex-align: center;
           align-items: center;
   height: 80vh;
-***REMOVED***
+}
 
-.row ***REMOVED***
+.row {
   margin-bottom: 2vh;
   margin-top: 4px;
-***REMOVED***
+}
 
-small ***REMOVED***
+small {
   color: #5a5a5a;
-***REMOVED***
+}
 /*# sourceMappingURL=style.css.map */

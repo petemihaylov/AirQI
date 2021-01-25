@@ -1,31 +1,31 @@
-import ***REMOVED***
+import {
   ADD_SLAMARKER,
   FETCH_SLAMARKERS,
   DELETE_SLAMARKER,
-***REMOVED*** from "../actions/types";
+} from "../actions/types";
 
-const initialState = ***REMOVED*** items: []***REMOVED***;
+const initialState = { items: [] };
 
-export default function (state = initialState, action: any) ***REMOVED***
-  const ***REMOVED*** type, payload***REMOVED*** = action;
+export default function (state = initialState, action: any) {
+  const { type, payload } = action;
 
-  switch (type) ***REMOVED***
+  switch (type) {
     case ADD_SLAMARKER:
-      return ***REMOVED***
+      return {
         ...state,
         items: [...state.items, payload],
-     ***REMOVED***;
+      };
     case FETCH_SLAMARKERS:
-      return ***REMOVED***
+      return {
         ...state,
         items: payload,
-     ***REMOVED***;
+      };
     case DELETE_SLAMARKER:
-      return ***REMOVED***
+      return {
         ...state,
         items: state.items.filter((item, index) => index !== action.payload),
-     ***REMOVED***;
+      };
     default:
       return state;
- ***REMOVED***
-***REMOVED***
+  }
+}

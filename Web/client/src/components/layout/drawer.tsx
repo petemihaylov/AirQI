@@ -1,9 +1,9 @@
-import React, ***REMOVED*** useState, useEffect***REMOVED*** from "react";
-import ***REMOVED*** Link***REMOVED*** from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navigation from "./navbar";
 
 import clsx from "clsx";
-import ***REMOVED*** makeStyles***REMOVED*** from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import List from "@material-ui/core/List";
@@ -21,177 +21,177 @@ import HomeIcon from "@material-ui/icons/Home";
 import Person from "@material-ui/icons/Person";
 
 /* Router :: Components */
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
+import { connect } from "react-redux";
 import Main from "./main";
 
 /* Style rules of the component */
 var navShift = 73;
 const drawerWidth = 240;
 
-const NavDrawer = (props: any) => ***REMOVED***
+const NavDrawer = (props: any) => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const ***REMOVED*** user***REMOVED*** = props;
+  const { user } = props;
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     if (user !== null) navShift = 0;
- ***REMOVED***, []);
+  }, []);
 
-  const handleDrawerOpen = () => ***REMOVED***
+  const handleDrawerOpen = () => {
     setOpen(true);
- ***REMOVED***;
+  };
 
-  const handleDrawerClose = () => ***REMOVED***
+  const handleDrawerClose = () => {
     setOpen(false);
- ***REMOVED***;
+  };
 
   return (
-    <div className=***REMOVED***classes.root***REMOVED***>
+    <div className={classes.root}>
       <CssBaseline />
 
       <AppBar
         position="fixed"
-        className=***REMOVED***clsx(classes.appBar, ***REMOVED***
+        className={clsx(classes.appBar, {
           [classes.appBarShift]: open,
-       ***REMOVED***)***REMOVED***
+        })}
       ></AppBar>
 
-      ***REMOVED***user ? (
+      {user ? (
         <Drawer
           variant="permanent"
-          className=***REMOVED***clsx(classes.drawer, ***REMOVED***
+          className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
             [classes.drawerClose]: !open,
-         ***REMOVED***)***REMOVED***
-          classes=***REMOVED******REMOVED***
-            paper: clsx(***REMOVED***
+          })}
+          classes={{
+            paper: clsx({
               [classes.drawerOpen]: open,
               [classes.drawerClose]: !open,
-           ***REMOVED***),
-         ***REMOVED******REMOVED***
+            }),
+          }}
         >
-          <div className=***REMOVED***classes.toolbar***REMOVED***>
-            ***REMOVED***open === true ? (
-              <IconButton onClick=***REMOVED***handleDrawerClose***REMOVED***>
+          <div className={classes.toolbar}>
+            {open === true ? (
+              <IconButton onClick={handleDrawerClose}>
                 <ChevronLeftIcon />
               </IconButton>
             ) : (
-              <IconButton onClick=***REMOVED***handleDrawerOpen***REMOVED***>
+              <IconButton onClick={handleDrawerOpen}>
                 <ChevronRightIcon />
               </IconButton>
-            )***REMOVED***
+            )}
           </div>
           <List>
             <Link
-              to=***REMOVED***"/profile"***REMOVED***
-              style=***REMOVED******REMOVED*** textDecoration: "none", color: "gray"***REMOVED******REMOVED***
+              to={"/profile"}
+              style={{ textDecoration: "none", color: "gray" }}
             >
               <ListItem button key="Account">
                 <ListItemIcon>
                   <Person />
                 </ListItemIcon>
-                <ListItemText primary=***REMOVED***"Account settings"***REMOVED*** />
+                <ListItemText primary={"Account settings"} />
               </ListItem>
             </Link>
 
             <Link
-              to=***REMOVED***"/Notifications"***REMOVED***
-              style=***REMOVED******REMOVED*** textDecoration: "none", color: "gray"***REMOVED******REMOVED***
+              to={"/Notifications"}
+              style={{ textDecoration: "none", color: "gray" }}
             >
               <ListItem button key="Notifications">
                 <ListItemIcon>
-                  <NotificationsActive className=***REMOVED***"blob"***REMOVED*** />
+                  <NotificationsActive className={"blob"} />
                 </ListItemIcon>
-                <ListItemText primary=***REMOVED***"Notifications"***REMOVED*** />
+                <ListItemText primary={"Notifications"} />
               </ListItem>
             </Link>
 
             <Link
-              to=***REMOVED***"/dashboard"***REMOVED***
-              style=***REMOVED******REMOVED*** textDecoration: "none", color: "gray", marginTop: "-"***REMOVED******REMOVED***
+              to={"/dashboard"}
+              style={{ textDecoration: "none", color: "gray", marginTop: "-" }}
             >
               <ListItem button key="Dashboard">
                 <ListItemIcon>
                   <HomeIcon />
                 </ListItemIcon>
-                <ListItemText primary=***REMOVED***"Dashboard"***REMOVED*** />
+                <ListItemText primary={"Dashboard"} />
               </ListItem>
             </Link>
           </List>
         </Drawer>
       ) : (
         " "
-      )***REMOVED***
+      )}
     </div>
   );
-***REMOVED***;
+};
 
-const useStyles = makeStyles((theme) => (***REMOVED***
-  root: ***REMOVED***
+const useStyles = makeStyles((theme) => ({
+  root: {
     display: "flex",
     outline: "none",
     textDecoration: "none",
- ***REMOVED***,
-  appBar: ***REMOVED***
+  },
+  appBar: {
     zIndex: theme.zIndex.drawer + 1,
     marginLeft: navShift,
-    width: `calc(100% - $***REMOVED***navShift***REMOVED***px)`,
-    transition: theme.transitions.create(["width", "margin"], ***REMOVED***
+    width: `calc(100% - ${navShift}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-   ***REMOVED***),
+    }),
     background: "#f3f3f3",
     boxShadow: "none",
- ***REMOVED***,
-  appBarShift: ***REMOVED***
+  },
+  appBarShift: {
     marginLeft: drawerWidth,
-    width: `calc(100% - $***REMOVED***drawerWidth***REMOVED***px)`,
-    transition: theme.transitions.create(["width", "margin"], ***REMOVED***
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(["width", "margin"], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-   ***REMOVED***),
- ***REMOVED***,
-  hide: ***REMOVED***
+    }),
+  },
+  hide: {
     display: "none",
- ***REMOVED***,
-  drawer: ***REMOVED***
+  },
+  drawer: {
     width: drawerWidth,
     flexShrink: 0,
     whiteSpace: "nowrap",
- ***REMOVED***,
-  drawerOpen: ***REMOVED***
+  },
+  drawerOpen: {
     width: drawerWidth,
-    transition: theme.transitions.create("width", ***REMOVED***
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
-   ***REMOVED***),
- ***REMOVED***,
-  drawerClose: ***REMOVED***
-    transition: theme.transitions.create("width", ***REMOVED***
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen,
-   ***REMOVED***),
+    }),
     overflowX: "hidden",
     width: theme.spacing(7) + 1,
-    [theme.breakpoints.up("sm")]: ***REMOVED***
+    [theme.breakpoints.up("sm")]: {
       width: theme.spacing(9) + 1,
-   ***REMOVED***,
- ***REMOVED***,
-  toolbar: ***REMOVED***
+    },
+  },
+  toolbar: {
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-end",
     padding: theme.spacing(0, 2),
     // necessary for content to be below app bar
     ...theme.mixins.toolbar,
- ***REMOVED***,
-***REMOVED***));
+  },
+}));
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** user***REMOVED*** = state.auth;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { user } = state.auth;
+  return {
     user,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(NavDrawer);

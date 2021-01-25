@@ -1,6 +1,6 @@
 import Geometry from "./Geometry";
 
-export default class Feature ***REMOVED***
+export default class Feature {
   type: string | undefined;
   properties: string | undefined;
   geometry: Geometry | undefined;
@@ -10,9 +10,9 @@ export default class Feature ***REMOVED***
     _type?: string,
     _properties?: string,
     _geometry?: Geometry
-  ) ***REMOVED***
+  ) {
     this.type = _type;
     this.properties = _properties;
     this.geometry = _geometry;
- ***REMOVED***
-***REMOVED***
+  }
+}

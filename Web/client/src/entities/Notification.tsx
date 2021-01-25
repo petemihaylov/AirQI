@@ -1,6 +1,6 @@
-import ***REMOVED*** INotification***REMOVED*** from "./interfaces/INotification";
+import { INotification } from "./interfaces/INotification";
 
-export default class Notification implements INotification ***REMOVED***
+export default class Notification implements INotification {
   name: any;
 
   id: number | undefined;
@@ -21,10 +21,10 @@ export default class Notification implements INotification ***REMOVED***
     _description?: string,
     _type?: string,
     _createAt?: string,
-  ) ***REMOVED***
+  ) {
     this.title = _title;
     this.description = _description;
     this.type = _type;
     this.createdAt = _createAt;
- ***REMOVED***
-***REMOVED***
+  }
+}

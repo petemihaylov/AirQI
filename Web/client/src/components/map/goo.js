@@ -3,13 +3,13 @@ import React from "react";
 let gooId = 0;
 
 // see https://css-tricks.com/gooey-effect/
-export default function Goo(***REMOVED*** children***REMOVED***) ***REMOVED***
+export default function Goo({ children }) {
   const id = React.useMemo(() => gooId++, []);
 
   return (
-    <g filter=***REMOVED***`url(#$***REMOVED***id***REMOVED***)`***REMOVED***>
+    <g filter={`url(#${id})`}>
       <defs>
-        <filter id=***REMOVED***id***REMOVED***>
+        <filter id={id}>
           <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
           <feColorMatrix
             in="blur"
@@ -20,7 +20,7 @@ export default function Goo(***REMOVED*** children***REMOVED***) ***REMOVED***
           <feBlend in="SourceGraphic" in2="goo" />
         </filter>
       </defs>
-      ***REMOVED***children***REMOVED***
+      {children}
     </g>
   );
-***REMOVED***
+}

@@ -5,9 +5,9 @@ using ApiBase.DTOs;
 using ApiBase.Models;
 
 namespace ApiBase.Services.Interfaces
-***REMOVED***
+{
     public interface IUserService
-    ***REMOVED***
+    {
         IEnumerable<UserDto> GetUsers();
         User GetUserById(int id);
 
@@ -16,5 +16,5 @@ namespace ApiBase.Services.Interfaces
         void DeleteUser(User userDto);
         bool IsValid(UserDto userDto);
         bool UserExists(UserDto userDto);
-   ***REMOVED***
-***REMOVED***
+    }
+}

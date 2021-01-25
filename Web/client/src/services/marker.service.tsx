@@ -1,24 +1,24 @@
 import axios from "axios";
-import ***REMOVED*** IMarker***REMOVED*** from "../entities/interfaces/IMarker";
+import { IMarker } from "../entities/interfaces/IMarker";
 import authHeader from "./auth.header";
-const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
+const { REACT_APP_API_URL } = process.env;
 
-class MarkerService ***REMOVED***
-  getAllMarkers = async () => ***REMOVED***
-    return await axios.get(REACT_APP_API_URL + "/api/markers/", ***REMOVED***
+class MarkerService {
+  getAllMarkers = async () => {
+    return await axios.get(REACT_APP_API_URL + "/api/markers/", {
       headers: authHeader(),
-   ***REMOVED***);
- ***REMOVED***;
+    });
+  };
 
-  createMarker = async (marker: IMarker) => ***REMOVED***
+  createMarker = async (marker: IMarker) => {
     return await axios.post(REACT_APP_API_URL + "/api/markers/", marker);
- ***REMOVED***;
+  };
 
-  deleteMarker = async (id: number) => ***REMOVED***
-    return axios.delete(REACT_APP_API_URL + "/api/markers/" + id, ***REMOVED***
+  deleteMarker = async (id: number) => {
+    return axios.delete(REACT_APP_API_URL + "/api/markers/" + id, {
       headers: authHeader(),
-   ***REMOVED***);
- ***REMOVED***;
-***REMOVED***
+    });
+  };
+}
 
 export default new MarkerService();

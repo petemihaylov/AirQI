@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using AirQi.Models.Core;
 
 namespace AirQi.Dtos.Core
-***REMOVED***
+{
     public class StationMeasurementCreateDto
-    ***REMOVED***
+    {
 
         [Required]
-        public double  Aqi ***REMOVED*** get; set;***REMOVED***
+        public double  Aqi { get; set; }
 
         [Required]
-        public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
+        public IEnumerable<Measurement> Measurements { get; set; }
 
         [Required]
-        public double[] Position ***REMOVED*** get; set;***REMOVED***
+        public double[] Position { get; set; }
 
-   ***REMOVED***
-***REMOVED***
+    }
+}

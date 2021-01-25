@@ -2,17 +2,17 @@ import React from "react";
 
 // react hooks user effects
 
-const Footer = () => ***REMOVED***
+const Footer = () => {
   return (
     <footer className="page-footer font-small">
-      ***REMOVED***/* Copyright */***REMOVED***
+      {/* Copyright */}
       <div className="footer-copyright text-center py-3">
         © 2020 Copyright:
         <a href="#"> Fontys University</a>
       </div>
-      ***REMOVED***/* Copyright */***REMOVED***
+      {/* Copyright */}
     </footer>
   );
-***REMOVED***;
+};
 
 export default Footer;

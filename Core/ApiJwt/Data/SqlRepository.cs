@@ -6,25 +6,25 @@ using Microsoft.EntityFrameworkCore;
 using ApiJwt.Models;
 
 namespace ApiJwt.Data
-***REMOVED***
+{
     public class SqlRepository : IEFRepository
-    ***REMOVED***
+    {
         
         private readonly ApplicationContext _context;
         public SqlRepository(ApplicationContext context)
-        ***REMOVED***
+        {
             this._context = context;
-       ***REMOVED***
+        }
 
         public async Task<IEnumerable<T>> GetAllAsync<T>() where T : BaseEntity
-        ***REMOVED***
+        {
             return await _context.Set<T>().ToListAsync();
-       ***REMOVED***
+        }
 
         public async Task<T> GetByUserAsync<T>(string username, string password) where T : BaseEntity
-        ***REMOVED***
+        {
             return await _context.Set<T>().SingleOrDefaultAsync(e => e.Username == username && e.Password == password);
-       ***REMOVED***
+        }
 
-  ***REMOVED***
-***REMOVED***
+   }
+}

@@ -1,14 +1,14 @@
-import React, ***REMOVED*** useEffect, useState***REMOVED*** from "react";
+import React, { useEffect, useState } from "react";
 import Map from "../map/map";
 import LiveNotification from "./livenotification";
 
-const Dashboard = (props: any) => ***REMOVED***
+const Dashboard = (props: any) => {
   return (
     <div>
       <LiveNotification />
       <Map />
     </div>
   );
-***REMOVED***;
+};
 
 export default Dashboard;

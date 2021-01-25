@@ -1,12 +1,12 @@
-import React, ***REMOVED*** useEffect***REMOVED*** from "react";
+import React, { useEffect } from "react";
 
 import * as legend from "./js/legend";
 import "./css/style.css";
 
-export const Legend = (props: any) => ***REMOVED***
-  useEffect(() => ***REMOVED***
+export const Legend = (props: any) => {
+  useEffect(() => {
     legend.illustation();
- ***REMOVED***, []);
+  }, []);
 
   return (
     <div className="mr-4 fixed-bottom">
@@ -29,4 +29,4 @@ export const Legend = (props: any) => ***REMOVED***
         </div>
       </div>
   );
-***REMOVED***;
+};

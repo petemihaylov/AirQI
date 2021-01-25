@@ -1,5 +1,5 @@
-***REMOVED***
-  "compilerOptions": ***REMOVED***
+{
+  "compilerOptions": {
     "target": "es5",
     "lib": [
       "dom",
@@ -19,13 +19,13 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react"
- ***REMOVED***,
-  "paths": ***REMOVED***
+  },
+  "paths": {
     "components/*": [
       "src/components/*"
     ]
- ***REMOVED***,
+  },
   "include": [
     "src",
   ]
-***REMOVED***
+}

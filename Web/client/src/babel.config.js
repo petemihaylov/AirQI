@@ -1,3 +1,3 @@
-module.exports = ***REMOVED***
+module.exports = {
   presets: ["@babel/preset-react"],
-***REMOVED***;
+};

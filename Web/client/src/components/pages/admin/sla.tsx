@@ -1,33 +1,33 @@
-import React, ***REMOVED*** useEffect***REMOVED*** from "react";
-import ***REMOVED*** Card, Form, Row, Col, Button***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
+import React, { useEffect } from "react";
+import { Card, Form, Row, Col, Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import { useForm } from "react-hook-form";
 import Polygon from "./polygon";
-import ***REMOVED*** createSlaMarker***REMOVED*** from "../../../actions/slamarker";
-import ***REMOVED*** faShapes***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+import { createSlaMarker } from "../../../actions/slamarker";
+import { faShapes } from "@fortawesome/free-solid-svg-icons";
 
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import SlaMarker from "../../../entities/SlaMarker";
 
-const Sla = (props: any) => ***REMOVED***
-  const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm();
+const Sla = (props: any) => {
+  const { register, handleSubmit, errors } = useForm();
 
-  const onSubmit = (data: any) => ***REMOVED***
+  const onSubmit = (data: any) => {
     props.dispatch(
       createSlaMarker(new SlaMarker(data.name, 0, parseInt(data.max), JSON.stringify(props.items)))
     );
- ***REMOVED***;
+  };
 
   return (
     <Card className="mb-3">
       <Card.Body>
         <Card.Title>
-          <FontAwesomeIcon icon=***REMOVED***faShapes***REMOVED*** className="mr-2" /> Edit
+          <FontAwesomeIcon icon={faShapes} className="mr-2" /> Edit
         </Card.Title>
         <small className="ml-4 pl-2">Edit SLA</small>
         <Polygon />
         <Card.Text className="mt-5">
-          <Form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED*** className="mt-5">
+          <Form onSubmit={handleSubmit(onSubmit)} className="mt-5">
             <Row>
               <Col>
                 <Form.Label>
@@ -38,7 +38,7 @@ const Sla = (props: any) => ***REMOVED***
                   placeholder="Enter name"
                   size="sm"
                   name="name"
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                  ref={register({ required: true })}
                 />
               </Col>
 
@@ -55,21 +55,21 @@ const Sla = (props: any) => ***REMOVED***
                   max="100"
                   size="sm"
                   placeholder="0"
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                  ref={register({ required: true })}
                 />
               </Col>
             </Row>
             <Row>
               <Col>
-                ***REMOVED***errors.name && (
+                {errors.name && (
                   <small className="text-danger"> This is required</small>
-                )***REMOVED***
+                )}
               </Col>
               <Col>
-                ***REMOVED***" "***REMOVED***
-                ***REMOVED***errors.max && (
+                {" "}
+                {errors.max && (
                   <small className="text-danger"> This is required</small>
-                )***REMOVED***
+                )}
               </Col>
             </Row>
             <Row className="mb-5">
@@ -80,7 +80,7 @@ const Sla = (props: any) => ***REMOVED***
                   size="sm"
                   type="submit"
                   className="pr-5 pl-5"
-                  style=***REMOVED******REMOVED*** border: "1px solid #f7f7f7"***REMOVED******REMOVED***
+                  style={{ border: "1px solid #f7f7f7" }}
                 >
                   Save
                 </Button>
@@ -92,13 +92,13 @@ const Sla = (props: any) => ***REMOVED***
       </Card.Body>
     </Card>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** items***REMOVED*** = state.features;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { items } = state.features;
+  return {
     items,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(Sla);

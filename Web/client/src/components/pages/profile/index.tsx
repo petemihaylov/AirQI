@@ -1,29 +1,29 @@
-import React, ***REMOVED*** useCallback***REMOVED*** from "react";
-import ***REMOVED*** Redirect***REMOVED*** from "react-router-dom";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED*** Container, Row, Col***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** useForm***REMOVED*** from "react-hook-form";
+import React, { useCallback } from "react";
+import { Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import { Container, Row, Col } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import ProfileImage from "./image";
 import "./css/style.css";
-import ***REMOVED*** updateUser***REMOVED*** from "../../../actions/userActions";
-import ***REMOVED*** update***REMOVED*** from "../../../actions/auth";
+import { updateUser } from "../../../actions/userActions";
+import { update } from "../../../actions/auth";
 import User from "../../../entities/User";
 import Auth from "../../../entities/Auth";
 
-interface CreateFormData ***REMOVED***
+interface CreateFormData {
   username: string;
   password: string;
   firstName: string;
   lastName: string;
   userRole: string;
-***REMOVED***
+}
 
-const Profile = (props: any) => ***REMOVED***
-  const ***REMOVED*** register, handleSubmit, errors***REMOVED*** = useForm<CreateFormData>();
-  const ***REMOVED*** user***REMOVED*** = props;
+const Profile = (props: any) => {
+  const { register, handleSubmit, errors } = useForm<CreateFormData>();
+  const { user } = props;
 
-  const onSubmit = useCallback((data: CreateFormData) => ***REMOVED***
-    const ***REMOVED*** username, firstName, lastName, password, userRole***REMOVED*** = data;
+  const onSubmit = useCallback((data: CreateFormData) => {
+    const { username, firstName, lastName, password, userRole } = data;
     var newUser = new User(
       username,
       firstName,
@@ -50,11 +50,11 @@ const Profile = (props: any) => ***REMOVED***
     props.dispatch(update(newAuth));
 
     console.log(password);
- ***REMOVED***, []);
+  }, []);
 
-  if (!user) ***REMOVED***
+  if (!user) {
     return <Redirect to="/login" />;
- ***REMOVED***
+  }
 
   return (
     <Container className="centered wrapper">
@@ -67,9 +67,9 @@ const Profile = (props: any) => ***REMOVED***
           <Col></Col>
         </Row>
 
-        <form onSubmit=***REMOVED***handleSubmit(onSubmit)***REMOVED***>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <Row className="mb-5">
-            <Col xs=***REMOVED***12***REMOVED*** md=***REMOVED***8***REMOVED*** className="centered">
+            <Col xs={12} md={8} className="centered">
               <div>
                 <h2>
                   <b>Edit profile</b>
@@ -79,7 +79,7 @@ const Profile = (props: any) => ***REMOVED***
                 </small>
               </div>
             </Col>
-            <Col xs=***REMOVED***6***REMOVED*** md=***REMOVED***4***REMOVED*** className="centered">
+            <Col xs={6} md={4} className="centered">
               <div>
                 <button className="btn btn-sm">Cancel</button>
                 <button className="btn btn-dark btn-sm ml-3">Save</button>
@@ -93,18 +93,18 @@ const Profile = (props: any) => ***REMOVED***
               <div className="input-group-sm">
                 <input
                   type="text"
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                  ref={register({ required: true })}
                   className="form-control"
                   aria-describedby="first name"
-                  defaultValue=***REMOVED***user.firstName***REMOVED***
+                  defaultValue={user.firstName}
                   name="firstName"
                 />
               </div>
-              ***REMOVED***errors.firstName?.type === "required" && (
+              {errors.firstName?.type === "required" && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </Col>
             <Col>
               <small>Last name</small>
@@ -112,18 +112,18 @@ const Profile = (props: any) => ***REMOVED***
                 <input
                   type="text"
                   name="lastName"
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                  ref={register({ required: true })}
                   className="form-control"
                   aria-describedby="last name"
-                  defaultValue=***REMOVED***user.lastName***REMOVED***
+                  defaultValue={user.lastName}
                 />
               </div>
-              ***REMOVED***errors.lastName?.type === "required" && (
+              {errors.lastName?.type === "required" && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
-            </Col>***REMOVED***" "***REMOVED***
+              )}
+            </Col>{" "}
           </Row>
 
           <Row>
@@ -133,17 +133,17 @@ const Profile = (props: any) => ***REMOVED***
                 <input
                   type="text"
                   name="username"
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                  ref={register({ required: true })}
                   className="form-control"
                   aria-describedby="username"
-                  defaultValue=***REMOVED***user.username***REMOVED***
+                  defaultValue={user.username}
                 />
               </div>
-              ***REMOVED***errors.username?.type === "required" && (
+              {errors.username?.type === "required" && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </Col>
           </Row>
 
@@ -154,17 +154,17 @@ const Profile = (props: any) => ***REMOVED***
                 <input
                   type="password"
                   name="password"
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
+                  ref={register({ required: true })}
                   className="form-control"
                   defaultValue="password123"
                   aria-describedby="Password"
                 />
               </div>
-              ***REMOVED***errors.password?.type === "required" && (
+              {errors.password?.type === "required" && (
                 <div>
                   <small className="text-danger"> This is required</small>
                 </div>
-              )***REMOVED***
+              )}
             </Col>
             <Col>
               <small>Authorities</small>
@@ -174,23 +174,23 @@ const Profile = (props: any) => ***REMOVED***
                   className="form-control"
                   aria-describedby="Roles"
                   name="userRole"
-                  ref=***REMOVED***register(***REMOVED*** required: true***REMOVED***)***REMOVED***
-                  defaultValue=***REMOVED***user.userRole***REMOVED***
+                  ref={register({ required: true })}
+                  defaultValue={user.userRole}
                 />
               </div>
-            </Col>***REMOVED***" "***REMOVED***
+            </Col>{" "}
           </Row>
         </form>
       </Container>
     </Container>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state: any) ***REMOVED***
-  const ***REMOVED*** user***REMOVED*** = state.auth;
-  return ***REMOVED***
+function mapStateToProps(state: any) {
+  const { user } = state.auth;
+  return {
     user,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(Profile);

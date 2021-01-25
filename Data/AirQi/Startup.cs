@@ -15,19 +15,19 @@ using AirQi.Repository.Core;
 using AirQi.Hubs;
 
 namespace AirQi
-***REMOVED***
+{
     public class Startup
-    ***REMOVED***
+    {
         public Startup(IConfiguration configuration)
-        ***REMOVED***
+        {
             Configuration = configuration;
-       ***REMOVED***
+        }
 
-        public IConfiguration Configuration ***REMOVED*** get;***REMOVED***
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        ***REMOVED***
+        {
             // Configurations
             ConfigureDatabaseServices(services);
             ConfiguraHangfireServices(services);
@@ -42,56 +42,56 @@ namespace AirQi
 
             // Controllers Serialization
             services.AddControllers().AddNewtonsoftJson(options =>
-            ***REMOVED***
+            {
                 options.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
-           ***REMOVED***);
+            });
 
             // SignalR
             ConfigureCrossOriginResourceSharing(services);
             services.AddSignalR();
 
-       ***REMOVED***
+        }
 
         // MongoDB Configurations
         public void ConfigureDatabaseServices(IServiceCollection services)
-        ***REMOVED***
+        {
             services.Configure<MongoDbSettings>(Configuration.GetSection(nameof(MongoDbSettings)));
             services.AddSingleton<IMongoDbSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<MongoDbSettings>>().Value);
-       ***REMOVED***
+        }
 
         // Swagger Configurations
         public void ConfigureSwaggerServices(IServiceCollection services)
-        ***REMOVED***
+        {
             services.AddSwaggerGen(options =>
-            ***REMOVED***
+            {
                 options.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
-                ***REMOVED***
+                {
                     Title = "API",
                     Version = "v1"
-               ***REMOVED***);
-           ***REMOVED***);
+                });
+            });
             
-       ***REMOVED***
+        }
 
         // SignalR Configurations
         public void ConfigureCrossOriginResourceSharing(IServiceCollection services)
-        ***REMOVED***
+        {
             services.AddCors(options =>
-            ***REMOVED***
+            {
                 options.AddPolicy("CrosPolicy", policy =>
-                ***REMOVED***
+                {
 
                     policy.SetIsOriginAllowed(origin => true)
                         .AllowAnyHeader()
                         .AllowAnyMethod()
                         .AllowCredentials();
-               ***REMOVED***);
-           ***REMOVED***);
-       ***REMOVED***
+                });
+            });
+        }
 
         // Hangfire
         public void ConfiguraHangfireServices(IServiceCollection services)
-        ***REMOVED***
+        {
             services.AddHangfire(config =>
                 config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)
                 .UseSimpleAssemblyNameTypeSerializer()
@@ -104,15 +104,15 @@ namespace AirQi
             // Worker Settings Configurations
             services.Configure<WorkerSettings>(Configuration.GetSection(nameof(WorkerSettings)));
             services.AddSingleton<IWorkerSettings>(serviceProvider => serviceProvider.GetRequiredService<IOptions<WorkerSettings>>().Value);
-       ***REMOVED***
+        }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        ***REMOVED***
+        {
             if (env.IsDevelopment())
-            ***REMOVED***
+            {
                 app.UseDeveloperExceptionPage();
-           ***REMOVED***
+            }
 
             // SignalR
             app.UseCors("CrosPolicy");
@@ -124,19 +124,19 @@ namespace AirQi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
-            ***REMOVED***
+            {
                 endpoints.MapControllers();
                 endpoints.MapHub<LiveStationHub>("/livestations");
                 endpoints.MapHub<LiveNotificationHub>("/livenotifications");
-           ***REMOVED***);
+            });
 
             // Swagger config
             app.UseSwagger();
 
             app.UseSwaggerUI(options =>
-            ***REMOVED***
+            {
                 options.SwaggerEndpoint("/swagger/v1/swagger.json", "API");
-           ***REMOVED***);
+            });
 
             // Hangfire
             app.UseHangfireDashboard();
@@ -157,6 +157,6 @@ namespace AirQi
 
             // this job will fetch data from AirThings at every 30 minutes
             RecurringJob.AddOrUpdate<PullAirThings>("Air-Things", service => service.PullDataAsync() , "*/30 * * * *");
-       ***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        }
+    }
+}

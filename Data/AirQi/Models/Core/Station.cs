@@ -6,26 +6,26 @@ using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 
 namespace AirQi.Models.Core
-***REMOVED***
+{
     [BsonCollection("stations")]
     public class Station : Document
-    ***REMOVED***
+    {
         [BsonElement]
-        public double  Aqi ***REMOVED*** get; set;***REMOVED***
+        public double  Aqi { get; set; }
                     
         [BsonElement]
-        public string Location ***REMOVED*** get; set;***REMOVED***
+        public string Location { get; set; }
 
         [BsonElement]
-        public string City ***REMOVED*** get; set;***REMOVED***
+        public string City { get; set; }
 
         [BsonElement]
-        public string Country ***REMOVED*** get; set;***REMOVED***
+        public string Country { get; set; }
 
         [BsonElement]
-        public double [] Position ***REMOVED*** get; set;***REMOVED***
+        public double [] Position { get; set; }
 
         [BsonElement]
-        public IEnumerable<Measurement> Measurements ***REMOVED*** get; set;***REMOVED***
-   ***REMOVED***
-***REMOVED***
+        public IEnumerable<Measurement> Measurements { get; set; }
+    }
+}

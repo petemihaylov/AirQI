@@ -1,27 +1,27 @@
-import ***REMOVED*** CREATE_MARKER, FETCH_MARKERS, DELETE_MARKER***REMOVED*** from "../actions/types";
+import { CREATE_MARKER, FETCH_MARKERS, DELETE_MARKER } from "../actions/types";
 
-const initialState = ***REMOVED*** items: []***REMOVED***;
+const initialState = { items: [] };
 
-export default function (state = initialState, action: any) ***REMOVED***
-  const ***REMOVED*** type, payload***REMOVED*** = action;
+export default function (state = initialState, action: any) {
+  const { type, payload } = action;
 
-  switch (type) ***REMOVED***
+  switch (type) {
     case FETCH_MARKERS:
-      return ***REMOVED***
+      return {
         ...state,
         items: payload,
-     ***REMOVED***;
+      };
     case CREATE_MARKER:
-      return ***REMOVED***
+      return {
         ...state,
         items: [...state.items, payload],
-     ***REMOVED***;
+      };
     case DELETE_MARKER:
-      return ***REMOVED***
+      return {
         ...state,
         items: state.items.filter((item, index) => index !== action.payload),
-     ***REMOVED***;
+      };
     default:
       return state;
- ***REMOVED***
-***REMOVED***
+  }
+}

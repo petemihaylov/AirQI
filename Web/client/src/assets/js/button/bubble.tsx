@@ -1,12 +1,12 @@
-import React, ***REMOVED*** useEffect***REMOVED*** from "react";
+import React, { useEffect } from "react";
 
 import * as bubble from "./js/bubble-animation";
 import "./css/style.css";
 
-export const BubbleButton = (props: any) => ***REMOVED***
-  useEffect(() => ***REMOVED***
+export const BubbleButton = (props: any) => {
+  useEffect(() => {
     bubble.animation();
- ***REMOVED***, []);
+  }, []);
 
   return (
     <div>
@@ -33,7 +33,7 @@ export const BubbleButton = (props: any) => ***REMOVED***
         <input
           className="button button--bubble"
           type="submit"
-          value=***REMOVED***props.name***REMOVED***
+          value={props.name}
         />
 
         <span className="button--bubble__effect-container">
@@ -50,4 +50,4 @@ export const BubbleButton = (props: any) => ***REMOVED***
       </span>
     </div>
   );
-***REMOVED***;
+};

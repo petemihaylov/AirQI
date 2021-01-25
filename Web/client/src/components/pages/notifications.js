@@ -1,97 +1,97 @@
-import ***REMOVED*** HubConnectionBuilder***REMOVED*** from "@microsoft/signalr";
-import React, ***REMOVED*** useEffect, useState, useRef***REMOVED*** from "react";
-import ***REMOVED*** Alert, Container, Row, Col***REMOVED*** from "react-bootstrap";
-import ***REMOVED*** FontAwesomeIcon***REMOVED*** from "@fortawesome/react-fontawesome";
-import ***REMOVED***
+import { HubConnectionBuilder } from "@microsoft/signalr";
+import React, { useEffect, useState, useRef } from "react";
+import { Alert, Container, Row, Col } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
   faExclamationTriangle,
   faTrashAlt,
-***REMOVED*** from "@fortawesome/free-solid-svg-icons";
+} from "@fortawesome/free-solid-svg-icons";
 import LiveNotification from "./livenotification";
-import ***REMOVED*** connect***REMOVED*** from "react-redux";
-import ***REMOVED***
+import { connect } from "react-redux";
+import {
   fetchNotifications,
   deleteNotification,
-***REMOVED*** from "../../actions/notificationActions";
+} from "../../actions/notificationActions";
 
-const ***REMOVED*** REACT_APP_API_URL***REMOVED*** = process.env;
+const { REACT_APP_API_URL } = process.env;
 
-const Notifications = (props) => ***REMOVED***
+const Notifications = (props) => {
   // Stored notifications from the DB
   const [content, handleContent] = useState([]);
 
   // Live notifications from the WebSocket
   const [notifications, setNotification] = useState([]);
 
-  const handleDelete = (id, index) => ***REMOVED***
+  const handleDelete = (id, index) => {
     props.dispatch(deleteNotification(id, index));
     handleContent(props.items);
- ***REMOVED***;
+  };
 
   /* Gets notifications from DB */
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     props.dispatch(fetchNotifications());
- ***REMOVED***, []);
+  }, []);
 
-  useEffect(() => ***REMOVED***
+  useEffect(() => {
     handleContent(props.items);
- ***REMOVED***, [props.items]);
+  }, [props.items]);
 
   return (
     <Container>
       <LiveNotification />
       <div className="d-flex flex-column align-items-center mt-5">
-        <div style=***REMOVED******REMOVED*** width: "60vw"***REMOVED******REMOVED***>
+        <div style={{ width: "60vw" }}>
           <small>Notifications </small>
-          <div className="border-bottom mb-4 mt-2" style=***REMOVED******REMOVED*** width: "60vw"***REMOVED******REMOVED***>
-            ***REMOVED***" "***REMOVED***
+          <div className="border-bottom mb-4 mt-2" style={{ width: "60vw" }}>
+            {" "}
           </div>
         </div>
         <div className="d-flex flex-column align-items-center">
-          ***REMOVED***content.map((item, idx) => (
+          {content.map((item, idx) => (
             <Alert
-              key=***REMOVED***idx***REMOVED***
-              variant=***REMOVED***"secondary"***REMOVED***
-              style=***REMOVED******REMOVED***
+              key={idx}
+              variant={"secondary"}
+              style={{
                 width: "60vw",
                 height: "45px",
                 background: "#ffff",
                 border: "dashed 2px #f89b1e",
-             ***REMOVED******REMOVED***
+              }}
               className="d-flex align-items-center"
             >
               <div className="w-100 d-flex align-items-center justify-content-between">
                 <div>
                   <FontAwesomeIcon
-                    icon=***REMOVED***faExclamationTriangle***REMOVED***
+                    icon={faExclamationTriangle}
                     className="mr-3"
-                    style=***REMOVED******REMOVED*** color: "#f89b3e"***REMOVED******REMOVED***
+                    style={{ color: "#f89b3e" }}
                   />
-                  <b>***REMOVED***new Date(Date.now()).toDateString()***REMOVED***</b>
-                  <span className="ml-5">***REMOVED***item.description***REMOVED***</span>
+                  <b>{new Date(Date.now()).toDateString()}</b>
+                  <span className="ml-5">{item.description}</span>
                 </div>
                 <div>
                   <button
                     className="btn"
                     title="Delete"
-                    onClick=***REMOVED***handleDelete.bind(this, item.id, idx)***REMOVED***
+                    onClick={handleDelete.bind(this, item.id, idx)}
                   >
-                    <FontAwesomeIcon icon=***REMOVED***faTrashAlt***REMOVED*** />
+                    <FontAwesomeIcon icon={faTrashAlt} />
                   </button>
                 </div>
               </div>
             </Alert>
-          ))***REMOVED***
+          ))}
         </div>
       </div>
     </Container>
   );
-***REMOVED***;
+};
 
-function mapStateToProps(state) ***REMOVED***
-  const ***REMOVED*** items***REMOVED*** = state.notifications;
-  return ***REMOVED***
+function mapStateToProps(state) {
+  const { items } = state.notifications;
+  return {
     items,
- ***REMOVED***;
-***REMOVED***
+  };
+}
 
 export default connect(mapStateToProps)(Notifications);

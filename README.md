@@ -4,7 +4,7 @@
 
 ### Introduction
 
-An air quality index (AQI) is used to communicate to the public how polluted the air currently is or how polluted it is forecast to become. Public health risks increase as the AQI rises. All the different countries have their own air quality indices, corresponding to different national air quality standards. 
+An air quality index (AQI) is used to visualise to the public the amount of current polluted air or a forcast of it. Public health risks increase as the AQI rises. All the different countries have their own air quality indices, corresponding to different national air quality standards. 
 
 AirQi is a web platform that integrates air quality data and provides access to the latest information in the browser. The AirQi web app enables communities of citizens to set up an air monitoring network by collecting, publishing, and visualizing air pollution data for specific regions. With this app, our small team strives to improve the quality of living in the outdoor air-polluted regions by informing the users about the health impacts of various pollutants and providing them with personalized suggestions. 
 

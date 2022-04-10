@@ -98,6 +98,9 @@ StyleCopReport.xml
 *.svclog
 *.scc
 
+*.DS_Store
+.ionide/
+
 # Chutzpah Test files
 _Chutzpah*
 

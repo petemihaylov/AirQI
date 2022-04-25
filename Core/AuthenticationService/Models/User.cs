@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiJwt.Models
+namespace AuthenticationService.Models
 {
     public class User : BaseEntity
     {

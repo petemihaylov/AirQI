@@ -1,15 +1,12 @@
-using System;
-using System.Linq;
+using AuthenticationService.Models;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
-using ApiJwt.Models;
 
-namespace ApiJwt.Data
+namespace AuthenticationService.Data
 {
     public class SqlRepository : IEFRepository
     {
-        
         private readonly ApplicationContext _context;
         public SqlRepository(ApplicationContext context)
         {
@@ -25,6 +22,5 @@ namespace ApiJwt.Data
         {
             return await _context.Set<T>().SingleOrDefaultAsync(e => e.Username == username && e.Password == password);
         }
-
-   }
+    }
 }

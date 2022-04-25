@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System;
 
-namespace ApiJwt.Models
+namespace AuthenticationService.Models
 {
     public class UserDto 
     {

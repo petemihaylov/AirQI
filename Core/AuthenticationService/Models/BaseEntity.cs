@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace ApiJwt.Models
+namespace AuthenticationService.Models
 {
     public abstract class BaseEntity
     {

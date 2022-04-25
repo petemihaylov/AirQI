@@ -1,13 +1,13 @@
-using ApiJwt.Data;
+using AuthenticationService.Data;
 using Microsoft.AspNetCore.Authentication.Certificate;
-using Microsoft.Extensions.Hosting;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
-namespace ApiJwt
+namespace AuthenticationService
 {
     public class Startup
     {
@@ -39,7 +39,7 @@ namespace ApiJwt
             });
 
             services.AddDbContext<ApplicationContext>(opt => opt.UseSqlServer
-            (Configuration.GetConnectionString("ApiConnection")));
+            (Configuration.GetConnectionString("AuthServiceDB")));
 
             services.AddScoped<IEFRepository, SqlRepository>();
 

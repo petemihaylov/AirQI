@@ -5,7 +5,7 @@ const { REACT_APP_JWT_URL, REACT_APP_API_URL } = process.env;
 
 export default class AuthService {
   static login = async (username: string, password: string) => {
-    console.log(username + " " + password); 
+    console.log(username + " " + password);
     return axios.post(REACT_APP_JWT_URL + "/api/token" || "", {
         username,
         password,

@@ -1,12 +1,11 @@
-using System.Linq;
-using ApiJwt.Models;
+using AuthenticationService.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ApiJwt.Data
+namespace AuthenticationService.Data
 {
     public class ApplicationContext : DbContext
     {
-        public ApplicationContext(DbContextOptions<ApplicationContext> opt) : base(opt){ }
+        public ApplicationContext(DbContextOptions<ApplicationContext> opt) : base(opt) { }
 
         public DbSet<User> Users { get; set; }
 

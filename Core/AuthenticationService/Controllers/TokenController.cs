@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
-using ApiJwt.Data;
-using ApiJwt.Models;
-using Microsoft.AspNetCore.Cors;
+﻿using AuthenticationService.Data;
+using AuthenticationService.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
-namespace ApiJwt.Controllers
+namespace AuthenticationService.Controllers
 {
 
     [ApiController]
@@ -38,7 +33,7 @@ namespace ApiJwt.Controllers
 
                 if (user != null)
                 {
-                    //create claims details based on the user information
+                    // Create claims details based on the user information
                     var claims = new[] {
                     new Claim(JwtRegisteredClaimNames.Sub, _configuration["Jwt:Subject"]),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
@@ -52,14 +47,13 @@ namespace ApiJwt.Controllers
                     new Claim("UserRole", user.UserRole.ToString())
                    };
 
-
                     var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
                     var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
                     var token = new JwtSecurityToken(_configuration["Jwt:Issuer"], _configuration["Jwt:Audience"], claims, expires: DateTime.UtcNow.AddDays(1), signingCredentials: signIn);
 
                     var jwt = new JwtSecurityTokenHandler().WriteToken(token);
-                    
+
                     var responseObj = new UserDto
                     {
                         Id = user.Id,

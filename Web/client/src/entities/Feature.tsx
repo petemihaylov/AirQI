@@ -5,7 +5,6 @@ export default class Feature {
   properties: string | undefined;
   geometry: Geometry | undefined;
 
-  
   constructor(
     _type?: string,
     _properties?: string,

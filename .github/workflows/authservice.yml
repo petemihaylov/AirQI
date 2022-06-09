@@ -1,4 +1,4 @@
-name: .NET
+name: AuthService Build
 
 on:
   push:
@@ -12,16 +12,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v5
     - name: Setup .NET
-      uses: actions/setup-dotnet@v2
+      uses: actions/setup-dotnet@v5
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: 5.0.x
     - name: Restore dependencies
       run: dotnet restore
-      working-directory: ./Core/ApiBase
+      working-directory: ./AuthService
 
-    - name: Build ApiBase
+    - name: Build AuthService
       run: dotnet build --no-restore
-      working-directory: ./Core/ApiBase
+      working-directory: ./AuthService
 

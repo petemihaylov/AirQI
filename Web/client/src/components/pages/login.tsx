@@ -32,7 +32,7 @@ const Login = (props: any) => {
   return (
     <div
       className="container d-flex-column justify-content-center align-items-center pt-5"
-      style={{ width: "23vw" }}
+      style={{ width: "23vw", minWidth: "320px" }}
     >
       <Card style={{ width: "20rem", height: "25rem" }} className="mt-5 mb-3">
         <Card.Title className="w-100 text-center pt-4">Login</Card.Title>

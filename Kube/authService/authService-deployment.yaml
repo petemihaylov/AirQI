@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authservice
+  template:
+    metadata:
+      labels:
+        app: authservice
+    spec:
+      containers:
+        - name: authservice
+          image: pepsm/authservice:latest
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authservice-clusterip
+spec:
+  type: ClusterIP
+  selector:
+    app: userservice
+  ports:
+  - name: userservice
+    protocol: TCP
+    port: 80
+    targetPort: 8081

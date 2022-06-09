@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: StorageClass
+metadata:
+  name: storage-class
+volumeBindingMode: WaitForFirstConsumer
+reclaimPolicy: Retain
+parameters:
+  kind: Managed

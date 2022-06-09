@@ -30,11 +30,11 @@ namespace AirQi
         {
             // Configurations
             ConfigureDatabaseServices(services);
-            ConfiguraHangfireServices(services);
+            ConfigureHangfireServices(services);
             ConfigureSwaggerServices(services);
 
             // Scopes
-            services.AddTransient(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>)); // A refference to mutiple instances
+            services.AddTransient(typeof(IMongoDataRepository<>), typeof(MongoDataRepository<>)); // A reference to multiple instances
             services.AddTransient<IWorkerService, WorkerService>();
 
             // AutoMapper
@@ -70,7 +70,6 @@ namespace AirQi
                     Version = "v1"
                 });
             });
-            
         }
 
         // SignalR Configurations
@@ -90,7 +89,7 @@ namespace AirQi
         }
 
         // Hangfire
-        public void ConfiguraHangfireServices(IServiceCollection services)
+        public void ConfigureHangfireServices(IServiceCollection services)
         {
             services.AddHangfire(config =>
                 config.SetDataCompatibilityLevel(CompatibilityLevel.Version_170)

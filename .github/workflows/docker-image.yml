@@ -17,3 +17,63 @@ jobs:
     - name: Build the Docker image
       working-directory: ./UserService
       run: docker build . --file Dockerfile --tag pepsm/userservice:$(date +%s)
+---      
+name: AuthService Docker CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      working-directory: ./AuthService
+      run: docker build . --file Dockerfile --tag pepsm/authservice:$(date +%s)
+---      
+name: MarkerService Docker CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      working-directory: ./MarkerService
+      run: docker build . --file Dockerfile --tag pepsm/markerservice:$(date +%s)   
+---      
+name: NotificationService Docker CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      working-directory: ./MarkerService
+      run: docker build . --file Dockerfile --tag pepsm/markerservice:$(date +%s)

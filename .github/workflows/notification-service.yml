@@ -24,9 +24,8 @@ jobs:
     - name: Build MarkerService
       run: dotnet build --no-restore
       working-directory: ./MarkerService
-   
-   Test:
-
+  Test:
+  
     runs-on: ubuntu-latest
 
     steps:

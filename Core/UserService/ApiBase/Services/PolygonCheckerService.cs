@@ -15,17 +15,14 @@ namespace ApiBase.Services
 
     public static class PolygonCheckerService
     {
-
         public static bool IsInPolygon(List<SlaMarker> collection, double Y, double X)
         {
             for (int c = 0; c < collection.Count; c++)
             {
-             
                 List<Feature> features = JsonConvert.DeserializeObject<List<Feature>>(collection[c].LocationBoundaries);
 
                 for (int f = 0; f < features.Count; f++)
                 {
-                 
                     List<Point> points = new List<Point>();
                     features[f].geometry.Coordinates[0].ForEach(p =>
                     {
@@ -73,8 +70,7 @@ namespace ApiBase.Services
             return (Math.Abs(total_angle) > 1);
         }
 
-        public static float GetAngle(float Ax, float Ay,
-    float Bx, float By, float Cx, float Cy)
+        public static float GetAngle(float Ax, float Ay, float Bx, float By, float Cx, float Cy)
         {
             // Get the dot product.
             float dot_product = DotProduct(Ax, Ay, Bx, By, Cx, Cy);
@@ -98,8 +94,8 @@ namespace ApiBase.Services
             // Calculate the Z coordinate of the cross product.
             return (BAx * BCy - BAy * BCx);
         }
-        private static float DotProduct(float Ax, float Ay,
-    float Bx, float By, float Cx, float Cy)
+
+        private static float DotProduct(float Ax, float Ay, float Bx, float By, float Cx, float Cy)
         {
             // Get the vectors' coordinates.
             float BAx = Ax - Bx;

@@ -12,7 +12,7 @@ namespace AirQi.Models.Core
     {
         [BsonElement]
         public double  Aqi { get; set; }
-                    
+
         [BsonElement]
         public string Location { get; set; }
 

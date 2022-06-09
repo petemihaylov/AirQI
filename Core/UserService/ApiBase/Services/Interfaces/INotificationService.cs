@@ -8,6 +8,6 @@ namespace ApiBase.Services.Interfaces
 {
     public interface INotificationService
     {
-        
+
     }
 }

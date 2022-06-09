@@ -6,7 +6,7 @@ import { faExclamationTriangle } from "@fortawesome/free-solid-svg-icons";
 import authHeader from "../../services/auth.header";
 import { connect } from "react-redux";
 
-const { REACT_APP_API_URL } = process.env;
+const { REACT_APP_MARKER_URL } = process.env;
 
 const LiveNotification = (props) => {
   // Live notifications from the WebSocket
@@ -16,7 +16,7 @@ const LiveNotification = (props) => {
   /* Gets WebSocket notification */
   useEffect(() => {
     const newConnection = new HubConnectionBuilder()
-      .withUrl(REACT_APP_API_URL + "/livenotification", {
+      .withUrl(REACT_APP_MARKER_URL + "/livenotification", {
         headers: authHeader(),
       })
       .withAutomaticReconnect()

@@ -16,7 +16,6 @@ namespace ApiBase.Services
         public SlaMarker AddSlaMarker(SlaMarker slaMarker)
         {
            var _sla = this._repository.AddAsync<SlaMarker>(slaMarker);
-           
            return _sla.Result;
         }
 

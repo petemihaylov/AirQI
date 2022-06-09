@@ -48,16 +48,13 @@ const Register = (props: any) => {
   }, []);
 
   return (
-    <div
-      className="container d-flex-column justify-content-center align-items-center pt-3"
-      style={{ width: "22vw" }}
-    >
+    <div className="container d-flex justify-content-center align-items-center pt-3">
       <Card style={{ width: "22vw", height: "33rem" }} className="mt-5">
         <Card.Title className="w-100 text-center pt-4 mb-5">
           Register
         </Card.Title>
         <Card.Body className="d-flex align-items-center h-100 mt-5">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(onSubmit)} className="w-100">
             <div className="form-group">
               <label>Username: </label>
               <input
@@ -126,7 +123,7 @@ const Register = (props: any) => {
 
             <div
               className="form-group"
-              style={{ marginTop: "35px", marginBottom: "100px" }}
+              style={{ marginTop: "35px", marginBottom: "100px", textAlign: "center" }}
             >
               <BubbleButton name={"SignUp"} disabled={loading}>
                 {loading && (

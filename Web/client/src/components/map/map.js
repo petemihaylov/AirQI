@@ -34,7 +34,7 @@ import { Legend } from "../../assets/js/legend/legend";
 // Data fetching method
 const fetcher = (...args) => fetch(...args).then(response => response.json());
 
-const { REACT_APP_TOKEN, REACT_APP_API_URL, REACT_APP_DATA_URL } = process.env;
+const { REACT_APP_AUTH_URL, REACT_APP_MARKER, REACT_APP_DATA_URL, REACT_APP_MAP_TOKEN } = process.env;
 
 
 const Map = (props) => {
@@ -81,8 +81,6 @@ const Map = (props) => {
    
    /* Websocket */
    useEffect(() => {
- 
-      
            if (hubConnection) {
                 hubConnection
                    .start()
@@ -97,9 +95,6 @@ const Map = (props) => {
                    })
                    .catch((e) => console.log("Connection failed: ", e));
            }
-       
-        
- 
    }, [hubConnection]);
 
   /* Custom settings for ViewportChange */
@@ -127,7 +122,7 @@ const Map = (props) => {
 
     /* Gets WebSocket marker */
     const newConnection = new HubConnectionBuilder()
-      .withUrl(REACT_APP_API_URL + "/livemarker", {
+      .withUrl(REACT_APP_MARKER + "/livemarker", {
         headers: authHeader(),
       })
       .withAutomaticReconnect()
@@ -214,7 +209,7 @@ const Map = (props) => {
         style={{ position: "absolute", top: 140 }}
       >
         <div className="mapboxgl-ctrl-group mapboxgl-ctrl">
-          <button className="" title="Add marker" onClick={handleController}>
+          <button title="Add marker" onClick={handleController}>
             <FontAwesomeIcon icon={faMapPin} />
           </button>
         </div>
@@ -261,7 +256,7 @@ const Map = (props) => {
         <Geocoder
           mapRef={mapRef}
           onViewportChange={handleGeocoderViewportChange}
-          mapboxApiAccessToken={REACT_APP_TOKEN}
+          mapboxApiAccessToken={REACT_APP_MAP_TOKEN}
           position="top-left"
         />
         <GeolocateControl
@@ -410,8 +405,7 @@ const Map = (props) => {
         width="100%"
         height="100%"
         onViewportChange={handleViewportChange}
-        mapStyle="mapbox://styles/constantimi/ckisx2s921doh19sz2tyod230"
-        mapboxApiAccessToken={REACT_APP_TOKEN}
+        mapboxApiAccessToken={REACT_APP_MAP_TOKEN}
         onClick={handleClick}
       >
         

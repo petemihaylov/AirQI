@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@deck.gl/core": "^8.3.14",
-    "@deck.gl/layers": "^8.3.14",
+    "@deck.gl/layers": "^8.8.8",
     "@deck.gl/react": "^8.3.14",
     "@luma.gl/core": "^8.3.3",
     "@microsoft/signalr": "^5.0.1",

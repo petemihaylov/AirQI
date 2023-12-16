@@ -29,21 +29,21 @@ AirQi requires [Node.js](https://nodejs.org/) v4+ and .Net Core v3.1+ to run.
 
 Install the dependencies and start the server and the client side.
 
-[First Tab] Client ReactJS application
+Client ReactJS application
 ```sh
     $ cd Web/client
     $ npm i
     $ npm start
 ```
 
-[Second Tab] User Management system
+User Management system
 ```sh
     $ cd Core/ApiBase
     $ dotnet build
     $ dotnet run
 ```
 
-[Third Tab] Data Provider system
+Data Provider system
 ```sh
     $ cd Data/AirQi
     $ dotnet build 

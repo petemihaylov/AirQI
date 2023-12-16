@@ -1,40 +1,27 @@
-# AirQI Overview
+# AirQi Overview
 
 [![Build Status](https://travis-ci.org/joemccann/dillinger.svg?branch=master)](https://travis-ci.org/joemccann/dillinger)
 
 ### Introduction
 
-An air quality index (AirQI) is used to visualise to the public the amount of current polluted air or a forcast of it. Public health risks increase as the AQI rises. All the different countries have their own air quality indices, corresponding to different national air quality standards. 
+The AirQi application is used to visualise real-time insights into air quality index metrics.
 
-AirQi is a web platform that integrates air quality data and provides access to the latest information in the browser. The AirQi web app enables communities of citizens to set up an air monitoring network by collecting, publishing, and visualizing air pollution data for specific regions. With this app, our small team strives to improve the quality of living in the outdoor air-polluted regions by informing the users about the health impacts of various pollutants and providing them with personalized suggestions. 
+AirQi is a distirbuted web application that integrates air quality data. Its aim is to empower users with real-time insights into air quality metrics, enabling informed decisions about their daily activities and overall health.
+The AirQi web app is collecting, exposing, and visualizing air pollution data for specific regions as the goal is to improve the quality of living in the outdoor by informing the users about the health impacts and providing them with personalized suggestions. Our ultimate goal is to cultivate a sense of environmental consciousness, fostering a community that actively engages in improving air quality while ensuring that our visualizations are universally accessible.
 
 ### Tech
 
-AirQi uses a number of open source libraries and frameworks to work properly:
+AirQi uses a number of open source libraries/frameworks to work properly:
 
-* [.NetCore] - Open-source, managed computer software framework.  
-* [ReactJS] - Creates interactive UIs.
-* [node.js] - Evented I/O for the backend.
-* [jQuery] - Designed to simplify HTML DOM tree.
-* [Kubernetes] - Open-source system for automating deployment, scaling, and management of containerized applications.
-
-### Dependencies
-
-###### .NET Core Releases
-* [Download the latest .NET Core SDK](https://dotnet.microsoft.com/download/dotnet/5.0)
-* [.NET Core releases](releases.md)
-
-###### Downloading and installing Node.js and npm
-* [Checking your version of npm and Node.js](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-* [Using a Node version manager to install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-* [Using a Node installer to install Node.js and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
-
-### Packages
-
-* [SignalR] - Incredibly simple real-time web for ASPdotNet
-* [Redux] - A Predictable State Container for JS Apps
-* [DeckGL] - WebGL-powered framework for visual exploratory data analysis of large datasets.
-* [Hangfire] - Background processing in .NET and .NET Core applications.
+* SignalR - Incredibly simple real-time web for ASPdotNet
+* Redux - A Predictable State Container for JS Apps
+* DeckGL - WebGL-powered framework for visual exploratory data analysis of large datasets.
+* Hangfire - Background processing in .NET and .NET Core applications.
+* .NetCore - Cross-platform, open-source developer platform.
+* React - Creates interactive UIs.
+* Node.js - Evented I/O for the backend.
+* jQuery - Designed to simplify HTML DOM tree.
+* Kubernetes - Open-source system for automating deployment, scaling, and management of containerized applications.
 
 ### Installation
 
@@ -182,11 +169,6 @@ Verify the deployment by navigating to your server address in your preferred bro
       "unit": "µg/m³",
       "sourceName": "ChinaAQIData"
     },
-    {},
-    {},
-    {},
-    {},
-    {}
   ],
   "position": [ 117.1837, 39.2133 ],
   "createdAt": "2021-01-19T22:25:24.552Z",
@@ -199,17 +181,4 @@ AirQi repo typically uses either the [MIT](LICENSE.TXT) or
 [Apache 2](https://www.apache.org/licenses/LICENSE-2.0) licenses for code.
 Some projects license documentation and other forms of content under
 [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/).
-
-
-   [.NetCore]: <https://dotnet.microsoft.com/download/dotnet-core>
-   [node.js]: <https://nodejs.org>
-   [jQuery]: <https://jquery.com>
-   [ReactJS]: <https://reactjs.org/>
-   [SignalR]: <https://dotnet.microsoft.com/apps/aspnet/signalr>
-   [Redux]: <https://redux.js.org/>
-   [DeckGL]: <https://deck.gl/>
-   [Hangfire]: <https://www.hangfire.io/>
-   [Kubernetes]: <https://kubernetes.io/>
-
-[[DevOps](https://dev.azure.com/429937/AirQI%20Project)][[JIRA](https://petarmihaylov.atlassian.net/secure/RapidBoard.jspa?projectKey=AIR&rapidView=1&view=planning.nodetail&atlOrigin=eyJpIjoiYWI1M2M1YWVmMmIyNGJkYmIwYWRiNjFlMGE4NmRlOTYiLCJwIjoiaiJ9)][[Confluence](https://petarmihaylov.atlassian.net/l/c/QEGg4x6G)]
 
